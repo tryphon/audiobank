@@ -1,0 +1,32 @@
+<%= render_partial("users/flash") %>
+<div id="bank">
+ <h2>Vos souscriptions</h2>
+ <ul>
+  <% for document in @subscriber.documents %>
+   <li><h3><%= document.title %></h3>
+   <p><%= document.description %></p>
+   </li>
+  <% end %>
+ </ul>
+</div>
+<div id="summary">
+ <div id="documents">
+  <h2>Vos documents</h2>
+  <ul>
+   <% for document in @author.documents %>
+    <li><h3><%= document.title %></h3>
+    <p><%= document.description %></p>
+    </li>
+   <% end %>
+  </ul>
+ </div>
+ <div id="users">
+  <h2>Vos souscrivants</h2>
+  <ul>
+   <% for subscriber in @author.subscribers %>
+    <li><%= subscriber.name %></li>
+   <% end %>
+  </ul>
+ </div>
+ <br style="clear: both;"/>
+</div>

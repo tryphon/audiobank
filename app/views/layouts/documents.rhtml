@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+ <head>
+  <title>AudioBank</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <%= stylesheet_link_tag("screen", :media => "screen") %>
+  <%= javascript_include_tag(:defaults) %>
+ </head>
+ <body>
+  <div id="menu">
+   <ul id="nav">
+    <% if session[:user] %>
+     <li><%= link_to("Documents", :controller => "documents", :action => "index") %></li>
+     <li><%= link_to("Options", :controller => "users", :action => "options") %></li>
+     <li><%= link_to("Quitter", :controller => "users", :action => "signout") %></li>
+    <% else %>
+     <li><%= link_to("Creer un compte", :controller => "users", :action => "signup") %></li>
+     <li><%= link_to("S'identifier", :controller => "users", :action => "signin") %></li>
+    <% end %>
+   </ul>
+  </div>
+  <div id="content">
+   <%= @content_for_layout %>
+  <div>
+ </body>
+</html>
