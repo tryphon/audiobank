@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 		if request.post?
 			@user = User.authenticate(params[:user])
 			unless @user.blank?
-				flash[:failure] = "Bienvenue !"
+				flash[:success] = "Bienvenue !"
 				session[:user] = @user.id
 				redirect_to :controller => "documents"
 			else
