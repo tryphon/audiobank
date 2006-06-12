@@ -36,6 +36,17 @@ class UsersController < ApplicationController
 		end
 	end
 	
+  def signup
+    @user = User.new(params[:user])
+    if request.post? 
+      if @user.save
+        flash[:success] = "Votre compte a bien été crée"
+      else
+        flash[:failure] = "Votre compte n'a pas été crée"
+		  end
+    end  
+  end
+
 	def	signout
 		session[:user] = nil
 		redirect_to :action => "welcome"
