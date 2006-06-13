@@ -1,5 +1,5 @@
 <%= render_partial("users/flash") %>
-<div id="bank">
+<div id="content">
  <h2>Vos souscriptions</h2>
  <ul>
   <% for document in @subscriber.documents %>
@@ -8,10 +8,8 @@
    </li>
   <% end %>
  </ul>
-</div>
-<div id="summary">
- <div id="documents">
-  <h2>Vos documents</h2>
+ <hr/>
+ <h2>Vos documents</h2>
   <ul>
    <% for document in @author.documents %>
     <li><h3><%= document.title %></h3>
@@ -19,14 +17,14 @@
     </li>
    <% end %>
   </ul>
- </div>
- <div id="users">
-  <h2>Vos souscrivants</h2>
+ <h2>Vos souscrivants</h2>
   <ul>
    <% for subscriber in @author.subscribers %>
-    <li><%= subscriber.name %></li>
+    <li class="vcard">
+     <%= image_tag("avatar") %>
+     <span class="fn"><%= subscriber.name %></span>
+     <span><%= pluralize subscriber.subscriptions.find(:all, ["author_id = ?", @author]).size , "subscription" %></span>
+    </li>
    <% end %>
   </ul>
- </div>
- <br style="clear: both;"/>
 </div>

@@ -8,8 +8,10 @@
   <%= javascript_include_tag(:defaults) %>
  </head>
  <body>
-  <div id="menu">
-   <ul id="nav">
+  <div id="header">
+   <div>
+   <h1>AudioBank</h1>
+   <ul>
     <% if session[:user] %>
      <li><%= link_to("Documents", :controller => "documents", :action => "index") %></li>
      <li><%= link_to("Options", :controller => "users", :action => "options") %></li>
@@ -19,9 +21,15 @@
      <li><%= link_to("S'identifier", :controller => "users", :action => "signin") %></li>
     <% end %>
    </ul>
+   </div>
   </div>
-  <div id="content">
-   <%= @content_for_layout %>
-  <div>
+  <hr/>
+  <div id="frame">
+   <div>
+    <%= @content_for_layout %>   
+   </div>
+  </div>
+  <div id="footer">
+  </div>
  </body>
 </html>

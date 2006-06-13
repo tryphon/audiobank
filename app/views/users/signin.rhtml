@@ -1,5 +1,6 @@
-<div id="form">
- <%= render_partial("flash") %>
+<%= render_partial("flash") %>
+<div id="content">
+ <h2>Vos identifiants</h2>
  <%= start_form_tag :action => "signin" %>
   <p><label for="username">Nom d'utilisateur :</label><br/>
   <%= text_field("user", "username") %></p>
