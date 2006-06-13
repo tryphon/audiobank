@@ -1,5 +1,4 @@
-<%= render_partial("flash") %>
-<div id="events">
+<div id="content">
  <% if @user.errors.count > 0 %>
   <div id="errors">
    <% if @user.errors.count == 1 %>
@@ -16,14 +15,14 @@
  <% end %>
  <h2>Votre nouveau compte</h2> 
  <%= start_form_tag :action => "signup" %>
-   <p><label for="username">Nom d'utilisateur :</label><br/>
-   <%= text_field("user", "username") %></p>
-   <p><label for="email">Email :</label><br/>
-   <%= text_field("user", "email") %></p>
-   <p><label for="name">Nom :</label><br/>
-   <%= text_field("user", "name") %></p>
-   <p><label for="password">Mot de passe :</label><br/>
-   <%= password_field("user", "password") %></p>
-   <%= submit_tag "Creer un compte" %>
+  <p><label for="username">Nom d'utilisateur :</label><br/>
+  <%= text_field("user", "username") %></p>
+  <p><label for="email">Email :</label><br/>
+  <%= text_field("user", "email") %></p>
+  <p><label for="name">Nom :</label><br/>
+  <%= text_field("user", "name") %></p>
+  <p><label for="password">Mot de passe :</label><br/>
+  <%= password_field("user", "password") %></p>
+  <%= submit_tag "Creer un compte" %>
  <%= end_form_tag %>
 </div>

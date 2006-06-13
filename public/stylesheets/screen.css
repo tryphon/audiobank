@@ -49,17 +49,25 @@ font: normal 115% "Trebuchet MS", sans-serif;
 #header ul li a:hover { color: #333; background: #a3de5b; }
 
 #frame {
-margin-top: 12px;
+margin: 0;
+padding: 12px 0;
 clear: both;
 }
-#frame div {
+#wrap {
 width: 750px;
 margin: 0 auto;
+background: #fff url("../images/frame-bg.png") repeat-y top left;
 }
 #frame ul { margin: 14px 0 0 28px; list-style-type: none; }
-#frame h2 {
+#frame h2, #frame h4 {
 font: normal 120% "Georgia", serif;
 color: #7dacd1;
+}
+
+#content {
+float: right;
+width: 510px;
+margin: 0 0 0 40px;
 }
 #content .vcard { float: left; padding: 10px 0; margin-right: 30px; }
 #content .vcard img {
@@ -75,7 +83,23 @@ display: block;
 margin-bottom: 5px;
 }
 
-#messages { padding: 11px 0; }
+#sidebar {
+float: left;
+width: 200px;
+margin: 0 0 20px 0;
+}
+#sidebar ul {
+margin: 0 0 22px;
+padding: 0;
+list-style: none;
+}
+#sidebar li {
+margin: 3px 0;
+padding: 6px 0 0 0;
+font-size: 100%;
+}
+
+#messages { padding: 11px 0; background: #fff; }
 #flash {
 padding: 12px 0;
 font-size: 115%;
@@ -103,4 +127,14 @@ background: #f2d654 url("../images/warning.png") no-repeat 28px;
 
 #footer {
 clear: both;
+margin: 0;
+padding: 30px 0 40px 0;
+}
+
+#wrap:after, #content .vcard:after {
+content: "."; 
+display: block; 
+height: 0;
+clear: both; 
+visibility: hidden;
 }

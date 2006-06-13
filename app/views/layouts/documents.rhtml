@@ -13,7 +13,7 @@
    <h1>AudioBank</h1>
    <ul>
     <% if session[:user] %>
-     <li><%= link_to("Documents", :controller => "documents", :action => "index") %></li>
+     <li><%= link_to("Dashboard", :controller => "users", :action => "dashboard") %></li>
      <li><%= link_to("Options", :controller => "users", :action => "options") %></li>
      <li><%= link_to("Quitter", :controller => "users", :action => "signout") %></li>
     <% else %>
@@ -25,11 +25,15 @@
   </div>
   <hr/>
   <div id="frame">
-   <div>
-    <%= @content_for_layout %>   
+   <div id="wrap">
+    <%= render_partial "users/flash" %>
+    <%= yield %>
    </div>
   </div>
+  <hr/>
   <div id="footer">
+   <div>
+   </div>
   </div>
  </body>
 </html>
