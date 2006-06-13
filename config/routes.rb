@@ -10,7 +10,8 @@ ActionController::Routing::Routes.draw do |map|
   # This route can be invoked with purchase_url(:id => product.id)
   map.connect 'documents/:action/:id', :controller => 'documents'
   map.connect 'subscriptions/:action/:id', :controller => 'subscriptions'
-	map.connect ':action/:id', :controller => 'users'
+	map.connect 'subscribers/:action/:id', :controller => 'subscribers'
+  map.connect ':action/:id', :controller => 'users'
 	
   # You can have the root of your site routed by hooking up '' 
   # -- just remember to delete public/index.html.
