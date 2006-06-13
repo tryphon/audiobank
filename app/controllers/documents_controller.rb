@@ -1,8 +1,7 @@
 class DocumentsController < ApplicationController
-	def dashboard
-		@author = Author.find(session[:user])
-		@subscriber = Subscriber.find(session[:user])
-	end
+  def index
+    redirect_to :controller => 'users', :action => 'dashboard'
+  end
   
   def create
     @document = AudioDocument.new(params[:document])

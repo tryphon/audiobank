@@ -9,6 +9,11 @@ class UsersController < ApplicationController
 	def welcome
 		# could be remove if no one find something to put in
 	end
+
+ 	def dashboard
+		@author = Author.find(session[:user])
+		@subscriber = Subscriber.find(session[:user])
+	end
 	
 	def options
 		@user = User.find(session[:user])
@@ -29,7 +34,7 @@ class UsersController < ApplicationController
 			unless @user.blank?
 				flash[:success] = "Bienvenue !"
 				session[:user] = @user.id
-				redirect_to :controller => "documents"
+				redirect_to :action => "dashboard"
 			else
 				flash[:failure] = "Mauvais nom d'utilisateur ou mot de passe"
 			end
