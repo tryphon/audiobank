@@ -1,0 +1,18 @@
+<div id="content">
+ <h2>Partage votre document</h2>
+  <p><label for="title">Titre :</label><br/>
+  <%= @document.title %></p>
+  <p><label for="description">Description :</label><br/>
+  <%= @document.description %></p>
+  
+  <h3>Utilisateurs autorisés</h3>
+
+	
+  
+ <%= start_form_tag :action => "share" %>
+  <p><label for="title">Utilisateur :</label><br/>
+  <%= text_field("subscription", "subscriber") %></p>
+  <%= submit_tag "Autoriser" %>
+ <%= end_form_tag %>
+  
+</div>
