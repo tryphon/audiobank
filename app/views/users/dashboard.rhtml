@@ -6,6 +6,7 @@
    <p><%= document.description %></p>
    <p>
    	<%= link_to("Editer", :controller => 'documents', :action => 'edit', :id => document.id) %>
+   	-
    	<%= link_to("Partager", :controller => 'documents', :action => 'share', :id => document.id) %>
    </p>
    </li>
