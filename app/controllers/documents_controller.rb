@@ -18,4 +18,28 @@ class DocumentsController < ApplicationController
       end
     end
   end
+  
+  def edit 
+  	@document = AudioDocument.find(params[:id])
+		if request.post?
+			if @document.update_attributes(params[:document])
+				flash[:success] = "Le document a bien été modifié"
+			else
+				flash[:failure] = "Le document n'a pu être modifié"
+			end
+		end
+  end
+  
+  def share
+  	@document = AudioDocument.find(params[:id])
+		@user = User.find(session[:user])
+	  @users = User.find(:all, :conditions => ["id != ?", @user.id])
+	  
+	  @subscription = Subscription.new(params[:subscription])
+	  @subscription.document = @document
+	  # check if @user == @document.author ?
+	  @subscription.author = @subscription.document.author;
+	  
+	  # to be continued :o)
+	end  	
 end

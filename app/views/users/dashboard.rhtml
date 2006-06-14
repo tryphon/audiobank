@@ -1,5 +1,19 @@
 <div id="content">
- <h2>Vos souscriptions</h2>
+ <h2>Vos documents</h2>
+ <ul>
+  <% for document in @author.documents %>
+   <li><h3><%= document.title %></h3>
+   <p><%= document.description %></p>
+   <p>
+   	<%= link_to("Editer", :controller => 'documents', :action => 'edit', :id => document.id) %>
+   	<%= link_to("Partager", :controller => 'documents', :action => 'share', :id => document.id) %>
+   </p>
+   </li>
+  <% end %>
+ </ul>
+ <hr/>
+
+ <h2>Documents accessibles</h2>
  <ul>
   <% for document in @subscriber.documents %>
    <li><h3><%= document.title %></h3>
@@ -8,40 +22,11 @@
   <% end %>
  </ul>
  <hr/>
- <h2>Vos documents</h2>
- <ul>
-  <% for document in @author.documents %>
-   <li><h3><%= document.title %></h3>
-   <p><%= document.description %></p>
-   </li>
-  <% end %>
- </ul>
- <hr/>
- <h2>Vos souscripteurs</h2>
- <ul>
-  <% for subscriber in @author.subscribers %>
-   <li class="vcard">
-    <%= image_tag("avatar") %>
-    <span class="fn"><%= subscriber.name %></span>
-    <span><%= pluralize subscriber.subscriptions.find(:all, ["author_id = ?", @author]).size , "subscription" %></span>
-   </li>
-  <% end %>
- </ul>
+
 </div>
 <div id="sidebar">
  <h4>Documents</h4>
  <ul>
   <li><%= link_to("Ajouter un document", :controller => 'documents', :action => 'create') %></li>
-  <li><%= link_to("Gérer vos documents", :controller => 'documents', :action => 'manage') %></li>
- </ul>
- <h4>Souscriptions</h4>
- <ul>
-  <li><%= link_to("Souscrire à un document", :controller => 'subscriptions', :action => 'subscribe') %></li>
-  <li><%= link_to("Gérer vos subscriptions", :controller => 'subscriptions', :action => 'manage') %></li>
- </ul>
- <h4>Souscripteurs</h4>
- <ul>
-  <li><%= link_to("Autoriser un subscripteur", :controller => 'subscribers', :action => 'allow') %></li>
-  <li><%= link_to("Gérer vos subscripteurs", :controller => 'subscribers', :action => 'manage') %></li>
  </ul>
 </div>
