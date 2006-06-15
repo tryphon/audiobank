@@ -1,12 +1,12 @@
 <h2>Votre panier</h2>
-<% if @document.empty? %>
-<p>Votre panier est vide ...</p>
-<% else %>
- <ul>
- <% for document in @document %>
-  <li>
-   <h3><%= document.title %> <%= link_to_remote(image_tag("basket_remove"), :update => "basket", :url => {:controller => "basket", :action => "remove", :id => document}) %></h3>
-  </li>
+<ul>
+ <% if @document.empty? %>
+  <li>Votre panier est vide ...</li>
+ <% else %>
+  <% for document in @document %>
+   <li>
+    <h3><%= document.title %> <%= link_to_remote(image_tag("basket_remove"), :update => "basket", :url => {:controller => "basket", :action => "remove", :id => document}) %></h3>
+   </li>
+  <% end %>
  <% end %>
- </ul>
-<% end %>
+</ul>
