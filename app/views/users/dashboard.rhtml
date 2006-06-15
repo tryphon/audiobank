@@ -1,15 +1,15 @@
-<h2>Vos souscriptions</h2>
-<ul>
- <%= render :partial => "documents/documents", :object => @subscriber.documents[0..2], :locals => { :empty => "Vous n'avez aucune souscription" } %>
-</ul>
-<div class="actions">
- <%= link_to("Vos autres subscriptions &#8250", :controller => "subscriptions", :action => "manage") %>
-</div>
-<hr/>
 <h2>Vos documents</h2>
 <ul>
  <%= render :partial => "documents/documents", :object => @author.documents[0..2], :locals => { :empty => "Vous n'avez aucun document" } %>
 </ul>
 <div class="actions">
  <%= link_to("Vos autres documents &#8250", :controller => "documents", :action => "manage") %>
+</div>
+<hr/>
+<h2>Vos souscriptions</h2>
+<ul>
+ <%= render :partial => "documents/documents", :object => @subscriber.documents[0..2], :locals => { :empty => "Vous n'avez aucune souscription" } %>
+</ul>
+<div class="actions">
+ <%= link_to("Vos autres subscriptions &#8250", :controller => "subscriptions", :action => "manage") %>
 </div>
