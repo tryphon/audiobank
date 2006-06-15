@@ -7,7 +7,7 @@
  <% end %>
 </ul>
 <div class="actions">
- <%= link_to("Vos autres subscriptions &#8250", :controller => 'subscriptions', :action => 'manage') %>
+ <%= link_to("Vos autres subscriptions &#8250", :controller => "subscriptions", :action => "manage") %>
 </div>
 <hr/>
 <h2>Vos documents</h2>
@@ -18,16 +18,20 @@
   </li>
  <% end %>
 </ul>
-<%= link_to("Vos autres documents &#8250", {:controller => 'documents', :action => 'manage'}, :class => "more") %>
+<div class="actions">
+ <%= link_to("Vos autres documents &#8250", :controller => "documents", :action => "manage") %>
+</div>
 <hr/>
 <h2>Vos souscripteurs</h2>
 <ul>
  <% for subscriber in @author.subscribers[0..3] %>
   <li class="vcard">
    <%= image_tag("avatar", :class => 'avatar') %>
-   <span class="fn"><%= link_to(subscriber.name, :controller => 'subscribers', :action => 'manage', :id => subscriber) %></span>
+   <span class="fn"><%= link_to(subscriber.name, :controller => "subscribers", :action => "manage", :id => subscriber) %></span>
    <span><%= pluralize subscriber.subscriptions.find(:all, ["author_id = ?", @author]).size , "subscription" %></span>
   </li>
  <% end %>
 </ul>
-<%= link_to("Vos autres subscripteurs &#8250", {:controller => 'subscribers', :action => 'manage'}, :class => "clear left more") %>
+<div class="actions">
+ <%= link_to("Vos autres subscripteurs &#8250", :controller => "subscribers", :action => "manage") %>
+</div>
