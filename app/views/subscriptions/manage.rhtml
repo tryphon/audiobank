@@ -8,7 +8,7 @@
     <h3><%= subscription.document.title %></h3>
     <p><%= subscription.document.description %></p>
     <div class="actions">
-      <%= link_to_remote("Ajouter au panier", {:update => "basket", :url => {:controller => "basket", :action => "put", :id => subscription.document }}, :class => "basket_put") %>
+      <%= link_to("Télécharger", {:controller => "documents", :action => "download", :id => subscription.document }, :class => "download") %>
      </span>
    </li>
   <% end %>

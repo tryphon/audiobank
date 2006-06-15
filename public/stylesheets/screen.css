@@ -82,6 +82,7 @@ border-top: 1px solid #ccc;
 #frame a.edit { background: url("../images/edit.png") no-repeat; }
 #frame a.share { background: url("../images/share.png") no-repeat; }
 #frame a.destroy { background: url("../images/destroy.png") no-repeat; }
+#frame a.download { background: url("../images/download.png") no-repeat; }
 #frame a.basket_put { background: url("../images/basket_put.png") no-repeat; }
 
 #content {

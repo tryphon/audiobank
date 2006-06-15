@@ -35,6 +35,10 @@ class DocumentsController < ApplicationController
     @document = Author.find(session[:user]).documents
   end
   
+  def download
+    
+  end
+  
   def destroy
     Author.find(session[:user]).documents.find(params[:id]).destroy
     redirect_to :action => 'manage'
