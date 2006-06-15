@@ -26,14 +26,14 @@
   <hr/>
   <div id="frame">
    <div id="wrap">
-    <%= render_partial "users/flash" %>
+    <%= render :partial => "users/flash" %>
     <div id="content">
      <%= yield %>
     </div>
     <hr/>
     <div id="sidebar">
      <% if session[:user] %>
-      <%= render_partial "documents/sidebar" %>
+      <%= render :partial => "documents/sidebar" %>
      <% end %>
     </div>
    </div>
