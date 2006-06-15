@@ -15,10 +15,12 @@
  <% end %>
  <h2>Vous</h2>
  <%= start_form_tag :action => "options" %>
-  <p><label for="name">Nom complet :</label><br/>
+  <p><label for="user_name">Nom complet :</label><br/>
   <%= text_field("user", "name") %></p>
-  <p><label for="email">Email :</label><br/>
+  <p><label for="user_email">Email :</label><br/>
   <%= text_field("user", "email") %></p>
+  <p><label for="user_organization">Organisme :</label><br/>
+  <%= text_field("user", "organization") %></p>
   <%= submit_tag "Modifier" %>
  <%= end_form_tag %> 
 </div>

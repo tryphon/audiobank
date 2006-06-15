@@ -1,11 +1,11 @@
 <% if subscribers.empty? %>
- <li>Déposer ici les utilisateurs qui ont accès à ce document</li>
+ <li><%= empty %></li>
 <% else %>
  <% for subscriber in subscribers %>
   <li id="<%= "subscriber_#{subscriber.id}" %>" class="vcard">
    <%= image_tag("avatar", :class => 'avatar') %>
    <span class="fn"><%= subscriber.name %></span>
-   <span class="org">Autres M ondes</span>
+   <span class="org"><%= subscriber.organization %></span>
   </li>
   <%= draggable_element("subscriber_#{subscriber.id}", :revert => true) %> 
  <% end %>

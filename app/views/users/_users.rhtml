@@ -1,11 +1,11 @@
 <% if users.empty? %>
- <li>Déposer ici les utilisateurs qui n'ont accès à ce document</li>
+ <li><%= empty %></li>
 <% else %>
  <% for user in users %>
   <li id="<%= "user_#{user.id}" %>" class="vcard">
    <%= image_tag("avatar", :class => 'avatar') %>
    <span class="fn"><%= user.name %></span>
-   <span class="org">Autres M ondes</span>
+   <span class="org"><%= user.organization %></span>
   </li>
  <%= draggable_element("user_#{user.id}", :revert => true) %> 
  <% end %>

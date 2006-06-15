@@ -1,5 +1,10 @@
-<% for document in documents %>
- <li><h3><%= document.title %></h3>
- <p><%= document.description %></p>
- </li>
+<% if documents.empty? %>
+ <li><%= empty %></li>
+<% else %>
+ <% for document in documents %>
+  <li>
+   <h3><%= document.title %></h3>
+   <p><%= document.description %></p>
+  </li>
+ <% end %>
 <% end %>

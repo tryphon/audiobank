@@ -1,13 +1,19 @@
 <h2>Partager votre document</h2>
-<h3><%= @document.title %></h3>
-<p><%= @document.description %></p>
+<ul>
+ <li>
+  <h3><%= @document.title %></h3>
+  <p><%= @document.description %></p>
+ </li>
+</ul>
 <hr/>
+<h4>N'ont pas accès à ce document :</h4>
 <ul id="users">
- <%= render :partial => "users/users", :object => @user %>
+ <%= render :partial => "users/users", :object => @user, :locals => { :empty => "Déposer ici les utilisateurs qui n'ont accès à ce document" } %>
 </ul>
 <%= drop_receiving_element("users", :url => { :controller => "subscriptions", :action => "remove", :document => @document }) %>
 <hr/>
+<h4>Ont accès à ce document :</h4>
 <ul id="subscribers">
- <%= render :partial => "subscribers/subscribers", :object => @document.subscribers %>
+ <%= render :partial => "subscribers/subscribers", :object => @document.subscribers, :locals => { :empty => "Déposer ici les utilisateurs qui ont accès à ce document" } %>
 </ul>
 <%= drop_receiving_element("subscribers", :url => { :controller => "subscriptions", :action => "add", :document => @document }) %>
