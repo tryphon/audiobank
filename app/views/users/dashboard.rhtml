@@ -13,11 +13,3 @@
 <div class="actions">
  <%= link_to("Vos autres documents &#8250", :controller => "documents", :action => "manage") %>
 </div>
-<hr/>
-<h2>Vos souscripteurs</h2>
-<ul>
- <%= render :partial => "subscribers/subscribers", :object => @author.subscribers[0..3], :locals => { :empty => "Vous n'avez aucun souscripteur" } %>
-</ul>
-<div class="actions">
- <%= link_to("Vos autres subscripteurs &#8250", :controller => "subscribers", :action => "manage") %>
-</div>
