@@ -1,5 +1,4 @@
-<div id="content">
- <% if @document.errors.count > 0 %>
+<% if @document.errors.count > 0 %>
  <div id="errors">
   <% if @document.errors.count == 1 %>
    <h2>Une erreur a été trouvée</h2>
@@ -12,13 +11,12 @@
    <% end %>
   </ul>
  </div>
- <% end %>
- <h2>Editer votre document</h2>
- <%= start_form_tag :action => "edit" %>
-  <p><label for="title">Titre :</label><br/>
-  <%= text_field("document", "title") %></p>
-  <p><label for="description">Description :</label><br/>
-  <%= text_area("document", "description", :rows => 15, :cols => 43) %></p>
-  <%= submit_tag "Modifier le document" %>
- <%= end_form_tag %>
-</div>
+<% end %>
+<h2>Modifier votre document</h2>
+<%= start_form_tag :action => "edit" %>
+ <p><label for="title">Titre :</label><br/>
+ <%= text_field("document", "title") %></p>
+ <p><label for="description">Description :</label><br/>
+ <%= text_area("document", "description", :rows => 15, :cols => 28) %></p>
+ <%= submit_tag "Modifier ce document" %>
+<%= end_form_tag %>

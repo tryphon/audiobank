@@ -27,7 +27,15 @@
   <div id="frame">
    <div id="wrap">
     <%= render_partial "users/flash" %>
-    <%= yield %>
+    <div id="content">
+     <%= yield %>
+    </div>
+    <hr/>
+    <div id="sidebar">
+     <% if session[:user] %>
+      <%= render_partial "documents/sidebar" %>
+     <% end %>
+    </div>
    </div>
   </div>
   <hr/>

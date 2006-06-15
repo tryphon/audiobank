@@ -11,6 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'documents/:action/:id', :controller => 'documents'
   map.connect 'subscriptions/:action/:id', :controller => 'subscriptions'
 	map.connect 'subscribers/:action/:id', :controller => 'subscribers'
+	map.connect 'basket/:action/:id', :controller => 'basket'
   map.connect ':action/:id', :controller => 'users'
 	
   # You can have the root of your site routed by hooking up '' 

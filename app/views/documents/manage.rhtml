@@ -1,0 +1,21 @@
+<h2>Gérer vos documents</h2>
+<% if @document.empty? %>
+ <p>Vous n'avez aucun document, vous devriez <%= link_to("en ajouter un", :action => "create") %></p>
+<% else %>
+ <ul>
+  <% for document in @document %>
+   <% element_id = "document_#{document.id}" %>
+   <li>
+    <h3 onmouseover="new Element.show('<%= element_id %>');" onmouseout="new Element.hide('<%= element_id %>');">
+     <span id="<%= element_id %>" class="actions" style="display: none;">
+      <%= link_to(image_tag("edit"), {:action => "edit", :id => document}, :title => "Editer ce document") %>
+      <%= link_to(image_tag("share"), :action => "share", :id => document) %>
+      <%= link_to(image_tag("destroy"), :action => "destroy", :id => document) %>
+     </span>
+     <%= document.title %>
+    </h3>
+    <p><%= document.description %></p>
+   </li>
+  <% end %>
+ </ul>
+<% end %>

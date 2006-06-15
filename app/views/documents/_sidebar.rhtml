@@ -1,0 +1,17 @@
+<h2>Documents</h2>
+<ul>
+ <li><%= link_to("Ajouter un document", :controller => 'documents', :action => 'add') %></li>
+ <li><%= link_to("Gérer vos documents", :controller => 'documents', :action => 'manage') %></li>
+</ul>
+<h2>Souscriptions</h2>
+<ul>
+ <li><%= link_to("Consulter vos souscriptions", :controller => 'subscriptions', :action => 'manage') %></li>
+</ul>
+<h2>Souscripteurs</h2>
+<ul>
+ <li><%= link_to("Ajouter un subscripteur", :controller => 'subscribers', :action => 'allow') %></li>
+ <li><%= link_to("Gérer vos subscripteurs", :controller => 'subscribers', :action => 'manage') %></li>
+</ul>
+<div id="basket">
+ <%= render_component(:controller => "basket", :action => "list") %>
+</div>

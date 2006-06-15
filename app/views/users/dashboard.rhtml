@@ -1,33 +1,31 @@
-<div id="content">
- <h2>Vos documents</h2>
- <ul>
-  <% for document in @author.documents %>
-   <li><h3><%= document.title %></h3>
-   <p><%= document.description %></p>
-   <p>
-   	<%= link_to("Editer", :controller => 'documents', :action => 'edit', :id => document.id) %>
-   	-
-   	<%= link_to("Partager", :controller => 'documents', :action => 'share', :id => document.id) %>
-   </p>
-   </li>
-  <% end %>
- </ul>
- <hr/>
-
- <h2>Documents accessibles</h2>
- <ul>
-  <% for document in @subscriber.documents %>
-   <li><h3><%= document.title %></h3>
-   <p><%= document.description %></p>
-   </li>
-  <% end %>
- </ul>
- <hr/>
-
-</div>
-<div id="sidebar">
- <h4>Documents</h4>
- <ul>
-  <li><%= link_to("Ajouter un document", :controller => 'documents', :action => 'create') %></li>
- </ul>
-</div>
+<h2>Vos souscriptions</h2>
+<ul>
+ <% for document in @subscriber.documents[0..2] %>
+  <li><h3><%= document.title %></h3>
+  <p><%= document.description %></p>
+  </li>
+ <% end %>
+</ul>
+<%= link_to("Vos autres subscriptions &#8250", {:controller => 'subscriptions', :action => 'manage'}, :class => "more") %>
+<hr/>
+<h2>Vos documents</h2>
+<ul>
+ <% for document in @author.documents[0..2] %>
+  <li><h3><%= document.title %></h3>
+  <p><%= document.description %></p>
+  </li>
+ <% end %>
+</ul>
+<%= link_to("Vos autres documents &#8250", {:controller => 'documents', :action => 'manage'}, :class => "more") %>
+<hr/>
+<h2>Vos souscripteurs</h2>
+<ul>
+ <% for subscriber in @author.subscribers[0..3] %>
+  <li class="vcard">
+   <%= image_tag("avatar", :class => 'avatar') %>
+   <span class="fn"><%= link_to(subscriber.name, :controller => 'subscribers', :action => 'manage', :id => subscriber) %></span>
+   <span><%= pluralize subscriber.subscriptions.find(:all, ["author_id = ?", @author]).size , "subscription" %></span>
+  </li>
+ <% end %>
+</ul>
+<%= link_to("Vos autres subscripteurs &#8250", {:controller => 'subscribers', :action => 'manage'}, :class => "clear left more") %>

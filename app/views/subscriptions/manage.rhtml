@@ -1,0 +1,19 @@
+<h2>Consulter vos souscriptions</h2>
+<% if @subscription.empty? %>
+ <p>Vous n'avez aucun document, vous devriez <%= link_to("en ajouter un", :action => "create") %></p>
+<% else %>
+ <ul>
+  <% for subscription in @subscription %>
+   <% element_id = "subscription_#{subscription.id}" %>
+   <li>
+    <h3 onmouseover="new Element.show('<%= element_id %>');" onmouseout="new Element.hide('<%= element_id %>');">
+     <span id="<%= element_id %>" class="actions" style="display: none;">
+      <%= link_to_remote(image_tag("basket_put"), :update => "basket", :url => {:controller => "basket", :action => "put", :id => subscription.document}) %>
+     </span>
+     <%= subscription.document.title %>
+    </h3>
+    <p><%= subscription.document.description %></p>
+   </li>
+  <% end %>
+ </ul>
+<% end %>
