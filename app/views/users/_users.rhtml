@@ -3,7 +3,7 @@
 <% else %>
  <% for user in users %>
   <li id="<%= "user_#{user.id}" %>" class="vcard">
-   <%= image_tag("avatar", :class => 'avatar') %>
+   <%= image_tag("avatar", :class => 'photo') %>
    <span class="fn"><%= user.name %></span>
    <span class="org"><%= user.organization %></span>
   </li>

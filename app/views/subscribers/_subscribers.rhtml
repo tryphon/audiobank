@@ -3,7 +3,7 @@
 <% else %>
  <% for subscriber in subscribers %>
   <li id="<%= "subscriber_#{subscriber.id}" %>" class="vcard">
-   <%= image_tag("avatar", :class => 'avatar') %>
+   <%= image_tag("avatar", :class => 'photo') %>
    <span class="fn"><%= subscriber.name %></span>
    <span class="org"><%= subscriber.organization %></span>
   </li>
