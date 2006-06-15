@@ -18,4 +18,8 @@ class User < ActiveRecord::Base
 			nil
 		end
 	end
+	
+	def ==(other)
+    id == other.id
+	end
 end

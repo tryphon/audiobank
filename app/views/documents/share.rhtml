@@ -1,3 +1,13 @@
 <h2>Partager votre document</h2>
 <h3><%= @document.title %></h3>
 <p><%= @document.description %></p>
+<hr/>
+<ul id="users">
+ <%= render :partial => "users/users", :object => @user %>
+</ul>
+<%= drop_receiving_element("users", :url => { :controller => "subscriptions", :action => "remove", :document => @document }) %>
+<hr/>
+<ul id="subscribers">
+ <%= render :partial => "subscribers/subscribers", :object => @document.subscribers %>
+</ul>
+<%= drop_receiving_element("subscribers", :url => { :controller => "subscriptions", :action => "add", :document => @document }) %>

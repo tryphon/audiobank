@@ -1,10 +1,6 @@
 <h2>Vos souscriptions</h2>
 <ul>
- <% for document in @subscriber.documents[0..2] %>
-  <li><h3><%= document.title %></h3>
-  <p><%= document.description %></p>
-  </li>
- <% end %>
+ <%= render :partial => "documents/documents", :object => @subscriber.documents[0..2] %>
 </ul>
 <div class="actions">
  <%= link_to("Vos autres subscriptions &#8250", :controller => "subscriptions", :action => "manage") %>
@@ -12,11 +8,7 @@
 <hr/>
 <h2>Vos documents</h2>
 <ul>
- <% for document in @author.documents[0..2] %>
-  <li><h3><%= document.title %></h3>
-  <p><%= document.description %></p>
-  </li>
- <% end %>
+ <%= render :partial => "documents/documents", :object => @author.documents[0..2] %>
 </ul>
 <div class="actions">
  <%= link_to("Vos autres documents &#8250", :controller => "documents", :action => "manage") %>
@@ -24,13 +16,7 @@
 <hr/>
 <h2>Vos souscripteurs</h2>
 <ul>
- <% for subscriber in @author.subscribers[0..3] %>
-  <li class="vcard">
-   <%= image_tag("avatar", :class => 'avatar') %>
-   <span class="fn"><%= link_to(subscriber.name, :controller => "subscribers", :action => "manage", :id => subscriber) %></span>
-   <span><%= pluralize subscriber.subscriptions.find(:all, ["author_id = ?", @author]).size , "subscription" %></span>
-  </li>
- <% end %>
+ <%= render :partial => "subscribers/subscribers", :object => @author.subscribers[0..3] %>
 </ul>
 <div class="actions">
  <%= link_to("Vos autres subscripteurs &#8250", :controller => "subscribers", :action => "manage") %>

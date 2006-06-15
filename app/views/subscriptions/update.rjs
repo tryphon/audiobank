@@ -1,0 +1,2 @@
+page.replace_html "users", :partial => "users/users", :object => User.find(:all, :conditions => ["id != ?", session[:user]]) - @document.subscribers
+page.replace_html "subscribers", :partial => "subscribers/subscribers", :object => @document.subscribers

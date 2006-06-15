@@ -41,15 +41,7 @@ class DocumentsController < ApplicationController
   end
 
   def share
-  	@document = AudioDocument.find(params[:id])
-		@user = User.find(session[:user])
-	  @users = User.find(:all, :conditions => ["id != ?", @user.id])
-	  
-	  @subscription = Subscription.new(params[:subscription])
-	  @subscription.document = @document
-	  # check if @user == @document.author ?
-	  @subscription.author = @subscription.document.author;
-	  
-	  # to be continued :o)
+  	@document = Author.find(session[:user]).documents.find(params[:id])
+	  @user = User.find(:all, :conditions => ["id != ?", session[:user]]) - @document.subscribers
 	end
 end

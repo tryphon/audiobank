@@ -25,7 +25,7 @@ border-bottom: 4px solid #ccc;
 background: #333;
 }
 #header div {
-height: 44px;
+height: 54px;
 width: 750px;
 margin: 0 auto;
 }
@@ -33,7 +33,7 @@ margin: 0 auto;
 #header a { font-size: 90%; color: #fff; }
 #header div ul {
 float: right;
-margin-top: 42px;
+margin-top: 52px;
 padding: 0;
 font-size: 90%;
 list-style: none;
@@ -71,6 +71,7 @@ color: #7dacd1;
 clear: both;
 }
 #frame .actions {
+clear: both;
 margin: 12px 0;
 padding: 4px;
 font-size: 90%;
@@ -91,7 +92,7 @@ margin: 0 0 0 40px;
 #content h2 { margin: 6px 0; }
 #content h3 { color: #6b2 }
 #content li { margin: 0 12px; padding: 10px 0 0; }
-#content .vcard { float: left; padding: 10px 0; margin-right: 30px; }
+#content .vcard { float: left; width: 45%; padding: 10px 0; }
 #content .vcard img.avatar {
 float: left;
 margin: 0 10px 0 0;
@@ -103,6 +104,13 @@ background: #fff;
 #content .vcard span.fn {
 display: block;
 margin-bottom: 5px;
+}
+#subscribers, #users {
+clear: both;
+border: 1px solid #5884a6;
+}
+#subscribers li, #users li {
+padding: 12px;
 }
 
 #sidebar {
@@ -161,7 +169,7 @@ margin: 0 auto;
 text-align: left;
 }
 
-#wrap:after, #content .vcard:after {
+#wrap:after, #content .vcard:after, #subscribers:after, #users:after {
 content: "."; 
 display: block; 
 height: 0;
