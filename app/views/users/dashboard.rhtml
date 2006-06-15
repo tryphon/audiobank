@@ -6,7 +6,9 @@
   </li>
  <% end %>
 </ul>
-<%= link_to("Vos autres subscriptions &#8250", {:controller => 'subscriptions', :action => 'manage'}, :class => "more") %>
+<div class="actions">
+ <%= link_to("Vos autres subscriptions &#8250", :controller => 'subscriptions', :action => 'manage') %>
+</div>
 <hr/>
 <h2>Vos documents</h2>
 <ul>

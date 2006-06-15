@@ -4,15 +4,12 @@
 <% else %>
  <ul>
   <% for subscription in @subscription %>
-   <% element_id = "subscription_#{subscription.id}" %>
    <li>
-    <h3 onmouseover="new Element.show('<%= element_id %>');" onmouseout="new Element.hide('<%= element_id %>');">
-     <span id="<%= element_id %>" class="actions" style="display: none;">
-      <%= link_to_remote(image_tag("basket_put"), :update => "basket", :url => {:controller => "basket", :action => "put", :id => subscription.document}) %>
-     </span>
-     <%= subscription.document.title %>
-    </h3>
+    <h3><%= subscription.document.title %></h3>
     <p><%= subscription.document.description %></p>
+    <div class="actions">
+      <%= link_to_remote("Ajouter au panier", {:update => "basket", :url => {:controller => "basket", :action => "put", :id => subscription.document }}, :class => "basket_put") %>
+     </span>
    </li>
   <% end %>
  </ul>

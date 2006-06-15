@@ -4,17 +4,14 @@
 <% else %>
  <ul>
   <% for document in @document %>
-   <% element_id = "document_#{document.id}" %>
    <li>
-    <h3 onmouseover="new Element.show('<%= element_id %>');" onmouseout="new Element.hide('<%= element_id %>');">
-     <span id="<%= element_id %>" class="actions" style="display: none;">
-      <%= link_to(image_tag("edit"), {:action => "edit", :id => document}, :title => "Editer ce document") %>
-      <%= link_to(image_tag("share"), :action => "share", :id => document) %>
-      <%= link_to(image_tag("destroy"), :action => "destroy", :id => document) %>
-     </span>
-     <%= document.title %>
-    </h3>
+    <h3><%= document.title %></h3>
     <p><%= document.description %></p>
+    <div class="actions">
+     <%= link_to("Détruire", {:action => "destroy", :id => document}, :title => "Détruire ce document", :class => "destroy") %>
+     <%= link_to("Partager", {:action => "share", :id => document}, :title => "Partager ce document", :class => "share") %>
+     <%= link_to("Editer", {:action => "edit", :id => document}, :title => "Editer ce document", :class => "edit") %>
+    </div>
    </li>
   <% end %>
  </ul>

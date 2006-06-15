@@ -4,14 +4,8 @@
 <% else %>
  <ul>
  <% for document in @document %>
-  <% element_id = "document_#{document.id}" %>
   <li>
-   <h3 onmouseover="new Element.show('<%= element_id %>');" onmouseout="new Element.hide('<%= element_id %>');">
-    <span id="<%= element_id %>" class="actions" style="display:none;">
-     <%= link_to_remote(image_tag("basket_remove"), :update => "basket", :url => {:controller => "basket", :action => "remove", :id => document}) %>
-    </span>
-    <%= document.title %>
-   </h3>
+   <h3><%= document.title %> <%= link_to_remote(image_tag("basket_remove"), :update => "basket", :url => {:controller => "basket", :action => "remove", :id => document}) %></h3>
   </li>
  <% end %>
  </ul>
