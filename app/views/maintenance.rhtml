@@ -4,18 +4,22 @@
   <title>AudioBank &raquo; Maintenance en cours</title>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <link rel="shortcut icon" href="/favicon.ico" />
+  <style type="text/css">
+   body#error { font: 14px Trebuchet MS, Verdana, sans-serif; margin-top: 2em; background: none; }
+   #frame { position: relative; width: 780px; margin: 0 auto; }
+   a { color: #000; text-decoration: none; }
+   a:hover { text-decoration: underline; }  
+  </style>
  </head>
  <body>
   <div id="frame">
-   <div id="wrap">
-    <h1>Hey, on s'occupe de nos serveurs !</h1>
-    <p>
-     Nous sommes actuellement en train de dorloter nos serveurs, tout ça afin de <%= reason ? reason : "les garder en forme" %>.
-    </p>
-    <p>
-     La séance de dorlotage à commencer à <%= Time.now.strftime("%H:%M") %> et devrait se terminer <%= deadline ? "#{deadline}" : "très bientôt" %>.
-    </p>
-   </div>
+   <h1>Hey, on s'occupe de nos serveurs !</h1>
+   <p>
+    Nous sommes actuellement en train de dorloter nos serveurs, tout ça afin de <%= reason ? reason : "les garder en forme" %>.
+   </p>
+   <p>
+    La séance de dorlotage à commencer à <%= Time.now.strftime("%H:%M") %> et devrait se terminer <%= deadline ? "#{deadline}" : "très bientôt" %>.
+   </p>
   </div>
  </body>
 </html>
