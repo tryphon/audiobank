@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+ <head>
+  <title>AudioBank &raquo; Maintenance en cours</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+ </head>
+ <body>
+  <div id="frame">
+   <div id="wrap">
+    <h1>Hey, on s'occupe de nos serveurs !</h1>
+    <p>
+     Nous sommes actuellement en train de dorloter nos serveurs, tout ça afin de <%= reason ? reason : "les garder en forme" %>.
+    </p>
+    <p>
+     La séance de dorlotage à commencer à <%= Time.now.strftime("%H:%M") %> et devrait se terminer <%= deadline ? "#{deadline}" : "très bientôt" %>.
+    </p>
+   </div>
+  </div>
+ </body>
+</html>
