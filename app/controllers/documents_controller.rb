@@ -12,7 +12,7 @@ class DocumentsController < ApplicationController
       @document.format = "unknow"
       if @document.save
         flash[:success] = "Votre document a bien été crée"
-        redirect_to :action => 'manage'
+        redirect_to :action => 'share', :id => @document
       else
         flash[:failure] = "Votre document n'a pas été crée"
       end
