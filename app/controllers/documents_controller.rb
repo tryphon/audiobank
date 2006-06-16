@@ -12,7 +12,7 @@ class DocumentsController < ApplicationController
       @document.format = "unknow"
       if @document.save
         flash[:success] = "Votre document a bien été crée"
-        redirect_to :action => 'share', :id => @document
+        redirect_to :action => 'upload', :id => @document
       else
         flash[:failure] = "Votre document n'a pas été crée"
       end
@@ -43,6 +43,8 @@ class DocumentsController < ApplicationController
   	@document = Author.find(session[:user]).documents.find(params[:id])
   	if request.post?
   		@document.file = params[:file]
+  		flash[:success] = "Votre fichier a bien été déposé"
+  		redirect_to :action => 'share', :id => @document
   	end
   end
   
