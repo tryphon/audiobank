@@ -1,0 +1,19 @@
+<% if @document.errors.count > 0 %>
+<div id="errors">
+ <% if @document.errors.count == 1 %>
+  <h2>Une erreur a été trouvée</h2>
+ <% else %>
+  <h2><%= @document.errors.count %> erreurs ont été trouvées</h2>
+ <% end %>
+ <ul>
+  <% @document.errors.each do |name, message| %>
+   <li><%= link_to(message, "#user_#{name}") %></li>
+  <% end %>
+ </ul>
+</div>
+<% end %>
+<h2>Déposer votre fichier</h2>
+<%= start_form_tag({:action => "upload"}, :multipart => true) %>
+ <label for="document_file">Fichier :</label><br/><%= file_field "document", "file" %>
+ <%= submit_tag "Déposer votre fichier" %>
+<%= end_form_tag %>

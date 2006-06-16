@@ -10,7 +10,7 @@ class Document < ActiveRecord::Base
 		id # find a standard and smarter way to name the file (based on document id)
 	end
 	
-	def file=(file) # not saved : time length of the file
+	def file=(file) # should calculate time length and return false if copy fail
 		format = file.content_type # should be used in a smarter way (check, format and save)
 		File.open("#{RAILS_ROOT}/media/#{filename}", "wb") do |f| 
     	f.write(file.read)
