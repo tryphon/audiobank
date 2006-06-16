@@ -39,6 +39,13 @@ class DocumentsController < ApplicationController
     
   end
   
+  def upload
+  	@document = Author.find(session[:user]).documents.find(params[:id])
+  	if request.post?
+  		@document.file = params[:file]
+  	end
+  end
+  
   def destroy
     Author.find(session[:user]).documents.find(params[:id]).destroy
     redirect_to :action => 'manage'
