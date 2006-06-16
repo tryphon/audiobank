@@ -21,4 +21,8 @@ class Document < ActiveRecord::Base
 	def after_destroy
     File.delete("#{RAILS_ROOT}/media/#{filename}") if File.exist?("#{RAILS_ROOT}/media/#{filename}")
   end
+  
+  def uploaded?
+  	!size.zero?
+  end
 end
