@@ -8,6 +8,7 @@
     <h3><%= document.title %></h3>
     <p><%= document.description %></p>
     <div class="actions">
+     <%= link_to("Déposer", {:action => "upload", :id => document} , :title => "Déposer votre fichier", :class => "upload") unless document.uploaded? %>
      <%= link_to("Détruire", {:action => "destroy", :id => document}, :confirm => "Êtes vous sûr de vouloir détruire ce document ?", :title => "Détruire ce document", :class => "destroy") %>
      <%= link_to("Partager", {:action => "share", :id => document}, :title => "Partager ce document", :class => "share") %>
      <%= link_to("Editer", {:action => "edit", :id => document}, :title => "Editer ce document", :class => "edit") %>

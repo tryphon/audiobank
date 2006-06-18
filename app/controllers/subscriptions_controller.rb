@@ -6,7 +6,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def manage
-    @subscription = Subscriber.find(session[:user]).subscriptions
+    @document = Subscriber.find(session[:user]).documents
   end 
   
   def add
@@ -22,5 +22,10 @@ class SubscriptionsController < ApplicationController
     @subscription = @document.subscriptions.find(:first, :conditions => ["author_id = ? AND subscriber_id = ?", session[:user], params[:id].split("_")[1]])
     @subscription.destroy
     render :action => "update"
+  end
+  
+  def download
+  	@document = Subscriber.find(session[:user]).documents.find(params[:id])
+  	send_file @document.path, :type => @document.format
   end
 end

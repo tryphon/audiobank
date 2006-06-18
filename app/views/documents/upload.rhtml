@@ -13,7 +13,15 @@
 </div>
 <% end %>
 <h2>Déposer votre fichier</h2>
+<ul>
+ <li>
+  <h3><%= @document.title %></h3>
+  <p><%= @document.description %></p>
+ </li>
+</ul>
+<hr/>
 <%= start_form_tag({:action => "upload"}, :multipart => true) %>
- <label for="document_file">Fichier :</label><br/><%= file_field "document", "file" %>
+ <p><label for="document_file">Fichier :</label><br/>
+ <%= file_field "document", "file" %></p>
  <%= submit_tag "Déposer votre fichier" %>
 <%= end_form_tag %>

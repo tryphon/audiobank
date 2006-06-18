@@ -10,6 +10,7 @@ list-style-type: square;
 }
 a { color: #000; text-decoration: none; }
 a:hover { text-decoration: underline; }
+form { margin: 12px; }
 input, textarea { padding: 4px; font-weight: normal; font-size: 120%; }
 hr { display: none; }
 img { border: none; vertical-align: middle; }

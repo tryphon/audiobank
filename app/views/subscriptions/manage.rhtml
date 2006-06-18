@@ -1,15 +1,18 @@
 <h2>Consulter vos souscriptions</h2>
-<% if @subscription.empty? %>
- <p>Vous n'avez aucun document, vous devriez <%= link_to("en ajouter un", :action => "create") %></p>
+<% if @document.empty? %>
+ <p>Vous n'avez aucune souscription ...</p>
 <% else %>
  <ul>
-  <% for subscription in @subscription %>
+  <% for document in @document %>
    <li>
-    <h3><%= subscription.document.title %></h3>
-    <p><%= subscription.document.description %></p>
+    <h3><%= document.title %></h3>
+    <p><%= document.description %></p>
+    <div class="details">
+      <%= image_tag("size") %> <%= human_size(document.size) %>
+    </div>
     <div class="actions">
-      <%= link_to("Télécharger", {:controller => "documents", :action => "download", :id => subscription.document }, :class => "download") %>
-     </span>
+      <%= link_to("Télécharger", {:action => "download", :id => document }, :class => "download") %>
+    </div>
    </li>
   <% end %>
  </ul>
