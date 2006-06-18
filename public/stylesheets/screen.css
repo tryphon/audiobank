@@ -82,6 +82,7 @@ border-top: 1px solid #ccc;
 #frame a.edit { background: url("../images/edit.png") no-repeat; }
 #frame a.share { background: url("../images/share.png") no-repeat; }
 #frame a.destroy { background: url("../images/destroy.png") no-repeat; }
+#frame a.upload { background: url("../images/upload.png") no-repeat; }
 #frame a.download { background: url("../images/download.png") no-repeat; }
 #frame a.basket_put { background: url("../images/basket_put.png") no-repeat; }
 
@@ -134,6 +135,7 @@ font-size: 100%;
 
 #messages { padding: 0 0 12px; background: #fff; }
 #flash {
+margin: 6px 0;
 padding: 12px 0;
 font-size: 115%;
 font-weight: bold;
@@ -155,7 +157,7 @@ background: #ffbdbd url("../images/failure.png") no-repeat 28px;
 #messages .warning {
 color: #c67109;
 border-color: #c67109;
-background: #f2d654 url("../images/warning.png") no-repeat 28px;
+background: #f8e694 url("../images/warning.png") no-repeat 28px;
 }
 
 #footer {
