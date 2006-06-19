@@ -8,8 +8,8 @@
     <h3><%= document.title %></h3>
     <p><%= document.description %></p>
     <div class="details">
-      <%= image_tag("size") %> <%= human_size(document.size) %>
-      <%= image_tag("length") %> <%= format_time(document.duration) %>
+      <span class="length"><%= format_time(document.duration) %></span>
+      <span class="size"><%= human_size(document.size) %></span>
     </div>
     <div class="actions">
       <%= link_to("Télécharger", {:action => "download", :id => document }, :class => "download") %>

@@ -86,6 +86,15 @@ border-top: 1px solid #ccc;
 #frame a.upload { background: url("../images/upload.png") no-repeat; }
 #frame a.download { background: url("../images/download.png") no-repeat; }
 #frame a.basket_put { background: url("../images/basket_put.png") no-repeat; }
+#frame .details {
+position: absolute;
+top: 12px;
+right: 0;
+font-size: 90%;
+}
+#frame .details span { margin: 0; padding: 0 4px 0 20px; }
+#frame span.length { background: url("../images/length.png") no-repeat; } 
+#frame span.size { background: url("../images/size.png") no-repeat; } 
 
 #content {
 float: right;
@@ -93,9 +102,9 @@ width: 510px;
 margin: 0 0 0 40px;
 }
 #content h2 { margin: 6px 0; }
-#content h3 { color: #6b2 }
+#content h3 { color: #6b2; }
 #content h4 { margin: 12px 0 0; color: #5884a6; }
-#content li { margin: 0 12px; padding: 10px 0 0; }
+#content li { position: relative; margin: 0 12px; padding: 10px 0 0; }
 #content .vcard { float: left; width: 45%; padding: 10px 0; }
 #content .vcard img.photo {
 float: left;
@@ -109,6 +118,7 @@ background: #fff;
 display: block;
 margin-bottom: 5px;
 }
+
 #subscribers, #users {
 clear: both;
 border: 1px solid #5884a6;

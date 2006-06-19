@@ -5,6 +5,10 @@
   <li>
    <h3><%= document.title %></h3>
    <p><%= document.description %></p>
+   <div class="details">
+    <span class="length"><%= format_time(document.duration) %></span>
+    <span class="size"><%= human_size(document.size) %></span>
+   </div>
   </li>
  <% end %>
 <% end %>
