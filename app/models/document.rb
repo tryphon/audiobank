@@ -1,3 +1,4 @@
+require 'taglib'
 class Document < ActiveRecord::Base
 	belongs_to :author
 	has_many :subscribers, :through => :subscriptions
@@ -16,12 +17,19 @@ class Document < ActiveRecord::Base
 		"#{RAILS_ROOT}/media/#{filename}"
 	end
 	
+	def duration
+		Time.at(self.length) - 3600
+	end
+	
 	def file=(file) # should calculate time length and return false if copy fail
 		self.format = file.content_type.chomp
 		self.size = file.length
 		File.open(path, "wb") do |f| 
     	f.write(file.read)
     end
+    file = TagLib::File.new(path)
+    self.length = file.length
+    file.close
   end
 	
 	def after_destroy
@@ -31,13 +39,16 @@ class Document < ActiveRecord::Base
   def uploaded?
   	!size.zero?
   end
-  
-  protected
+
+	protected
   def suffix
   	case self.format
   		when "audio/mpeg" then ".mp3"
+  		when "audio/x-flac" then ".flac"
   		when "application/ogg", "audio/x-vorbis+ogg" then ".ogg"
+  		# not supported format :
   		when "audio/x-wav" then ".wav"
+  		when "audio/mp4" then ".ma4"
   		else nil
   	end
   end
