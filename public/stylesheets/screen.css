@@ -68,8 +68,10 @@ background: #fff url("../images/frame-bg.png") repeat-y top left;
 #frame ul { margin: 4px 0; list-style-type: none; }
 #frame h2 {
 font: normal 120% "Georgia", serif;
+margin: 6px 0;
 color: #7dacd1;
 clear: both;
+border-bottom: 1px solid #7dacd1;
 }
 #frame .actions {
 clear: both;
@@ -101,10 +103,9 @@ float: right;
 width: 510px;
 margin: 0 0 0 40px;
 }
-#content h2 { margin: 6px 0; }
 #content h3, #content h3  a { text-decoration: none; color: #6b2; }
 #content h4 { margin: 12px 0 0; color: #5884a6; }
-#content li { position: relative; margin: 0 12px; padding: 10px 0 0; }
+#content li { position: relative; margin: 0 12px 16px; padding: 10px 0 0; }
 #content .vcard { float: left; width: 45%; padding: 10px 0; }
 #content .vcard img.photo {
 float: left;
@@ -134,9 +135,9 @@ width: 200px;
 margin: 0 0 20px 0;
 }
 #sidebar ul {
-margin: 0 0 22px;
+margin: 0 0 22px 22px;
 padding: 0;
-list-style: none;
+list-style-type: square;
 }
 #sidebar li {
 margin: 3px 0;
