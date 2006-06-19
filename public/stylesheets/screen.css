@@ -88,7 +88,7 @@ border-top: 1px solid #ccc;
 #frame a.basket_put { background: url("../images/basket_put.png") no-repeat; }
 #frame .details {
 position: absolute;
-top: 12px;
+top: 14px;
 right: 0;
 font-size: 90%;
 }
@@ -102,7 +102,7 @@ width: 510px;
 margin: 0 0 0 40px;
 }
 #content h2 { margin: 6px 0; }
-#content h3 { color: #6b2; }
+#content h3, #content h3  a { text-decoration: none; color: #6b2; }
 #content h4 { margin: 12px 0 0; color: #5884a6; }
 #content li { position: relative; margin: 0 12px; padding: 10px 0 0; }
 #content .vcard { float: left; width: 45%; padding: 10px 0; }

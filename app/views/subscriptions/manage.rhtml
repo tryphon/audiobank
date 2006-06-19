@@ -1,20 +1,4 @@
 <h2>Consulter vos souscriptions</h2>
-<% if @document.empty? %>
- <p>Vous n'avez aucune souscription ...</p>
-<% else %>
- <ul>
-  <% for document in @document %>
-   <li>
-    <h3><%= document.title %></h3>
-    <p><%= document.description %></p>
-    <div class="details">
-      <span class="length"><%= format_time(document.duration) %></span>
-      <span class="size"><%= human_size(document.size) %></span>
-    </div>
-    <div class="actions">
-      <%= link_to("Télécharger", {:action => "download", :id => document }, :class => "download") %>
-    </div>
-   </li>
-  <% end %>
- </ul>
-<% end %>
+<ul>
+ <%= render :partial => "documents/documents", :object => @document, :locals => { :linked => true, :empty => "Vous n'avez aucune souscription ...", :actions => true, :type => :subscriptions } %>
+</ul>

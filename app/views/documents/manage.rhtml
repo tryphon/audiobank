@@ -1,23 +1,4 @@
 <h2>Gérer vos documents</h2>
-<% if @document.empty? %>
- <p>Vous n'avez aucun document, vous devriez <%= link_to("en ajouter un", :action => "create") %></p>
-<% else %>
- <ul>
-  <% for document in @document %>
-   <li>
-    <h3><%= document.title %></h3>
-    <p><%= document.description %></p>
-    <div class="details">
-     <span class="length"><%= format_time(document.duration) %></span>
-     <span class="size"><%= human_size(document.size) %></span>
-    </div>
-    <div class="actions">
-     <%= link_to("Déposer", {:action => "upload", :id => document} , :title => "Déposer votre fichier", :class => "upload") unless document.uploaded? %>
-     <%= link_to("Détruire", {:action => "destroy", :id => document}, :confirm => "Êtes vous sûr de vouloir détruire ce document ?", :title => "Détruire ce document", :class => "destroy") %>
-     <%= link_to("Partager", {:action => "share", :id => document}, :title => "Partager ce document", :class => "share") %>
-     <%= link_to("Editer", {:action => "edit", :id => document}, :title => "Editer ce document", :class => "edit") %>
-    </div>
-   </li>
-  <% end %>
- </ul>
-<% end %>
+<ul>
+ <%= render :partial => "documents/documents", :object => @document, :locals => { :linked => true, :empty => "Vous n'avez aucun document, vous devriez #{link_to("en ajouter un", :action => "create")}", :actions => true, :type => :documents } %>
+</ul>

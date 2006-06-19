@@ -9,6 +9,10 @@ class SubscriptionsController < ApplicationController
     @document = Subscriber.find(session[:user]).documents
   end 
   
+  def show
+  	@document = Subscriber.find(session[:user]).documents.find(params[:id])
+  end
+  
   def add
     @document = Document.find(params[:document])
     @subscription = Subscription.new(:author => Author.find(session[:user]), :document => @document, :subscriber => Subscriber.find(params[:id].split("_")[1]))

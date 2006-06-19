@@ -1,0 +1,4 @@
+<h2>Votre document</h2>
+<ul>
+ <%= render :partial => "documents/documents", :object => @document.to_a, :locals => { :linked => false, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => true, :type => :documents } %>
+</ul>

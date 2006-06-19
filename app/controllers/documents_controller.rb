@@ -18,6 +18,10 @@ class DocumentsController < ApplicationController
       end
     end
   end
+  
+  def show 
+  	@document = Author.find(session[:user]).documents.find(params[:id])
+  end
     
   def edit
     @document = Author.find(session[:user]).documents.find(params[:id])
@@ -47,6 +51,11 @@ class DocumentsController < ApplicationController
   			flash[:failure] = "Votre fichier n'a pas été déposé"
   		end
   	end
+  end
+  
+  def download
+  	@document = Author.find(session[:user]).documents.find(params[:id])
+  	send_file @document.path, :type => @document.format
   end
   
   def destroy

@@ -3,12 +3,25 @@
 <% else %>
  <% for document in documents %>
   <li>
-   <h3><%= document.title %></h3>
+   <h3><%= link_to_if(linked, document.title, :controller => type.to_s, :action => "show", :id => document) %></h3>
    <p><%= document.description %></p>
    <div class="details">
-    <span class="length"><%= format_time(document.duration) %></span>
     <span class="size"><%= human_size(document.size) %></span>
+    <span class="length"><%= format_time(document.duration) %></span>
    </div>
+   <% if actions %>
+    <div class="actions">
+     <% if type == :documents %>
+      <%= link_to("Télécharger", {:action => "download", :id => document }, :class => "download") if document.uploaded?  %>
+      <%= link_to("Déposer", {:action => "upload", :id => document} , :title => "Déposer votre fichier", :class => "upload") %>
+      <%= link_to("Détruire", {:action => "destroy", :id => document}, :confirm => "Êtes vous sûr de vouloir détruire ce document ?", :title => "Détruire ce document", :class => "destroy") %>
+      <%= link_to("Partager", {:action => "share", :id => document}, :title => "Partager ce document", :class => "share") %>
+      <%= link_to("Editer", {:action => "edit", :id => document}, :title => "Editer ce document", :class => "edit") %>
+		 <% else %>
+      <%= link_to("Télécharger", {:action => "download", :id => document }, :class => "download") if document.uploaded?  %>
+     <% end %> 
+    </div>
+   <% end %>
   </li>
  <% end %>
 <% end %>

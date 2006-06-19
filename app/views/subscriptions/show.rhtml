@@ -1,0 +1,4 @@
+<h2>Consulter votre souscription</h2>
+<ul>
+ <%= render :partial => "documents/documents", :object => @document.to_a, :locals => { :linked => false, :empty => "Aucune souscription correspondante n'a été trouvée ...", :actions => true, :type => :subscriptions } %>
+</ul>
