@@ -30,6 +30,7 @@ class Document < ActiveRecord::Base
     file = TagLib::File.new(path)
     self.length = file.length
     file.close
+ 		self.uploaded = true
   end
 	
 	def after_destroy
@@ -37,7 +38,7 @@ class Document < ActiveRecord::Base
   end
   
   def uploaded?
-  	!size.zero?
+  	uploaded
   end
 
 	protected

@@ -7,9 +7,6 @@ class DocumentsController < ApplicationController
     @document = AudioDocument.new(params[:document])
     if request.post?
       @document.author = Author.find(session[:user])
-      @document.length = 0
-      @document.size = 0
-      @document.format = "application/octet-stream"
       if @document.save
         flash[:success] = "Votre document a bien été crée"
         redirect_to :action => 'upload', :id => @document
