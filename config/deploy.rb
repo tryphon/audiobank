@@ -37,6 +37,15 @@ role :db,  "tryphon.asyd.net", :primary => true
 # set :cvs, "/path/to/cvs"       # defaults to searching the PATH
 # set :gateway, "gate.host.com"  # default to no gateway
 
+set :keep_releases, 3
+set :use_sudo, false
+
+set :sudo, "/usr/pkg/bin/sudo"
+set :rake, "/usr/pkg/bin/rake"
+set :svn, "/usr/pkg/bin/svn"
+
+set :deploy_to, "/var/www/audiobank/"
+
 # =============================================================================
 # SSH OPTIONS
 # =============================================================================
