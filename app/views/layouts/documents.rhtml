@@ -17,7 +17,7 @@
      <li><%= link_to("Options", :controller => "users", :action => "options") %></li>
      <li><%= link_to("Quitter", :controller => "users", :action => "signout") %></li>
     <% else %>
-     <li><%= link_to("Creer un compte", :controller => "users", :action => "signup") %></li>
+     <li><%= link_to("Créer un compte", :controller => "users", :action => "signup") %></li>
      <li><%= link_to("S'identifier", :controller => "users", :action => "signin") %></li>
     <% end %>
    </ul>
@@ -33,7 +33,9 @@
     <hr/>
     <div id="sidebar">
      <% if session[:user] %>
-      <%= render :partial => "documents/sidebar" %>
+      <%= render :partial => "users/sidebar" %>
+     <% else %>
+      <%= render :partial => "users/guest" %>
      <% end %>
     </div>
    </div>

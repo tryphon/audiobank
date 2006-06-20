@@ -54,6 +54,7 @@ class UsersController < ApplicationController
 
 	def	signout
 		session[:user] = nil
+		flash[:success] = "A bientôt !"
 		redirect_to :action => "welcome"
 	end 
 end
