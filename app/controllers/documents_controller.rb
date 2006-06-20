@@ -63,6 +63,6 @@ class DocumentsController < ApplicationController
   def share
   	@document = Author.find(session[:user]).documents.find(params[:id])
 	  @user = User.find(:all, :conditions => ["id != ?", session[:user]]) - @document.subscribers
-	  flash[:warning] = "Vos partages ne seront effectifs que lorsque le document sera lié à un fichier" unless @document.uploaded?
+	  flash[:warning] = "Votre document n'est lié à aucun fichier" unless @document.uploaded?
 	end
 end

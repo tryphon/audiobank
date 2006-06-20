@@ -12,7 +12,7 @@ a { color: #000; text-decoration: none; }
 a:hover { text-decoration: underline; }
 form { margin: 12px; }
 input, textarea { padding: 4px; font-weight: normal; font-size: 120%; }
-hr { display: none; }
+hr { display: none; clear: both; }
 img { border: none; vertical-align: middle; }
 
 .clear { clear: both; }
@@ -81,22 +81,24 @@ font-size: 90%;
 text-align: right;
 border-top: 1px solid #ccc;
 }
-#frame .actions a { padding: 2px 2px 2px 20px; margin-left: 12px; }
-#frame a.edit { background: url("../images/edit.png") no-repeat; }
-#frame a.share { background: url("../images/share.png") no-repeat; }
-#frame a.destroy { background: url("../images/destroy.png") no-repeat; }
-#frame a.upload { background: url("../images/upload.png") no-repeat; }
-#frame a.download { background: url("../images/download.png") no-repeat; }
-#frame a.basket_put { background: url("../images/basket_put.png") no-repeat; }
 #frame .details {
 position: absolute;
 top: 14px;
 right: 0;
 font-size: 90%;
 }
-#frame .details span { margin: 0; padding: 0 4px 0 20px; }
+#frame .details span, #frame .actions span { margin: 0; padding: 0 4px 0 20px; }
+#frame .actions a, #frame .details a { padding: 2px 2px 2px 20px; margin-left: 12px; }
+#frame a.edit { background: url("../images/edit.png") no-repeat; }
+#frame a.share { background: url("../images/share.png") no-repeat; }
+#frame a.destroy { background: url("../images/destroy.png") no-repeat; }
+#frame a.upload { background: url("../images/upload.png") no-repeat; }
+#frame a.download { background: url("../images/download.png") no-repeat; }
+#frame a.basket_put { background: url("../images/basket_put.png") no-repeat; }
+#frame a.warning { background: url("../images/warning.png") no-repeat; }
 #frame span.length { background: url("../images/length.png") no-repeat; } 
-#frame span.size { background: url("../images/size.png") no-repeat; } 
+#frame span.size { background: url("../images/size.png") no-repeat; }
+#frame span.author { float: left; background: url("../images/author.png") no-repeat; }
 
 #content {
 float: right;
@@ -126,7 +128,7 @@ border: 1px solid #5884a6;
 }
 #subscribers li, #users li {
 padding: 12px;
-margin: 6px 12px;
+margin: 2px 12px;
 cursor: move;
 }
 

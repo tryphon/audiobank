@@ -7,6 +7,8 @@
    <span class="fn"><%= subscriber.name %></span>
    <span class="org"><%= subscriber.organization %></span>
   </li>
-  <%= draggable_element("subscriber_#{subscriber.id}", :revert => true) %> 
+  <% if draggable %>
+   <%= draggable_element("subscriber_#{subscriber.id}", :revert => true) %> 
+  <% end %>
  <% end %>
 <% end %>
