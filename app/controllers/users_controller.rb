@@ -45,6 +45,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if request.post? 
       if @user.save
+      	Subscriber.find(@user.id).subscriptions.build(:author => Author.find(1), :document => Document.find(1)).save
         flash[:success] = "Votre compte a bien été crée"
         redirect_to :action => "signin"
       else
