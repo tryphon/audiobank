@@ -46,6 +46,7 @@ class UsersController < ApplicationController
     if request.post? 
       if @user.save
         flash[:success] = "Votre compte a bien été crée"
+        redirect_to :action => "signin"
       else
         flash[:failure] = "Votre compte n'a pas été crée"
 		  end
