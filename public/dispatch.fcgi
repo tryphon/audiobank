@@ -1,4 +1,4 @@
-#!/usr/pkg/bin/ruby
+#!/usr/bin/env ruby
 
 #!/usr/local/bin/ruby
 #

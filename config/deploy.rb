@@ -88,9 +88,9 @@ set :deploy_to, "/var/www/audiobank/"
 # all should be rolled back (for each task that specifies an on_rollback
 # handler).
 
-desc "Restart the web server"
-task :restart do
-  sudo "/usr/sbin/svcadm refresh apache2"
+desc "Create media folder"
+task :after_setup do
+	run "mkdir #{shared_path}/media" 
 end
 
 desc "Disable web before deployement"
@@ -113,4 +113,9 @@ end
 desc "Remove symlink (useful for solaris)"
 task :before_symlink do
   delete current_path
+end
+
+desc "Add symlink to the media folder"
+task :after_symlink do
+	run "ln -nfs #{shared_path}/media #{release_path}/public/media" 
 end
