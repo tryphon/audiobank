@@ -10,11 +10,11 @@ class Document < ActiveRecord::Base
 	attr_protected :size, :length, :format, :file
 	
 	def filename
-		"#{id}#{suffix}"
+		"#{id}-#{title}#{suffix}"
 	end
 	
 	def path
-		"#{RAILS_ROOT}/media/#{filename}"
+		"#{RAILS_ROOT}/media/#{id}#{suffix}"
 	end
 	
 	def duration

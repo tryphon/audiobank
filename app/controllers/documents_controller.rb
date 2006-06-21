@@ -52,7 +52,7 @@ class DocumentsController < ApplicationController
   
   def download
   	@document = Author.find(session[:user]).documents.find(params[:id])
-  	send_file @document.path, :type => @document.format
+  	send_file @document.path, :type => @document.format, :filename => @document.filename
   end
   
   def destroy

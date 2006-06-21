@@ -34,6 +34,6 @@ class SubscriptionsController < ApplicationController
   def download
     @subscription = Subscriber.find(session[:user]).subscriptions.find(params[:id])
     @subscription.increment!(:download_count)
-  	send_file @subscription.document.path, :type => @subscription.document.format
+  	send_file @subscription.document.path, :type => @subscription.document.format, :filename => @subscription.document.filename
   end
 end
