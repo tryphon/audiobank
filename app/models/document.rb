@@ -21,7 +21,7 @@ class Document < ActiveRecord::Base
 		Time.at(self.length) - 3600
 	end
 	
-	def file=(file) # should calculate time length and return false if copy fail
+	def file=(file) # should return false if copy fail
 		self.format = file.content_type.chomp
 		self.size = file.length
 		File.open(path, "wb") do |f| 
