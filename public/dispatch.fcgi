@@ -1,4 +1,4 @@
-#!/usr/bin/ruby1.8
+#!/usr/pkg/bin/ruby
 
 #!/usr/local/bin/ruby
 #
