@@ -152,6 +152,9 @@ margin: 3px 0;
 padding: 6px 0 0 0;
 font-size: 100%;
 }
+#sidebar sup {
+font-size: 70%;
+}
 
 #messages { padding: 0 0 12px; background: #fff; }
 #flash {
