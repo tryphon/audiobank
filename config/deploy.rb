@@ -103,6 +103,11 @@ task :before_deploy do
   disable_web
 end
 
+desc "Migrate before restart"
+task :before_restart do
+  migrate
+end
+
 desc "Put our own maintenance template"
 task :disable_web do
   buffer = render("app/views/maintenance.rhtml", :deadline => ENV['UNTIL'], :reason => ENV['REASON'])
