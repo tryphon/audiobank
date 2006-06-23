@@ -160,6 +160,9 @@ text-indent: 4px;
 font-size: 90%;
 margin: 4px;
 }
+#sidebar p a {
+color: #5884a6;
+}
 
 #messages { padding: 0 0 12px; background: #fff; }
 #flash {
