@@ -155,6 +155,11 @@ font-size: 100%;
 #sidebar sup {
 font-size: 70%;
 }
+#sidebar p {
+text-indent: 4px;
+font-size: 90%;
+margin: 4px;
+}
 
 #messages { padding: 0 0 12px; background: #fff; }
 #flash {
