@@ -2,7 +2,7 @@ class AddConfirmed < ActiveRecord::Migration
   def self.up
   	add_column :users, :confirmed, :boolean, :default => false
   	User.find(:all) do |user|
-			user.update_attribute(:confirmed, true) 	
+			user.confirmed = true 	
   	end
   end
 
