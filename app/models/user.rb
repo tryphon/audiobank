@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 	end
 	
 	def self.authenticate(attributes)
-		user = User.find_by_username(attributes[:username])
+		user = User.find_by_username(attributes[:username], :conditions => ["confirmed = ?", true])
 		unless user.blank? or Digest::SHA256.hexdigest(attributes[:password]) != user.password
 			user
 		else
@@ -22,4 +22,12 @@ class User < ActiveRecord::Base
 	def ==(other)
     id == other.id
 	end
+	
+	def hashcode
+    Digest::SHA256.hexdigest(id.to_s + email)
+  end
+  
+  def confirmed?
+  	confirmed
+  end
 end

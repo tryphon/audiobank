@@ -43,15 +43,31 @@ class UsersController < ApplicationController
 	
   def signup
     @user = User.new(params[:user])
-    if request.post? 
+    if request.post?
+    	@user.confirmed = false
       if @user.save
-      	Subscriber.find(@user.id).subscriptions.build(:author => Author.find(1), :document => Document.find(1)).save
-        flash[:success] = "Votre compte a bien été crée"
+	      Mailer::deliver_confirm(@user, self)
+      	flash[:success] = "Votre compte a bien été crée"
+        flash[:notice] = "Un email vous a été envoyé"
         redirect_to :action => "signin"
       else
+      	@user.password = ""
         flash[:failure] = "Votre compte n'a pas été crée"
 		  end
     end  
+  end
+  
+  def confirm
+  	@user = User.find(params[:id])
+  	if @user.hashcode == params[:confirm] && !@user.confirmed?
+  		@user.update_attribute(:confirmed, true)
+	  	Subscriber.find(@user.id).subscriptions.build(:author => Author.find(1), :document => Document.find(1)).save
+	  	flash[:success] = "La création de votre compte a bien été confirmé"
+	  	redirect_to :action => "signin"
+	  else
+	  	flash[:failure] = "La création de votre compte n'a pas été confirmé"
+	  	redirect_to :action => "signup"
+	  end
   end
 
 	def	signout

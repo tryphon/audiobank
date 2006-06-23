@@ -1,0 +1,6 @@
+<html>
+ <body>
+  <h3>Bienvenue <%= @user.name %> !</h3>
+  <p>Afin de confirmer la création de votre compte, utiliser le lien suivant : <a href="<%= url_for(:controller => "users", :action => "confirm", :id => @user.id, :confirm => @user.hashcode, :only_path => false) %>"><%= url_for(:controller => "users", :action => "confirm", :id => @user.id, :confirm => @user.hashcode, :only_path => false) %></a></p>
+  </body>
+</html>

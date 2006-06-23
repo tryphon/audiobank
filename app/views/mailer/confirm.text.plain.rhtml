@@ -1,0 +1,3 @@
+Bienvenue <%= @user.name %> !
+
+Afin de confirmer la création de votre événement, utiliser le lien suivant : <%= url_for(:controller => "users", :action => "confirm", :id => @user.id, :confirm => @user.hashcode, :only_path => false) %>
