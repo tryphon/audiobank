@@ -30,4 +30,8 @@ class User < ActiveRecord::Base
   def confirmed?
   	confirmed
   end
+  
+  def after_update
+  	User.destroy_all(["confirmed = ? AND created_at <= ?", false, Time.new - 2592000])
+  end
 end
