@@ -199,6 +199,12 @@ border-color: #c67109;
 background: #f8e694 url("../images/warning.png") no-repeat 28px;
 }
 
+#errors ul {
+margin: 0 12px 14px 14px;
+list-style-type: square;
+}
+#errors li { margin: 6px; } 
+
 #footer {
 clear: both;
 color: #333;
