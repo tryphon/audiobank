@@ -23,5 +23,6 @@
 <%= start_form_tag({:action => "upload"}, :multipart => true) %>
  <p><label for="document_file">Fichier :</label><br/>
  <%= file_field "document", "file" %></p>
+ <p class="note icon">Les formats supportés sont : ogg vorbis, flac, mp3 et mpc.</p>
  <%= submit_tag "Déposer votre fichier" %>
 <%= end_form_tag %>

@@ -39,8 +39,7 @@ class DocumentsController < ApplicationController
   def upload
   	@document = Author.find(session[:user]).documents.find(params[:id])
   	if request.post?
-  		unless params[:document][:file].is_a?(StringIO)
-  			@document.file = params[:document][:file]
+  		if @document.upload_file(params[:document][:file])
   			@document.save
   			flash[:success] = "Votre fichier a bien été déposé"
   			redirect_to :action => 'share', :id => @document

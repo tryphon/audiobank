@@ -21,16 +21,21 @@ class Document < ActiveRecord::Base
 		Time.at(self.length) - 3600
 	end
 	
-	def file=(file) # should return false if copy fail
-		self.format = file.content_type.chomp
-		self.size = file.length
-		File.open(path, "wb") do |f| 
-    	f.write(file.read)
-    end
-    file = TagLib::File.new(path)
-    self.length = file.length
-    file.close
- 		self.uploaded = true
+	def upload_file(file)
+		begin
+			self.format = file.content_type.chomp
+			self.size = file.length
+			File.open(path, "wb") do |f| 
+    		f.write(file.read)
+   		end
+    	file = TagLib::File.new(path)
+    	self.length = file.length
+    	file.close
+ 			self.uploaded = true
+ 			return true
+ 		rescue Exception
+ 			return false
+ 		end
   end
 	
 	def after_destroy
