@@ -92,19 +92,20 @@ top: 14px;
 right: 0;
 font-size: 90%;
 }
-#frame .details span, #frame .actions span { margin: 0; padding: 0 4px 0 20px; }
+#frame .details span, #frame .actions span, #frame .icon { margin: 0; padding: 0 4px 0 20px; }
 #frame .actions a, #frame .details a { padding: 2px 2px 2px 20px; margin-left: 12px; }
-#frame a.edit { background: url("../images/edit.png") no-repeat; }
-#frame a.share { background: url("../images/share.png") no-repeat; }
-#frame a.destroy { background: url("../images/destroy.png") no-repeat; }
-#frame a.upload { background: url("../images/upload.png") no-repeat; }
-#frame a.download { background: url("../images/download.png") no-repeat; }
-#frame a.basket_put { background: url("../images/basket_put.png") no-repeat; }
-#frame a.warning { background: url("../images/warning.png") no-repeat; }
-#frame a.signup { background: url("../images/author.png") no-repeat; }
-#frame span.length { background: url("../images/length.png") no-repeat; } 
-#frame span.size { background: url("../images/size.png") no-repeat; }
-#frame span.author { float: left; background: url("../images/author.png") no-repeat; }
+#frame .edit { background: url("../images/edit.png") no-repeat; }
+#frame .share { background: url("../images/share.png") no-repeat; }
+#frame .destroy { background: url("../images/destroy.png") no-repeat; }
+#frame .upload { background: url("../images/upload.png") no-repeat; }
+#frame .download { background: url("../images/download.png") no-repeat; }
+#frame .basket_put { background: url("../images/basket_put.png") no-repeat; }
+#frame .warning { background: url("../images/warning.png") no-repeat; }
+#frame .signup { background: url("../images/author.png") no-repeat; }
+#frame .length { background: url("../images/length.png") no-repeat; } 
+#frame .size { background: url("../images/size.png") no-repeat; }
+#frame .note { background: url("../images/note.png") no-repeat; }
+#frame .author { float: left; background: url("../images/author.png") no-repeat; }
 
 #content {
 float: right;
@@ -206,6 +207,7 @@ list-style-type: square;
 #errors li { margin: 6px; } 
 
 #footer {
+display: none;
 clear: both;
 color: #333;
 line-height: 18px;
