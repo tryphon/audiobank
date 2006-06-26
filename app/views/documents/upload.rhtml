@@ -24,5 +24,4 @@
  <p><label for="document_file">Fichier :</label><br/>
  <%= file_field "document", "file" %></p>
  <p class="note icon">Les formats supportés sont : ogg vorbis, flac, mp3 et mpc.</p>
- <%= submit_tag "Déposer votre fichier" %>
-<%= end_form_tag %>
+ <%= submit_tag "Déposer votre fichier" %> ou <%= link_to("le faire plus tard &#8250;", { :action => "share", :id => @document}, :title => "Déposer votre fichier plus tard", :class => "blue") %>
