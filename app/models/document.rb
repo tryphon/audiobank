@@ -1,3 +1,4 @@
+require 'mahoro'
 require 'taglib'
 class Document < ActiveRecord::Base
 	belongs_to :author
@@ -14,7 +15,11 @@ class Document < ActiveRecord::Base
 	end
 	
 	def path
-		"#{RAILS_ROOT}/media/#{id}#{suffix}"
+		"#{RAILS_ROOT}/media/#{id}"
+	end
+	
+	def mime
+		Mahoro.new(Mahoro::MIME).file(path)
 	end
 	
 	def duration
@@ -23,21 +28,21 @@ class Document < ActiveRecord::Base
 	
 	def upload_file(file)
 		begin
-			self.format = file.content_type.chomp
-			self.size = file.length
+			document = TagLib::File.new(file.path, Mahoro.new(Mahoro::NONE).file(file.path))
+	    	self.length = document.length
+    	document.close
+			
+			self.format = Mahoro.new(Mahoro::MIME).file(file.path)
+			self.size = file.size
+		
 			File.open(path, "wb") do |f| 
     		f.write(file.read)
    		end
-    	file = TagLib::File.new(path)
-    	self.length = file.length
-    	file.close
+ 			
  			self.uploaded = true
- 			return true
- 		rescue TagLib::BadFile
- 			FileUtils.remove_file(path, true)
- 			return false
- 		rescue IOError
- 			return false
+ 			true
+ 		rescue Exception => e
+ 			false
  		end
   end
 	

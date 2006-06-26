@@ -24,17 +24,6 @@
 require 'dl'
 require 'dl/import'
 
-begin
-	require 'mahoro'
-	module TagLib
-		MAHORO_PRESENT = true
-	end
-rescue Exception => e
-	module TagLib
-		MAHORO_PRESENT = false
-	end
-end
-
 module TagLib
 
 extend DL::Importable
@@ -42,11 +31,7 @@ extend DL::Importable
 begin
 	dlload 'libtag_c.so'
 rescue
-	begin
-		dlload 'libtag_c.dylib'
-	rescue
-		raise 'libtag_c not found or uses a filename not looked for.'
-	end
+	raise 'libtag_c not found or uses a filename not looked for.'
 end
 
 File_Type =
@@ -98,16 +83,13 @@ end
 
 class File
 
-	def initialize(p)
+	def initialize(p, mime = nil)
 		@path = p
 		if not @path
 			raise BadPath.new
 		end
 
-		if MAHORO_PRESENT
-			mahoro = Mahoro.new
-			mahoro.flags = Mahoro::NONE
-			mime = mahoro.file(@path)
+		unless mime.nil?
 			type = taglibForMime(mime)
 		else
 			type = nil
