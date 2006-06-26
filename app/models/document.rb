@@ -33,7 +33,10 @@ class Document < ActiveRecord::Base
     	file.close
  			self.uploaded = true
  			return true
- 		rescue Exception
+ 		rescue TagLib::BadFile
+ 			FileUtils.remove_file(path, true)
+ 			return false
+ 		rescue IOError
  			return false
  		end
   end
