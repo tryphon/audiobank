@@ -1,10 +1,8 @@
-<div id="content">
- <h2>Vos identifiants</h2>
- <%= start_form_tag :action => "signin" %>
-  <p><label for="username">Nom d'utilisateur :</label><br/>
-  <%= text_field("user", "username") %></p>
-  <p><label for="password">Mot de passe :</label><br/>
-  <%= password_field("user", "password") %></p>
-  <%= submit_tag "Se connecter" %>
- <%= end_form_tag %>
-</div>
+<h2>Vos identifiants</h2>
+<%= start_form_tag :action => "signin" %>
+ <p><label for="username">Nom d'utilisateur :</label><br/>
+ <%= text_field("user", "username") %></p>
+ <p><label for="password">Mot de passe :</label><br/>
+ <%= password_field("user", "password") %></p>
+ <%= submit_tag "Se connecter" %>
+<%= end_form_tag %>
