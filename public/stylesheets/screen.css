@@ -226,3 +226,4 @@ height: 0;
 clear: both; 
 visibility: hidden;
 }
+* html #wrap, * html #content .vcard, * html #subscribers, * html #users { height: 1%; }
