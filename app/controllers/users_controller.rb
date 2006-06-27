@@ -48,7 +48,7 @@ class UsersController < ApplicationController
       if @user.save
 	      Mailer::deliver_confirm(@user, self)
       	flash[:success] = "Votre compte a bien été crée"
-        flash[:notice] = "Un email vous a été envoyé"
+        flash[:notice] = "Un email de confirmation vous a été envoyé"
         redirect_to :action => "signin"
       else
       	@user.password = ""
