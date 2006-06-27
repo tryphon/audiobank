@@ -88,8 +88,8 @@ class File
 		if not @path
 			raise BadPath.new
 		end
-
-		unless mime.nil?
+		
+		if mime
 			type = taglibForMime(mime)
 		else
 			type = nil
@@ -220,11 +220,11 @@ private
 		end
 
 		if mime.include?('Ogg') or mime.include?('ogg')
-			if mime.include?('Vorbis') or mime.include?('vorbis')
-				return TagLib::OggVorbis
-			elsif mime.include?('FLAC')
-				return TagLib::FLAC
-			end
+			return TagLib::OggVorbis
+		end
+		
+		if mime.include?('FLAC')
+			return TagLib::FLAC
 		end
 
 		return nil

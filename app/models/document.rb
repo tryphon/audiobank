@@ -17,11 +17,7 @@ class Document < ActiveRecord::Base
 	def path
 		"#{RAILS_ROOT}/media/#{id}"
 	end
-	
-	def mime
-		Mahoro.new(Mahoro::MIME).file(path)
-	end
-	
+		
 	def duration
 		Time.at(self.length) - 3600
 	end
@@ -29,22 +25,22 @@ class Document < ActiveRecord::Base
 	def upload_file(file)
 		begin
 			document = TagLib::File.new(file.path, Mahoro.new(Mahoro::NONE).file(file.path))
-	    	self.length = document.length
-    	document.close
+				self.length = document.length
+			document.close
 			
 			self.format = Mahoro.new(Mahoro::MIME).file(file.path)
 			self.size = file.size
 		
-			File.open(path, "wb") do |f| 
-    		f.write(file.read)
-   		end
+			File.open(path, "wb") do |f|
+				f.write(file.read)
+			end
  			
- 			self.uploaded = true
- 			true
- 		rescue Exception => e
+			self.uploaded = true
+			true
+		rescue Exception => e
  			false
- 		end
-  end
+		end
+	end
 	
 	def after_destroy
     File.delete(path) if File.exist?(path)

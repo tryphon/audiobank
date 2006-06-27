@@ -127,5 +127,6 @@ end
 
 desc "Add symlink to the media folder"
 task :after_symlink do
+	run "ln -nfs #{shared_path}/system/mahoro.so #{release_path}/vendor/mahoro.so" 
 	run "ln -nfs #{shared_path}/media #{release_path}/media" 
 end
