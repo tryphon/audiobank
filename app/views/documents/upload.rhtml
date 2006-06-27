@@ -14,10 +14,7 @@
 <% end %>
 <h2>Déposer votre fichier</h2>
 <ul>
- <li>
-  <h3><%= @document.title %></h3>
-  <p><%= @document.description %></p>
- </li>
+ <%= render :partial => "documents/documents", :object => @document.to_a, :locals => { :linked => false, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => false } %>
 </ul>
 <hr/>
 <%= start_form_tag({:action => "upload"}, :multipart => true) %>
