@@ -1,0 +1,4 @@
+<h2>Vos souscriptions portant l'étiquette : <%= params[:name] %></h2>
+<ul>
+ <%= render :partial => "subscriptions/subscriptions", :object => @subscription, :locals => { :linked => true, :empty => "Aucune souscription correspondant n'a été trouvé ...", :actions => true, :tags => true } %>
+</ul>
