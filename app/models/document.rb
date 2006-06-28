@@ -61,6 +61,10 @@ class Document < ActiveRecord::Base
   		self.tags = Tag.parse(list)
   	end
   end
+  
+  def nonsubscribers
+  	User.find(:all, :conditions => ["id != ? AND confirmed = ?", author.id, true]) - subscribers
+  end
 
 	protected	
 	def destroy_tags

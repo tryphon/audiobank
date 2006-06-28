@@ -20,14 +20,12 @@ class SubscriptionsController < ApplicationController
     	subscription.subscriber = Subscriber.find(params[:id].split("_")[1])
     end
 		@subscription.save
-		@users = User.find(:all, :conditions => ["id != ? AND confirmed = ?", session[:user], true]) - @subscription.document.subscribers 
 		render :action => "update"
 	end
   
   def remove
     @subscription = Author.find(session[:user]).documents.find(params[:document]).subscriptions.find(:first, :conditions => ["author_id = ? AND subscriber_id = ?", session[:user], params[:id].split("_")[1]])
     @subscription.destroy
-    @users = User.find(:all, :conditions => ["id != ? AND confirmed = ?", session[:user], true]) - @subscription.document.subscribers 
     render :action => "update"
   end
   

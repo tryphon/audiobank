@@ -65,7 +65,6 @@ class DocumentsController < ApplicationController
 
   def share
   	@document = Author.find(session[:user]).documents.find(params[:id])
-	  @user = User.find(:all, :conditions => ["id != ? AND confirmed = ?", session[:user], true]) - @document.subscribers
 	  flash[:warning] = "Votre document n'est lié à aucun fichier" unless @document.uploaded?
 	end
 	
