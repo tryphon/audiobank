@@ -5,9 +5,9 @@ class SubscriptionsController < ApplicationController
     redirect_to :action => 'manage'
   end
 
-  def manage
-    @subscription = Subscriber.find(session[:user]).subscriptions
-  end 
+	def manage
+		@subscription = Subscriber.find(session[:user]).subscriptions
+	end 
   
   def show
   	@subscription = Subscriber.find(session[:user]).subscriptions.find(params[:id])
@@ -29,6 +29,10 @@ class SubscriptionsController < ApplicationController
     @subscription.destroy
     @users = User.find(:all, :conditions => ["id != ? AND confirmed = ?", session[:user], true]) - @subscription.document.subscribers 
     render :action => "update"
+  end
+  
+  def tags
+  	@subscriptions = Subscriber.find(session[:user]).subscriptions.delete_if{ |s| !s.document.tags.include?(Tag.new(:name => params[:name])) }
   end
   
   def download

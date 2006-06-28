@@ -1,6 +1,6 @@
 <h2>Vos documents</h2>
 <ul>
- <%= render :partial => "documents/documents", :object => @author.documents[0..2], :locals => { :linked => true, :empty => "Vous n'avez aucun document ...", :actions => false } %>
+ <%= render :partial => "documents/documents", :object => @author.documents[0..2], :locals => { :linked => true, :empty => "Vous n'avez aucun document ...", :actions => false, :tags => false } %>
 </ul>
 <div class="actions">
  <%= link_to("Vos autres documents &#8250;", :controller => "documents", :action => "manage") %>
@@ -8,8 +8,16 @@
 <hr/>
 <h2>Vos souscriptions</h2>
 <ul>
- <%= render :partial => "subscriptions/subscriptions", :object => @subscriber.subscriptions[0..2], :locals => { :linked => true, :empty => "Vous n'avez aucune souscription ...", :actions => false } %>
+ <%= render :partial => "subscriptions/subscriptions", :object => @subscriber.subscriptions[0..2], :locals => { :linked => true, :empty => "Vous n'avez aucune souscription ...", :actions => false, :tags => false } %>
 </ul>
 <div class="actions">
  <%= link_to("Vos autres subscriptions &#8250;", :controller => "subscriptions", :action => "manage") %>
 </div>
+<h2>Vos étiquettes</h2>
+<% if @tag.empty? %>
+ <p>Vous n'avez aucune étiquette ..</p>
+<% else %>
+ <% for tag in @tag %>
+  <%= link_to(tag.name, { :action => "tags", :name => tag.name }, :rel => "tag", :class => "rel-tag") %>
+ <% end %>
+<% end %>

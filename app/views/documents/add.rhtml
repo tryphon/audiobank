@@ -1,16 +1,16 @@
 <% if @document.errors.count > 0 %>
-<div id="errors">
- <% if @document.errors.count == 1 %>
-  <h2>Une erreur a été trouvée</h2>
- <% else %>
-  <h2><%= @document.errors.count %> erreurs ont été trouvées</h2>
- <% end %>
- <ul>
-  <% @document.errors.each do |name, message| %>
-   <li><%= link_to(message, "#user_#{name}") %></li>
+ <div id="errors">
+  <% if @document.errors.count == 1 %>
+   <h2>Une erreur a été trouvée</h2>
+  <% else %>
+   <h2><%= @document.errors.count %> erreurs ont été trouvées</h2>
   <% end %>
- </ul>
-</div>
+  <ul>
+   <% @document.errors.each do |name, message| %>
+    <li><%= link_to(message, "#user_#{name}") %></li>
+   <% end %>
+  </ul>
+ </div>
 <% end %>
 <h2>Ajouter votre document</h2>
 <%= start_form_tag :action => "add" %>
@@ -18,5 +18,8 @@
  <%= text_field("document", "title") %></p>
  <p><label for="description">Description :</label><br/>
  <%= text_area("document", "description", :rows => 15, :cols => 28) %></p>
+ <p><label for="labels">Etiquettes :</label><br/>
+ <%= text_field_tag("labels", @document.tags.collect{ |t| t.name }.join(" "), :size => 30) %><span id="labels_auto_complete"></span>
+ <%= auto_complete_field("labels", :url => {:controller => "documents", :action => "auto_complete_for_tags"}, :tokens => " ") %></p>
  <%= submit_tag "Creer votre document" %>
 <%= end_form_tag %>

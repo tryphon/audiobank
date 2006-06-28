@@ -11,6 +11,13 @@
      <span class="length"><%= format_time(subscription.document.duration) %></span>
     </div>
    <% end %>
+   <% unless subscription.document.tags.empty? or !tags %> 
+    <div class="tags">
+     <% for tag in subscription.document.tags %>
+      <%= link_to(tag.name, { :action => "tags", :name => tag.name }, :rel => "tag") %> 
+     <% end %>
+    </div>
+   <% end %>
    <% if actions %>
     <div class="actions">
      <span class="author" title="<%= subscription.author.name %> — <%= subscription.author.organization %>"><%= subscription.author.name %></span>

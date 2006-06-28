@@ -1,4 +1,4 @@
 <h2>Gérer vos documents</h2>
 <ul>
- <%= render :partial => "documents/documents", :object => @document, :locals => { :linked => true, :empty => "Vous n'avez aucun document, vous devriez #{link_to("en ajouter un", :action => "add")}", :actions => true, :type => :documents } %>
+ <%= render :partial => "documents/documents", :object => @document, :locals => { :linked => true, :empty => "Vous n'avez aucun document, vous devriez #{link_to("en ajouter un", :action => "add")}", :actions => true, :tags => true } %>
 </ul>

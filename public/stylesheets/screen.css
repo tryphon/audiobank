@@ -11,7 +11,7 @@ list-style-type: square;
 a { color: #5884a6; text-decoration: none; }
 a:hover { text-decoration: underline; }
 form { margin: 12px; }
-input, textarea { padding: 4px; font-weight: normal; font-size: 120%; }
+input, textarea { padding: 4px; font-weight: normal; font-size: 120%;  }
 hr { display: none; clear: both; }
 img { border: none; vertical-align: middle; }
 
@@ -78,10 +78,10 @@ color: #7dacd1;
 clear: both;
 border-bottom: 1px solid #7dacd1;
 }
-#frame .actions {
+#frame .actions, #frame .tags  {
 clear: both;
-margin: 12px 0;
-padding: 4px;
+margin: 0 0 6px;
+padding: 4px 0;
 font-size: 90%;
 text-align: right;
 border-top: 1px solid #ccc;
@@ -91,6 +91,12 @@ position: absolute;
 top: 14px;
 right: 0;
 font-size: 90%;
+}
+#frame .tags {
+margin: 6px 0 0;
+padding: 6px 20px;
+text-align: left;
+background: url("../images/tags.png") no-repeat 0px 6px;
 }
 #frame .details span, #frame .actions span, #frame .icon { margin: 0; padding: 0 4px 0 20px; }
 #frame .actions a, #frame .details a { color: #000; padding: 2px 2px 2px 20px; margin-left: 12px; }
@@ -112,9 +118,9 @@ float: right;
 width: 510px;
 margin: 0 0 0 40px;
 }
-#content h3, #content h3  a { text-decoration: none; color: #6b2; }
+#content h3, #content h3  a { text-decoration: none; color: #6b2; margin-bottom: 6px; }
 #content h4 { margin: 12px 0 0; color: #5884a6; }
-#content li { position: relative; margin: 0 12px 16px; padding: 10px 0 0; }
+#content li { position: relative; margin: 0 12px 8px; padding: 8px 0 0; }
 #content .vcard { float: left; width: 45%; padding: 10px 0; }
 #content .vcard img.photo {
 float: left;
@@ -128,6 +134,15 @@ background: #fff;
 display: block;
 margin-bottom: 5px;
 }
+#content a.rel-tag {
+line-height: 2em;
+margin: 0 2px 0 0;
+padding: 3px 5px;
+border-right: 1px solid #ccc;
+border-bottom: 1px solid #ccc;
+background: #f2f2f2;
+}
+#content a:hover.rel-tag { text-decoration: none; background: #efefef; }
 ul#welcome { margin: 16px 100px 16px 14px; }
 #welcome li {
 margin: 6px;
@@ -203,6 +218,22 @@ margin: 0 12px 14px 14px;
 list-style-type: square;
 }
 #errors li { margin: 6px; } 
+
+#labels_auto_complete ul {
+margin: 0;
+padding: 0;
+list-style-type: none;
+border: 1px solid #ccc;
+background: #fff;
+}
+#labels_auto_complete li {
+cursor: default;
+margin: 0;
+padding: 7px 5px;
+border-top: 1px solid #ccc;
+background: #fff;
+}
+#labels_auto_complete li.selected { background: #c9e9b3; }
 
 #footer {
 display: none;

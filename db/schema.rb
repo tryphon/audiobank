@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 10) do
+ActiveRecord::Schema.define(:version => 11) do
 
   create_table "documents", :force => true do |t|
     t.column "title", :string, :null => false
@@ -13,6 +13,11 @@ ActiveRecord::Schema.define(:version => 10) do
     t.column "format", :string, :default => "application/octet-stream", :null => false
     t.column "type", :string, :null => false
     t.column "uploaded", :boolean, :default => false
+  end
+
+  create_table "documents_tags", :id => false, :force => true do |t|
+    t.column "document_id", :integer, :null => false
+    t.column "tag_id", :integer, :null => false
   end
 
   create_table "sessions", :force => true do |t|
@@ -28,6 +33,10 @@ ActiveRecord::Schema.define(:version => 10) do
     t.column "author_id", :integer, :null => false
     t.column "subscriber_id", :integer, :null => false
     t.column "download_count", :integer, :default => 0
+  end
+
+  create_table "tags", :force => true do |t|
+    t.column "name", :string
   end
 
   create_table "users", :force => true do |t|

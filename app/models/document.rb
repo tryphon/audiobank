@@ -4,6 +4,7 @@ class Document < ActiveRecord::Base
 	belongs_to :author
 	has_many :subscribers, :through => :subscriptions
 	has_many :subscriptions, :dependent => :destroy
+	has_and_belongs_to_many :tags
 	
 	validates_presence_of :title, :message => "Un titre est requis"
 	validates_presence_of :description, :message => "Une description est requise"
@@ -43,14 +44,31 @@ class Document < ActiveRecord::Base
 	end
 	
 	def after_destroy
-    File.delete(path) if File.exist?(path)
+		File.delete(path) if File.exist?(path)
+		destroy_tags
   end
+  
+	def after_save
+		destroy_tags
+	end
   
   def uploaded?
   	uploaded
   end
+  
+  def tag_with(list)
+  	Tag.transaction do
+  		self.tags = Tag.parse(list)
+  	end
+  end
 
-	protected
+	protected	
+	def destroy_tags
+		Tag.find(:all, :include => :documents).each do |tag|
+			tag.destroy if tag.documents.empty?
+		end
+	end
+	
   def suffix
   	case self.format
   		when "audio/mpeg" then ".mp3"

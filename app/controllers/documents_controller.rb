@@ -1,4 +1,6 @@
 class DocumentsController < ApplicationController
+	layout 'documents', :except => [:auto_complete_for_tags]
+
   def index
     redirect_to :action => 'manage'
   end
@@ -7,6 +9,7 @@ class DocumentsController < ApplicationController
     @document = AudioDocument.new(params[:document])
     if request.post?
       @document.author = Author.find(session[:user])
+    	@document.tag_with(params[:labels])
       if @document.save
         flash[:success] = "Votre document a bien été crée"
         redirect_to :action => 'upload', :id => @document
@@ -23,6 +26,7 @@ class DocumentsController < ApplicationController
   def edit
     @document = Author.find(session[:user]).documents.find(params[:id])
     if request.post?
+    	@document.tag_with(params[:labels])
       if @document.update_attributes(params[:document])
         flash[:success] = "Votre document a bien été édité"
         redirect_to :action => 'manage'
@@ -32,9 +36,9 @@ class DocumentsController < ApplicationController
     end
   end
 
-  def manage
-    @document = Author.find(session[:user]).documents
-  end
+	def manage
+		@document = Author.find(session[:user]).documents
+	end
   
   def upload
   	@document = Author.find(session[:user]).documents.find(params[:id])
@@ -63,5 +67,13 @@ class DocumentsController < ApplicationController
   	@document = Author.find(session[:user]).documents.find(params[:id])
 	  @user = User.find(:all, :conditions => ["id != ? AND confirmed = ?", session[:user], true]) - @document.subscribers
 	  flash[:warning] = "Votre document n'est lié à aucun fichier" unless @document.uploaded?
+	end
+	
+	def tags
+		@document = Author.find(session[:user]).documents.delete_if{ |d| !d.tags.include?(Tag.new(:name => params[:name])) }
+	end
+	
+	def auto_complete_for_tags
+		@tag = Tag.find(:all, :conditions => ["name ~* ?", params[:labels]])
 	end
 end

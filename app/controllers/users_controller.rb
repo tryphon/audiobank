@@ -13,6 +13,13 @@ class UsersController < ApplicationController
  	def dashboard
 		@author = Author.find(session[:user])
 		@subscriber = Subscriber.find(session[:user])
+		@tag = @subscriber.subscriptions.collect{ |s| s.document.tags } + @author.documents.collect{ |d| d.tags }
+		@tag.delete_if { |t| t.blank? }.flatten!.uniq!
+	end
+	
+	def tags
+		@document = Author.find(session[:user]).documents.delete_if{ |d| !d.tags.include?(Tag.new(:name => params[:name])) }
+		@subscriptions = Subscriber.find(session[:user]).subscriptions.delete_if{ |s| !s.document.tags.include?(Tag.new(:name => params[:name])) }
 	end
 	
 	def options
