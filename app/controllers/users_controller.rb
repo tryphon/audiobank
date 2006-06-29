@@ -18,8 +18,8 @@ class UsersController < ApplicationController
 	end
 	
 	def tags
-		@document = Author.find(session[:user]).documents.delete_if{ |d| !d.tags.include?(Tag.new(:name => params[:name])) }
-		@subscriptions = Subscriber.find(session[:user]).subscriptions.delete_if{ |s| !s.document.tags.include?(Tag.new(:name => params[:name])) }
+		@document = Author.find(session[:user]).documents.find_by_tag(params[:name])
+		@subscriptions = Subscriber.find(session[:user]).subscriptions.find_by_tag(params[:name])
 	end
 	
 	def options

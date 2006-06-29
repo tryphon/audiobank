@@ -30,7 +30,7 @@ class SubscriptionsController < ApplicationController
   end
   
   def tags
-  	@subscriptions = Subscriber.find(session[:user]).subscriptions.delete_if{ |s| !s.document.tags.include?(Tag.new(:name => params[:name])) }
+  	@subscriptions = Subscriber.find(session[:user]).subscriptions.find_by_tag(params[:name])
   end
   
   def download

@@ -69,7 +69,7 @@ class DocumentsController < ApplicationController
 	end
 	
 	def tags
-		@document = Author.find(session[:user]).documents.delete_if{ |d| !d.tags.include?(Tag.new(:name => params[:name])) }
+		@document = Author.find(session[:user]).documents.find_by_tag(params[:name])
 	end
 	
 	def auto_complete_for_tags
