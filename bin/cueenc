@@ -1,0 +1,34 @@
+#!/bin/bash -e
+
+input=$1
+output=$2
+quality=-1
+
+[ -r $input ] || exit 1
+
+sox=/usr/bin/sox
+oggenc=/usr/bin/oggenc
+flac=/usr/bin/flac
+
+[ -x $sox ] || exit 1
+[ -x $oggenc ] || exit 1
+[ -x $flac ] || exit 1
+
+input_type=`file -bi $input`
+case $input_type in 
+	audio/mpeg|application/ogg)
+		function play() {
+			$sox $1 -t wav -
+		}
+	;;
+	audio/x-flac)
+		function play() {
+			$flac --silent --decode --stdout $1
+		}
+	;;
+	*)
+		exit 1
+	;;
+esac
+
+play $input | $oggenc -Q --downmix -q$quality -o $output -
