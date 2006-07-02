@@ -2,7 +2,11 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 11) do
+ActiveRecord::Schema.define(:version => 12) do
+
+  create_table "cues", :force => true do |t|
+    t.column "document_id", :integer, :null => false
+  end
 
   create_table "documents", :force => true do |t|
     t.column "title", :string, :null => false

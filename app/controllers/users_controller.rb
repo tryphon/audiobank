@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 		@author = Author.find(session[:user])
 		@subscriber = Subscriber.find(session[:user])
 		@tag = @subscriber.subscriptions.collect{ |s| s.document.tags } + @author.documents.collect{ |d| d.tags }
-		@tag.delete_if { |t| t.blank? }.flatten!.uniq!
+		@tag = @tag.flatten.uniq
 	end
 	
 	def tags
