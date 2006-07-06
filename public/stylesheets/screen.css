@@ -236,6 +236,7 @@ background: #fff;
 #labels_auto_complete li.selected { background: #c9e9b3; }
 
 #footer {
+display: none;
 clear: both;
 color: #333;
 line-height: 18px;
