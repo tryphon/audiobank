@@ -22,9 +22,9 @@ set :repository, "http://svn.tryphon.org/kolaka/audiobank/trunk"
 # be used to single out a specific subset of boxes in a particular role, like
 # :primary => true.
 
-role :app, "tryphon.asyd.net"
-role :web, "tryphon.asyd.net"
-role :db,  "tryphon.asyd.net", :primary => true
+role :app, "audiobank.tryphon.org"
+role :web, "audiobank.tryphon.org"
+role :db,  "audiobank.tryphon.org", :primary => true
 
 # =============================================================================
 # OPTIONAL VARIABLES
@@ -39,10 +39,6 @@ role :db,  "tryphon.asyd.net", :primary => true
 
 set :keep_releases, 3
 set :use_sudo, false
-
-set :sudo, "/usr/pkg/bin/sudo"
-set :rake, "/usr/pkg/bin/rake"
-set :svn, "/usr/pkg/bin/svn"
 
 set :deploy_to, "/var/www/audiobank/"
 
@@ -90,7 +86,8 @@ set :deploy_to, "/var/www/audiobank/"
 
 desc "Restart the web server"
 task :restart do
-  sudo "/usr/sbin/svcadm refresh apache2"
+  #sudo "/usr/sbin/svcadm refresh apache2"
+  sudo "/etc/init.d/apache2 reload"
 end
 
 desc "Create media folder"
