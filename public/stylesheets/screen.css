@@ -107,6 +107,7 @@ background: url("../images/tags.png") no-repeat 0px 6px;
 #frame .download { background: url("../images/download.png") no-repeat; }
 #frame .basket_put { background: url("../images/basket_put.png") no-repeat; }
 #frame .warning { background: url("../images/warning.png") no-repeat; }
+#frame .unavailable { background: url("../images/unavailable.png") no-repeat; }
 #frame .signup { background: url("../images/author.png") no-repeat; }
 #frame .length { background: url("../images/length.png") no-repeat; } 
 #frame .size { background: url("../images/size.png") no-repeat; }

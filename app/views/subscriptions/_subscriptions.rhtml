@@ -22,7 +22,7 @@
     <div class="actions">
      <span class="author" title="<%= subscription.author.name %> — <%= subscription.author.organization %>"><%= subscription.author.name %></span>
      <% unless subscription.document.uploaded? %>
-		  <%= link_to("Non disponible", {:action => "show", :id => subscription }, :title => "Ce fichier n'est pas disponible", :class => "warning") %>
+		  <%= link_to("Non disponible", {:action => "show", :id => subscription }, :title => "Ce fichier n'est pas disponible", :class => "unavailable") %>
 		 <% else %>
 		  <%= link_to("Télécharger", {:action => "download", :id => subscription }, :title => "Télécharger le fichier", :class => "download") %>
      <% end %>
