@@ -1,7 +1,7 @@
 # Filters added to this controller will be run for all controllers in the application.
 # Likewise, all the methods added will be available for all controllers.
 class ApplicationController < ActionController::Base
-	before_filter :check_authentication, :except => [:signup, :signin, :welcome, :index, :confirm]
+	before_filter :check_authentication, :except => [:signup, :signin, :welcome, :index, :confirm, :play, :playlist]
 
 	private
 	def	check_authentication

@@ -75,4 +75,8 @@ class DocumentsController < ApplicationController
 	def auto_complete_for_tags
 		@tag = Tag.find(:all, :conditions => ["name ~* ?", params[:labels]])
 	end
+	
+  def listen
+  	@document = Author.find(session[:user]).documents.find(params[:id])
+	end
 end

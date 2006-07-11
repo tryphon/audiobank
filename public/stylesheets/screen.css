@@ -99,12 +99,13 @@ text-align: left;
 background: url("../images/tags.png") no-repeat 0px 6px;
 }
 #frame .details span, #frame .actions span, #frame .icon { margin: 0; padding: 0 4px 0 20px; }
-#frame .actions a, #frame .details a { color: #000; padding: 2px 2px 2px 20px; margin-left: 12px; }
+#frame .actions a, #frame .details a { color: #000; padding: 2px 2px 2px 20px; margin-left: 6px; }
 #frame .edit { background: url("../images/edit.png") no-repeat; }
 #frame .share { background: url("../images/share.png") no-repeat; }
 #frame .destroy { background: url("../images/destroy.png") no-repeat; }
 #frame .upload { background: url("../images/upload.png") no-repeat; }
 #frame .download { background: url("../images/download.png") no-repeat; }
+#frame .listen { background: url("../images/listen.png") no-repeat; }
 #frame .basket_put { background: url("../images/basket_put.png") no-repeat; }
 #frame .warning { background: url("../images/warning.png") no-repeat; }
 #frame .unavailable { background: url("../images/unavailable.png") no-repeat; }

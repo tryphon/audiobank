@@ -6,7 +6,7 @@ class Cue < ActiveRecord::Base
 	end
 
 	def path
-		"#{RAILS_ROOT}/media/cue/#{id}.ogg"
+		"#{RAILS_ROOT}/media/cue/#{id}"
 	end
 	
 end
