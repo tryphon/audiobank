@@ -2,7 +2,7 @@
 
 input=$1
 output=$2
-quality=-1
+quality=0
 
 [ -r $input ] || exit 1
 
