@@ -2,3 +2,4 @@
 
 bin_dir=`dirname $0`
 $bin_dir/../script/runner 'Cue.update'
+$bin_dir/../script/runner 'Cast.update'
