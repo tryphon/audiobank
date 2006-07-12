@@ -5,6 +5,7 @@ class Document < ActiveRecord::Base
 	has_many :subscribers, :through => :subscriptions
 	has_many :subscriptions, :dependent => :destroy
 	has_many :cues, :dependent => :destroy
+	has_many :reviews, :dependent => :destroy
 	has_many :casts, :dependent => :destroy
 	has_and_belongs_to_many :tags
 	

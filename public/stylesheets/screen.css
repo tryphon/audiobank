@@ -123,8 +123,8 @@ margin: 0 0 0 40px;
 #content h3, #content h3  a { text-decoration: none; color: #6b2; margin-bottom: 6px; }
 #content h4 { margin: 12px 0 0; color: #5884a6; }
 #content li { position: relative; margin: 0 12px 8px; padding: 8px 0 0; }
-#content .vcard { float: left; width: 45%; padding: 10px 0; }
-#content .vcard img.photo {
+#content li.vcard { float: left; width: 45%; padding: 10px 0; }
+#content li.vcard img.photo {
 float: left;
 margin: 0 10px 0 0;
 text-align: center;
@@ -132,10 +132,41 @@ padding: 2px;
 border: 1px solid #ccc;
 background: #fff;
 }
-#content .vcard span.fn {
+#content li.vcard span.fn {
 display: block;
 margin-bottom: 5px;
 }
+#content li.hreview {
+position: relative;
+padding: 15px;
+border-bottom: 1px solid #E5DFC7;
+border-right: 1px solid #E5DFC7;
+background: #f2f2f2;
+}
+#content li.hreview img.photo {
+float: left;
+margin: 0 10px 4px 0;
+padding: 2px;
+border: 1px solid #ccc;
+}
+#content li.hreview span.reviewer {
+padding: 0;
+margin: 0 0 6px 0;
+font-weight: bold;
+font-size: 100%;
+border: none;
+}
+#content li.hreview abbr.rating {
+float: right;
+margin: 0;
+border: none;
+}
+#content li.hreview blockquote.description {
+margin: 2px 0 6px 56px;
+padding: 0;
+line-height: 1.5em;
+}
+
 #content a.rel-tag {
 line-height: 2em;
 margin: 0 2px 0 0;
@@ -252,7 +283,7 @@ margin: 0 auto;
 text-align: left;
 }
 
-#wrap:after, #content .vcard:after, #subscribers:after, #users:after {
+#wrap:after, #content .vcard:after, #subscribers:after, #users:after, #content .hreview:after {
 content: "."; 
 display: block; 
 height: 0;

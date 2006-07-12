@@ -2,3 +2,33 @@
 <ul>
  <%= render :partial => "documents/documents", :object => @document.to_a, :locals => { :linked => false, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => true, :tags => true } %>
 </ul>
+<h2>Les commentaires sur votre document</h2>
+<ul>
+ <%= render :partial => "reviews/reviews", :object => @document.reviews, :locals => { :empty => "Aucun commentaire ..." } %> 
+</ul>
+<% if @review.errors.count > 0 %>
+ <div id="errors">
+  <% if @review.errors.count == 1 %>
+   <h2>Une erreur a été trouvée</h2>
+  <% else %>
+   <h2><%= @review.errors.count %> erreurs ont été trouvées</h2>
+  <% end %>
+  <ul>
+   <% @review.errors.each do |name, message| %>
+    <li><%= link_to(message, "#review_#{name}") %></li>
+   <% end %>
+  </ul>
+ </div>
+<% end %>
+<h2>Ajouter un commentaire</h2>
+<%= start_form_tag :action => "show" %>
+ <p><label for="review_description">Commentaire :</label><br/>
+ <%= text_area("review", "description", :rows => 4, :cols => 44) %></p>
+ <p>
+  <label for="review_rating">Note :</label>
+  <%= radio_button("review", "rating", "0") %>0 <%= radio_button("review", "rating", "1") %>1
+  <%= radio_button("review", "rating", "2") %>2 <%= radio_button("review", "rating", "3") %>3
+  <%= radio_button("review", "rating", "4") %>4	<%= radio_button("review", "rating", "5") %>5
+ </p>
+ <%= submit_tag "Ajouter votre commentaire" %>
+<%= end_form_tag %>

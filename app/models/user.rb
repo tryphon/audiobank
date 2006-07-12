@@ -1,5 +1,7 @@
 require "digest/sha2"
 class User < ActiveRecord::Base
+	has_many :reviews, :dependent => :destroy
+
 	validates_uniqueness_of :username, :message => "Ce nom d'utilisateur existe déjà"
 	validates_presence_of :username, :message => "Un nom d'utilisateur est requis"
 	validates_presence_of :name, :message => "Votre nom est requis"

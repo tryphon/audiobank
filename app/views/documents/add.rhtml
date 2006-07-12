@@ -13,10 +13,10 @@
  </div>
 <% end %>
 <h2>Ajouter votre document</h2>
-<%= start_form_tag :action => "add" %>
- <p><label for="document_title">Titre :</label><br/>
+<%= start_form_tag :action => "review" %>
+ <p><label for="review_desc">Titre :</label><br/>
  <%= text_field("document", "title") %></p>
- <p><label for="document_description">Description :</label><br/>
+ <p><label for="review_description">Commentaire :</label><br/>
  <%= text_area("document", "description", :rows => 15, :cols => 28) %></p>
  <p><label for="labels">Etiquettes :</label><br/>
  <%= text_field_tag("labels", @document.tags.collect{ |t| t.name }.join(" "), :size => 30) %><span id="labels_auto_complete"></span>

@@ -29,6 +29,14 @@ ActiveRecord::Schema.define(:version => 13) do
     t.column "tag_id", :integer, :default => 0, :null => false
   end
 
+  create_table "reviews", :force => true do |t|
+    t.column "document_id", :integer, :null => false
+    t.column "user_id", :integer, :null => false
+    t.column "rating", :integer
+    t.column "description", :string, :null => false
+    t.column "created_at", :datetime, :null => false
+  end
+
   create_table "sessions", :force => true do |t|
     t.column "session_id", :string
     t.column "data", :text

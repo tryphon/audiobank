@@ -21,6 +21,17 @@ class DocumentsController < ApplicationController
   
   def show 
   	@document = Author.find(session[:user]).documents.find(params[:id])
+  	@review = Review.new(params[:review])
+  	if request.post?
+  		@review.document = @document
+  		@review.user = User.find(session[:user])
+  		if @review.save
+  			flash[:success] = "Votre commentaire a bien été ajouté"
+  			redirect_to :action => 'show', :id => @document 
+  		else
+  			flash[:failure] = "Votre commentaire n'a pas été ajouté"
+  		end
+  	end
   end
     
   def edit
