@@ -4,6 +4,10 @@ class Cue < ActiveRecord::Base
 	def update_file
 		system "#{RAILS_ROOT}/bin/cueenc", document.path, path
 	end
+	
+	def before_destroy
+		File.delete(path) if File.exists?(path)
+	end
 
 	def path
 		"#{RAILS_ROOT}/media/cue/#{id}"

@@ -38,6 +38,7 @@ class Document < ActiveRecord::Base
 			end
  			
 			self.uploaded = true
+			self.cues.clear
 			true
 		rescue Exception => e
  			false
