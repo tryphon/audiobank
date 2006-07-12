@@ -5,6 +5,7 @@ class Document < ActiveRecord::Base
 	has_many :subscribers, :through => :subscriptions
 	has_many :subscriptions, :dependent => :destroy
 	has_many :cues, :dependent => :destroy
+	has_many :casts, :dependent => :destroy
 	has_and_belongs_to_many :tags
 	
 	validates_presence_of :title, :message => "Un titre est requis"
@@ -39,6 +40,7 @@ class Document < ActiveRecord::Base
  			
 			self.uploaded = true
 			self.cues.clear
+			self.casts.clear
 			true
 		rescue Exception => e
  			false

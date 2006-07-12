@@ -14,6 +14,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'subscriptions/:action/:id', :controller => 'subscriptions'
   map.connect 'tags/:name', :controller => 'users', :action => 'tags'
   map.connect 'cues/:action/:id', :controller => 'cues'
+  map.connect 'casts/:name', :controller => 'casts', :action => 'play'
   map.connect ':action/:id/:confirm', :controller => 'users', :action => 'confirm'
 	map.connect ':action/:id', :controller => 'users'
 	

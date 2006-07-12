@@ -79,4 +79,5 @@ class DocumentsController < ApplicationController
   def listen
   	@document = Author.find(session[:user]).documents.find(params[:id])
 	end
+
 end
