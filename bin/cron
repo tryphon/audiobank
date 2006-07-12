@@ -1,5 +1,16 @@
 #!/bin/sh
 
+lock_file=/tmp/audiobank-cron-lock
+
+if [ -f $lock_file ]; then
+  echo "INFO: cron already running"
+  exit 0
+fi
+
+touch $lock_file
+
 bin_dir=`dirname $0`
 $bin_dir/../script/runner 'Cue.update'
 $bin_dir/../script/runner 'Cast.update'
+
+rm $lock_file
