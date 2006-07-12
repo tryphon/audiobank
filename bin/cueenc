@@ -16,9 +16,14 @@ flac=/usr/bin/flac
 
 input_type=`file -bi $input`
 case $input_type in 
-	audio/mpeg|application/ogg)
+	audio/mpeg)
 		function play() {
-			$sox $1 -t wav -
+			$sox -t mp3 $1 -t wav -
+		}
+	;;
+	application/ogg)
+		function play() {
+			$sox -t ogg $1 -t wav -
 		}
 	;;
 	audio/x-flac)
