@@ -93,6 +93,8 @@ end
 desc "Create media folder"
 task :after_setup do
 	run "mkdir #{shared_path}/media" 
+	run "mkdir #{shared_path}/media/cue"
+	run "mkdir #{shared_path}/media/cast"
 end
 
 desc "Disable web before deployement"
