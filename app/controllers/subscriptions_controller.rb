@@ -21,6 +21,8 @@ class SubscriptionsController < ApplicationController
   		else
   			flash[:failure] = "Votre commentaire n'a pas été ajouté"
   		end
+    else
+    	@review.rating = 3
   	end
   end
   
