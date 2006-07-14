@@ -20,7 +20,12 @@
    <% end %>
    <% if actions %>
     <div class="actions">
-     <%= link_to("Ecouter", {:action => "listen", :id => document }, :title => "Ecouter le document", :class => "listen") unless document.cues.empty?  %>
+     <% if document.cues.size > 1 %>
+	     <%= link_to("Ecouter", {:action => "listen", :id => document }, :title => "Ecouter le document", :class => "listen") %>
+	   <% end %>
+	   <% if document.cues.size == 1 %>
+	     <%= link_to("Ecouter", { :controller => "cues", :action => "playlist", :id => document.cues.first }, :title => "Ecouter le document", :class => "listen") %>
+	   <% end %>
      <%= link_to("Télécharger", {:action => "download", :id => document }, :title => "Télécharger votre fichier", :class => "download") if document.uploaded?  %>
      <%= link_to("Déposer", {:action => "upload", :id => document}, :title => "Déposer votre fichier", :class => "upload") %>
      <%= link_to("Détruire", {:action => "destroy", :id => document}, :confirm => "Êtes vous sûr de vouloir détruire ce document ?", :title => "Détruire ce document", :class => "destroy") %>
