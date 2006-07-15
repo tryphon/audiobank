@@ -55,14 +55,37 @@ class DocumentsController < ApplicationController
   
   def upload
   	@document = Author.find(session[:user]).documents.find(params[:id])
+  	
   	if request.post?
-  		if @document.upload_file(params[:document][:file])
+  		if params[:upload]
+  			@upload = Upload.new(params[:upload])
+  			upload_file = @upload.file
+  			logger.info "ftp upload from #{@upload}"
+			else 
+				upload_file = params[:document][:file]
+			end
+			
+			begin
+				logger.debug "upload file: #{upload_file}"
+				@document.upload_file(upload_file)			
+			rescue Exception => e
+ 				logger.error("can't upload #{upload_file}: #{e}")
+			end
+
+			if @document.uploaded?
   			@document.save
+  			if @upload
+ 					logger.debug("delete upload: #{@upload}")
+  				@upload.delete 
+  			end
   			flash[:success] = "Votre fichier a bien été déposé"
   			redirect_to :action => 'share', :id => @document
   		else
   			flash[:failure] = "Votre fichier n'a pas été déposé"
   		end
+  	else
+	  	@upload = Upload.new
+	  	@upload.create
   	end
   end
   

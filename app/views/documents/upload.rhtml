@@ -17,8 +17,21 @@
  <%= render :partial => "documents/documents", :object => @document.to_a, :locals => { :linked => false, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => false } %>
 </ul>
 <hr/>
+
 <%= start_form_tag({:action => "upload"}, :multipart => true) %>
  <p><label for="document_file">Fichier :</label><br/>
  <%= file_field "document", "file" %></p>
  <p class="note icon">Les formats supportés sont : ogg vorbis, flac, mp3 et mpc.</p>
  <%= submit_tag "Déposer votre fichier" %> ou <%= link_to("le faire plus tard &#8250;", { :action => "share", :id => @document}, :title => "Déposer votre fichier plus tard", :class => "blue") %>
+<%= end_form_tag %>
+ 
+<hr/>
+
+<h2>Par FTP</h2>
+
+Déposer votre fichier dans ce <a href="<%= "ftp://audiobank.tryphon.org/upload/" + @upload.path %>"> répertoire</a> puis
+
+<%= start_form_tag({:action => "upload", :id => @document}) %>
+<%= hidden_field "upload", "key" %></p>
+<%= submit_tag "Confirmer le dépôt" %>
+<%= end_form_tag %>

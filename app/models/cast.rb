@@ -16,7 +16,7 @@ class Cast < ActiveRecord::Base
 	def self.update
 		Document.find(:all).delete_if { |d| !d.uploaded? or !d.casts.empty? }.each do |document|
 			puts "INFO: create cast for document #{document.id}"
-			cast = Cast.create(:document => document, :name => String.random_alphanumeric(8).downcase)
+			cast = Cast.create(:document => document, :name => StringRandom.alphanumeric(8).downcase)
 			if !cast.update_file then
 				puts "ERROR: can't create cast for document #{document.id}"
 				cast.destroy
@@ -29,5 +29,5 @@ end
 def String.random_alphanumeric(size=16)
   s = ""
   size.times { s << (i = Kernel.rand(62); i += ((i < 10) ? 48 : ((i < 36) ? 55 : 61 ))).chr }
-  s
+  s.downcase
 end

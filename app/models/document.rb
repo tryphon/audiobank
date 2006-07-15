@@ -27,7 +27,6 @@ class Document < ActiveRecord::Base
 	end
 	
 	def upload_file(file)
-		begin
 			document = TagLib::File.new(file.path, Mahoro.new(Mahoro::NONE).file(file.path))
 				self.length = document.length
 			document.close
@@ -42,10 +41,6 @@ class Document < ActiveRecord::Base
 			self.uploaded = true
 			self.cues.clear
 			self.casts.clear
-			true
-		rescue Exception => e
- 			false
-		end
 	end
 	
 	def after_destroy
