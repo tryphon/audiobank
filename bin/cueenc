@@ -18,7 +18,7 @@ input_type=`file -bi $input`
 case $input_type in 
 	audio/mpeg)
 		function play() {
-			$sox -t mp3 $1 -t wav -
+			mpg321 -q -w - $1
 		}
 	;;
 	application/ogg)
