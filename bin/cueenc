@@ -9,16 +9,18 @@ quality=0
 sox=/usr/bin/sox
 oggenc=/usr/bin/oggenc
 flac=/usr/bin/flac
+mpg321=/usr/bin/mpg321 
 
 [ -x $sox ] || exit 1
 [ -x $oggenc ] || exit 1
 [ -x $flac ] || exit 1
+[ -x $mpg321 ] || exit 1
 
 input_type=`file -bi $input`
 case $input_type in 
 	audio/mpeg)
 		function play() {
-			mpg321 -q -w - $1
+			$mpg321 -q -w - $1
 		}
 	;;
 	application/ogg)
