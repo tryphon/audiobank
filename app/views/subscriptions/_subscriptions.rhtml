@@ -21,6 +21,11 @@
    <% if actions %>
     <div class="actions">
      <span class="author" title="<%= subscription.author.name %> — <%= subscription.author.organization %>"><%= subscription.author.name %></span>
+
+	   <% if subscription.document.cues.size == 1 %>
+	     <%= link_to("Ecouter", { :controller => "cues", :action => "playlist", :id => subscription.document.cues.first }, :title => "Ecouter le document", :class => "listen") %>
+	   <% end %>
+     
      <% unless subscription.document.uploaded? %>
 		  <%= link_to("Non disponible", {:action => "show", :id => subscription }, :title => "Ce fichier n'est pas disponible", :class => "unavailable") %>
 		 <% else %>
