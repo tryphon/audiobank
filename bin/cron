@@ -9,8 +9,10 @@ fi
 
 touch $lock_file
 
+[ "$#" -gt 0 ] && options="-e $1"
+
 bin_dir=`dirname $0`
-$bin_dir/../script/runner 'Cue.update'
-$bin_dir/../script/runner 'Cast.update'
+$bin_dir/../script/runner $options 'Cue.update'
+$bin_dir/../script/runner $options 'Cast.update'
 
 rm $lock_file
