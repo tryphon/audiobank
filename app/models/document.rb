@@ -11,6 +11,7 @@ class Document < ActiveRecord::Base
 	
 	validates_presence_of :title, :message => "Un titre est requis"
 	validates_presence_of :description, :message => "Une description est requise"
+	validates_length_of :description, :maximum => 255, :message => "Votre description est trop longue"
 	
 	attr_protected :size, :length, :format, :file
 	
