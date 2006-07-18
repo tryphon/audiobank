@@ -20,12 +20,12 @@ input_type=`file -bi $input`
 case $input_type in 
 	audio/mpeg)
 		function play() {
-			$mpg321 -q -w - $1
+			$mpg321 -q --stereo -w - $1
 		}
 	;;
 	application/ogg)
 		function play() {
-			$sox -t ogg $1 -t wav -
+			$sox -t ogg $1 -t wav -c 2 -
 		}
 	;;
 	audio/x-flac)
