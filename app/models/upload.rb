@@ -15,6 +15,7 @@ class Upload
 
 	def create
 		Dir.mkdir path
+		File.chmod(2775, path)
 	end
 
 	def delete
@@ -31,6 +32,10 @@ class Upload
 	
 	def file
 		File.new(candidates.first)
+	end
+	
+	def public_url 
+		"ftp://audiobank.tryphon.org/upload/media/#{key}"
 	end
 	
 	def empty?
