@@ -95,6 +95,7 @@ task :after_setup do
 	run "mkdir #{shared_path}/media" 
 	run "mkdir #{shared_path}/media/cue"
 	run "mkdir #{shared_path}/media/cast"
+	run "mkdir #{shared_path}/media/upload"
 end
 
 desc "Disable web before deployement"
