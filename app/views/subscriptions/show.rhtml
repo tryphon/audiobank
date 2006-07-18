@@ -6,20 +6,7 @@
 <ul>
  <%= render :partial => "reviews/reviews", :object => @subscription.document.reviews, :locals => { :empty => "Aucun commentaire ..." } %> 
 </ul>
-<% if @review.errors.count > 0 %>
- <div id="errors">
-  <% if @review.errors.count == 1 %>
-   <h2>Une erreur a été trouvée</h2>
-  <% else %>
-   <h2><%= @review.errors.count %> erreurs ont été trouvées</h2>
-  <% end %>
-  <ul>
-   <% @review.errors.each do |name, message| %>
-    <li><%= link_to(message, "#review_#{name}") %></li>
-   <% end %>
-  </ul>
- </div>
-<% end %>
+<%= error_messages_for("review") %>
 <h2>Ajouter un commentaire</h2>
 <%= start_form_tag :action => "show" %>
  <p><label for="review_description">Commentaire :</label><br/>
