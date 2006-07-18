@@ -29,9 +29,15 @@
 
 <h2>Par FTP</h2>
 
-Déposer votre fichier dans ce <a href="<%= "ftp://audiobank.tryphon.org/upload/" + @upload.path %>"> répertoire</a> puis
+Déposer votre fichier dans ce <a target="_new" href="<%= @upload.public_url %>">répertoire</a> à l'aide d'un 
+client FTP.
 
 <%= start_form_tag({:action => "upload", :id => @document}) %>
-<%= hidden_field "upload", "key" %></p>
+<%= hidden_field "upload", "key" %>
+<p>Répertoire temporaire de dépot:<br/>
+<a target="_new" href="<%= @upload.public_url %>"><%= @upload.public_url %></a></p>
 <%= submit_tag "Confirmer le dépôt" %>
 <%= end_form_tag %>
+
+<p class="note icon">Vous pouvez utilisé <a href="http://fireftp.mozdev.org/">FireFTP</a> avec FireFox, 
+<a href="http://filezilla.sourceforge.net/">FileZilla</a> sous Windows ou <a href="http://www.cyberduck.ch/">Cyberduck</a> sous Mac</p>
