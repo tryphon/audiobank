@@ -1,17 +1,4 @@
-<% if @document.errors.count > 0 %>
- <div id="errors">
-  <% if @document.errors.count == 1 %>
-   <h2>Une erreur a été trouvée</h2>
-  <% else %>
-   <h2><%= @document.errors.count %> erreurs ont été trouvées</h2>
-  <% end %>
-  <ul>
-   <% @document.errors.each do |name, message| %>
-    <li><%= link_to(message, "#document_#{name}") %></li>
-   <% end %>
-  </ul>
- </div>
-<% end %>
+<%= error_messages_for("document") %>
 <h2>Modifier votre document</h2>
 <%= start_form_tag :action => "edit" %>
  <p><label for="document_title">Titre :</label><br/>
@@ -21,5 +8,5 @@
  <p><label for="labels">Etiquettes :</label><br/>
  <%= text_field_tag("labels", @document.tags.collect{ |t| t.name }.join(" " ), :size => 30) %><span id="labels_auto_complete"></span>
  <%= auto_complete_field("labels", :url => {:controller => "documents", :action => "auto_complete_for_tags"}, :tokens => " ") %></p>
- <%= submit_tag "Modifier ce document" %>
+ <%= submit_tag "Modifier ce document" %> ou <%= link_to("annuler &#8250;", { :action => "show", :id => @document}, :title => "Annuler", :class => "blue") %>
 <%= end_form_tag %>

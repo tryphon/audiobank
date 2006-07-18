@@ -1,6 +1,6 @@
 <h2>Partager votre document</h2>
 <ul>
- <%= render :partial => "documents/documents", :object => @document.to_a, :locals => { :linked => false, :empty => "Aucun document ne correspond ...", :actions => false } %>
+ <%= render :partial => "documents/documents", :object => @document.to_a, :locals => { :linked => true, :empty => "Aucun document ne correspond ...", :actions => false } %>
 </ul>
 
 <hr/>

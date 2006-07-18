@@ -1,20 +1,7 @@
-<% if @document.errors.count > 0 %>
-<div id="errors">
- <% if @document.errors.count == 1 %>
-  <h2>Une erreur a été trouvée</h2>
- <% else %>
-  <h2><%= @document.errors.count %> erreurs ont été trouvées</h2>
- <% end %>
- <ul>
-  <% @document.errors.each do |name, message| %>
-   <li><%= link_to(message, "#user_#{name}") %></li>
-  <% end %>
- </ul>
-</div>
-<% end %>
+<%= error_messages_for("document") %>
 <h2>Déposer votre fichier</h2>
 <ul>
- <%= render :partial => "documents/documents", :object => @document.to_a, :locals => { :linked => false, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => false } %>
+ <%= render :partial => "documents/documents", :object => @document.to_a, :locals => { :linked => true, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => false } %>
 </ul>
 <hr/>
 
@@ -29,8 +16,8 @@
 
 <h2>Par FTP</h2>
 
-Déposer votre fichier dans ce <a target="_new" href="<%= @upload.public_url %>">répertoire</a> à l'aide d'un 
-client FTP.
+<p>Déposer votre fichier dans ce <a target="_new" href="<%= @upload.public_url %>">répertoire</a> à l'aide d'un 
+client FTP.</p>
 
 <%= start_form_tag({:action => "upload", :id => @document}) %>
 <%= hidden_field "upload", "key" %>

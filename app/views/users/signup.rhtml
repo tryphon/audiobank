@@ -1,17 +1,4 @@
-<% if @user.errors.count > 0 %>
- <div id="errors">
-  <% if @user.errors.count == 1 %>
-   <h2>Une erreur a été trouvée</h2>
-  <% else %>
-   <h2><%= @user.errors.count %> erreurs ont été trouvées</h2>
-  <% end %>
-  <ul>
-   <% @user.errors.each do |name, message| %>
-    <li><%= link_to(message, "#user_#{name}") %></li>
-   <% end %>
-  </ul>
- </div>
-<% end %>
+<%= error_messages_for("user") %>
 <h2>Votre nouveau compte</h2> 
 <%= start_form_tag :action => "signup" %>
  <p><label for="user_username">Nom d'utilisateur :</label><br/>
