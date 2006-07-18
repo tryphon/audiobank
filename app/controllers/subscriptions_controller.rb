@@ -6,7 +6,8 @@ class SubscriptionsController < ApplicationController
   end
 
 	def manage
-		@subscription = Subscriber.find(session[:user]).subscriptions
+		@pages = Paginator.new(self, Subscriber.find(session[:user]).subscriptions.size, 4, params[:page])
+		@subscription = Subscriber.find(session[:user]).subscriptions.find(:all, :limit => @pages.items_per_page, :offset => @pages.current.offset)
 	end 
   
   def show

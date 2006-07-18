@@ -50,7 +50,8 @@ class DocumentsController < ApplicationController
   end
 
 	def manage
-		@document = Author.find(session[:user]).documents
+		@pages = Paginator.new(self, Author.find(session[:user]).documents.size, 4, params[:page])
+		@document = Author.find(session[:user]).documents.find(:all, :limit => @pages.items_per_page, :offset => @pages.current.offset)
 	end
   
   def upload

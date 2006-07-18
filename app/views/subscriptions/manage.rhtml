@@ -2,3 +2,7 @@
 <ul>
  <%= render :partial => "subscriptions", :object => @subscription, :locals => { :linked => true, :empty => "Vous n'avez aucune souscription ...", :actions => true, :type => :subscriptions, :tags => true } %>
 </ul>
+<div class="actions">
+ <%= link_to("Précédentes", { :page => @pages.current.previous }, :class => "previous") if @pages.current.previous %>
+ <%= link_to("Suivantes", { :page => @pages.current.next }, :class => "next") if @pages.current.next %> 
+</div>

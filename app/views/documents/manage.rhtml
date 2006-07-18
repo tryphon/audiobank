@@ -2,3 +2,7 @@
 <ul>
  <%= render :partial => "documents/documents", :object => @document, :locals => { :linked => true, :empty => "Vous n'avez aucun document, vous devriez #{link_to("en ajouter un", :action => "add")}", :actions => true, :tags => true } %>
 </ul>
+<div class="actions">
+ <%= link_to("Précédents", { :page => @pages.current.previous }, :class => "previous") if @pages.current.previous %>
+ <%= link_to("Suivants", { :page => @pages.current.next }, :class => "next") if @pages.current.next %> 
+</div>

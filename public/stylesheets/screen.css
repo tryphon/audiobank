@@ -104,6 +104,8 @@ background: url("../images/tags.png") no-repeat 0px 6px;
 #frame .share { background: url("../images/share.png") no-repeat; }
 #frame .destroy { background: url("../images/destroy.png") no-repeat; }
 #frame .upload { background: url("../images/upload.png") no-repeat; }
+#frame .next { background: url("../images/next.png") no-repeat; }
+#frame .previous { background: url("../images/previous.png") no-repeat; }
 #frame .download { background: url("../images/download.png") no-repeat; }
 #frame .listen { background: url("../images/listen.png") no-repeat; }
 #frame .basket_put { background: url("../images/basket_put.png") no-repeat; }
