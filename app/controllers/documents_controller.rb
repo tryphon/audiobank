@@ -56,12 +56,21 @@ class DocumentsController < ApplicationController
   
   def upload
   	@document = Author.find(session[:user]).documents.find(params[:id])
+  	logger.info(@document.inspect)
+  	unless @document.upload
+	  	@document.upload = Upload.create 
+	  	@document.save
+	  end
   	
   	if request.post?
-  		if params[:upload]
-  			@upload = Upload.new(params[:upload])
-  			upload_file = @upload.file
-  			logger.info "ftp upload from #{@upload}"
+  		if params[:mode] == "ftp"
+	  			logger.info "ftp upload from #{@document.upload}"
+  			unless @document.upload.empty?
+	  			upload_file = @document.upload.file
+	  		else
+	  			flash[:failure] = "Votre fichier n'a pas été trouvé dans le répertoire ftp"
+	  			return
+	  		end
 			else 
 				upload_file = params[:document][:file]
 			end
@@ -74,19 +83,13 @@ class DocumentsController < ApplicationController
 			end
 
 			if @document.uploaded?
+				@document.upload.destroy
   			@document.save
-  			if @upload
- 					logger.debug("delete upload: #{@upload}")
-  				@upload.delete 
-  			end
   			flash[:success] = "Votre fichier a bien été déposé"
   			redirect_to :action => 'share', :id => @document
   		else
   			flash[:failure] = "Votre fichier n'a pas été déposé"
   		end
-  	else
-	  	@upload = Upload.new
-	  	@upload.create
   	end
   end
   

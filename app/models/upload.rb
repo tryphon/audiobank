@@ -1,24 +1,18 @@
-class Upload 
-	attr_reader :key
+class Upload < ActiveRecord::Base
+	belongs_to :document
 
 	def to_s
     "Upload: #{@key} (#{path}, #{candidates})"
   end
   
-	def initialize(params=nil)
-		if (params) 
-			@key = params[:key]
-		else 
-			@key = StringRandom.alphanumeric(16).downcase
-		end
-	end
+  def before_create
+		self.key = StringRandom.alphanumeric(16).downcase
 
-	def create
 		Dir.mkdir path
-		File.chmod(2775, path)
-	end
-
-	def delete
+		File.chmod(02775, path)
+  end
+  
+	def after_destroy
 		FileUtils.remove_dir path
 	end
 	

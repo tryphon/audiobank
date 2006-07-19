@@ -16,13 +16,13 @@
 
 <h2>Par FTP</h2>
 
-<p>Déposer votre fichier dans ce <a target="_new" href="<%= @upload.public_url %>">répertoire</a> à l'aide d'un 
+<p>Déposer votre fichier dans ce <a target="_new" href="<%= @document.upload.public_url %>">répertoire</a> à l'aide d'un 
 client FTP.</p>
 
 <%= start_form_tag({:action => "upload", :id => @document}) %>
-<%= hidden_field "upload", "key" %>
+<%= hidden_field_tag "mode", "ftp" %>
 <p>Répertoire temporaire de dépot:<br/>
-<a target="_new" href="<%= @upload.public_url %>"><%= @upload.public_url %></a></p>
+<a target="_new" href="<%= @document.upload.public_url %>"><%= @document.upload.public_url %></a></p>
 <%= submit_tag "Confirmer le dépôt" %>
 <%= end_form_tag %>
 
