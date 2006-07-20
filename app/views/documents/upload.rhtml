@@ -5,25 +5,22 @@
 </ul>
 <hr/>
 
+<h4>Avec votre navigateur :</h4>
 <%= start_form_tag({:action => "upload"}, :multipart => true) %>
  <p><label for="document_file">Fichier :</label><br/>
  <%= file_field "document", "file" %></p>
  <p class="note icon">Les formats supportés sont : ogg vorbis, flac, mp3 et mpc.</p>
  <%= submit_tag "Déposer votre fichier" %> ou <%= link_to("le faire plus tard &#8250;", { :action => "share", :id => @document}, :title => "Déposer votre fichier plus tard", :class => "blue") %>
 <%= end_form_tag %>
- 
 <hr/>
 
-<h2>Par FTP</h2>
-
-<p>Déposer votre fichier dans ce <a target="_new" href="<%= @document.upload.public_url %>">répertoire</a> à l'aide d'un 
-client FTP.</p>
+<h4>Avec un client ftp :</h4>
 
 <%= start_form_tag({:action => "upload", :id => @document}) %>
 <%= hidden_field_tag "mode", "ftp" %>
-<p>Répertoire temporaire de dépot:<br/>
+<p>Déposer votre fichier dans ce répertoire :<br/>
 <a target="_new" href="<%= @document.upload.public_url %>"><%= @document.upload.public_url %></a></p>
-<%= submit_tag "Confirmer le dépôt" %>
+<%= submit_tag "Confirmer le dépôt" %> ou <%= link_to("le faire plus tard &#8250;", { :action => "share", :id => @document}, :title => "Déposer votre fichier plus tard", :class => "blue") %>
 <%= end_form_tag %>
 
 <p class="note icon">Vous pouvez utilisé <a href="http://fireftp.mozdev.org/">FireFTP</a> avec FireFox, 

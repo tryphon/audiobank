@@ -56,9 +56,8 @@ class DocumentsController < ApplicationController
   
   def upload
   	@document = Author.find(session[:user]).documents.find(params[:id])
-  	logger.info(@document.inspect)
   	unless @document.upload
-	  	@document.upload = Upload.create 
+	  	@document.upload = Upload.new
 	  	@document.save
 	  end
   	
