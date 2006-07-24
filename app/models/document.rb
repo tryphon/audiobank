@@ -2,7 +2,7 @@ require 'mahoro'
 require 'taglib'
 class Document < ActiveRecord::Base
 	belongs_to :author
-	has_one :upload
+	has_one :upload, :dependent => :destroy
 	has_many :subscribers, :through => :subscriptions
 	has_many :subscriptions, :dependent => :destroy
 	has_many :cues, :dependent => :destroy
@@ -34,8 +34,9 @@ class Document < ActiveRecord::Base
 			document.close
 			
 			self.format = Mahoro.new(Mahoro::MIME).file(file.path)
-			self.size = file.size
-		
+			file.respond_to?(:size) ? self.size = file.size : self.size = File.size(file.path)
+			
+			self.uploaded = false
 			File.open(path, "wb") do |f|
 				f.write(file.read)
 			end
@@ -43,6 +44,8 @@ class Document < ActiveRecord::Base
 			self.uploaded = true
 			self.cues.clear
 			self.casts.clear
+			
+			true
 	end
 	
 	def after_destroy

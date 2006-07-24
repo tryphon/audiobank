@@ -63,26 +63,26 @@ class DocumentsController < ApplicationController
   	
   	if request.post?
   		if params[:mode] == "ftp"
-	  			logger.info "ftp upload from #{@document.upload}"
+	  		logger.info "FTP upload from #{@document.upload}"
   			unless @document.upload.empty?
 	  			upload_file = @document.upload.file
 	  		else
 	  			flash[:failure] = "Votre fichier n'a pas été trouvé dans le répertoire ftp"
 	  			return
 	  		end
-			else 
+			else
 				upload_file = params[:document][:file]
-			end
-			
+			end		
+				
 			begin
-				logger.debug "upload file: #{upload_file}"
-				@document.upload_file(upload_file)			
+				logger.debug "Upload file: #{upload_file}"
+				uploaded = @document.upload_file(upload_file)			
 			rescue Exception => e
- 				logger.error("can't upload #{upload_file}: #{e}")
+ 				logger.error("Can't upload #{upload_file.to_s}: #{e}")
 			end
 
-			if @document.uploaded?
-				@document.upload.destroy
+			if uploaded
+				@document.upload = nil
   			@document.save
   			flash[:success] = "Votre fichier a bien été déposé"
   			redirect_to :action => 'share', :id => @document
