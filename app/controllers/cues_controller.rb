@@ -1,5 +1,5 @@
 class CuesController < ApplicationController
-	layout 'documents', :except => [:play, :playlist]
+	layout nil
 
   def playlist
   	@cue = Cue.find(params[:id])
