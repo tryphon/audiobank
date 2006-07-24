@@ -2,11 +2,14 @@ class CastsController < ApplicationController
 	layout nil
 
   def play
-  	name = File.basename(params[:name], ".ogg")
-  	if params[:name] != name
-  		playcontent(name)
-  	else 
-  		playlist(params[:name])
+  	extension = params[:name].split('.').last
+  	case extension
+  		when "ogg":
+  			playcontent(File.basename(params[:name], "."+ extension))
+  		when "m3u" 
+  			playlist(File.basename(params[:name], "."+ extension))
+  		else
+  			redirect_to :action => :play, :name => params[:name]+".m3u"
   	end
   end
   
