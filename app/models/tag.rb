@@ -26,6 +26,8 @@ class Tag < ActiveRecord::Base
     # remove any blank tag
     tags = tags.delete_if { |t| t.empty? }
     
+    tags.collect! { |t| t.downcase }
+    
     tags.collect! { |t| Tag.find_or_create_by_name(t) }
     
     return tags
