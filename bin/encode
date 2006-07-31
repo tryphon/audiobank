@@ -17,6 +17,7 @@ lame=/usr/bin/lame
 [ -x $oggenc ] || exit 1
 [ -x $flac ] || exit 1
 [ -x $mpg321 ] || exit 1
+[ -x $lame ] || exit 1
 
 input_type=`file -bi $input`
 case $input_type in 
@@ -40,4 +41,21 @@ case $input_type in
 	;;
 esac
 
-play $input | $oggenc -Q --downmix -q$quality -o $output -
+case $format in
+	ogg)
+		function encode() {
+			$oggenc -Q --downmix -q$1 -o $2 -
+		}
+	;;
+	mp3)
+		function encode() {
+			lame_quality=$[9-$1]
+			$lame --silent -m s -a -q$lame_quality - $2
+		}
+	;;
+	*)
+		exit 1
+	;;
+esac
+
+play $input | encode $quality $output
