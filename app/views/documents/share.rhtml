@@ -30,7 +30,7 @@
   </p>
  	<ul>
     <% @document.casts.each do |cast| %>
-  	  <li><%= url_for(:controller => 'casts', :action => 'play', :name => cast.name, :only_path => false) %></li>
+  	  <li><%= link_to(url_for(:controller => 'casts', :action => 'play', :name => cast.name, :only_path => false), :controller => 'casts', :action => 'play', :name => cast.name) %></li>
  		<% end %>
   </ul>
 	<% end %>
