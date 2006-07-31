@@ -9,11 +9,23 @@ class CastsController < ApplicationController
   		when "m3u" 
   			playlist(File.basename(params[:name], "."+ extension))
   		else
-  			redirect_to :action => :play, :name => params[:name]+".m3u"
+  			if player?
+	  			redirect_to :action => :play, :name => params[:name]+".ogg"
+  			else
+	  			redirect_to :action => :play, :name => params[:name]+".m3u"
+	  		end
   	end
   end
   
   private
+  def player?
+  	if request.env['HTTP_USER_AGENT'] =~ /^Winamp|Windows/
+  		true
+  	else
+  		false
+  	end
+  end
+   
   def playcontent(name)
   	@cast = Cast.find_by_name(name)
   	send_file @cast.path, :type => "application/ogg", :filename => "audiobank-#{@cast.name}.ogg", :disposition => "inline"

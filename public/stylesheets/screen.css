@@ -21,7 +21,6 @@ img { border: none; vertical-align: middle; }
 .hide { display: none; }
 
 #header {
-padding: 30px;
 border-bottom: 4px solid #ccc;
 background: #333;
 }
@@ -34,7 +33,7 @@ margin: 0 auto;
 #header a { font-size: 90%; color: #fff; }
 #header div ul {
 float: right;
-margin-top: 54px;
+margin-top: 24px;
 padding: 0;
 font-size: 90%;
 list-style: none;
