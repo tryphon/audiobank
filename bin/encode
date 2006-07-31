@@ -2,6 +2,7 @@
 
 input=$1
 output=$2
+format=$3
 quality=0
 
 [ -r $input ] || exit 1
@@ -10,6 +11,7 @@ sox=/usr/bin/sox
 oggenc=/usr/bin/oggenc
 flac=/usr/bin/flac
 mpg321=/usr/bin/mpg321 
+lame=/usr/bin/lame
 
 [ -x $sox ] || exit 1
 [ -x $oggenc ] || exit 1

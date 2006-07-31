@@ -2,7 +2,7 @@ class Cast < ActiveRecord::Base
 	belongs_to :document
 	
 	def update_file
-		system "#{RAILS_ROOT}/bin/cueenc", document.path, path
+		system "#{RAILS_ROOT}/bin/encode", document.path, path, "ogg"
 	end
 	
 	def before_destroy
