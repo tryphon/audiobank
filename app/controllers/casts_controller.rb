@@ -9,11 +9,7 @@ class CastsController < ApplicationController
   		when "m3u" 
   			playlist(File.basename(params[:name], "."+ extension))
   		else
-  			if player?
-	  			redirect_to :action => :play, :name => params[:name]+".ogg"
-  			else
-	  			redirect_to :action => :play, :name => params[:name]+".m3u"
-	  		end
+  			redirect_to :action => :play, :name => params[:name]+".m3u"
   	end
   end
   
@@ -33,9 +29,19 @@ class CastsController < ApplicationController
 
   def playlist(name)
   	@cast = Cast.find_by_name(name)
+
   	content = "#EXTM3U\n"
   	content += "#EXTINF:#{@cast.document.length},#{@cast.document.title}\n" 
   	content += url_for(:action => 'play', :name => @cast.name) + ".ogg\n"
-		render :text => content, :content_type => 'audio/x-mpegurl'
+
+		m3u_url = "cache/#{name}.m3u"
+		m3u_path = "#{RAILS_ROOT}/public/#{m3u_url}"
+		unless File.exists?(m3u_path)
+			File.open(m3u_path, "w") do |f|
+					f.write(content)
+			end
+		end
+
+  	redirect_to "/#{m3u_url}"
   end
 end
