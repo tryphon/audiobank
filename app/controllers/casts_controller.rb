@@ -4,8 +4,15 @@ class CastsController < ApplicationController
   def play
   	extension = params[:name].split('.').last
   	case extension
+  		when "mp3":
+  			playcontent(File.basename(params[:name], "."+ extension), extension)
   		when "ogg":
-  			playcontent(File.basename(params[:name], "."+ extension))
+  			if mp3_only_player?
+			  	real_name = File.basename(params[:name], "."+ extension)
+	  			redirect_to :action => :play, :name => real_name +".mp3"  
+	  			return
+	  		end
+  			playcontent(File.basename(params[:name], "."+ extension), extension)
   		when "m3u" 
   			playlist(File.basename(params[:name], "."+ extension))
   		else
@@ -21,10 +28,24 @@ class CastsController < ApplicationController
   		false
   	end
   end
+
+  def mp3_only_player?
+  	if request.env['HTTP_USER_AGENT'] =~ /^Windows|mpg321|RMA|iTunes/
+  		true
+  	else
+  		false
+  	end
+  end
    
-  def playcontent(name)
+  def playcontent(name, format)
   	@cast = Cast.find_by_name(name)
-  	send_file @cast.path, :type => "application/ogg", :filename => "audiobank-#{@cast.name}.ogg", :disposition => "inline"
+  	case format
+  		when "ogg":
+  			type = "application/ogg"
+  		when "mp3" 
+  			type = "application/mp3"
+  	end
+  	send_file @cast.path(format), :type => type, :filename => "audiobank-#{@cast.name}.#{format}", :disposition => "inline"
   end
 
   def playlist(name)

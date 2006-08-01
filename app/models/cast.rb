@@ -1,25 +1,47 @@
 class Cast < ActiveRecord::Base
 	belongs_to :document
 	
-	def update_file
-		system "#{RAILS_ROOT}/bin/encode", document.path, path, "ogg"
+	FORMATS = %w(ogg mp3)
+	
+	def update_file(format = "ogg")
+		puts "DEBUG: #{RAILS_ROOT}/bin/encode #{document.path} #{path(format)} #{format}"
+		system "#{RAILS_ROOT}/bin/encode", document.path, path(format), format
 	end
 	
 	def before_destroy
-		File.delete(path) if File.exists?(path)
+		FORMATS.each do |format|
+			File.delete(path(format)) if File.exists?(path(format))
+		end
 	end
 
-	def path
-		"#{RAILS_ROOT}/media/cast/#{id}"
+	def path(format = "ogg")
+		"#{RAILS_ROOT}/media/cast/#{id}.#{format}"
+	end
+	
+	def uptodate?(format = "ogg")
+		FileUtils.uptodate?(path(format), document.path)
 	end
 	
 	def self.update
+		Cast.find(:all).each do |cast|
+			FORMATS.each do |format|
+				unless cast.uptodate?(format)
+					puts "INFO: update #{format} cast for document #{cast.document.id}"
+					if !cast.update_file(format) then
+						puts "ERROR: can't update #{format} cast for document #{cast.document.id}"
+					end
+				end
+			end
+		end
+				
 		Document.find(:all).delete_if { |d| !d.uploaded? or !d.casts.empty? }.each do |document|
 			puts "INFO: create cast for document #{document.id}"
 			cast = Cast.create(:document => document, :name => StringRandom.alphanumeric(8).downcase)
-			if !cast.update_file then
-				puts "ERROR: can't create cast for document #{document.id}"
-				cast.destroy
+			FORMATS.each do |format|
+				if !cast.update_file(format) then
+					puts "ERROR: can't create cast for document #{document.id}"
+					cast.destroy
+				end
 			end
 		end		
 	end
