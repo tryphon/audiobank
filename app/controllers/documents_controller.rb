@@ -42,7 +42,7 @@ class DocumentsController < ApplicationController
     	@document.tag_with(params[:labels])
       if @document.update_attributes(params[:document])
         flash[:success] = "Votre document a bien été édité"
-        redirect_to :action => 'manage'
+        redirect_to :action => 'show', :id => @document
       else
         flash[:failure] = "Votre document n'a pas été édité"
       end
