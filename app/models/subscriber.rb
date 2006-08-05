@@ -5,5 +5,9 @@ class Subscriber < User
 		def find_by_tag(name)
 			find_by_sql(["SELECT subscriptions.* FROM subscriptions, documents, tags, documents_tags WHERE subscriptions.document_id = documents.id AND documents.id = documents_tags.document_id AND tags.id = documents_tags.tag_id AND subscriptions.subscriber_id = ? AND tags.name = ?", @owner.quoted_id, name])
 		end
+		
+		def find_by_keywords(keywords)
+			find_by_sql(["SELECT subscriptions.* FROM subscriptions, documents WHERE subscriptions.document_id = documents.id AND subscriptions.subscriber_id = ? AND documents.title ~* ?", @owner.quoted_id, keywords])
+		end
 	end
 end

@@ -1,4 +1,4 @@
-body {
+ body {
 margin: 0;
 padding: 0;
 font: 14px Trebuchet MS, Verdana, sans-serif;
@@ -220,6 +220,12 @@ font-size: 70%;
 text-indent: 4px;
 font-size: 90%;
 margin: 4px;
+}
+#search {
+margin: 0.2em 0 1em;
+}
+#search input {
+width: 186px;
 }
 
 #messages { padding: 0 0 12px; background: #fff; }

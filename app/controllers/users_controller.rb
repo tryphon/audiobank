@@ -19,7 +19,12 @@ class UsersController < ApplicationController
 	
 	def tags
 		@document = Author.find(session[:user]).documents.find_by_tag(params[:name])
-		@subscriptions = Subscriber.find(session[:user]).subscriptions.find_by_tag(params[:name])
+		@subscription = Subscriber.find(session[:user]).subscriptions.find_by_tag(params[:name])
+	end
+	
+	def find
+		@document = Author.find(session[:user]).documents.find_by_keywords(params[:keywords])
+		@subscription = Subscriber.find(session[:user]).subscriptions.find_by_keywords(params[:keywords])
 	end
 	
 	def options

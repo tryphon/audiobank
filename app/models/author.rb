@@ -5,5 +5,9 @@ class Author < User
 		def find_by_tag(name)
 			find_by_sql(["SELECT documents.* FROM documents, tags, documents_tags WHERE documents.id = documents_tags.document_id AND tags.id = documents_tags.tag_id AND documents.author_id = ? AND tags.name = ?", @owner.quoted_id, name])
 		end
+		
+		def find_by_keywords(keywords)
+			find(:all, :conditions => ["title ~* ?", keywords])
+		end
 	end
 end

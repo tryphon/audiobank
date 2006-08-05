@@ -1,0 +1,8 @@
+<h2>Vos documents correspondant à : <%= params[:keywords] %></h2>
+<ul>
+ <%= render :partial => "documents/documents", :object => @document, :locals => { :linked => true, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => false, :tags => true } %>
+</ul>
+<h2>Vos souscriptions correspondant à : <%= params[:keywords] %></h2>
+<ul>
+ <%= render :partial => "subscriptions/subscriptions", :object => @subscription, :locals => { :linked => true, :empty => "Aucune souscription correspondante n'a été trouvé ...", :actions => false, :tags => true } %>
+</ul>
