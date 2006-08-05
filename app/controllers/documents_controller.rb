@@ -55,7 +55,7 @@ class DocumentsController < ApplicationController
 	end
   
   def upload
-  	@document = Author.find(session[:user]).documents.find(params[:id])
+  	@document = Author.find(session[:user]).documents.find(params[:id], :include => :tags)
   	unless @document.upload
 	  	@document.upload = Upload.new
 	  	@document.save
@@ -103,7 +103,7 @@ class DocumentsController < ApplicationController
   end
 
   def share
-  	@document = Author.find(session[:user]).documents.find(params[:id])
+  	@document = Author.find(session[:user]).documents.find(params[:id], :include => :tags)
 	  flash[:warning] = "Votre document n'est lié à aucun fichier" unless @document.uploaded?
 	end
 	
