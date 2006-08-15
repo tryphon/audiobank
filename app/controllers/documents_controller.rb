@@ -20,7 +20,7 @@ class DocumentsController < ApplicationController
   end
   
   def show 
-  	@document = Author.find(session[:user]).documents.find(params[:id])
+  	@document = Author.find(session[:user]).documents.find(params[:id], :include => :tags)
   	@review = Review.new(params[:review])
   	if request.post?
   		@review.document = @document
@@ -51,11 +51,11 @@ class DocumentsController < ApplicationController
 
 	def manage
 		@pages = Paginator.new(self, Author.find(session[:user]).documents.size, 4, params[:page])
-		@document = Author.find(session[:user]).documents.find(:all, :limit => @pages.items_per_page, :offset => @pages.current.offset)
+		@document = Author.find(session[:user]).documents.find(:all, :limit => @pages.items_per_page, :offset => @pages.current.offset, :include => :tags)
 	end
   
   def upload
-  	@document = Author.find(session[:user]).documents.find(params[:id], :include => :tags)
+  	@document = Author.find(session[:user]).documents.find(params[:id])
   	unless @document.upload
 	  	@document.upload = Upload.new
 	  	@document.save
@@ -103,7 +103,7 @@ class DocumentsController < ApplicationController
   end
 
   def share
-  	@document = Author.find(session[:user]).documents.find(params[:id], :include => :tags)
+  	@document = Author.find(session[:user]).documents.find(params[:id])
 	  flash[:warning] = "Votre document n'est lié à aucun fichier" unless @document.uploaded?
 	end
 	
