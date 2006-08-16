@@ -1,6 +1,8 @@
 class DocumentsController < ApplicationController
 	layout 'documents', :except => [:auto_complete_for_tags]
-
+	
+	upload_status_for :upload
+  
   def index
     redirect_to :action => 'manage'
   end
@@ -74,20 +76,24 @@ class DocumentsController < ApplicationController
 				upload_file = params[:document][:file]
 			end		
 				
+			upload_progress.message = "Vérification du document ..."
+      session.update
+			
 			begin
 				logger.debug "Upload file: #{upload_file}"
 				uploaded = @document.upload_file(upload_file)			
 			rescue Exception => e
  				logger.error("Can't upload #{upload_file.to_s}: #{e}")
 			end
-
+			
 			if uploaded
 				@document.upload = nil
   			@document.save
   			flash[:success] = "Votre fichier a bien été déposé"
   			redirect_to :action => 'share', :id => @document
-  		else
-  			flash[:failure] = "Votre fichier n'a pas été déposé"
+  		else  			
+  			flash[:failure] = "Votre fichier n'a pas été déposé" 
+  			redirect_to :action => 'upload', :id => @document
   		end
   	end
   end

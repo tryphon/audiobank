@@ -4,13 +4,17 @@
  <%= render :partial => "documents/documents", :object => @document.to_a, :locals => { :linked => true, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => false, :tags => false } %>
 </ul>
 <hr/>
-
 <h4>Avec votre navigateur :</h4>
-<%= start_form_tag({:action => "upload"}, :multipart => true) %>
+<%= form_tag_with_upload_progress({:action => "upload"}, :begin => "new Effect.Appear('status')") %>
  <p><label for="document_file">Fichier :</label><br/>
  <%= file_field "document", "file" %></p>
  <p class="note icon">Les formats supportés sont : ogg vorbis, flac, mp3 et mpc.</p>
  <%= submit_tag "Déposer votre fichier" %> ou <%= link_to("le faire plus tard &#8250;", { :action => "share", :id => @document}, :title => "Déposer votre fichier plus tard", :class => "blue") %>
+ 
+ <div id="status" style="display: none">
+  <%= upload_status_tag %>
+ </div>
+ 
 <%= end_form_tag %>
 <hr/>
 

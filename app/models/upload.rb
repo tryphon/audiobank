@@ -13,7 +13,7 @@ class Upload < ActiveRecord::Base
   end
   
 	def after_destroy
-		FileUtils.remove_dir path
+		FileUtils.remove_dir(path) if File.exists?(path)
 	end
 	
 	def path 

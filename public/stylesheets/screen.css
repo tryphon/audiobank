@@ -228,6 +228,10 @@ margin: 0.2em 0 1em;
 width: 186px;
 }
 
+#status { margin: 1em 0; }
+#status .progressBar .border { background-color: white; border: 1px solid grey; width: 100%; }
+#status .progressBar .background { background-color: #333; height: 18px; width: 0%; }
+
 #messages { padding: 0 0 12px; background: #fff; }
 #flash {
 margin: 6px 0;
