@@ -1,2 +1,2 @@
-page.replace_html "users", :partial => "users/users", :object => @subscription.document.nonsubscribers, :locals => { :empty => "Déposer ici les utilisateurs qui n'ont accès à ce document", :draggable => true }
+page.replace_html "users", :partial => "users/users", :object => @subscription.document.nonsubscribers, :locals => { :empty => "Déposer ici les utilisateurs qui n'ont pas accès à ce document", :draggable => true }
 page.replace_html "subscribers", :partial => "subscribers/subscribers", :object => @subscription.document.subscribers, :locals => { :empty => "Déposer ici les utilisateurs qui ont accès à ce document", :draggable => true }
