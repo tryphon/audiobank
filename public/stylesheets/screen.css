@@ -20,6 +20,8 @@ img { border: none; vertical-align: middle; }
 .left { float: left; }
 .hide { display: none; }
 
+#access { display: none; }
+
 #header {
 border-bottom: 4px solid #ccc;
 background: #333;

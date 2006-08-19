@@ -8,6 +8,11 @@
   <%= javascript_include_tag(:defaults) %>
  </head>
  <body>
+  <ul id="access">
+   <li><a href="#content">Aller au contenu</a></li>
+   <li><a href="#sidebar">Aller au menu</a></li>
+  </ul>
+  <hr/>
   <div id="header">
    <div>
    <h1>AudioBank</h1>
@@ -26,7 +31,6 @@
   <hr/>
   <div id="frame">
    <div id="wrap">
-    <%= render :partial => "users/flash" %>
     <div id="content">
      <%= yield %>
     </div>
