@@ -13,6 +13,14 @@
 <div class="actions">
  <%= link_to("Vos autres subscriptions &#8250;", :controller => "subscriptions", :action => "manage") %>
 </div>
+<h2>Vos podcasts</h2>
+<ul>
+ <%= render :partial => "podcasts/podcasts", :object => @author.podcasts[0..2], :locals => { :linked => true, :empty => "Vous n'avez aucun podcast ...", :actions => false, :tags => false } %>
+</ul>
+<div class="actions">
+ <%= link_to("Vos autres podcasts &#8250;", :controller => "podcasts", :action => "manage") %>
+</div>
+<hr/>
 <h2>Vos étiquettes</h2>
 <% if @tag.empty? %>
  <p>Vous n'avez aucune étiquette ..</p>

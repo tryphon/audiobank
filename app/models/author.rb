@@ -10,4 +10,5 @@ class Author < User
 			find(:all, :conditions => ["title ~* ?", keywords])
 		end
 	end
+	has_many :podcasts, :dependent => :destroy
 end

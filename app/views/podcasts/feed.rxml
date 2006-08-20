@@ -1,0 +1,25 @@
+xml.rss :version =>"2.0" do
+	xml.channel do
+		xml.title @podcast.title
+		xml.description @podcast.description
+
+		# xml.itunes_keywords @podcast.tags.collect { |t| "#{t.name} " }.to_s.strip
+		
+		xml.lastBuildDate @podcast.date.strftime("%a, %e %b %Y %T %Z")
+			
+		for document in @podcast.documents
+		 xml.item do
+		 	 xml.title document.title
+		 	 # xml.itunes_keywords document.tags.collect { |t| "#{t.name} " }.to_s.strip
+		 	 xml.description document.description
+
+    	 cast = document.casts.first
+    	 cast_url = url_for(:controller => 'casts', :action => 'play', :name => cast.name, :only_path => false) + ".mp3"
+    	 
+    	 xml.enclosure :url => cast_url, :length => cast.size, :type => "audio/mpeg"
+    	 xml.guid cast_url
+    	 xml.pubDate document.date.strftime("%a, %e %b %Y %T %Z")
+		 end
+		end
+	end
+end

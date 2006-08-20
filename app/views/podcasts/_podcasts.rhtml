@@ -1,0 +1,24 @@
+<% if podcasts.empty? %>
+ <li><%= empty %></li>
+<% else %>
+ <% for podcast in podcasts %>
+  <li>
+   <h3 class="item fn"><%= link_to_if(linked, podcast.title, :controller => "podcasts", :action => "show", :id => podcast) %></h3>
+   <p><%= podcast.description %></p>
+
+   <% unless podcast.tags.empty? %> 
+    <div class="tags">
+     <% for tag in podcast.tags %>
+      <%= link_to(tag.name, { :controller => "documents", :action => "tags", :name => tag.name }, :title => "Etiquette : #{tag.name}", :rel => "tag") %> 
+     <% end %>
+    </div>
+   <% end %>
+   <% if actions %>
+    <div class="actions">
+     <%= link_to("Détruire", {:action => "destroy", :id => podcast}, :confirm => "Êtes vous sûr de vouloir détruire ce podcast ?", :title => "Détruire ce podcast", :class => "destroy") %>
+     <%= link_to("Editer", {:action => "edit", :id => podcast}, :title => "Editer ce podcast", :class => "edit") %>
+	  </div>
+   <% end %>
+  </li>
+ <% end %>
+<% end %>

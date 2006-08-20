@@ -18,6 +18,10 @@ class Cast < ActiveRecord::Base
 		"#{RAILS_ROOT}/media/cast/#{id}.#{format}"
 	end
 	
+	def size(format = "ogg") 
+		File.size(path(format))
+	end
+	
 	def uptodate?(format = "ogg")
 		FileUtils.uptodate?(path(format), document.path)
 	end

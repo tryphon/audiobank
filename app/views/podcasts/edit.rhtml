@@ -1,0 +1,12 @@
+<%= error_messages_for("podcast") %>
+<h2>Modifier votre podcast</h2>
+<%= start_form_tag :action => "edit" %>
+ <p><label for="podcast_title">Titre :</label><br/>
+ <%= text_field("podcast", "title", :size => 30) %></p>
+ <p><label for="podcast_description">Description :</label><br/>
+ <%= text_area("podcast", "description", :rows => 10, :cols => 28) %></p>
+ <p><label for="labels">Etiquettes :</label><br/>
+ <%= text_field_tag("labels", @podcast.tags.collect{ |t| t.name }.join(" " ), :size => 30) %><span id="labels_auto_complete"></span>
+ <%= auto_complete_field("labels", :url => {:controller => "documents", :action => "auto_complete_for_tags"}, :tokens => " ") %></p>
+ <%= submit_tag "Modifier ce podcast" %> ou <%= link_to("annuler &#8250;", { :action => "show", :id => @podcast}, :title => "Annuler", :class => "blue") %>
+<%= end_form_tag %>

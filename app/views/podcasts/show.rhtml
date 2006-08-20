@@ -1,0 +1,13 @@
+<h2>Votre podcast</h2>
+<ul>
+ <%= render :partial => "podcasts/podcasts", :object => @podcast.to_a, :locals => { :linked => false, :empty => "Aucun podcast correspondant n'a été trouvé ...", :actions => true, :tags => true } %>
+</ul>
+<h2>Les documents inclus dans votre podcast</h2>
+<ul>
+ <%= render :partial => "documents/documents", :object => @podcast.documents, :locals => { :linked => true, :empty => "Vous n'avez aucun document dans ce podcast", :actions => false, :tags => false } %>
+</ul>
+<h2>Publier votre podcast</h2>
+<p>
+Votre podcast est accessible à l'adresse suivante :ic
+<%= link_to(url_for(:controller => 'podcasts', :action => 'feed', :name => @podcast.name, :only_path => false), :controller => 'podcasts', :action => 'feed', :name => @podcast.name) %>
+</p>

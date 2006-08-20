@@ -1,5 +1,6 @@
 class Tag < ActiveRecord::Base
 	has_and_belongs_to_many :documents
+	has_and_belongs_to_many :podcasts
 	
 	validates_uniqueness_of :name
 	validates_presence_of :name
