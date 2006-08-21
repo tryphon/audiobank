@@ -123,7 +123,7 @@ float: right;
 width: 510px;
 margin: 0 0 0 40px;
 }
-#content h3, #content h3  a { text-decoration: none; color: #6b2; margin-bottom: 6px; }
+#content h3, #content h3 a { text-decoration: none; color: #6b2; margin-bottom: 6px; }
 #content h4 { margin: 12px 0 0; color: #5884a6; }
 #content p { margin: 0 0 0 6px; }
 #content li { position: relative; margin: 0 12px 8px; padding: 8px 0 0; }
@@ -205,7 +205,7 @@ width: 200px;
 margin: 0 0 20px 0;
 }
 #sidebar ul {
-margin: 0 0 22px 22px;
+margin: 0 0 12px 22px;
 padding: 0;
 list-style-type: square;
 }
@@ -267,6 +267,7 @@ list-style-type: square;
 }
 #errors li { margin: 6px; } 
 
+p#cloud { margin-bottom: 8px; }
 #labels_auto_complete ul {
 margin: 0;
 padding: 0;

@@ -5,49 +5,48 @@
 ActiveRecord::Schema.define(:version => 17) do
 
   create_table "casts", :force => true do |t|
-    t.column "document_id", :integer, :default => 0, :null => false
-    t.column "name", :string, :default => "", :null => false
+    t.column "document_id", :integer, :null => false
+    t.column "name", :string, :null => false
   end
 
   create_table "cues", :force => true do |t|
-    t.column "document_id", :integer, :default => 0, :null => false
+    t.column "document_id", :integer, :null => false
   end
 
   create_table "documents", :force => true do |t|
-    t.column "title", :string, :default => "", :null => false
-    t.column "description", :string, :default => "", :null => false
-    t.column "author_id", :integer, :default => 0, :null => false
+    t.column "title", :string, :null => false
+    t.column "description", :string, :null => false
+    t.column "author_id", :integer, :null => false
     t.column "length", :integer, :default => 0, :null => false
     t.column "size", :integer, :default => 0, :null => false
     t.column "format", :string, :default => "application/octet-stream", :null => false
-    t.column "type", :string, :default => "", :null => false
+    t.column "type", :string, :null => false
     t.column "uploaded", :boolean, :default => false
-    t.column "upload_id", :integer
-    t.column "date", :datetime
+    t.column "updated_at", :datetime
   end
 
   create_table "documents_tags", :id => false, :force => true do |t|
-    t.column "document_id", :integer, :default => 0, :null => false
-    t.column "tag_id", :integer, :default => 0, :null => false
+    t.column "document_id", :integer, :null => false
+    t.column "tag_id", :integer, :null => false
   end
 
   create_table "podcasts", :force => true do |t|
     t.column "name", :string
     t.column "title", :string
     t.column "description", :string
-    t.column "author_id", :integer, :default => 0, :null => false
+    t.column "author_id", :integer, :null => false
   end
 
   create_table "podcasts_tags", :id => false, :force => true do |t|
-    t.column "podcast_id", :integer, :default => 0, :null => false
-    t.column "tag_id", :integer, :default => 0, :null => false
+    t.column "podcast_id", :integer, :null => false
+    t.column "tag_id", :integer, :null => false
   end
 
   create_table "reviews", :force => true do |t|
-    t.column "document_id", :integer, :default => 0, :null => false
-    t.column "user_id", :integer, :default => 0, :null => false
-    t.column "rating", :integer, :default => 0, :null => false
-    t.column "description", :string, :default => "", :null => false
+    t.column "document_id", :integer, :null => false
+    t.column "user_id", :integer, :null => false
+    t.column "rating", :integer, :null => false
+    t.column "description", :string, :null => false
     t.column "created_at", :datetime, :null => false
   end
 
@@ -60,9 +59,9 @@ ActiveRecord::Schema.define(:version => 17) do
   add_index "sessions", ["session_id"], :name => "sessions_session_id_index"
 
   create_table "subscriptions", :force => true do |t|
-    t.column "document_id", :integer, :default => 0, :null => false
-    t.column "author_id", :integer, :default => 0, :null => false
-    t.column "subscriber_id", :integer, :default => 0, :null => false
+    t.column "document_id", :integer, :null => false
+    t.column "author_id", :integer, :null => false
+    t.column "subscriber_id", :integer, :null => false
     t.column "download_count", :integer, :default => 0
   end
 
@@ -71,15 +70,15 @@ ActiveRecord::Schema.define(:version => 17) do
   end
 
   create_table "uploads", :force => true do |t|
-    t.column "document_id", :integer, :default => 0, :null => false
-    t.column "key", :string, :default => "", :null => false
+    t.column "document_id", :integer, :null => false
+    t.column "key", :string, :null => false
   end
 
   create_table "users", :force => true do |t|
-    t.column "username", :string, :default => "", :null => false
-    t.column "password", :string, :default => "", :null => false
-    t.column "name", :string, :default => "", :null => false
-    t.column "email", :string, :default => "", :null => false
+    t.column "username", :string, :null => false
+    t.column "password", :string, :null => false
+    t.column "name", :string, :null => false
+    t.column "email", :string, :null => false
     t.column "organization", :string
     t.column "confirmed", :boolean, :default => false
     t.column "created_at", :datetime

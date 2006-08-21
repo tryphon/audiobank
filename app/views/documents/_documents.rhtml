@@ -14,7 +14,7 @@
    <% unless document.tags.empty? or !tags %> 
     <div class="tags">
      <% for tag in document.tags %>
-      <%= link_to(tag.name, { :action => "tags", :name => tag.name }, :title => "Etiquette : #{tag.name}", :rel => "tag") %> 
+      <%= link_to(tag.name, { :action => "tag", :name => tag.name }, :title => "Etiquette : #{tag.name}", :rel => "tag") %> 
      <% end %>
     </div>
    <% end %>

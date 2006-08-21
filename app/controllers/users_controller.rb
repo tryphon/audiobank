@@ -14,12 +14,19 @@ class UsersController < ApplicationController
 		@author = Author.find(session[:user])
 		@subscriber = Subscriber.find(session[:user])
 		@tag = @subscriber.subscriptions.collect{ |s| s.document.tags } + @author.documents.collect{ |d| d.tags }
-		@tag = @tag.flatten.uniq
+		@tag = @tag.flatten.uniq[0..15]
 	end
 	
 	def tags
-		@document = Author.find(session[:user]).documents.find_by_tag(params[:name])
-		@subscription = Subscriber.find(session[:user]).subscriptions.find_by_tag(params[:name])
+	  @author = Author.find(session[:user])
+		@subscriber = Subscriber.find(session[:user])
+	  @tag = @subscriber.subscriptions.collect{ |s| s.document.tags } + @author.documents.collect{ |d| d.tags }
+		@tag = @tag.flatten.uniq
+	end
+	
+	def tag
+		@document = Author.find(session[:user]).documents.find_by_tag(params[:name], { :limit => 5 })
+		@subscription = Subscriber.find(session[:user]).subscriptions.find_by_tag(params[:name], { :limit => 5 })
 	end
 	
 	def find

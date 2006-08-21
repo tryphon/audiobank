@@ -9,8 +9,8 @@ class Podcast < ActiveRecord::Base
   end
   
   def date
-  	return DateTime::now if documents.empty? 
-  	documents.last.date
+  	return Time.now if documents.empty? 
+  	documents.last.updated_at
   end
   
   def documents
@@ -18,7 +18,7 @@ class Podcast < ActiveRecord::Base
     for tag in tags
     	tag.documents.delete_if { |d| d.casts.empty?  or d.author != self.author }.each { |d| documents << d }
     end
-    return documents.sort_by { |d| d.date }
+    return documents.sort_by { |d| d.updated_at }
   end
 	
 end

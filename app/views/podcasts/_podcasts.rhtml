@@ -6,12 +6,14 @@
    <h3 class="item fn"><%= link_to_if(linked, podcast.title, :controller => "podcasts", :action => "show", :id => podcast) %></h3>
    <p><%= podcast.description %></p>
 
-   <% unless podcast.tags.empty? %> 
-    <div class="tags">
-     <% for tag in podcast.tags %>
-      <%= link_to(tag.name, { :controller => "documents", :action => "tags", :name => tag.name }, :title => "Etiquette : #{tag.name}", :rel => "tag") %> 
-     <% end %>
-    </div>
+   <% if tags %>
+    <% unless podcast.tags.empty? %> 
+     <div class="tags">
+      <% for tag in podcast.tags %>
+       <%= link_to(tag.name, { :controller => "documents", :action => "tag", :name => tag.name }, :title => "Etiquette : #{tag.name}", :rel => "tag") %> 
+      <% end %>
+     </div>
+    <% end %>
    <% end %>
    <% if actions %>
     <div class="actions">

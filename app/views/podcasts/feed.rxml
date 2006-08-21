@@ -1,16 +1,16 @@
-xml.rss :version =>"2.0" do
+xml.rss :version => "2.0", 'xmlns:itunes' => "http://www.itunes.com/dtds/podcast-1.0.dtd" do
 	xml.channel do
 		xml.title @podcast.title
+		xml.author @podcast.documents.first.author.name
 		xml.description @podcast.description
-
-		# xml.itunes_keywords @podcast.tags.collect { |t| "#{t.name} " }.to_s.strip
-		
 		xml.lastBuildDate @podcast.date.strftime("%a, %e %b %Y %T %Z")
 			
 		for document in @podcast.documents
 		 xml.item do
 		 	 xml.title document.title
-		 	 # xml.itunes_keywords document.tags.collect { |t| "#{t.name} " }.to_s.strip
+		 	 xml.author document.author.name
+		 	 xml.itunes :duration, document.length
+		 	 xml.itunes :keywords, document.tags[0..11].join(",")
 		 	 xml.description document.description
 
     	 cast = document.casts.first
@@ -18,7 +18,7 @@ xml.rss :version =>"2.0" do
     	 
     	 xml.enclosure :url => cast_url, :length => cast.size, :type => "audio/mpeg"
     	 xml.guid cast_url
-    	 xml.pubDate document.date.strftime("%a, %e %b %Y %T %Z")
+    	 xml.pubDate document.updated_at.strftime("%a, %e %b %Y %T %Z")
 		 end
 		end
 	end

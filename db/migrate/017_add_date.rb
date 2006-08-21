@@ -1,13 +1,13 @@
 class AddDate < ActiveRecord::Migration
   def self.up
-  	add_column :documents, :date, :datetime, :default => false
+  	add_column :documents, :updated_at, :datetime
   	Document.find(:all).each do |document|
-  		document.date = DateTime::now()
+  		document.updated_at = Time.now()
   		document.save
   	end
   end
 
   def self.down
-  	remove_column :documents, :date
+  	remove_column :documents, :updated_at
   end
 end

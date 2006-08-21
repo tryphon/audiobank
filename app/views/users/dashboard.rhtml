@@ -25,7 +25,12 @@
 <% if @tag.empty? %>
  <p>Vous n'avez aucune étiquette ..</p>
 <% else %>
- <% for tag in @tag %>
-  <%= link_to(tag.name, { :action => "tags", :name => tag.name }, :rel => "tag", :class => "rel-tag") %>
- <% end %>
+ <p id="cloud">
+  <% for tag in @tag %>
+   <%= link_to(tag.name, { :action => "tag", :name => tag.name }, :rel => "tag", :class => "rel-tag") %>
+  <% end %>
+ </p>
 <% end %>
+<div class="actions">
+ <%= link_to("Vos autres étiquettes &#8250;", :controller => "users", :action => "tags") %>
+</div>

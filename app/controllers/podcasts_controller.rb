@@ -48,8 +48,7 @@ class PodcastsController < ApplicationController
   end
   
   def feed
-  	logger.debug("render feed for podcast #{params[:name]}")
   	@podcast = Podcast.find_by_name(params[:name])
-  	logger.debug("render feed for podcast #{@podcast.inspect}")
+  	render :content_type => "application/rss+xml"
   end
 end

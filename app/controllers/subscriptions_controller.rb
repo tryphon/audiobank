@@ -43,9 +43,9 @@ class SubscriptionsController < ApplicationController
     render :action => "update"
   end
   
-  def tags
+  def tag
   	@pages = Paginator.new(self, Subscriber.find(session[:user]).subscriptions.find_by_tag(params[:name]).size, 4, params[:page])
-  	@subscriptions = Subscriber.find(session[:user]).subscriptions.find_by_tag(params[:name], @pages.current.offset, @pages.items_per_page)
+  	@subscriptions = Subscriber.find(session[:user]).subscriptions.find_by_tag(params[:name], { :offset => @pages.current.offset, :limit => @pages.items_per_page })
   end
   
   def download

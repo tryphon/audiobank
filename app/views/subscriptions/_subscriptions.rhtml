@@ -14,7 +14,7 @@
    <% unless subscription.document.tags.empty? or !tags %> 
     <div class="tags">
      <% for tag in subscription.document.tags %>
-      <%= link_to(tag.name, { :action => "tags", :name => tag.name }, :rel => "tag") %> 
+      <%= link_to(tag.name, { :action => "tag", :name => tag.name }, :rel => "tag") %> 
      <% end %>
     </div>
    <% end %>

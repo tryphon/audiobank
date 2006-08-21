@@ -8,6 +8,6 @@
 </ul>
 <h2>Publier votre podcast</h2>
 <p>
-Votre podcast est accessible à l'adresse suivante :ic
+Votre podcast est accessible à l'adresse suivante :
 <%= link_to(url_for(:controller => 'podcasts', :action => 'feed', :name => @podcast.name, :only_path => false), :controller => 'podcasts', :action => 'feed', :name => @podcast.name) %>
 </p>

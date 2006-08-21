@@ -113,9 +113,9 @@ class DocumentsController < ApplicationController
 	  flash[:warning] = "Votre document n'est lié à aucun fichier" unless @document.uploaded?
 	end
 	
-	def tags
+	def tag
 		@pages = Paginator.new(self, Author.find(session[:user]).documents.find_by_tag(params[:name]).size, 4, params[:page])
-		@document = Author.find(session[:user]).documents.find_by_tag(params[:name], @pages.current.offset, @pages.items_per_page)
+		@document = Author.find(session[:user]).documents.find_by_tag(params[:name], { :offset => @pages.current.offset, :limit => @pages.items_per_page })
 	end
 	
 	def auto_complete_for_tags

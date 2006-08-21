@@ -42,7 +42,6 @@ class Document < ActiveRecord::Base
 			end
  			
 			self.uploaded = true
-			self.date = DateTime::now
 			self.cues.clear
 			self.casts.clear
 			

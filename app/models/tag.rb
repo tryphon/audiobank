@@ -33,4 +33,8 @@ class Tag < ActiveRecord::Base
     
     return tags
 	end
+	
+	def to_s
+	  name
+	end
 end
