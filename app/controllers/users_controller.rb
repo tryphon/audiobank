@@ -81,8 +81,9 @@ class UsersController < ApplicationController
   	if @user.hashcode == params[:confirm] && !@user.confirmed?
   		@user.update_attribute(:confirmed, true)
 	  	Subscriber.find(@user.id).subscriptions.build(:author => Author.find(1), :document => Document.find(1)).save
-	  	flash[:success] = "La création de votre compte a bien été confirmé"
-	  	redirect_to :action => "signin"
+	  	flash[:success] = "Bienvenue !"
+	    session[:user] = @user.id
+	  	redirect_to :action => "dashboard"
 	  else
 	  	flash[:failure] = "La création de votre compte n'a pas été confirmé"
 	  	redirect_to :action => "signup"
