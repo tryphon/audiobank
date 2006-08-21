@@ -14,11 +14,7 @@ class Podcast < ActiveRecord::Base
   end
   
   def documents
-    documents = Array.new
-    for tag in tags
-    	tag.documents.delete_if { |d| d.casts.empty?  or d.author != self.author }.each { |d| documents << d }
-    end
-    return documents.sort_by { |d| d.updated_at }
+    Podcast.find_by_sql(["SELECT documents.* FROM documents, tags, podcasts_tags, documents_tags WHERE documents.id = documents_tags.document_id AND tags.id = documents_tags.tag_id AND podcasts_tags.tag_id = tags.id AND documents.id IN (SELECT document_id FROM casts) AND podcasts_tags.podcast_id = ? AND documents.author_id = ? ORDER BY documents.updated_at DESC", self.id, self.author_id])
   end
 	
 end
