@@ -10,7 +10,7 @@ class Podcast < ActiveRecord::Base
   
   def date
   	return Time.now if documents.empty? 
-  	documents.last.updated_at
+  	documents.first.updated_at
   end
   
   def documents
