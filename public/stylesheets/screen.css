@@ -1,4 +1,4 @@
- body {
+body {
 margin: 0;
 padding: 0;
 font: 14px Trebuchet MS, Verdana, sans-serif;
@@ -27,15 +27,16 @@ border-bottom: 4px solid #ccc;
 background: #333;
 }
 #header div {
-height: 54px;
+height: 132px;
 width: 750px;
 margin: 0 auto;
+background: url("../images/audiobank.png") no-repeat 0px 6px;
 }
 #header h1 { display: none; }
 #header a { font-size: 90%; color: #fff; }
 #header div ul {
 float: right;
-margin-top: 24px;
+margin-top: 102px;
 padding: 0;
 font-size: 90%;
 list-style: none;
@@ -58,7 +59,7 @@ font: normal 115% "Trebuchet MS", sans-serif;
 
 #frame {
 margin: 0;
-padding: 12px 0;
+padding: 18px 0;
 clear: both;
 }
 #wrap {
