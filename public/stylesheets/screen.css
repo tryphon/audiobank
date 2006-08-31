@@ -27,16 +27,16 @@ border-bottom: 4px solid #ccc;
 background: #333;
 }
 #header div {
-height: 132px;
+height: 100px;
 width: 750px;
 margin: 0 auto;
-background: url("../images/audiobank.png") no-repeat 0px 6px;
+background: url("../images/audiobank.png") no-repeat 0px 10px;
 }
 #header h1 { display: none; }
 #header a { font-size: 90%; color: #fff; }
 #header div ul {
 float: right;
-margin-top: 102px;
+margin-top: 70px;
 padding: 0;
 font-size: 90%;
 list-style: none;
@@ -45,7 +45,7 @@ list-style: none;
 float: left;
 margin: 0 0 0 8px;
 padding: 0;
-background: #66af16;
+background: #66af16 url("../images/corner.png") no-repeat top right;
 }
 #header ul li a {
 float: left;
@@ -55,7 +55,10 @@ text-decoration: none;
 color: #fff;
 font: normal 115% "Trebuchet MS", sans-serif;
 }
-#header ul li a:hover { color: #333; background: #a3de5b; }
+#header ul li a:hover {
+color: #333;
+background: #a3de5b url("../images/corner-over.png") no-repeat top right;
+}
 
 #frame {
 margin: 0;
