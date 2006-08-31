@@ -231,7 +231,15 @@ margin: 4px;
 margin: 0.2em 0 1em;
 }
 #search input {
-width: 186px;
+float: left;
+padding: 0;
+width: 174px;
+}
+#search input.image {
+float: right;
+width: 20px;
+height: 20px;
+border: none;
 }
 
 #status { margin: 1em 0; }
@@ -303,11 +311,11 @@ margin: 0 auto;
 text-align: left;
 }
 
-#wrap:after, #content .vcard:after, #subscribers:after, #users:after, #content .hreview:after {
+#wrap:after, #content .vcard:after, #subscribers:after, #users:after, #content .hreview:after, #search:after {
 content: "."; 
 display: block; 
 height: 0;
 clear: both; 
 visibility: hidden;
 }
-* html #wrap, * html #content .vcard, * html #subscribers, * html #users { height: 1%; }
+* html #wrap, * html #content .vcard, * html #subscribers, * html #users, * html #search { height: 1%; }
