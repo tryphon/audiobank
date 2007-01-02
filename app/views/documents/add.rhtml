@@ -1,6 +1,6 @@
-<%= error_messages_for("document") %>
+<%= error_messages_for(:document) %>
 <h2>Ajouter votre document</h2>
-<%= start_form_tag :action => "add" %>
+<% form_tag(:action => :add) do %>
  <p><label for="document_title">Titre :</label><br/>
  <%= text_field("document", "title") %></p>
  <p><label for="document_description">Description :</label><br/>
@@ -9,4 +9,4 @@
  <%= text_field_tag("labels", @document.tags.collect{ |t| t.name }.join(" "), :size => 30) %><span id="labels_auto_complete"></span>
  <%= auto_complete_field("labels", :url => {:controller => "documents", :action => "auto_complete_for_tags"}, :tokens => " ") %></p>
  <%= submit_tag "Creer votre document" %> ou <%= link_to("annuler &#8250;", { :action => "manage" }, :title => "Annuler", :class => "blue") %>
-<%= end_form_tag %>
+<% end %>

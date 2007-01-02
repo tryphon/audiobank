@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	open_id_consumer :required => [:email, :nickname], :optional => [:fullname, :dob, :gender, :country]
 	layout 'documents'
 	
 	def index
@@ -90,7 +91,43 @@ class UsersController < ApplicationController
 	  end
   end
 
-	def	signout
+	def begin
+    case open_id_response.status
+      when OpenID::SUCCESS
+        redirect_to open_id_response.redirect_url((request.protocol + request.host_with_port + '/'), url_for(:action => 'complete'))
+      else
+        flash[:failure] = "Impossible de trouver un server openid à l'adresse #{params[:openid_url]}"
+        render :action => :signin
+    end
+  end
+
+  def complete
+    case open_id_response.status
+      when OpenID::FAILURE
+        flash[:failure] = "Votre identification a échoué"
+       
+      when OpenID::SUCCESS
+        @user = User.find_or_initialize_by_openid_url(open_id_response.identity_url)
+        if @user.new_record?
+        	@user.email = open_id_fields["email"]
+        	@user.confirmed = true
+        	@user.name = open_id_fields["nickname"]
+        	@user.name = open_id_fields["fullname"] if open_id_fields.has_key?("fullname")
+        	@user.save
+        end
+        flash[:success] = "Bienvenue !"
+       	session[:user] = @user.id
+    
+      when OpenID::CANCEL
+        flash[:failure] = "Votre identification a été annulé"
+    
+      else
+        flash[:failure] = "Voter identification a échoué : #{open_id_response.status}"
+    end
+    redirect_to :action => 'dashboard'
+  end
+
+	def signout
 		session[:user] = nil
 		flash[:success] = "A bientôt !"
 		redirect_to :action => "welcome"

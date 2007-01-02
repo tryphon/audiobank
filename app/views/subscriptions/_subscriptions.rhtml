@@ -7,7 +7,7 @@
    <p><%= subscription.document.description %></p>
    <% if subscription.document.uploaded? %>
     <div class="details">
-     <span class="size"><%= human_size(subscription.document.size) %></span>
+     <span class="size"><%= number_to_human_size(subscription.document.size) %></span>
      <span class="length"><%= format_time(subscription.document.duration) %></span>
     </div>
    <% end %>

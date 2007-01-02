@@ -12,6 +12,7 @@ a { color: #5884a6; text-decoration: none; }
 a:hover { text-decoration: underline; }
 form { margin: 12px; }
 input, textarea { padding: 4px; font-weight: normal; font-size: 120%;  }
+input.openid { padding-left: 24px; background: url("../images/openid.png") no-repeat 4px; }
 hr { display: none; clear: both; }
 img { border: none; vertical-align: middle; }
 

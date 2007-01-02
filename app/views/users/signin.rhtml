@@ -1,8 +1,13 @@
 <h2>Vos identifiants</h2>
-<%= start_form_tag :action => "signin" %>
+<% form_tag(:action => :signin) do %>
  <p><label for="username">Nom d'utilisateur :</label><br/>
  <%= text_field("user", "username") %></p>
  <p><label for="password">Mot de passe :</label><br/>
  <%= password_field("user", "password") %></p>
  <%= submit_tag "Se connecter" %>
-<%= end_form_tag %>
+<% end %>
+<% form_tag(:action => :begin) do %>
+ <p><label for="openid_url">OpenId :</label><br/>
+ <%= text_field_tag("openid_url", nil, { :size => 30, :class => :openid }) %></p>
+ <%= submit_tag "Se connecter" %>
+<% end %>

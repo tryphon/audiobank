@@ -11,10 +11,10 @@
  <li><%= link_to("Ajouter un podcast", :controller => "podcasts", :action => "add") %></li>
 </ul>
 <h2>Recherchez</h2>
-<%= start_form_tag({ :controller => "users", :action => "find" }, :id => "search") %>
+<% form_tag({:controller => :users, :action => :find }, :id => "search") do %>
  <%= text_field_tag("keywords") %>
- <%= image_submit_tag("search", :class => "image") %>
-<%= end_form_tag %>
+ <%= image_submit_tag("search.png", :class => "image") %>
+<% end %>
 <h2>Participez</h2>
 <p>
  AudioBank se fait avec vous,

@@ -1,0 +1,195 @@
+PGError: ERROR:  relation "sessions" does not exist
+:             SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+              FROM pg_attribute a LEFT JOIN pg_attrdef d
+                ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+             WHERE a.attrelid = 'sessions'::regclass
+               AND a.attnum > 0 AND NOT a.attisdropped
+             ORDER BY a.attnum
+
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/abstract_adapter.rb:120:in `log'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/postgresql_adapter.rb:144:in `query'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/postgresql_adapter.rb:453:in `column_definitions'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/postgresql_adapter.rb:217:in `columns'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/base.rb:696:in `columns'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/base.rb:704:in `columns_hash'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:103:in `setup_sessid_compatibility!'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:77:in `find_by_session_id'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:281:in `initialize'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/base.rb:794:in `silence'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:281:in `initialize'
+/usr/lib/ruby/1.8/cgi/session.rb:273:in `initialize'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/cgi_process.rb:112:in `session'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/cgi_process.rb:142:in `stale_session_check!'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/cgi_process.rb:108:in `session'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/base.rb:918:in `assign_shortcuts_without_flash'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/flash.rb:141:in `assign_shortcuts'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/base.rb:402:in `process_without_filters'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/filters.rb:377:in `process_without_session_management_support'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session_management.rb:117:in `process'
+/var/lib/gems/1.8/gems/rails-1.1.6/lib/dispatcher.rb:38:in `dispatch'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/bin/scgi_service:23:in `process_request'
+/usr/lib/ruby/1.8/thread.rb:135:in `synchronize'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/bin/scgi_service:21:in `process_request'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:291:in `read_header'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:253:in `handle_client'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:234:in `handle_client'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:188:in `listen'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:186:in `listen'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:412:in `run'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/bin/scgi_service:61
+PGError: ERROR:  relation "sessions" does not exist
+:             SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+              FROM pg_attribute a LEFT JOIN pg_attrdef d
+                ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+             WHERE a.attrelid = 'sessions'::regclass
+               AND a.attnum > 0 AND NOT a.attisdropped
+             ORDER BY a.attnum
+
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/abstract_adapter.rb:120:in `log'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/postgresql_adapter.rb:144:in `query'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/postgresql_adapter.rb:453:in `column_definitions'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/postgresql_adapter.rb:217:in `columns'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/base.rb:696:in `columns'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/base.rb:704:in `columns_hash'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:103:in `setup_sessid_compatibility!'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:77:in `find_by_session_id'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:281:in `initialize'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/base.rb:794:in `silence'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:281:in `initialize'
+/usr/lib/ruby/1.8/cgi/session.rb:273:in `initialize'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/cgi_process.rb:112:in `session'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/cgi_process.rb:142:in `stale_session_check!'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/cgi_process.rb:108:in `session'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/base.rb:918:in `assign_shortcuts_without_flash'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/flash.rb:141:in `assign_shortcuts'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/base.rb:402:in `process_without_filters'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/filters.rb:377:in `process_without_session_management_support'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session_management.rb:117:in `process'
+/var/lib/gems/1.8/gems/rails-1.1.6/lib/dispatcher.rb:38:in `dispatch'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/bin/scgi_service:23:in `process_request'
+/usr/lib/ruby/1.8/thread.rb:135:in `synchronize'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/bin/scgi_service:21:in `process_request'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:291:in `read_header'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:253:in `handle_client'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:234:in `handle_client'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:188:in `listen'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:186:in `listen'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:412:in `run'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/bin/scgi_service:61
+PGError: ERROR:  relation "sessions" does not exist
+:             SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+              FROM pg_attribute a LEFT JOIN pg_attrdef d
+                ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+             WHERE a.attrelid = 'sessions'::regclass
+               AND a.attnum > 0 AND NOT a.attisdropped
+             ORDER BY a.attnum
+
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/abstract_adapter.rb:120:in `log'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/postgresql_adapter.rb:144:in `query'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/postgresql_adapter.rb:453:in `column_definitions'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/postgresql_adapter.rb:217:in `columns'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/base.rb:696:in `columns'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/base.rb:704:in `columns_hash'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:103:in `setup_sessid_compatibility!'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:77:in `find_by_session_id'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:281:in `initialize'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/base.rb:794:in `silence'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:281:in `initialize'
+/usr/lib/ruby/1.8/cgi/session.rb:273:in `initialize'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/cgi_process.rb:112:in `session'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/cgi_process.rb:142:in `stale_session_check!'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/cgi_process.rb:108:in `session'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/base.rb:918:in `assign_shortcuts_without_flash'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/flash.rb:141:in `assign_shortcuts'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/base.rb:402:in `process_without_filters'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/filters.rb:377:in `process_without_session_management_support'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session_management.rb:117:in `process'
+/var/lib/gems/1.8/gems/rails-1.1.6/lib/dispatcher.rb:38:in `dispatch'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/bin/scgi_service:23:in `process_request'
+/usr/lib/ruby/1.8/thread.rb:135:in `synchronize'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/bin/scgi_service:21:in `process_request'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:291:in `read_header'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:253:in `handle_client'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:234:in `handle_client'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:188:in `listen'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:186:in `listen'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:412:in `run'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/bin/scgi_service:61
+PGError: ERROR:  relation "sessions" does not exist
+:             SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+              FROM pg_attribute a LEFT JOIN pg_attrdef d
+                ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+             WHERE a.attrelid = 'sessions'::regclass
+               AND a.attnum > 0 AND NOT a.attisdropped
+             ORDER BY a.attnum
+
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/abstract_adapter.rb:120:in `log'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/postgresql_adapter.rb:144:in `query'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/postgresql_adapter.rb:453:in `column_definitions'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/postgresql_adapter.rb:217:in `columns'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/base.rb:696:in `columns'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/base.rb:704:in `columns_hash'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:103:in `setup_sessid_compatibility!'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:77:in `find_by_session_id'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:281:in `initialize'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/base.rb:794:in `silence'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:281:in `initialize'
+/usr/lib/ruby/1.8/cgi/session.rb:273:in `initialize'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/cgi_process.rb:112:in `session'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/cgi_process.rb:142:in `stale_session_check!'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/cgi_process.rb:108:in `session'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/base.rb:918:in `assign_shortcuts_without_flash'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/flash.rb:141:in `assign_shortcuts'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/base.rb:402:in `process_without_filters'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/filters.rb:377:in `process_without_session_management_support'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session_management.rb:117:in `process'
+/var/lib/gems/1.8/gems/rails-1.1.6/lib/dispatcher.rb:38:in `dispatch'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/bin/scgi_service:23:in `process_request'
+/usr/lib/ruby/1.8/thread.rb:135:in `synchronize'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/bin/scgi_service:21:in `process_request'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:291:in `read_header'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:253:in `handle_client'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:234:in `handle_client'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:188:in `listen'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:186:in `listen'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:412:in `run'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/bin/scgi_service:61
+PGError: ERROR:  relation "sessions" does not exist
+:             SELECT a.attname, format_type(a.atttypid, a.atttypmod), d.adsrc, a.attnotnull
+              FROM pg_attribute a LEFT JOIN pg_attrdef d
+                ON a.attrelid = d.adrelid AND a.attnum = d.adnum
+             WHERE a.attrelid = 'sessions'::regclass
+               AND a.attnum > 0 AND NOT a.attisdropped
+             ORDER BY a.attnum
+
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/abstract_adapter.rb:120:in `log'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/postgresql_adapter.rb:144:in `query'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/postgresql_adapter.rb:453:in `column_definitions'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/connection_adapters/postgresql_adapter.rb:217:in `columns'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/base.rb:696:in `columns'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/base.rb:704:in `columns_hash'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:103:in `setup_sessid_compatibility!'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:77:in `find_by_session_id'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:281:in `initialize'
+/var/lib/gems/1.8/gems/activerecord-1.14.4/lib/active_record/base.rb:794:in `silence'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session/active_record_store.rb:281:in `initialize'
+/usr/lib/ruby/1.8/cgi/session.rb:273:in `initialize'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/cgi_process.rb:112:in `session'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/cgi_process.rb:142:in `stale_session_check!'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/cgi_process.rb:108:in `session'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/base.rb:918:in `assign_shortcuts_without_flash'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/flash.rb:141:in `assign_shortcuts'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/base.rb:402:in `process_without_filters'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/filters.rb:377:in `process_without_session_management_support'
+/var/lib/gems/1.8/gems/actionpack-1.12.5/lib/action_controller/session_management.rb:117:in `process'
+/var/lib/gems/1.8/gems/rails-1.1.6/lib/dispatcher.rb:38:in `dispatch'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/bin/scgi_service:23:in `process_request'
+/usr/lib/ruby/1.8/thread.rb:135:in `synchronize'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/bin/scgi_service:21:in `process_request'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:291:in `read_header'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:253:in `handle_client'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:234:in `handle_client'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:188:in `listen'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:186:in `listen'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/lib/scgi.rb:412:in `run'
+/var/lib/gems/1.8/gems/scgi_rails-0.4.3/bin/scgi_service:61

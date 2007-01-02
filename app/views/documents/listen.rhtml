@@ -20,7 +20,7 @@
 <% if @document.cues.count > 0 %>
  <ul>
  <% @document.cues.each do |cue| %>
-  <li><%= link_to("Ecouter en format Ogg", { :controller => "cues", :action => "playlist", :id => cue }, :title => "Ecouter le document", :class => "play") %></li>
+  <li><%= link_to("Ecouter au format Ogg", { :controller => "cues", :action => "playlist", :id => cue }, :title => "Ecouter le document", :class => "play") %></li>
  <% end %>
  </ul>
 <% end %>

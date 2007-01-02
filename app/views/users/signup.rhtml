@@ -1,6 +1,6 @@
 <%= error_messages_for("user") %>
 <h2>Votre nouveau compte</h2> 
-<%= start_form_tag :action => "signup" %>
+<% form_tag(:action => :signup) do %>
  <p><label for="user_username">Nom d'utilisateur :</label><br/>
  <%= text_field("user", "username") %></p>
  <p><label for="user_email">Email :</label><br/>
@@ -12,4 +12,4 @@
  <p><label for="user_organization">Organisme :</label><br/>
  <%= text_field("user", "organization") %></p>
  <%= submit_tag "Creer un compte" %>
-<%= end_form_tag %>
+<% end %>

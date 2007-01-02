@@ -2,11 +2,11 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 18) do
+ActiveRecord::Schema.define(:version => 19) do
 
   create_table "casts", :force => true do |t|
     t.column "document_id", :integer, :null => false
-    t.column "name", :string, :null => false
+    t.column "name",        :string,  :null => false
   end
 
   create_table "cues", :force => true do |t|
@@ -14,56 +14,75 @@ ActiveRecord::Schema.define(:version => 18) do
   end
 
   create_table "documents", :force => true do |t|
-    t.column "title", :string, :null => false
-    t.column "description", :string, :null => false
-    t.column "author_id", :integer, :null => false
-    t.column "length", :integer, :default => 0, :null => false
-    t.column "size", :integer, :default => 0, :null => false
-    t.column "format", :string, :default => "application/octet-stream", :null => false
-    t.column "type", :string, :null => false
-    t.column "uploaded", :boolean, :default => false
-    t.column "updated_at", :datetime
+    t.column "title",       :string,                                           :null => false
+    t.column "description", :string,                                           :null => false
+    t.column "author_id",   :integer,                                          :null => false
+    t.column "length",      :integer,  :default => 0,                          :null => false
+    t.column "size",        :integer,  :default => 0,                          :null => false
+    t.column "format",      :string,   :default => "application/octet-stream", :null => false
+    t.column "type",        :string,                                           :null => false
+    t.column "uploaded",    :boolean,  :default => false
+    t.column "updated_at",  :datetime
   end
 
   create_table "documents_tags", :id => false, :force => true do |t|
     t.column "document_id", :integer, :null => false
-    t.column "tag_id", :integer, :null => false
+    t.column "tag_id",      :integer, :null => false
+  end
+
+  create_table "open_id_associations", :force => true do |t|
+    t.column "server_url", :binary
+    t.column "handle",     :string
+    t.column "secret",     :binary
+    t.column "issued",     :integer
+    t.column "lifetime",   :integer
+    t.column "assoc_type", :string
+  end
+
+  create_table "open_id_nonces", :force => true do |t|
+    t.column "nonce",   :string
+    t.column "created", :integer
+  end
+
+  create_table "open_id_settings", :force => true do |t|
+    t.column "setting", :string
+    t.column "value",   :binary
   end
 
   create_table "podcasts", :force => true do |t|
-    t.column "name", :string
-    t.column "title", :string
+    t.column "name",        :string
+    t.column "title",       :string
     t.column "description", :string
-    t.column "author_id", :integer, :null => false
+    t.column "author_id",   :integer, :null => false
   end
 
   create_table "podcasts_tags", :id => false, :force => true do |t|
     t.column "podcast_id", :integer, :null => false
-    t.column "tag_id", :integer, :null => false
+    t.column "tag_id",     :integer, :null => false
   end
 
   create_table "reviews", :force => true do |t|
-    t.column "document_id", :integer, :null => false
-    t.column "user_id", :integer, :null => false
-    t.column "rating", :integer, :null => false
-    t.column "description", :string, :null => false
-    t.column "created_at", :datetime, :null => false
+    t.column "document_id", :integer,  :null => false
+    t.column "user_id",     :integer,  :null => false
+    t.column "rating",      :integer,  :null => false
+    t.column "description", :string,   :null => false
+    t.column "created_at",  :datetime, :null => false
   end
 
   create_table "sessions", :force => true do |t|
     t.column "session_id", :string
-    t.column "data", :text
+    t.column "data",       :text
     t.column "updated_at", :datetime
   end
 
   add_index "sessions", ["session_id"], :name => "sessions_session_id_index"
 
   create_table "subscriptions", :force => true do |t|
-    t.column "document_id", :integer, :null => false
-    t.column "author_id", :integer, :null => false
-    t.column "subscriber_id", :integer, :null => false
-    t.column "download_count", :integer, :default => 0
-    t.column "created_at", :datetime
+    t.column "document_id",    :integer,                 :null => false
+    t.column "author_id",      :integer,                 :null => false
+    t.column "subscriber_id",  :integer,                 :null => false
+    t.column "download_count", :integer,  :default => 0
+    t.column "created_at",     :datetime
   end
 
   create_table "tags", :force => true do |t|
@@ -72,17 +91,18 @@ ActiveRecord::Schema.define(:version => 18) do
 
   create_table "uploads", :force => true do |t|
     t.column "document_id", :integer, :null => false
-    t.column "key", :string, :null => false
+    t.column "key",         :string,  :null => false
   end
 
   create_table "users", :force => true do |t|
-    t.column "username", :string, :null => false
-    t.column "password", :string, :null => false
-    t.column "name", :string, :null => false
-    t.column "email", :string, :null => false
+    t.column "username",     :string,                      :null => false
+    t.column "password",     :string
+    t.column "name",         :string
+    t.column "email",        :string,                      :null => false
     t.column "organization", :string
-    t.column "confirmed", :boolean, :default => false
-    t.column "created_at", :datetime
+    t.column "confirmed",    :boolean,  :default => false
+    t.column "created_at",   :datetime
+    t.column "openid_url",   :string
   end
 
 end
