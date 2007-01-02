@@ -22,9 +22,9 @@ set :repository, "http://svn.tryphon.org/kolaka/audiobank/trunk"
 # be used to single out a specific subset of boxes in a particular role, like
 # :primary => true.
 
-role :app, "audiobank.tryphon.org"
-role :web, "audiobank.tryphon.org"
-role :db,  "audiobank.tryphon.org", :primary => true
+role :app, "zigmun.tryphon.org"
+role :web, "zigmun.tryphon.org"
+role :db,  "zigmun.tryphon.org", :primary => true
 
 # =============================================================================
 # OPTIONAL VARIABLES
@@ -40,13 +40,13 @@ role :db,  "audiobank.tryphon.org", :primary => true
 set :keep_releases, 3
 set :use_sudo, false
 
-set :deploy_to, "/var/www/audiobank/"
+set :deploy_to, "/var/www/tryphon.org/audiobank/"
 
 # =============================================================================
 # SSH OPTIONS
 # =============================================================================
 # ssh_options[:keys] = %w(/path/to/my/key /path/to/another/key)
-# ssh_options[:port] = 25
+ssh_options[:port] = 2722
 
 # =============================================================================
 # TASKS
@@ -121,10 +121,10 @@ task :after_deploy do
   enable_web
 end
 
-desc "Remove symlink (useful for solaris)"
-task :before_symlink do
-  delete current_path
-end
+#desc "Remove symlink (useful for solaris)"
+#task :before_symlink do
+#  delete current_path
+#end
 
 desc "Add symlink"
 task :after_symlink do
