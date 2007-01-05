@@ -4,16 +4,16 @@ class CastsController < ApplicationController
   def play
   	case params[:format]
   		when "mp3":
-  			playcontent(File.basename(params[:name], "."+ extension), extension)
+  			playcontent(File.basename(params[:name], "."+ params[:format]), params[:format])
   		when "ogg":
   			if mp3_only_player?
-			  	real_name = File.basename(params[:name], "."+ extension)
+			  	real_name = File.basename(params[:name], "."+ params[:format])
 	  			redirect_to :action => :play, :name => real_name +".mp3"  
 	  			return
 	  		end
-  			playcontent(File.basename(params[:name], "."+ extension), extension)
+  			playcontent(File.basename(params[:name], "."+ params[:format]), params[:format])
   		when "m3u" 
-  			playlist(File.basename(params[:name], "."+ extension))
+  			playlist(File.basename(params[:name], "."+ params[:format]))
   		else
   			redirect_to :action => :play, :name => params[:name]+".m3u"
   	end
