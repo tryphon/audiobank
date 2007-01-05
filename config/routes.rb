@@ -23,6 +23,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'tag/:name/:page', :controller => 'users', :action => 'tag'
   map.connect 'cues/:action/:id', :controller => 'cues'
   map.connect 'casts/:name', :controller => 'casts', :action => 'play'
+  map.connect 'casts/:name.:format', :controller => 'casts', :action => 'play'
   map.connect ':action/:id/:confirm', :controller => 'users', :action => 'confirm'
 	map.connect ':action/:id', :controller => 'users'
 	

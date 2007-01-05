@@ -2,8 +2,7 @@ class CastsController < ApplicationController
 	layout nil
 
   def play
-  	extension = params[:name].split('.').last
-  	case extension
+  	case params[:format]
   		when "mp3":
   			playcontent(File.basename(params[:name], "."+ extension), extension)
   		when "ogg":
