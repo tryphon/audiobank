@@ -3,7 +3,7 @@ xml.rss :version => "2.0", 'xmlns:itunes' => "http://www.itunes.com/dtds/podcast
 		xml.title @podcast.title
 		xml.author @podcast.documents.first.author.name
 		xml.description @podcast.description
-		xml.lastBuildDate @podcast.date.strftime("%a, %e %b %Y %T %Z")
+		xml.lastBuildDate @podcast.date
 			
 		for document in @podcast.documents
 		 xml.item do
