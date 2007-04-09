@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	open_id_consumer :required => [:email, :nickname], :optional => [:fullname, :dob, :gender, :country]
+	open_id_consumer :required => [:email, :nickname], :optional => [:fullname]
 	layout 'documents'
 	
 	def index

@@ -3,7 +3,8 @@
 <% else %>
  <% for review in reviews %>
   <li class="hreview">
-   <abbr class="rating" title="<%= review.rating %>"><%= image_tag(review.rating.to_s +".png") %></abbr>
+   <abbr class="rating" title="<%= review.rating %>"><%= 
+   image_tag("#{review.rating.to_s}.png") %></abbr>
    <span class="reviewer vcard">
     <%= image_tag("avatar", :class => 'photo') %>
     <span class="fn"><%= review.user.name %></span>
