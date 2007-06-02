@@ -194,11 +194,11 @@ padding: 4px 4px 4px 28px;
 background: #fff url("../images/tick.png") no-repeat 4px 4px;
 }
 
-#subscribers, #users {
+#subscribers, #users, #members {
 clear: both;
 border: 1px solid #5884a6;
 }
-#subscribers li, #users li {
+#subscribers li, #users li, #members li {
 padding: 12px;
 margin: 2px 12px;
 cursor: pointer;
@@ -312,11 +312,11 @@ margin: 0 auto;
 text-align: left;
 }
 
-#wrap:after, #content .vcard:after, #subscribers:after, #users:after, #content .hreview:after, #search:after {
+#wrap:after, #content .vcard:after, #subscribers:after, #users:after, #members:after, #content .hreview:after, #search:after {
 content: "."; 
 display: block; 
 height: 0;
 clear: both; 
 visibility: hidden;
 }
-* html #wrap, * html #content .vcard, * html #subscribers, * html #users, * html #search { height: 1%; }
+* html #wrap, * html #content .vcard, * html #subscribers, * html #users, * html #members, * html #search { height: 1%; }

@@ -1,6 +1,8 @@
 require "digest/sha2"
 class User < ActiveRecord::Base
 	has_many :reviews, :dependent => :destroy
+	has_and_belongs_to_many :groups
+	has_many :manageable_groups, :class_name => "Group", :foreign_key => "owner_id"
 
 	validates_uniqueness_of :username, :message => "Ce nom d'utilisateur existe déjà", :if => Proc.new { |u| u.openid_url.nil? }
 	validates_presence_of :username, :message => "Un nom d'utilisateur est requis", :if => Proc.new { |u| u.openid_url.nil? }

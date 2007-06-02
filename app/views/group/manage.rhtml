@@ -1,0 +1,8 @@
+<h2>Gérer vos groupes</h2>
+<ul>
+ <%= render :partial => "group/groups", :object => @groups, :locals => { :linked => true, :empty => "Vous n'avez créé groupe, vous pouvez #{link_to("en ajouter un", :action => "add")}", :actions => true } %>
+</ul>
+<div class="actions">
+ <%= link_to("Précédents", { :page => @pages.current.previous }, :class => "previous") if @pages.current.previous %>
+ <%= link_to("Suivants", { :page => @pages.current.next }, :class => "next") if @pages.current.next %> 
+</div>

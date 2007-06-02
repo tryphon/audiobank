@@ -8,7 +8,7 @@ class Upload < ActiveRecord::Base
   def before_create
 		self.key = StringRandom.alphanumeric(16).downcase
 
-		Dir.mkdir path
+		FileUtils.mkdir_p path
 		File.chmod(02775, path)
   end
   

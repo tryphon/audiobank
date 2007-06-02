@@ -1,0 +1,9 @@
+<%= error_messages_for(:group) %>
+<h2>Ajouter un groupe</h2>
+<% form_tag(:action => :add) do %>
+ <p><label for="group_name">Nom :</label><br/>
+ <%= text_field("group", "name") %></p>
+ <p><label for="group_description">Description :</label><br/>
+ <%= text_area("group", "description", :rows => 10, :cols => 28) %></p>
+ <%= submit_tag "Creer votre groupe" %> ou <%= link_to("annuler &#8250;", { :action => "manage" }, :title => "Annuler", :class => "blue") %>
+<% end %>

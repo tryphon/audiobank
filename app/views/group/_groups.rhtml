@@ -1,0 +1,44 @@
+<% if groups.empty? %>
+ <li><%= empty %></li>
+<% else %>
+ <% for group in groups %>
+  <li>
+   <h3 class="item fn"><%= link_to_if(linked, group.name, :action => "show", :id => group) %></h3>
+   <p><%= group.description %></p>
+    <div class="details">
+      <span class="size">
+        <% unless group.users.empty? %>
+          <%= pluralize(group.users.size, "membre") %>
+        <% else %>
+          Aucun membre
+        <% end %>
+      </span>
+    </div>
+   
+   <% if members %>
+    <h4>Sont membres de ce groupe :</h4>
+    
+    <ul id="members">
+     <%= render :partial => "users/users", :object => @group.users, :locals => { :empty => "Aucun membre", :draggable => actions } %>
+    </ul>
+    <%= drop_receiving_element("members", :url => { :controller => "group", :action => "add_member", :group => @group }) %>
+    
+    <hr/>
+    
+    <h4>Ne sont pas membres de ce groupe :</h4>
+    <ul id="users">
+     <%= render :partial => "users/users", :object => @group.nonmembers, :locals => { :empty => "Déposer ici les utilisateurs qui ne sont membres de ce groupe", :draggable => actions } %>
+    </ul>
+    <%= drop_receiving_element("users", :url => { :controller => "group", :action => "remove_member", :group => @group }) %>
+    
+   <% end %> 
+   
+   <% if actions %>
+    <div class="actions">
+     <%= link_to("Détruire", {:action => "destroy", :id => group}, :confirm => "Êtes vous sûr de vouloir détruire ce groupe ?", :title => "Détruire ce groupe", :class => "destroy") %>
+     <%= link_to("Modifier", {:action => "edit", :id => group}, :title => "Editer ce groupe", :class => "edit") %>
+	  </div>
+   <% end %>
+  </li>
+ <% end %>
+<% end %>
