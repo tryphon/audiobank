@@ -81,7 +81,13 @@ class UsersController < ApplicationController
   	@user = User.find(params[:id])
   	if @user.hashcode == params[:confirm] && !@user.confirmed?
   		@user.update_attribute(:confirmed, true)
-	  	Subscriber.find(@user.id).subscriptions.build(:author => Author.find(1), :document => Document.find(1)).save
+  		
+  		begin
+  	  	Subscriber.find(@user.id).subscriptions.build(:author => Author.find(1), :document => Document.find(1)).save
+  	  rescue ActiveRecord::RecordNotFound
+  	    logger.error("no welcome document found")
+  	  end
+  	  
 	  	flash[:success] = "Bienvenue !"
 	    session[:user] = @user.id
 	  	redirect_to :action => "dashboard"
