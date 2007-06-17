@@ -126,4 +126,15 @@ class DocumentsController < ApplicationController
   	@document = Author.find(session[:user]).documents.find(params[:id])
 	end
 
+	
+  def search_nonsubscribers
+    input = params[:input].nil? ? "" : params[:input].downcase
+    id = params[:id]
+    
+    @users = Document.find(id).nonsubscribers.delete_if do |user|
+      not (user.name.downcase.include?(input) or user.username.downcase.include?(input))
+    end
+    render :partial => "users/users", :object => @users, 
+      :locals => { :empty => "Aucun utilisateur ne correspond", :draggable => true }
+  end	
 end

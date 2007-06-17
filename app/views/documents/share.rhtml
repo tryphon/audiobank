@@ -6,10 +6,19 @@
 <hr/>
 
 <h4>N'ont pas accès à ce document :</h4>
+
 <ul id="users">
  <%= render :partial => "users/users", :object => @document.nonsubscribers, :locals => { :empty => "Déposer ici les utilisateurs qui n'ont pas accès à ce document", :draggable => true } %>
 </ul>
 <%= drop_receiving_element("users", :url => { :controller => "subscriptions", :action => "remove", :document => @document }) %>
+
+<% form_remote_tag :update => "users", :url => { :controller => "documents", :action => "search_nonsubscribers" } do %>
+<p>
+<label>Sélection: </label><%= text_field_tag("input") %>
+<%= hidden_field_tag("id", @document.id ) %>
+</p>
+<% end %>
+
 <hr/>
 <h4>Ont accès à ce document :</h4>
 <ul id="subscribers">
