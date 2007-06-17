@@ -58,4 +58,15 @@ class GroupController < ApplicationController
 		render :action => "update"
   end  
 
+  def search_nonmembers
+    input = params[:input].nil? ? "" : params[:input].downcase
+    id = params[:id]
+    
+    @users = Group.find(id).nonmembers.delete_if do |user|
+      not (user.name.downcase.include?(input) or user.username.downcase.include?(input))
+    end
+    render :partial => "users/users", :object => @users, 
+      :locals => { :empty => "Aucun utilisateur ne correspond", :draggable => true }
+  end	
+
 end
