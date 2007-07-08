@@ -3,9 +3,9 @@
 input=$1
 output=$2
 format=$3
-quality=0
+quality=2
 
-[ -r $input ] || exit 1
+[ -r "$input" ] || exit 1
 
 sox=/usr/bin/sox
 oggenc=/usr/bin/oggenc
@@ -19,21 +19,21 @@ lame=/usr/bin/lame
 [ -x $mpg321 ] || exit 1
 [ -x $lame ] || exit 1
 
-input_type=`file -bi $input`
+input_type=`file -bi "$input"`
 case $input_type in 
 	audio/mpeg)
 		function play() {
-			$mpg321 -q --stereo -w - $1
+			$mpg321 -q --stereo -w - "$1"
 		}
 	;;
 	application/ogg)
 		function play() {
-			$sox -t ogg $1 -t wav -c 2 -
+			$sox -t ogg "$1" -t wav -c 2 -
 		}
 	;;
 	audio/x-flac)
 		function play() {
-			$flac --silent --decode --stdout $1
+			$flac --silent --decode --stdout "$1"
 		}
 	;;
 	*)
@@ -44,13 +44,13 @@ esac
 case $format in
 	ogg)
 		function encode() {
-			$oggenc -Q --downmix -q$1 -o $2 -
+			$oggenc -Q -q$1 -o "$2" -
 		}
 	;;
 	mp3)
 		function encode() {
 			lame_quality=$[9-$1]
-			$lame --silent -m s -a -q$lame_quality - $2
+			$lame --silent -m s -q$lame_quality - "$2"
 		}
 	;;
 	*)
@@ -58,4 +58,4 @@ case $format in
 	;;
 esac
 
-play $input | encode $quality $output
+play "$input" | encode $quality "$output"
