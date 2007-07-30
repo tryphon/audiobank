@@ -132,7 +132,7 @@ class DocumentsController < ApplicationController
     id = params[:id]
     
     @users = Document.find(id).nonsubscribers.delete_if do |user|
-      not (user.name.downcase.include?(input) or user.username.downcase.include?(input))
+      not (user.name.downcase.include?(input) or (not user.username.nil? and user.username.downcase.include?(input)))
     end
     render :partial => "users/users", :object => @users, 
       :locals => { :empty => "Aucun utilisateur ne correspond", :draggable => true }
