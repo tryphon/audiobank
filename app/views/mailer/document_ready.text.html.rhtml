@@ -1,0 +1,12 @@
+<html>
+ <body>
+  <h3>Document <%= @document.title %></h3>
+  <p>
+    Le document "<%= @document.title %>" est maintenant prêt pour un partage sur internet.
+  </p>
+  <ul>
+    <li>Identifiant du cast : <%= @document.casts.first.name %></li>
+    <li>Durée : <%= (@document.length / 60.0).ceil %> minutes</li>
+  </ul> 
+ </body>
+</html>

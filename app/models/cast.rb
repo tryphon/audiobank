@@ -51,6 +51,8 @@ class Cast < ActiveRecord::Base
 					cast.destroy
 				end
 			end
+			document.casts << cast
+	    Mailer::deliver_document_ready(document)
 		end
 	end
 end

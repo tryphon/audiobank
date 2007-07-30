@@ -1,0 +1,7 @@
+Document <%= @document.title %>
+
+Le document "<%= @document.title %>" est maintenant prêt pour un partage sur internet.
+
+* Identifiant du cast : <%= @document.casts.first.name %>
+* Durée : <%= (@document.length / 60.0).ceil %> minutes
+
