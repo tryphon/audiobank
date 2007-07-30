@@ -44,7 +44,7 @@ class CastsController < ApplicationController
   		when "mp3" 
   			type = "application/mp3"
   	end
-  	send_file @cast.path(format), :type => type, :filename => "audiobank-#{@cast.name}.#{format}", :disposition => "inline"
+  	redirect_to "/static/cast/#{@cast.filename(format)}"
   end
 
   def playlist(name)

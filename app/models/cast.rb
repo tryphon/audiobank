@@ -15,7 +15,11 @@ class Cast < ActiveRecord::Base
 	end
 
 	def path(format = "ogg")
-		"#{RAILS_ROOT}/media/cast/#{id}.#{format}"
+	  "#{RAILS_ROOT}/media/cast/#{filename(format)}"
+	end
+	
+	def filename(format = "ogg")
+	  "#{id}.#{format}"
 	end
 	
 	def size(format = "ogg") 
@@ -47,6 +51,6 @@ class Cast < ActiveRecord::Base
 					cast.destroy
 				end
 			end
-		end		
+		end
 	end
 end
