@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
 	validates_uniqueness_of :username, :message => "Ce nom d'utilisateur existe déjà", :if => Proc.new { |u| u.openid_url.nil? }
 	validates_presence_of :username, :message => "Un nom d'utilisateur est requis", :if => Proc.new { |u| u.openid_url.nil? }
+	validates_format_of :username, :with => /^[-a-z0-9]{3,12}$/, :message => "Un nom d'utilisateur valide est requis"
 	validates_presence_of :name, :message => "Votre nom est requis"
   validates_presence_of :password, :message => "Un mot de passe est requis", :if => Proc.new { |u| u.openid_url.nil? }
 	validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/, :message => "Un email valide pour vous contacter est requis"

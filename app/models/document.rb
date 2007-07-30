@@ -56,6 +56,10 @@ class Document < ActiveRecord::Base
 	def after_save
 		destroy_tags
 	end
+	
+	def before_create
+	  self.upload = Upload.new
+	end
   
   def uploaded?
   	uploaded
