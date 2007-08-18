@@ -26,3 +26,12 @@ kermit:
   size: 230000000
   format: ogg
   type: AudioDocument
+elmo:
+  id: 4
+  title: Rosita
+  description: The sexy Rosita is posing for us !
+  author_id: 3
+  length: 23000000
+  size: 230000000
+  format: ogg
+  type: AudioDocument

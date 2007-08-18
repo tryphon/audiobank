@@ -3,17 +3,18 @@ bert:
   id: 1
   username: bert
   name: Bert
-  password: cd3ebf2708df4d4c6cdb3d90e5e7456c6bc080c03e8cd4573a31671d15adff94
+  password: <%= User.digest_password("bert") %>
   email: ernie@sesamestreet.com
 ernie:
   id: 2
   username: ernie
   name: Ernie
-  password: 32987c4b7a9fb90e729425fc63e7bb81ce2cb1f80140ddeddc968aa79a34e8f8
+  password: <%= User.digest_password("ernie") %>
   email: bert@sesamestreet.com
 elmo:
   id: 3
   username: elmo
   name: Elmo
-  password: a3d92ef00ea150ebe63e6010f733567b904c0e5a34e660096913a1f341f793c1
+  password: <%= User.digest_password("elmo") %>
   email: elmo@sesamestreet.com
+  confirmed: true

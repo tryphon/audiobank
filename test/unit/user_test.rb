@@ -19,12 +19,12 @@ class UserTest < Test::Unit::TestCase
 		user = users(:elmo)
 		user.email = "elmo at ruesesame dot fr"
 		assert !user.save
-	end 
+	end
 
 	def	test_password 
 		user = users(:elmo)
 		password = user.password
-		user.password = "kermit"
+		user.password = user.username
 		assert_equal password, user.password		
 	end 
 

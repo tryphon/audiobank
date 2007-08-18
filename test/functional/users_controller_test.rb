@@ -23,9 +23,9 @@ class UsersControllerTest < Test::Unit::TestCase
   end
   
   def test_post_signin
-  	post :signin, :user => {:username => "elmo", :password => "kermit"}
+  	post :signin, :user => {:username => "elmo", :password => "elmo"}
   	
-		assert_redirected_to :controller => "documents"
+		assert_redirected_to :action => "dashboard"
   end
   
   def test_options

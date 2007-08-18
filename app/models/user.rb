@@ -11,17 +11,31 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :message => "Un mot de passe est requis", :if => Proc.new { |u| u.openid_url.nil? }
 	validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/, :message => "Un email valide pour vous contacter est requis"
 	
+	def self.digest_password(clear_password)
+  	Digest::SHA256.hexdigest(clear_password)
+	end
+	
 	def password=(password)
-		write_attribute(:password, Digest::SHA256.hexdigest(password)) unless password.empty?
+		write_attribute(:password, User.digest_password(password)) unless password.empty?
 	end
 	
 	def self.authenticate(attributes)
-		user = User.find_by_username(attributes[:username], :conditions => ["confirmed = ?", true])
-		unless user.blank? or Digest::SHA256.hexdigest(attributes[:password]) != user.password
-			user
-		else
-			nil
-		end
+	  username = attributes[:username]
+	  
+		user = User.find_by_username(username, :conditions => ["confirmed = ?", true])
+
+    if user.blank?
+      logger.debug("unknown or unconfirmed user : #{username}")
+      return nil
+    end
+    
+    if User.digest_password(attributes[:password]) != user.password
+      logger.debug("wrong password for : #{username}")
+      return nil
+    end
+		
+    logger.info("user logged : #{username}")
+		user
 	end
 	
 	def ==(other)
@@ -31,7 +45,7 @@ class User < ActiveRecord::Base
 	def hashcode
     Digest::SHA256.hexdigest(id.to_s + email)
   end
-  
+    
   def confirmed?
   	confirmed
   end
