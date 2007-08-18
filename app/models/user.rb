@@ -1,6 +1,30 @@
 require "digest/sha2"
 class User < ActiveRecord::Base
 	has_many :reviews, :dependent => :destroy
+	
+	has_many :documents, :dependent => :destroy, :order => "updated_at DESC", :foreign_key => "author_id" do
+		def find_by_tag(name, options = Hash.new)
+			find_by_sql(["SELECT documents.* FROM documents, tags, documents_tags WHERE documents.id = documents_tags.document_id AND tags.id = documents_tags.tag_id AND documents.author_id = ? AND tags.name = ? OFFSET ? LIMIT ?", @owner.quoted_id, name, options[:offset], options[:limit]])
+		end
+		
+		def find_by_keywords(keywords)
+			find(:all, :conditions => ["title ~* ?", keywords])
+		end
+	end
+	
+	has_many :subscriptions, :dependent => :destroy, :order => "created_at DESC" do 
+		def find_by_tag(name, options = Hash.new)
+		  options[:offset] = 0 if options[:offset]
+			find_by_sql(["SELECT subscriptions.* FROM subscriptions, documents, tags, documents_tags WHERE subscriptions.document_id = documents.id AND documents.id = documents_tags.document_id AND tags.id = documents_tags.tag_id AND subscriptions.subscriber_id = ? AND tags.name = ? OFFSET ? LIMIT ?", @owner.quoted_id, name, options[:offset], options[:limit]])
+		end
+		
+		def find_by_keywords(keywords)
+			find_by_sql(["SELECT subscriptions.* FROM subscriptions, documents WHERE subscriptions.document_id = documents.id AND subscriptions.subscriber_id = ? AND documents.title ~* ?", @owner.quoted_id, keywords])
+		end
+	end
+	
+	has_many :podcasts, :dependent => :destroy, :foreign_key => "author_id"
+	
 	has_and_belongs_to_many :groups
 	has_many :manageable_groups, :class_name => "Group", :foreign_key => "owner_id"
 

@@ -29,7 +29,7 @@ class SubscriptionsController < ApplicationController
   
 	def add
 		@subscription = Subscription.new do |subscription|
-    	subscription.author = Author.find(session[:user])
+    	subscription.author = User.find(session[:user])
     	subscription.document = subscription.author.documents.find(params[:document])
     	subscription.subscriber = Subscriber.find(params[:id].split("_")[1])
     end
@@ -38,7 +38,7 @@ class SubscriptionsController < ApplicationController
 	end
   
   def remove
-    @subscription = Author.find(session[:user]).documents.find(params[:document]).subscriptions.find(:first, :conditions => ["author_id = ? AND subscriber_id = ?", session[:user], params[:id].split("_")[1]])
+    @subscription = User.find(session[:user]).documents.find(params[:document]).subscriptions.find(:first, :conditions => ["author_id = ? AND subscriber_id = ?", session[:user], params[:id].split("_")[1]])
     @subscription.destroy
     render :action => "update"
   end

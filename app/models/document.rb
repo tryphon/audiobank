@@ -1,7 +1,7 @@
 require 'mahoro'
 require 'taglib'
 class Document < ActiveRecord::Base
-	belongs_to :author
+	belongs_to :author, :class_name => "User", :foreign_key => "author_id"
 	has_one :upload, :dependent => :destroy
 	has_many :subscribers, :through => :subscriptions
 	has_many :subscriptions, :dependent => :destroy

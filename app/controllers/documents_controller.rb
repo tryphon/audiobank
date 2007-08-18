@@ -10,7 +10,7 @@ class DocumentsController < ApplicationController
   def add
     @document = AudioDocument.new(params[:document])
     if request.post?
-      @document.author = Author.find(session[:user])
+      @document.author = User.find(session[:user])
     	@document.tag_with(params[:labels])
       if @document.save
         flash[:success] = "Votre document a bien été crée"
@@ -22,7 +22,7 @@ class DocumentsController < ApplicationController
   end
   
   def show 
-  	@document = Author.find(session[:user]).documents.find(params[:id], :include => :tags)
+  	@document = User.find(session[:user]).documents.find(params[:id], :include => :tags)
   	@review = Review.new(params[:review])
   	if request.post?
   		@review.document = @document
@@ -39,7 +39,7 @@ class DocumentsController < ApplicationController
   end
     
   def edit
-    @document = Author.find(session[:user]).documents.find(params[:id])
+    @document = User.find(session[:user]).documents.find(params[:id])
     if request.post?
     	@document.tag_with(params[:labels])
       if @document.update_attributes(params[:document])
@@ -52,12 +52,12 @@ class DocumentsController < ApplicationController
   end
 
 	def manage
-		@pages = Paginator.new(self, Author.find(session[:user]).documents.size, 4, params[:page])
-		@document = Author.find(session[:user]).documents.find(:all, :limit => @pages.items_per_page, :offset => @pages.current.offset, :include => :tags)
+		@pages = Paginator.new(self, User.find(session[:user]).documents.size, 4, params[:page])
+		@document = User.find(session[:user]).documents.find(:all, :limit => @pages.items_per_page, :offset => @pages.current.offset, :include => :tags)
 	end
   
   def upload
-  	@document = Author.find(session[:user]).documents.find(params[:id])
+  	@document = User.find(session[:user]).documents.find(params[:id])
   	unless @document.upload
 	  	@document.upload = Upload.new
 	  	@document.save
@@ -99,23 +99,23 @@ class DocumentsController < ApplicationController
   end
   
   def download
-  	@document = Author.find(session[:user]).documents.find(params[:id])
+  	@document = User.find(session[:user]).documents.find(params[:id])
   	send_file @document.path, :type => @document.format, :filename => @document.filename
   end
   
   def destroy
-    Author.find(session[:user]).documents.find(params[:id]).destroy
+    User.find(session[:user]).documents.find(params[:id]).destroy
     redirect_to :action => 'manage'
   end
 
   def share
-  	@document = Author.find(session[:user]).documents.find(params[:id])
+  	@document = User.find(session[:user]).documents.find(params[:id])
 	  flash[:warning] = "Votre document n'est lié à aucun fichier" unless @document.uploaded?
 	end
 	
 	def tag
-		@pages = Paginator.new(self, Author.find(session[:user]).documents.find_by_tag(params[:name]).size, 4, params[:page])
-		@document = Author.find(session[:user]).documents.find_by_tag(params[:name], { :offset => @pages.current.offset, :limit => @pages.items_per_page })
+		@pages = Paginator.new(self, User.find(session[:user]).documents.find_by_tag(params[:name]).size, 4, params[:page])
+		@document = User.find(session[:user]).documents.find_by_tag(params[:name], { :offset => @pages.current.offset, :limit => @pages.items_per_page })
 	end
 	
 	def auto_complete_for_tags
@@ -123,7 +123,7 @@ class DocumentsController < ApplicationController
 	end
 	
   def listen
-  	@document = Author.find(session[:user]).documents.find(params[:id])
+  	@document = User.find(session[:user]).documents.find(params[:id])
 	end
 
 	

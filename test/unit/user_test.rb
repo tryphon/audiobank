@@ -31,4 +31,11 @@ class UserTest < Test::Unit::TestCase
   def test_truth
   	assert_kind_of User, User.find(:first)
   end
+  
+  def test_documents
+		user = users(:elmo)
+		assert ! user.documents.empty?
+		tags = user.documents.collect{ |d| d.tags }
+  end
+  
 end

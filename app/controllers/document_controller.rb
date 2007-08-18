@@ -49,7 +49,7 @@ class DocumentController < ApplicationController
   protected
   
   def current_author
-    Author.find(@user_id)
+    User.find(@user_id)
   end
   
   def author_document(document_id)

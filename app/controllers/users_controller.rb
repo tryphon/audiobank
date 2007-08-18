@@ -12,26 +12,27 @@ class UsersController < ApplicationController
 	end
 
  	def dashboard
-		@author = Author.find(session[:user])
+		@author = User.find(session[:user])
 		@subscriber = Subscriber.find(session[:user])
-		@tag = @subscriber.subscriptions.collect{ |s| s.document.tags } + @author.documents.collect{ |d| d.tags }
+		user_tags = @author.documents.collect{ |d| d.tags }
+		@tag = @subscriber.subscriptions.collect{ |s| s.document.tags } + user_tags
 		@tag = @tag.flatten.uniq[0..15]
 	end
 	
 	def tags
-	  @author = Author.find(session[:user])
+	  @author = User.find(session[:user])
 		@subscriber = Subscriber.find(session[:user])
 	  @tag = @subscriber.subscriptions.collect{ |s| s.document.tags } + @author.documents.collect{ |d| d.tags }
 		@tag = @tag.flatten.uniq
 	end
 	
 	def tag
-		@document = Author.find(session[:user]).documents.find_by_tag(params[:name], { :limit => 5 })
+		@document = User.find(session[:user]).documents.find_by_tag(params[:name], { :limit => 5 })
 		@subscription = Subscriber.find(session[:user]).subscriptions.find_by_tag(params[:name], { :limit => 5 })
 	end
 	
 	def find
-		@document = Author.find(session[:user]).documents.find_by_keywords(params[:keywords])
+		@document = User.find(session[:user]).documents.find_by_keywords(params[:keywords])
 		@subscription = Subscriber.find(session[:user]).subscriptions.find_by_keywords(params[:keywords])
 	end
 	
@@ -83,7 +84,7 @@ class UsersController < ApplicationController
   		@user.update_attribute(:confirmed, true)
   		
   		begin
-  	  	Subscriber.find(@user.id).subscriptions.build(:author => Author.find(1), :document => Document.find(1)).save
+  	  	Subscriber.find(@user.id).subscriptions.build(:author => User.find(1), :document => Document.find(1)).save
   	  rescue ActiveRecord::RecordNotFound
   	    logger.error("no welcome document found")
   	  end

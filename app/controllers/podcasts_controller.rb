@@ -8,7 +8,7 @@ class PodcastsController < ApplicationController
   def add
     @podcast = Podcast.new(params[:podcast])
     if request.post?
-      @podcast.author = Author.find(session[:user])
+      @podcast.author = User.find(session[:user])
     	@podcast.tag_with(params[:labels])
     	@podcast.name = StringRandom.alphanumeric(8).downcase
       if @podcast.save
@@ -21,11 +21,11 @@ class PodcastsController < ApplicationController
   end
   
   def show 
-  	@podcast = Author.find(session[:user]).podcasts.find(params[:id], :include => :tags)
+  	@podcast = User.find(session[:user]).podcasts.find(params[:id], :include => :tags)
   end
     
   def edit
-    @podcast = Author.find(session[:user]).podcasts.find(params[:id])
+    @podcast = User.find(session[:user]).podcasts.find(params[:id])
     if request.post?
     	@podcast.tag_with(params[:labels])
       if @podcast.update_attributes(params[:document])
@@ -38,12 +38,12 @@ class PodcastsController < ApplicationController
   end
 
 	def manage
-		@pages = Paginator.new(self, Author.find(session[:user]).podcasts.size, 4, params[:page])
-		@podcast = Author.find(session[:user]).podcasts.find(:all, :limit => @pages.items_per_page, :offset => @pages.current.offset, :include => :tags)
+		@pages = Paginator.new(self, User.find(session[:user]).podcasts.size, 4, params[:page])
+		@podcast = User.find(session[:user]).podcasts.find(:all, :limit => @pages.items_per_page, :offset => @pages.current.offset, :include => :tags)
 	end
     
   def destroy
-    Author.find(session[:user]).podcasts.find(params[:id]).destroy
+    User.find(session[:user]).podcasts.find(params[:id]).destroy
     redirect_to :action => 'manage'
   end
   

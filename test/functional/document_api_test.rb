@@ -13,7 +13,7 @@ class DocumentControllerApiTest < Test::Unit::TestCase
     
     @user = users(:elmo)
     @user_key = "#{@user.username}/#{@user.username}"
-    @document = Author.find(@user.id).documents.first
+    @document = User.find(@user.id).documents.first
     assert_not_nil @document
   end
 
