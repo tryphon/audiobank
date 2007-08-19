@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 		end
 	end
 	
-	has_many :subscriptions, :dependent => :destroy, :order => "created_at DESC" do 
+	has_many :subscriptions, :dependent => :destroy, :order => "created_at DESC", :foreign_key => "subscriber_id" do 
 		def find_by_tag(name, options = Hash.new)
 		  options[:offset] = 0 if options[:offset]
 			find_by_sql(["SELECT subscriptions.* FROM subscriptions, documents, tags, documents_tags WHERE subscriptions.document_id = documents.id AND documents.id = documents_tags.document_id AND tags.id = documents_tags.tag_id AND subscriptions.subscriber_id = ? AND tags.name = ? OFFSET ? LIMIT ?", @owner.quoted_id, name, options[:offset], options[:limit]])

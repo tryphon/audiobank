@@ -35,7 +35,7 @@
 <hr/>
 <h4>Ont accès à ce document :</h4>
 <ul id="subscribers">
- <%= render :partial => "subscribers/subscribers", :object => @document.subscribers, :locals => { :empty => "Déposer ici les utilisateurs qui ont accès à ce document", :draggable => true } %>
+ <%= render :partial => "users/subscribers", :object => @document.subscribers, :locals => { :empty => "Déposer ici les utilisateurs qui ont accès à ce document", :draggable => true } %>
 </ul>
 <%= drop_receiving_element("subscribers", :url => { :controller => "subscriptions", :action => "add", :document => @document }) %>
 

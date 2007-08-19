@@ -6,12 +6,12 @@ class SubscriptionsController < ApplicationController
   end
 
 	def manage
-		@pages = Paginator.new(self, Subscriber.find(session[:user]).subscriptions.size, 4, params[:page])
-		@subscription = Subscriber.find(session[:user]).subscriptions.find(:all, :limit => @pages.items_per_page, :offset => @pages.current.offset)
+		@pages = Paginator.new(self, User.find(session[:user]).subscriptions.size, 4, params[:page])
+		@subscription = User.find(session[:user]).subscriptions.find(:all, :limit => @pages.items_per_page, :offset => @pages.current.offset)
 	end 
   
   def show
-  	@subscription = Subscriber.find(session[:user]).subscriptions.find(params[:id])
+  	@subscription = User.find(session[:user]).subscriptions.find(params[:id])
   	@review = Review.new(params[:review])
   	if request.post?
   		@review.document = @subscription.document
@@ -31,7 +31,7 @@ class SubscriptionsController < ApplicationController
 		@subscription = Subscription.new do |subscription|
     	subscription.author = User.find(session[:user])
     	subscription.document = subscription.author.documents.find(params[:document])
-    	subscription.subscriber = Subscriber.find(params[:id].split("_")[1])
+    	subscription.subscriber = User.find(params[:id].split("_")[1])
     end
 		@subscription.save
 		render :action => "update"
@@ -44,12 +44,12 @@ class SubscriptionsController < ApplicationController
   end
   
   def tag
-  	@pages = Paginator.new(self, Subscriber.find(session[:user]).subscriptions.find_by_tag(params[:name]).size, 4, params[:page])
-  	@subscriptions = Subscriber.find(session[:user]).subscriptions.find_by_tag(params[:name], { :offset => @pages.current.offset, :limit => @pages.items_per_page })
+  	@pages = Paginator.new(self, User.find(session[:user]).subscriptions.find_by_tag(params[:name]).size, 4, params[:page])
+  	@subscriptions = User.find(session[:user]).subscriptions.find_by_tag(params[:name], { :offset => @pages.current.offset, :limit => @pages.items_per_page })
   end
   
   def download
-    @subscription = Subscriber.find(session[:user]).subscriptions.find(params[:id])
+    @subscription = User.find(session[:user]).subscriptions.find(params[:id])
     @subscription.increment!(:download_count)
   	send_file @subscription.document.path, :type => @subscription.document.format, :filename => @subscription.document.filename
   end
