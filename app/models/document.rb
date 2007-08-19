@@ -3,7 +3,7 @@ require 'taglib'
 class Document < ActiveRecord::Base
 	belongs_to :author, :class_name => "User", :foreign_key => "author_id"
 	has_one :upload, :dependent => :destroy
-	has_many :subscribers, :through => :subscriptions
+	
 	has_many :subscriptions, :dependent => :destroy
 	has_many :cues, :dependent => :destroy
 	has_many :reviews, :dependent => :destroy
@@ -15,6 +15,10 @@ class Document < ActiveRecord::Base
 	validates_length_of :description, :maximum => 255, :message => "Votre description est trop longue"
 	
 	attr_protected :size, :length, :format, :file
+
+	def subscribers
+    self.subscriptions.collect { |s| s.subscriber }
+  end
 	
 	def filename
 		"#{id}-#{title}#{suffix}"

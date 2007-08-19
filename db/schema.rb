@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 20) do
+ActiveRecord::Schema.define(:version => 22) do
 
   create_table "casts", :force => true do |t|
     t.column "document_id", :integer,                 :null => false
@@ -86,14 +86,15 @@ ActiveRecord::Schema.define(:version => 20) do
     t.column "updated_at", :datetime
   end
 
-  add_index "sessions", ["session_id"], :name => "sessions_session_id_index"
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
 
   create_table "subscriptions", :force => true do |t|
-    t.column "document_id",    :integer,                 :null => false
-    t.column "author_id",      :integer,                 :null => false
-    t.column "subscriber_id",  :integer,                 :null => false
-    t.column "download_count", :integer,  :default => 0
-    t.column "created_at",     :datetime
+    t.column "document_id",     :integer,                  :null => false
+    t.column "author_id",       :integer,                  :null => false
+    t.column "subscriber_id",   :integer,                  :null => false
+    t.column "download_count",  :integer,  :default => 0
+    t.column "created_at",      :datetime
+    t.column "subscriber_type", :string,   :default => "", :null => false
   end
 
   create_table "tags", :force => true do |t|
@@ -106,8 +107,8 @@ ActiveRecord::Schema.define(:version => 20) do
   end
 
   create_table "users", :force => true do |t|
-    t.column "username",     :string,   :default => "",    :null => false
-    t.column "password",     :string,   :default => "",    :null => false
+    t.column "username",     :string,   :default => ""
+    t.column "password",     :string,   :default => ""
     t.column "name",         :string,   :default => "",    :null => false
     t.column "email",        :string,   :default => "",    :null => false
     t.column "organization", :string
