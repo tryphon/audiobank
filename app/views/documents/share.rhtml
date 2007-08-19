@@ -21,7 +21,7 @@
 <h4>N'ont pas accès à ce document :</h4>
 
 <ul id="users">
- <%= render :partial => "users/users", :object => @document.nonsubscribers, :locals => { :empty => "Déposer ici les utilisateurs qui n'ont pas accès à ce document", :draggable => true } %>
+ <%= render :partial => "users/people", :object => @document.nonsubscribers, :locals => { :empty => "Reposer ici les utilisateurs qui ne doivent pas avoir accès à ce document" } %>
 </ul>
 <%= drop_receiving_element("users", :url => { :controller => "subscriptions", :action => "remove", :document => @document }) %>
 
@@ -35,7 +35,7 @@
 <hr/>
 <h4>Ont accès à ce document :</h4>
 <ul id="subscribers">
- <%= render :partial => "users/subscribers", :object => @document.subscribers, :locals => { :empty => "Déposer ici les utilisateurs qui ont accès à ce document", :draggable => true } %>
+ <%= render :partial => "users/people", :object => @document.subscribers, :locals => { :empty => "Déposer ici les utilisateurs qui ont accès à ce document", :limit => :none } %>
 </ul>
 <%= drop_receiving_element("subscribers", :url => { :controller => "subscriptions", :action => "add", :document => @document }) %>
 

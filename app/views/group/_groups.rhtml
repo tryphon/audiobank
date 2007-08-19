@@ -19,7 +19,7 @@
     <h4>Sont membres de ce groupe :</h4>
     
     <ul id="members">
-     <%= render :partial => "users/users", :object => @group.users, :locals => { :empty => "Aucun membre", :draggable => actions } %>
+     <%= render :partial => "users/people", :object => @group.users, :locals => { :empty => "Aucun membre", :draggable => actions, :limit => :none } %>
     </ul>
     <%= drop_receiving_element("members", :url => { :controller => "group", :action => "add_member", :group => @group }) %>
     
@@ -27,7 +27,7 @@
     
     <h4>Ne sont pas membres de ce groupe :</h4>
     <ul id="users">
-     <%= render :partial => "users/users", :object => @group.nonmembers, :locals => { :empty => "Déposer ici les utilisateurs qui ne sont membres de ce groupe", :draggable => actions } %>
+     <%= render :partial => "users/people", :object => @group.nonmembers, :locals => { :empty => "Déposer ici les utilisateurs qui ne sont membres de ce groupe", :draggable => actions } %>
     </ul>
     <%= drop_receiving_element("users", :url => { :controller => "group", :action => "remove_member", :group => @group }) %>
 

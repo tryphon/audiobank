@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class UserTest < Test::Unit::TestCase
-  fixtures :users
+  fixtures :users, :documents
 
 	def	test_username 
 		user = users(:elmo)
@@ -35,7 +35,19 @@ class UserTest < Test::Unit::TestCase
   def test_documents
 		user = users(:elmo)
 		assert ! user.documents.empty?
-		tags = user.documents.collect{ |d| d.tags }
+  end
+  
+  def test_authenticate
+		user = users(:elmo)
+		
+		clear_password = "test"
+		user.password = clear_password
+		user.save
+		
+    logged_user = User.authenticate(user.username, clear_password)
+    assert_not_nil logged_user
+
+    assert_equal user, logged_user
   end
   
 end

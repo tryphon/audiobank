@@ -76,9 +76,15 @@ class Document < ActiveRecord::Base
   end
   
   def nonsubscribers
-  	User.find(:all, :conditions => ["id != ? AND confirmed = ?", author.id, true]) - subscribers
+    groups = Group.find(:all)
+    users = User.find(:all, :conditions => ["id != ? AND confirmed = ?", author.id, true])
+    return groups + users - subscribers
   end
-
+  
+  def match?(keywords)
+    title.downcase.match(keywords.downcase)
+  end
+  
 	protected	
 	def destroy_tags
 		Tag.find(:all, :include => :documents).each do |tag|

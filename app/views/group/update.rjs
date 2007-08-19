@@ -1,2 +1,2 @@
-page.replace_html "users", :partial => "users/users", :object => @group.nonmembers, :locals => { :empty => "Déposer ici les utilisateurs qui ne sont membres de ce groupe", :draggable => true }
-page.replace_html "members", :partial => "users/users", :object => @group.users, :locals => { :empty => "Déposer ici les utilisateurs membres de ce groupe", :draggable => true }
+page.replace_html "users", :partial => "users/people", :object => @group.nonmembers, :locals => { :empty => "Déposer ici les utilisateurs qui ne sont membres de ce groupe" }
+page.replace_html "members", :partial => "users/people", :object => @group.users, :locals => { :empty => "Déposer ici les utilisateurs membres de ce groupe" }

@@ -4,14 +4,15 @@ class SubscriptionsController < ApplicationController
   def index
     redirect_to :action => 'manage'
   end
+  
 
 	def manage
-		@pages = Paginator.new(self, User.find(session[:user]).subscriptions.size, 4, params[:page])
-		@subscription = User.find(session[:user]).subscriptions.find(:all, :limit => @pages.items_per_page, :offset => @pages.current.offset)
+		@pages = Paginator.new(self, User.find(session[:user]).find_subscriptions.size, 4, params[:page])
+		@subscription = User.find(session[:user]).find_subscriptions(:limit => @pages.items_per_page, :offset => @pages.current.offset)
 	end 
   
   def show
-  	@subscription = User.find(session[:user]).subscriptions.find(params[:id])
+  	@subscription = User.find(session[:user]).find_subscription(params[:id])
   	@review = Review.new(params[:review])
   	if request.post?
   		@review.document = @subscription.document
@@ -28,12 +29,19 @@ class SubscriptionsController < ApplicationController
   end
   
 	def add
+	  document_id = params[:document]
+	  subscriber_type, subscriber_id = params[:id].split("_")
+	  
 		@subscription = Subscription.new do |subscription|
     	subscription.author = User.find(session[:user])
-    	subscription.document = subscription.author.documents.find(params[:document])
-    	subscription.subscriber = User.find(params[:id].split("_")[1])
+    	subscription.document = subscription.author.documents.find(document_id)
+    	subscription.subscriber = Object.const_get(subscriber_type.capitalize).find(subscriber_id)
     end
-		@subscription.save
+		
+		unless @subscription.save
+		  logger.error("can't create subscription on #{document_id} for #{subscriber_type}:#{subscriber_id} : #{@subscription.errors.inspect}")
+		end
+		
 		render :action => "update"
 	end
   
@@ -44,13 +52,14 @@ class SubscriptionsController < ApplicationController
   end
   
   def tag
-  	@pages = Paginator.new(self, User.find(session[:user]).subscriptions.find_by_tag(params[:name]).size, 4, params[:page])
-  	@subscriptions = User.find(session[:user]).subscriptions.find_by_tag(params[:name], { :offset => @pages.current.offset, :limit => @pages.items_per_page })
+  	@pages = Paginator.new(self, User.find(session[:user]).find_subscriptions(:tag => params[:name]).size, 4, params[:page])
+  	@subscriptions = User.find(session[:user]).find_subscriptions(:tag => params[:name], :offset => @pages.current.offset, :limit => @pages.items_per_page)
   end
   
   def download
-    @subscription = User.find(session[:user]).subscriptions.find(params[:id])
+    @subscription = User.find(session[:user]).find_subscription(params[:id])
     @subscription.increment!(:download_count)
   	send_file @subscription.document.path, :type => @subscription.document.format, :filename => @subscription.document.filename
   end
+  
 end

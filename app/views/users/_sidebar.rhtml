@@ -10,12 +10,12 @@
  <li><%= link_to("Gérer vos podcasts", :controller => "podcasts", :action => "manage") %></li>
  <li><%= link_to("Ajouter un podcast", :controller => "podcasts", :action => "add") %></li>
 </ul>
-<!--
+
 <ul>
  <li><%= link_to("Gérer vos groupes", :controller => "group", :action => "manage") %></li>
  <li><%= link_to("Ajouter un groupe", :controller => "group", :action => "add") %></li>
 </ul>
--->
+
 <h2>Recherchez</h2>
 <% form_tag({:controller => :users, :action => :find }, :id => "search") do %>
  <%= text_field_tag("keywords") %>

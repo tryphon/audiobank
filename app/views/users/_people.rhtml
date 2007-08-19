@@ -1,0 +1,31 @@
+<% if people.empty? %>
+ <li><%= empty %></li>
+<% else %>
+ <% limit ||= 7 %>
+ <% limit = -1 if limit == :none %>
+ <% draggable ||= true %>
+ 
+ <% for entry in (limit > -1 ? people.first(limit) : people) %>
+  <% entry_type = entry.class.to_s.downcase %>
+
+  <li id="<%= "#{entry_type}_#{entry.id}" %>" class="vcard">
+
+   <% case entry_type
+      when "user" %>
+     <%= image_tag("avatar.png", :class => "photo") %>
+     <span class="fn"><%= entry.name %></span>
+     <span class="org"><%= entry.organization %></span>
+    <% when "group" %>
+     <%= image_tag("avatar-group.png", :class => "photo") %>
+     <span class="fn"><%= entry.name %></span>
+   <% end %>
+  </li>
+  
+  <% if draggable %>
+   <%= draggable_element("#{entry_type}_#{entry.id}", :revert => true) %> 
+  <% end %>
+ <% end %>
+ <% if limit > -1 and people.size > limit %>
+   <li class="vcard">...</li>
+ <% end %>
+<% end %>

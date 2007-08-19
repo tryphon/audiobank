@@ -62,10 +62,10 @@ class GroupController < ApplicationController
     input = params[:input].nil? ? "" : params[:input].downcase
     id = params[:id]
     
-    @users = Group.find(id).nonmembers.delete_if do |user|
-      not (user.name.downcase.include?(input) or user.username.downcase.include?(input))
+    @people = Group.find(id).nonmembers.delete_if do |user|
+      not (user.name.downcase.include?(input) or (!user.username.nil? and user.username.downcase.include?(input)))
     end
-    render :partial => "users/users", :object => @users, 
+    render :partial => "users/people", :object => @people, 
       :locals => { :empty => "Aucun utilisateur ne correspond", :draggable => true }
   end	
 

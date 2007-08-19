@@ -4,24 +4,22 @@ class User < ActiveRecord::Base
 	
 	has_many :documents, :dependent => :destroy, :order => "updated_at DESC", :foreign_key => "author_id" do
 		def find_by_tag(name, options = Hash.new)
-			find_by_sql(["SELECT documents.* FROM documents, tags, documents_tags WHERE documents.id = documents_tags.document_id AND tags.id = documents_tags.tag_id AND documents.author_id = ? AND tags.name = ? OFFSET ? LIMIT ?", @owner.quoted_id, name, options[:offset], options[:limit]])
+	    tag = Tag.find_by_name(name)
+		  documents = find(:all).delete_if { |d| !d.tags.include?(tag) }
+		  
+  	  if options[:offset] and options[:limit]
+  	    documents.slice!(options[:offset], options[:limit])
+  	  end
+  	  
+  	  documents
 		end
 		
 		def find_by_keywords(keywords)
-			find(:all, :conditions => ["title ~* ?", keywords])
+			find(:all).delete_if { |d| !d.match?(keywords) }
 		end
 	end
 	
-	has_many :subscriptions, :dependent => :destroy, :order => "created_at DESC", :as => "subscriber" do 
-		def find_by_tag(name, options = Hash.new)
-		  options[:offset] = 0 if options[:offset]
-			find_by_sql(["SELECT subscriptions.* FROM subscriptions, documents, tags, documents_tags WHERE subscriptions.document_id = documents.id AND documents.id = documents_tags.document_id AND tags.id = documents_tags.tag_id AND subscriptions.subscriber_id = ? AND tags.name = ? OFFSET ? LIMIT ?", @owner.quoted_id, name, options[:offset], options[:limit]])
-		end
-		
-		def find_by_keywords(keywords)
-			find_by_sql(["SELECT subscriptions.* FROM subscriptions, documents WHERE subscriptions.document_id = documents.id AND subscriptions.subscriber_id = ? AND documents.title ~* ?", @owner.quoted_id, keywords])
-		end
-	end
+	has_many :subscriptions, :dependent => :destroy, :order => "created_at DESC", :as => "subscriber"
 	
 	has_many :podcasts, :dependent => :destroy, :foreign_key => "author_id"
 	
@@ -35,6 +33,47 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :message => "Un mot de passe est requis", :if => Proc.new { |u| u.openid_url.nil? }
 	validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/, :message => "Un email valide pour vous contacter est requis"
 	
+	def tags
+	  subscriptions_tags = find_subscriptions.collect{ |s| s.document.tags }.flatten
+	  documents_tags = documents.collect{ |d| d.tags }.flatten
+	  (subscriptions_tags + documents_tags).uniq
+	end
+	
+	def find_subscriptions(options = Hash.new)
+	  group_subscriptions = groups.collect{ |group| group.subscriptions }.flatten
+	  all_subscriptions = self.subscriptions + group_subscriptions
+
+	  sorted_attribute = "created_at"
+	  all_subscriptions = all_subscriptions.sort_by { |s| s[sorted_attribute] }.reverse
+	  
+	  if options[:tag]
+	    tag = Tag.find_by_name(options[:tag])
+  	  all_subscriptions = all_subscriptions.delete_if { |s| ! s.document.tags.include?(tag) }
+  	end
+  	
+  	if options[:keywords]
+  	  puts options[:keywords]
+  	  all_subscriptions = all_subscriptions.delete_if do |s| 
+  	    !s.document.match?(options[:keywords])
+  	  end
+  	end
+
+	  if options[:offset] and options[:limit]
+	    return all_subscriptions.slice(options[:offset], options[:limit])
+	  end
+	  
+	  all_subscriptions
+	end
+	
+	def find_subscription(id)
+	  subscription = self.subscriptions.find_by_id(id)
+	  for group in groups
+  	  subscription = group.subscriptions.find_by_id(id)
+  	  break unless subscription.nil?
+	  end
+	  subscription
+	end
+		
 	def self.digest_password(clear_password)
   	Digest::SHA256.hexdigest(clear_password)
 	end
@@ -43,17 +82,15 @@ class User < ActiveRecord::Base
 		write_attribute(:password, User.digest_password(password)) unless password.empty?
 	end
 	
-	def self.authenticate(attributes)
-	  username = attributes[:username]
-	  
+	def self.authenticate(username, clear_password)
 		user = User.find_by_username(username, :conditions => ["confirmed = ?", true])
-
+		
     if user.blank?
       logger.debug("unknown or unconfirmed user : #{username}")
       return nil
     end
     
-    if User.digest_password(attributes[:password]) != user.password
+    if User.digest_password(clear_password) != user.password
       logger.debug("wrong password for : #{username}")
       return nil
     end

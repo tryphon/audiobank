@@ -1,6 +1,8 @@
 class Group < ActiveRecord::Base
    has_and_belongs_to_many :users
    belongs_to :owner, :class_name => "User", :foreign_key => "owner_id"
+   
+   has_many :subscriptions, :dependent => :destroy, :order => "created_at DESC", :as => "subscriber"
 
 	validates_uniqueness_of :name, :message => "Ce nom de groupe existe déjà"
 	validates_presence_of :name, :message => "Un nom de groupe est requis"

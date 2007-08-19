@@ -12,28 +12,33 @@ class UsersController < ApplicationController
 	end
 
  	def dashboard
-		@author = User.find(session[:user])
-		@subscriber = User.find(session[:user])
-		user_tags = @author.documents.collect{ |d| d.tags }
-		@tag = @subscriber.subscriptions.collect{ |s| s.document.tags } + user_tags
-		@tag = @tag.flatten.uniq[0..15]
+ 	  user = User.find(session[:user])
+		@author = user
+		@subscriber = user
+
+		@tag = user.tags.uniq[0..15]
 	end
 	
 	def tags
-	  @author = User.find(session[:user])
-		@subscriber = User.find(session[:user])
-	  @tag = @subscriber.subscriptions.collect{ |s| s.document.tags } + @author.documents.collect{ |d| d.tags }
-		@tag = @tag.flatten.uniq
+	  user = User.find(session[:user])
+	  @author = user
+		@subscriber = user
+
+		@tag = user.tags.uniq[0..15]
 	end
 	
 	def tag
-		@document = User.find(session[:user]).documents.find_by_tag(params[:name], { :limit => 5 })
-		@subscription = User.find(session[:user]).subscriptions.find_by_tag(params[:name], { :limit => 5 })
+	  user = User.find(session[:user])
+
+		@document = user.documents.find_by_tag(params[:name], { :limit => 5 })
+		@subscription = user.find_subscriptions(:tag => params[:name], :limit => 5)
 	end
 	
 	def find
-		@document = User.find(session[:user]).documents.find_by_keywords(params[:keywords])
-		@subscription = User.find(session[:user]).subscriptions.find_by_keywords(params[:keywords])
+	  user = User.find(session[:user])
+	  
+		@document = user.documents.find_by_keywords(params[:keywords])
+		@subscription = user.find_subscriptions(:keywords => params[:keywords])
 	end
 	
 	def options
@@ -51,7 +56,7 @@ class UsersController < ApplicationController
 	def signin
 		@user = User.new
 		if request.post?
-			@user = User.authenticate(params[:user])
+			@user = User.authenticate(params[:user][:username],params[:user][:password])
 			unless @user.blank?
 				flash[:success] = "Bienvenue !"
 				session[:user] = @user.id

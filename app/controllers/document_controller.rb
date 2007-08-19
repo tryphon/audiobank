@@ -61,11 +61,9 @@ class DocumentController < ApplicationController
     
     attributes = Hash.new
 
-    key =~ /(.*)\/(.*)/
-    attributes[:username]= $1
-    attributes[:password]= $2
+    username, password = key.split('/')
     
-    user = User.authenticate(attributes)
+    user = User.authenticate(username, password)
     if user
       @user_id = user.id
       return nil
