@@ -85,6 +85,16 @@ class Document < ActiveRecord::Base
     title.downcase.match(keywords.downcase)
   end
   
+  def match_tags?(tags)
+    tags = [ tags ] unless tags.is_a? Array
+    
+    for tag in tags do 
+      return false unless self.tags.include?(tag)
+    end
+
+    true
+  end
+  
 	protected	
 	def destroy_tags
 		Tag.find(:all, :include => :documents).each do |tag|

@@ -10,6 +10,14 @@ class Tag < ActiveRecord::Base
 	end
 	
 	def self.parse(list)
+	  if list.is_a? Tag
+	    return [ list ]
+	  end
+	  
+	  if list.is_a? Array
+	    return list.collect { |item| Tag.parse(item) }.flatten
+	  end
+	  
 		tags = Array.new
 		
     # remove quoted tags
@@ -37,4 +45,9 @@ class Tag < ActiveRecord::Base
 	def to_s
 	  name
 	end
+	
+	def self.format(tags)
+	  tags.join(" ")
+	end
+	
 end

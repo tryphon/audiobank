@@ -47,12 +47,15 @@ class User < ActiveRecord::Base
 	  all_subscriptions = all_subscriptions.sort_by { |s| s[sorted_attribute] }.reverse
 	  
 	  if options[:tag]
-	    tag = Tag.find_by_name(options[:tag])
-  	  all_subscriptions = all_subscriptions.delete_if { |s| ! s.document.tags.include?(tag) }
+  	  options[:tags] = Tag.parse(options[:tag])
+	  end
+	  
+	  if options[:tags]
+	    tags = Tag.parse(options[:tags])
+  	  all_subscriptions = all_subscriptions.delete_if { |s| ! s.document.match_tags?(tags) }
   	end
   	
   	if options[:keywords]
-  	  puts options[:keywords]
   	  all_subscriptions = all_subscriptions.delete_if do |s| 
   	    !s.document.match?(options[:keywords])
   	  end
@@ -64,6 +67,34 @@ class User < ActiveRecord::Base
 	  
 	  all_subscriptions
 	end
+	
+	def find_documents(options = Hash.new)
+	  documents = self.documents.find(:all)
+
+	  if options[:tag]
+  	  options[:tags] = Tag.parse(options[:tag])
+	  end
+	  
+	  if options[:tags]
+	    tags = Tag.parse(options[:tags])
+		  documents = documents.delete_if do |document| 
+		    !document.match_tags?(tags)
+		  end
+		end
+
+  	if options[:keywords]
+  	  documents = documents.delete_if do |document| 
+  	    !document.match?(options[:keywords])
+  	  end
+  	end
+	  
+	  if options[:offset] and options[:limit]
+	    documents.slice!(options[:offset], options[:limit])
+	  end
+	  
+	  documents
+	end
+	
 	
 	def find_subscription(id)
 	  subscription = self.subscriptions.find_by_id(id)
