@@ -11,5 +11,9 @@ class Group < ActiveRecord::Base
   def nonmembers
   	User.find(:all, :conditions => ["confirmed = ?", true]) - users
   end
+  
+  def match_name?(input)
+ 	  self.name.downcase.include?(input)
+	end
 
 end

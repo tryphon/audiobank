@@ -130,6 +130,10 @@ class User < ActiveRecord::Base
 		user
 	end
 	
+	def match_name?(input)
+	  (self.name.downcase.include?(input) or (not self.username.nil? and self.username.downcase.include?(input)))
+	end
+	
 	def ==(other)
     id == other.id
 	end
