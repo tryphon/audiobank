@@ -1,5 +1,15 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-first:
+kermit:
   id: 1
-another:
+  document_id: 4
+  user_id: 2
+  rating: 0
+  description: I've got the exact same one ! Goddamn Elmo!
+  created_at: <%= DateTime.now %>
+elmo:
   id: 2
+  document_id: 4
+  user_id: 3
+  rating: 0
+  description: Hihi, hihi ...
+  created_at: <%= DateTime.now %>

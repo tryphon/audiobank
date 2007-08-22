@@ -9,14 +9,13 @@
   <% entry_type = entry.class.to_s.downcase %>
 
   <li id="<%= "#{entry_type}_#{entry.id}" %>" class="vcard">
-
    <% case entry_type
       when "user" %>
      <%= image_tag("avatar.png", :class => "photo") %>
      <span class="fn"><%= entry.name %></span>
      <span class="org"><%= entry.organization %></span>
     <% when "group" %>
-     <%= image_tag("avatar-group.png", :class => "photo") %>
+     <%= image_tag("group.png", :class => "photo") %>
      <span class="fn"><%= entry.name %></span>
    <% end %>
   </li>

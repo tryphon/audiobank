@@ -5,12 +5,14 @@ bert:
   name: Bert
   password: <%= User.digest_password("bert") %>
   email: ernie@sesamestreet.com
+  confirmed: true
 ernie:
   id: 2
   username: ernie
   name: Ernie
   password: <%= User.digest_password("ernie") %>
   email: bert@sesamestreet.com
+  confirmed: true
 elmo:
   id: 3
   username: elmo

@@ -4,13 +4,16 @@ first:
   document_id: 1
   author_id: 1
   subscriber_id: 2
+  subscriber_type: User
 second:
   id: 2
   document_id: 2
   author_id: 2
   subscriber_id: 1
+  subscriber_type: User
 third:
   id: 3
   document_id: 3
   author_id: 2
   subscriber_id: 3
+  subscriber_type: User
