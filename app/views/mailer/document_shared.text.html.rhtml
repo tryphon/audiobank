@@ -1,0 +1,16 @@
+<html>
+ <body>
+  <% for subscription in @subscriptions %>
+    <h3>Document <%= subscription.document.title %></h3>
+    <p>
+      Vous pouvez dès maintenant accéder au document "<%= subscription.document.title %>".
+    </p>
+    <p>
+      Ce partage vous est proposé par <%= subscription.author.name %>.
+    </p>
+    <ul>
+      <li><%= link_to("Détails du document", :controller => "subscriptions", :action => "show", :id => subscription, :only_path => false) %></li>
+    </ul>
+   <% end %>
+ </body>
+</html>

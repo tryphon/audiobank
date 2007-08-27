@@ -1,0 +1,9 @@
+<% for subscription in @subscriptions %>
+  *Document <%= subscription.document.title %>*
+
+  Vous pouvez dès maintenant accéder au document "<%= subscription.document.title %>".
+
+  Ce partage vous est proposé par <%= subscription.author.name %>.
+
+  * <%= url_for(:controller => "subscriptions", :action => "show", :id => subscription, :only_path => false) %>
+<% end %>
