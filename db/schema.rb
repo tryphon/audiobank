@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 24) do
+ActiveRecord::Schema.define(:version => 25) do
 
   create_table "casts", :force => true do |t|
     t.column "document_id", :integer,                 :null => false
@@ -89,13 +89,13 @@ ActiveRecord::Schema.define(:version => 24) do
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
 
   create_table "subscriptions", :force => true do |t|
-    t.column "document_id",     :integer,                  :null => false
-    t.column "author_id",       :integer,                  :null => false
-    t.column "subscriber_id",   :integer,                  :null => false
+    t.column "document_id",     :integer,                     :null => false
+    t.column "author_id",       :integer,                     :null => false
+    t.column "subscriber_id",   :integer,                     :null => false
     t.column "download_count",  :integer,  :default => 0
     t.column "created_at",      :datetime
-    t.column "subscriber_type", :string,   :default => "", :null => false
-    t.column "notified",        :boolean,                  :null => false
+    t.column "subscriber_type", :string,   :default => "",    :null => false
+    t.column "notified",        :boolean,  :default => false, :null => false
   end
 
   create_table "tags", :force => true do |t|
