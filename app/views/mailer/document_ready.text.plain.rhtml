@@ -4,4 +4,4 @@ Le document "<%= @document.title %>" est maintenant prêt pour un partage sur in
 
 * Identifiant du cast : <%= @document.casts.first.name %>
 * Durée : <%= (@document.length / 60.0).ceil %> minutes
-
+* Détails du document : <%= url_for(:controller => "document", :action => "show", :id => @document, :only_path => false) %>
