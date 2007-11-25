@@ -3,7 +3,7 @@ class AddSubscriptionNotified < ActiveRecord::Migration
     add_column :subscriptions, :notified, :boolean
     Subscription.reset_column_information
     Subscription.update_all "notified = 1"
-    change_column :subscriptions, :notified, :boolean, :null => false
+    # change_column :subscriptions, :notified, :boolean, :null => false
   end
 
   def self.down
