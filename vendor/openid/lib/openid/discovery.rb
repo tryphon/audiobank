@@ -5,7 +5,7 @@ require "openid/parse"
 # try and use the yadis gem, falling back to system yadis
 begin
   require 'rubygems'
-  require_gem 'ruby-yadis', ">=0.3.3"  
+  gem 'ruby-yadis', ">=0.3.3"
 rescue LoadError
   require "yadis"
 end
@@ -21,7 +21,7 @@ module OpenID
                      OPENID_1_1_TYPE,OPENID_1_0_TYPE]
 
   # OpenID::Discovery encapsulates the logic for doing Yadis and OpenID 1.0
-  # style server discovery.  This class uses a session object to manage 
+  # style server discovery.  This class uses a session object to manage
   # a list of tried OpenID servers for implemeting server fallback.  This is
   # useful the case when a user's primary server(s) is not available, and
   # will allow then to try again with one of their alternates.
@@ -39,7 +39,7 @@ module OpenID
       unless filter
         filter = lambda {|s| OpenIDServiceEndpoint.from_endpoint(s)}
       end
-      
+
       begin
         # do yadis discover, filtering out OpenID services
         return super(filter)
@@ -61,7 +61,7 @@ module OpenID
     def openid_discovery(url)
       ret = @fetcher.get(url)
       return [HTTP_FAILURE, nil] if ret.nil?
-      
+
       consumer_id, data = ret
       server = nil
       delegate = nil
@@ -71,7 +71,7 @@ module OpenID
           href = attrs["href"]
           server = href unless href.nil?
         end
-        
+
         if rel == "openid.delegate" and delegate.nil?
           href = attrs["href"]
           delegate = href unless href.nil?
@@ -79,18 +79,18 @@ module OpenID
       end
 
       return [PARSE_ERROR, nil] if server.nil?
-    
+
       server_id = delegate.nil? ? consumer_id : delegate
 
       consumer_id = OpenID::Util.normalize_url(consumer_id)
       server_id = OpenID::Util.normalize_url(server_id)
       server_url = OpenID::Util.normalize_url(server)
-                  
+
       service = OpenID::FakeOpenIDServiceEndpoint.new(consumer_id,
                                                       server_id,
                                                       server_url)
       return [SUCCESS, service]
-    end    
+    end
 
   end
 
@@ -114,7 +114,7 @@ module OpenID
           endpoints << se
         end
       }
-      return [@url, endpoints]      
+      return [@url, endpoints]
     end
 
   end
