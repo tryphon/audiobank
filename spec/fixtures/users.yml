@@ -1,0 +1,6 @@
+first:
+  id: 1
+  username: first
+  password: secret
+  name: First
+  email: first@audiobank.tryphon.org
