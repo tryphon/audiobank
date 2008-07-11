@@ -1,13 +1,13 @@
 class Cast < ActiveRecord::Base
 	belongs_to :document
-	
+
 	FORMATS = %w(ogg mp3)
-	
+
 	def update_file(format = "ogg")
 		puts "DEBUG: #{RAILS_ROOT}/bin/encode #{document.path} #{path(format)} #{format}"
 		system "#{RAILS_ROOT}/bin/encode", document.path, path(format), format
 	end
-	
+
 	def before_destroy
 		FORMATS.each do |format|
 			File.delete(path(format)) if File.exists?(path(format))
@@ -17,19 +17,19 @@ class Cast < ActiveRecord::Base
 	def path(format = "ogg")
 	  "#{RAILS_ROOT}/media/cast/#{filename(format)}"
 	end
-	
+
 	def filename(format = "ogg")
 	  "#{id}.#{format}"
 	end
-	
-	def size(format = "ogg") 
-		File.size(path(format))
+
+	def size(format = "ogg")
+	  File.exists?(path(format)) ? File.size(path(format)) : 0
 	end
-	
+
 	def uptodate?(format = "ogg")
 		FileUtils.uptodate?(path(format), document.path)
 	end
-	
+
 	def self.update
 		Cast.find(:all).each do |cast|
 			FORMATS.each do |format|
@@ -41,7 +41,7 @@ class Cast < ActiveRecord::Base
 				end
 			end
 		end
-				
+
 		Document.find(:all).delete_if { |d| !d.uploaded? or !d.casts.empty? }.each do |document|
 			puts "INFO: create cast for document #{document.id}"
 			cast = Cast.create(:document => document, :name => StringRandom.alphanumeric(8).downcase)
