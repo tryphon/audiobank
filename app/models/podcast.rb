@@ -7,14 +7,14 @@ class Podcast < ActiveRecord::Base
   		self.tags = Tag.parse(list)
   	end
   end
-  
+
   def date
-  	return Time.now if documents.empty? 
+  	return Time.now if documents.empty?
   	documents.first.updated_at
   end
-  
+
   def documents
-    self.author.find_documents(:tags => self.tags)
+    self.author.find_documents(:tags => self.tags, :order_by => :id).reverse
   end
-	
+
 end
