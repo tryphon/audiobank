@@ -88,6 +88,10 @@ class User < ActiveRecord::Base
   	  end
   	end
 
+	  if options[:order_by]
+	    documents = documents.sort_by(&options[:order_by])
+	  end
+
 	  if options[:offset] and options[:limit]
 	    documents.slice!(options[:offset], options[:limit])
 	  end
@@ -151,4 +155,5 @@ class User < ActiveRecord::Base
   def after_save
   	User.destroy_all(["confirmed = ? AND created_at <= ?", false, Time.new - 2592000])
   end
+
 end
