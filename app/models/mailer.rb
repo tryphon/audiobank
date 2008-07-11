@@ -8,23 +8,30 @@ class Mailer < ActionMailer::Base
     @body = { :controller => controller }
     @body["user"] = user
   end
-  
+
+  def new_password(user, new_password)
+    @recipients = user.email
+    @from = "AudioBank <audiobank@tryphon.org>"
+    @subject = "[AudioBank] Votre mot de passe"
+    @body = { :new_password => new_password, :user => user }
+  end
+
   def document_ready(document)
     @recipients = document.author.email
     @from = "AudioBank <audiobank@tryphon.org>"
     @subject = "[AudioBank] #{document.title} prêt"
     @body = { :document => document, :user => document.author }
   end
-  
+
   def document_shared(user, subscriptions)
     return if subscriptions.empty?
-    
+
     @recipients = user.email
     @from = "AudioBank <audiobank@tryphon.org>"
-    @subject = 
-      "[AudioBank] " + 
+    @subject =
+      "[AudioBank] " +
       (subscriptions.size == 1 ? "nouvelle souscription" : "nouvelles souscriptions")
     @body = { :subscriptions => subscriptions, :user => user }
   end
-  
+
 end

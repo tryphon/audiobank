@@ -136,6 +136,17 @@ class User < ActiveRecord::Base
 		user
 	end
 
+	def change_password
+	  generated_password = new_password
+	  update_attribute(:password, generated_password)
+	  Mailer.deliver_new_password(self, generated_password)
+	end
+
+	def new_password
+	  random_sha = Digest::SHA256.hexdigest rand.to_s
+	  random_sha[-10..-1]
+	end
+
 	def match_name?(input)
 	  (self.name.downcase.include?(input) or (not self.username.nil? and self.username.downcase.include?(input)))
 	end

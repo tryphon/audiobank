@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
 	open_id_consumer :required => [:email, :nickname], :optional => [:fullname]
 	layout 'documents'
-	
+
 	def index
 		welcome
 		render(:action => "welcome")
 	end
-	
+
 	def welcome
 		# could be remove if no one find something to put in
 	end
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
 		@tag = user.tags.uniq[0..15]
 	end
-	
+
 	def tags
 	  user = User.find(session[:user])
 	  @author = user
@@ -26,21 +26,21 @@ class UsersController < ApplicationController
 
 		@tag = user.tags.uniq[0..15]
 	end
-	
+
 	def tag
 	  user = User.find(session[:user])
 
 		@document = user.documents.find_by_tag(params[:name], { :limit => 5 })
 		@subscription = user.find_subscriptions(:tag => params[:name], :limit => 5)
 	end
-	
+
 	def find
 	  user = User.find(session[:user])
-	  
+
 		@document = user.documents.find_by_keywords(params[:keywords])
 		@subscription = user.find_subscriptions(:keywords => params[:keywords])
 	end
-	
+
 	def options
 		@user = User.find(session[:user])
 	  @users = User.find(:all, :conditions => ["id != ?", @user.id])
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
 			end
 		end
 	end
-	
+
 	def signin
 		@user = User.new
 		if request.post?
@@ -66,7 +66,7 @@ class UsersController < ApplicationController
 			end
 		end
 	end
-	
+
   def signup
     @user = User.new(params[:user])
     if request.post?
@@ -80,20 +80,35 @@ class UsersController < ApplicationController
       	@user.password = ""
         flash[:failure] = "Votre compte n'a pas été crée"
 		  end
-    end  
+    end
   end
-  
+
+  def recover_password
+    @email = params[:email]
+
+    if request.post?
+      user = User.find_by_email(@email)
+      unless user.nil?
+        user.change_password
+        flash[:success] = "Votre nouveau de passe a été envoyé à #{user.email}"
+        redirect_to :action => :signin
+      else
+        flash[:failure] = "Aucun compte AudioBank ne correspond à cet email"
+      end
+    end
+  end
+
   def confirm
   	@user = User.find(params[:id])
   	if @user.hashcode == params[:confirm] && !@user.confirmed?
   		@user.update_attribute(:confirmed, true)
-  		
+
   		begin
   	  	User.find(@user.id).subscriptions.build(:author => User.find(1), :document => Document.find(1)).save
   	  rescue ActiveRecord::RecordNotFound
   	    logger.error("no welcome document found")
   	  end
-  	  
+
 	  	flash[:success] = "Bienvenue !"
 	    session[:user] = @user.id
 	  	redirect_to :action => "dashboard"
@@ -117,7 +132,7 @@ class UsersController < ApplicationController
     case open_id_response.status
       when OpenID::FAILURE
         flash[:failure] = "Votre identification a échoué"
-       
+
       when OpenID::SUCCESS
         @user = User.find_or_initialize_by_openid_url(open_id_response.identity_url)
         if @user.new_record?
@@ -129,10 +144,10 @@ class UsersController < ApplicationController
         end
         flash[:success] = "Bienvenue !"
        	session[:user] = @user.id
-    
+
       when OpenID::CANCEL
         flash[:failure] = "Votre identification a été annulé"
-    
+
       else
         flash[:failure] = "Voter identification a échoué : #{open_id_response.status}"
     end
@@ -143,5 +158,5 @@ class UsersController < ApplicationController
 		session[:user] = nil
 		flash[:success] = "A bientôt !"
 		redirect_to :action => "welcome"
-	end 
+	end
 end

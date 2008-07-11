@@ -5,7 +5,10 @@
  <p><label for="password">Mot de passe :</label><br/>
  <%= password_field("user", "password") %></p>
  <%= submit_tag "Se connecter" %>
+ ou
+ <%= link_to "rappel de votre mot de passe &#8250;", :controller => :users, :action => :recover_password, :class => "blue" %>
 <% end %>
+
 <% form_tag(:action => :begin) do %>
  <p><label for="openid_url">OpenId :</label><br/>
  <%= text_field_tag("openid_url", nil, { :size => 30, :class => :openid }) %></p>
