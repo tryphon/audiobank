@@ -92,8 +92,8 @@ end
 
 desc "Create media folder"
 task :after_setup do
-  run "mkdir #{shared_path}/cache" 
-	run "mkdir #{shared_path}/media" 
+  run "mkdir #{shared_path}/cache"
+	run "mkdir #{shared_path}/media"
 	run "mkdir #{shared_path}/media/cue"
 	run "mkdir #{shared_path}/media/cast"
 	run "mkdir #{shared_path}/media/upload"
@@ -104,10 +104,10 @@ task :before_deploy do
   disable_web
 end
 
-desc "Migrate before restart"
-task :before_restart do
-  migrate
-end
+#desc "Migrate before restart"
+#task :before_restart do
+#  migrate
+#end
 
 desc "Put our own maintenance template"
 task :disable_web do
@@ -128,7 +128,7 @@ end
 
 desc "Add symlink"
 task :after_symlink do
-	run "ln -nfs #{shared_path}/system/mahoro.so #{release_path}/vendor/mahoro.so" 
+	run "ln -nfs #{shared_path}/system/mahoro.so #{release_path}/vendor/mahoro.so"
 	run "ln -nfs #{shared_path}/media #{release_path}/media"
-	run "ln -nfs #{shared_path}/cache #{release_path}/public/cache" 
+	run "ln -nfs #{shared_path}/cache #{release_path}/public/cache"
 end
