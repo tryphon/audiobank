@@ -1,12 +1,12 @@
 class DocumentsController < ApplicationController
 	layout 'documents', :except => [:auto_complete_for_tags]
-	
+
 	upload_status_for :upload
-  
+
   def index
     redirect_to :action => 'manage'
   end
-  
+
   def add
     @document = AudioDocument.new(params[:document])
     if request.post?
@@ -20,8 +20,8 @@ class DocumentsController < ApplicationController
       end
     end
   end
-  
-  def show 
+
+  def show
   	@document = User.find(session[:user]).documents.find(params[:id], :include => :tags)
   	@review = Review.new(params[:review])
   	if request.post?
@@ -29,7 +29,7 @@ class DocumentsController < ApplicationController
   		@review.user = User.find(session[:user])
   		if @review.save
   			flash[:success] = "Votre commentaire a bien été ajouté"
-  			redirect_to :action => 'show', :id => @document 
+  			redirect_to :action => 'show', :id => @document
   		else
   			flash[:failure] = "Votre commentaire n'a pas été ajouté"
   		end
@@ -37,7 +37,7 @@ class DocumentsController < ApplicationController
     	@review.rating = 3
   	end
   end
-    
+
   def edit
     @document = User.find(session[:user]).documents.find(params[:id])
     if request.post?
@@ -55,14 +55,14 @@ class DocumentsController < ApplicationController
 		@pages = Paginator.new(self, User.find(session[:user]).documents.size, 4, params[:page])
 		@document = User.find(session[:user]).documents.find(:all, :limit => @pages.items_per_page, :offset => @pages.current.offset, :include => :tags)
 	end
-  
+
   def upload
   	@document = User.find(session[:user]).documents.find(params[:id])
   	unless @document.upload
 	  	@document.upload = Upload.new
 	  	@document.save
 	  end
-  	
+
   	if request.post?
   		if params[:mode] == "ftp"
 	  		logger.info "FTP upload from #{@document.upload}"
@@ -74,35 +74,35 @@ class DocumentsController < ApplicationController
 	  		end
 			else
 				upload_file = params[:document][:file]
-			end		
-				
+			end
+
 			upload_progress.message = "Vérification du document ..."
       session.update
-			
+
 			begin
 				logger.debug "Upload file: #{upload_file}"
-				uploaded = @document.upload_file(upload_file)			
+				uploaded = @document.upload_file(upload_file)
 			rescue Exception => e
  				logger.error("Can't upload #{upload_file.to_s}: #{e}")
 			end
-			
+
 			if uploaded
 				@document.upload = nil
   			@document.save
   			flash[:success] = "Votre fichier a bien été déposé"
   			redirect_to :action => 'share', :id => @document
-  		else  			
-  			flash[:failure] = "Votre fichier n'a pas été déposé" 
+  		else
+  			flash[:failure] = "Votre fichier n'a pas été déposé"
   			redirect_to :action => 'upload', :id => @document
   		end
   	end
   end
-  
+
   def download
   	@document = User.find(session[:user]).documents.find(params[:id])
   	send_file @document.path, :type => @document.format, :filename => @document.filename
   end
-  
+
   def destroy
     User.find(session[:user]).documents.find(params[:id]).destroy
     redirect_to :action => 'manage'
@@ -112,27 +112,28 @@ class DocumentsController < ApplicationController
   	@document = User.find(session[:user]).documents.find(params[:id])
 	  flash[:warning] = "Votre document n'est lié à aucun fichier" unless @document.uploaded?
 	end
-	
+
 	def tag
 		@pages = Paginator.new(self, User.find(session[:user]).documents.find_by_tag(params[:name]).size, 4, params[:page])
 		@document = User.find(session[:user]).documents.find_by_tag(params[:name], { :offset => @pages.current.offset, :limit => @pages.items_per_page })
 	end
-	
+
 	def auto_complete_for_tags
 		@tag = Tag.find(:all, :conditions => ["name ~* ?", params[:labels]])
 	end
-	
+
   def listen
   	@document = User.find(session[:user]).documents.find(params[:id])
+  	redirect_to :controller => 'casts', :action => 'play', :name => @document.casts.first.name
 	end
 
   def search_nonsubscribers
     input = params[:input].nil? ? "" : params[:input].downcase
     id = params[:id]
-    
+
     @people = Document.find(id).nonsubscribers.delete_if do |people|
       ! people.match_name?(input)
     end
     render :partial => "users/people", :object => @people, :locals => { :empty => "Aucun utilisateur ne correspond", :draggable => true }
-  end	
+  end
 end
