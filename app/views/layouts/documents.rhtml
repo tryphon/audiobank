@@ -18,8 +18,8 @@
    <h1>AudioBank</h1>
    <ul>
     <% if session[:user] %>
-     <li><%= link_to("Dashboard", :controller => "users", :action => "dashboard") %></li>
-     <li><%= link_to("Options", :controller => "users", :action => "options") %></li>
+     <li><%= link_to("Tableau de bord", :controller => "users", :action => "dashboard") %></li>
+     <li><%= link_to("Mon compte", :controller => "user", :action => "show") %></li>
      <li><%= link_to("Quitter", :controller => "users", :action => "signout") %></li>
     <% else %>
      <li><%= link_to("Créer un compte", :controller => "users", :action => "signup") %></li>

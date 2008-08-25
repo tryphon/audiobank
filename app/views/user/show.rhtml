@@ -1,0 +1,28 @@
+<h2>Vous</h2>
+
+<dl>
+  <dt>Nom complet :</dt>
+  <dd><%= @user.name %></dd>
+
+  <dt>Email :</dt>
+  <dd><%= @user.email %></dd>
+
+  <dt>Organisme :</dt>
+  <dd><%= @user.organization %></dd>
+</dl>
+
+<div class="actions">
+ <%= link_to("Modifier", {:action => "edit"}, :title => "Modifier", :class => "edit") %>
+</div>
+
+<h2>Groupes</h2>
+
+<% unless @user.groups.empty? %>
+  <p>
+    Vous appartenez <%= @user.groups.many? ? "aux groupes suivants" : "au groupe suivant" %> :
+  </p>
+<% end %>
+
+<ul>
+ <%= render :partial => "group/groups", :object => @user.groups, :locals => { :linked => false, :empty => "Vous n'appartenez à aucun groupe", :actions => false, :members => false } %>
+</ul>

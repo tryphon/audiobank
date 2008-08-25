@@ -1,6 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   # The priority is based upon order of creation: first created -> highest priority.
-  
+
   # Sample of regular route:
   # map.connect 'products/:id', :controller => 'catalog', :action => 'view'
   # Keep in mind you can assign values other than :controller and :action
@@ -27,10 +27,12 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'cues/:action/:id', :controller => 'cues'
   map.connect 'casts/:name', :controller => 'casts', :action => 'play'
   map.connect 'casts/:name.:format', :controller => 'casts', :action => 'play'
+  map.connect 'user/:action', :controller => 'user'
+
   map.connect ':action/:id/:confirm', :controller => 'users', :action => 'confirm'
 	map.connect ':action/:id', :controller => 'users'
-	
-  # You can have the root of your site routed by hooking up '' 
+
+  # You can have the root of your site routed by hooking up ''
   # -- just remember to delete public/index.html.
   map.connect '', :controller => 'users', :action => 'welcome'
 
