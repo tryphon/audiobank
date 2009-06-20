@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class DocumentsController < ApplicationController
 	layout 'documents', :except => [:auto_complete_for_tags]
 
@@ -52,8 +53,7 @@ class DocumentsController < ApplicationController
   end
 
 	def manage
-		@pages = Paginator.new(self, User.find(session[:user]).documents.size, 4, params[:page])
-		@document = User.find(session[:user]).documents.find(:all, :limit => @pages.items_per_page, :offset => @pages.current.offset, :include => :tags)
+		@documents = User.find(session[:user]).documents.paginate :page => params[:page], :per_page => 4
 	end
 
   def upload

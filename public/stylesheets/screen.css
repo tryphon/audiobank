@@ -30,7 +30,7 @@ img { border: none; vertical-align: middle; }
 #frame ul { margin: 4px 0; list-style-type: none; }
 #frame h1 { font: normal 145% "Georgia", serif; color: #66af16; margin: 6px 0; }
 #frame h2 { font: normal 120% "Georgia", serif; margin: 6px 0; color: #7dacd1; clear: both; border-bottom: 1px solid #7dacd1; }
-#frame .actions, #frame .tags  { clear: both; margin: 0 0 6px; padding: 4px 0; font-size: 90%; text-align: right; border-top: 1px solid #ccc; }
+#frame .actions, #frame .tags, #frame .pagination { clear: both; margin: 0 0 6px; padding: 4px 0; font-size: 90%; text-align: right; border-top: 1px solid #ccc; }
 #frame .details { position: absolute; top: 10px; right: 0; font-size: 90%; }
 #frame .tags { margin: 6px 0 0; padding: 6px 20px; text-align: left; background: url("../images/tags.png") no-repeat 0px 6px; }
 #frame .details span, #frame .actions span, #frame .icon { margin: 0; padding: 0 4px 0 20px; }
@@ -51,6 +51,11 @@ img { border: none; vertical-align: middle; }
 #frame .size { background: url("../images/size.png") no-repeat; }
 #frame .note { background: url("../images/note.png") no-repeat; }
 #frame .author { float: left; background: url("../images/author.png") no-repeat; }
+
+#frame .pagination a { color: #000; padding: 2px; }
+#frame .pagination .next_page { background: url("../images/next.png") no-repeat; padding: 2px 2px 2px 20px; }
+#frame .pagination .prev_page { background: url("../images/previous.png") no-repeat; padding: 2px 2px 2px 20px; }
+#frame .pagination .disabled { display: none; }
 
 #content { float: right; width: 510px; margin: 0 0 0 40px; }
 #content h3, #content h3 a { text-decoration: none; color: #6b2; margin-bottom: 6px; }
