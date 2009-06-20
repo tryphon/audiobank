@@ -1,5 +1,6 @@
 require 'mahoro'
 require 'taglib'
+
 class Document < ActiveRecord::Base
 	belongs_to :author, :class_name => "User", :foreign_key => "author_id"
 	has_one :upload, :dependent => :destroy
@@ -12,62 +13,73 @@ class Document < ActiveRecord::Base
 	
 	validates_presence_of :title, :message => "Un titre est requis"
 	validates_presence_of :description, :message => "Une description est requise"
-	validates_length_of :description, :maximum => 255, :message => "Votre description est trop longue"
+	validates_length_of :description, :maximum => 255, :message => "Votre description est trop longue", :allow_blank => true, :allow_nil => true
 	
 	attr_protected :size, :length, :format, :file
 
 	def subscribers
+    # Subscription#subscriber is polymorphic
+    # with current Rails, a has_many :through isn't possible
     self.subscriptions.collect { |s| s.subscriber }
   end
 	
 	def filename
-		"#{id}-#{title}#{suffix}"
+		"#{id}-#{title}.#{extname}"
 	end
+
+  def extname
+  	case self.format
+    when "audio/mpeg" then "mp3"
+    when "audio/x-flac" then "flac"
+    when "application/ogg", "audio/x-vorbis+ogg" then "ogg"
+  		# not supported format :
+    when "audio/x-wav" then "wav"
+    when "audio/mp4" then "ma4"
+    else nil
+  	end
+  end
 	
 	def path
 		"#{RAILS_ROOT}/media/#{id}"
 	end
-		
+  
 	def duration
-		Time.at(self.length) - 3600
+    # TODO use a Duration object ?
+		Time.at(self.length) + Time.local(1970,1,1).to_i
 	end
 	
 	def upload_file(file)
-			document = TagLib::File.new(file.path, Mahoro.new(Mahoro::NONE).file(file.path))
-				self.length = document.length
-			document.close
-			
-			self.format = Mahoro.new(Mahoro::MIME).file(file.path)
-			file.respond_to?(:size) ? self.size = file.size : self.size = File.size(file.path)
-			
-			self.uploaded = false
-			File.open(path, "wb") do |f|
-				f.write(file.read)
-			end
- 			
-			self.uploaded = true
-			self.cues.clear
-			self.casts.clear
-			
-			true
+    document = TagLib::File.new(file.path)
+    self.length = document.length
+    document.close
+    
+    self.format = Mahoro.new(Mahoro::MIME).file(file.path)
+    file.respond_to?(:size) ? self.size = file.size : self.size = File.size(file.path)
+    
+    self.uploaded = false
+    File.open(path, "wb") do |f|
+      f.write(file.read)
+    end
+    
+    self.uploaded = true
+    self.cues.clear
+    self.casts.clear
+    
+    true
 	end
 	
 	def after_destroy
 		File.delete(path) if File.exist?(path)
-		destroy_tags
+		Tag.destroy_orphelan_tags
   end
   
 	def after_save
-		destroy_tags
+		Tag.destroy_orphelan_tags
 	end
 	
 	def before_create
 	  self.upload = Upload.new
 	end
-  
-  def uploaded?
-  	uploaded
-  end
   
   def tag_with(list)
   	Tag.transaction do
@@ -86,31 +98,7 @@ class Document < ActiveRecord::Base
   end
   
   def match_tags?(tags)
-    tags = [ tags ] unless tags.is_a? Array
-    
-    for tag in tags do 
-      return false unless self.tags.include?(tag)
-    end
-
-    true
+    (Array(tags) - self.tags).empty?
   end
-  
-	protected	
-	def destroy_tags
-		Tag.find(:all, :include => :documents).each do |tag|
-			tag.destroy if tag.documents.empty?
-		end
-	end
 	
-  def suffix
-  	case self.format
-  		when "audio/mpeg" then ".mp3"
-  		when "audio/x-flac" then ".flac"
-  		when "application/ogg", "audio/x-vorbis+ogg" then ".ogg"
-  		# not supported format :
-  		when "audio/x-wav" then ".wav"
-  		when "audio/mp4" then ".ma4"
-  		else nil
-  	end
-  end
 end

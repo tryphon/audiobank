@@ -1,0 +1,8 @@
+Autotest.add_hook :initialize do |at|
+  %w{.git bin Capfile coverage media Rakefile README script vendor}.each do |exception|
+    at.add_exception(exception)
+  end
+  at.add_mapping(%r%^spec/factories\.rb$%) { 
+    at.files_matching %r%^spec/.*_spec\.rb$%
+  }
+end

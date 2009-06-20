@@ -5,6 +5,12 @@ require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'spec'
 require 'spec/rails'
 
+require 'factory_girl'
+
+def fixture_path
+  @fixture_path ||= File.join(File.dirname(__FILE__), "fixtures")
+end
+
 Spec::Runner.configure do |config|
   # If you're not using ActiveRecord you should remove these
   # lines, delete config/database.yml and disable :active_record

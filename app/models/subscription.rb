@@ -5,6 +5,8 @@ class Subscription < ActiveRecord::Base
 
 	validates_uniqueness_of :subscriber_id, :scope => [:document_id, :subscriber_type]
 
+  before_validation_on_create :define_default_author
+
 	def self.notify
 	  unnotified_subscriptions = Subscription.find_all_by_notified(false)
 
@@ -38,5 +40,11 @@ class Subscription < ActiveRecord::Base
 	def users
 	 subscriber.is_a?(Group) ? subscriber.users : [ subscriber ]
 	end
+
+  private
+
+  def define_default_author
+    self.author = self.document.author
+  end
 
 end

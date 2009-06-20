@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require "digest/sha2"
 class User < ActiveRecord::Base
 	has_many :reviews, :dependent => :destroy
@@ -154,10 +155,6 @@ class User < ActiveRecord::Base
 
 	def match_name?(input)
 	  (self.name.downcase.include?(input) or (not self.username.nil? and self.username.downcase.include?(input)))
-	end
-
-	def ==(other)
-    id == other.id
 	end
 
 	def hashcode

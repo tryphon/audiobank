@@ -49,5 +49,11 @@ class Tag < ActiveRecord::Base
 	def self.format(tags)
 	  tags.join(" ")
 	end
+
+	def self.destroy_orphelan_tags
+		Tag.find(:all, :include => :documents).each do |tag|
+			tag.destroy if tag.documents.empty?
+		end
+	end
 	
 end

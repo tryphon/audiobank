@@ -17,3 +17,10 @@ config.action_controller.perform_caching             = false
 # The :test delivery method accumulates sent emails in the
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
+
+# config.gem "rspec",            :lib => false
+# config.gem "rspec-rails",      :lib => false
+# config.gem "factory_girl", :lib => false
+# config.gem "remarkable_rails", :lib => false
+# config.gem "svenfuchs-i18n", :lib => false
+
