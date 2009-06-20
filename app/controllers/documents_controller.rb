@@ -114,8 +114,7 @@ class DocumentsController < ApplicationController
 	end
 
 	def tag
-		@pages = Paginator.new(self, User.find(session[:user]).documents.find_by_tag(params[:name]).size, 4, params[:page])
-		@document = User.find(session[:user]).documents.find_by_tag(params[:name], { :offset => @pages.current.offset, :limit => @pages.items_per_page })
+		@documents = User.find(session[:user]).documents.find_by_tag(params[:name]).paginate(:page => params[:page], :per_page => 4)
 	end
 
 	def auto_complete_for_tags
