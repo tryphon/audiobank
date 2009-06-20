@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class SubscriptionsController < ApplicationController
   layout 'documents'
 
@@ -6,8 +7,7 @@ class SubscriptionsController < ApplicationController
   end
 
 	def manage
-		@pages = Paginator.new(self, User.find(session[:user]).find_subscriptions.size, 4, params[:page])
-		@subscription = User.find(session[:user]).find_subscriptions(:limit => @pages.items_per_page, :offset => @pages.current.offset)
+		@subscriptions = User.find(session[:user]).find_subscriptions.paginate(:page => params[:page], :per_page => 4)
 	end
 
   def listen
@@ -56,8 +56,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def tag
-  	@pages = Paginator.new(self, User.find(session[:user]).find_subscriptions(:tag => params[:name]).size, 4, params[:page])
-  	@subscriptions = User.find(session[:user]).find_subscriptions(:tag => params[:name], :offset => @pages.current.offset, :limit => @pages.items_per_page)
+  	@subscriptions = User.find(session[:user]).find_subscriptions(:tag => params[:name]).paginate(:page => params[:page], :per_page => 4)
   end
 
   def download

@@ -1,8 +1,5 @@
 <h2>Vos souscriptions portant l'étiquette : <%= params[:name] %></h2>
 <ul>
- <%= render :partial => "subscriptions/subscriptions", :object => @subscription, :locals => { :linked => true, :empty => "Aucune souscription correspondant n'a été trouvé ...", :actions => true, :tags => true } %>
+ <%= render :partial => "subscriptions/subscriptions", :object => @subscriptions, :locals => { :linked => true, :empty => "Aucune souscription correspondant n'a été trouvé ...", :actions => true, :tags => true } %>
 </ul>
-<div class="actions">
- <%= link_to("Précédents", { :page => @pages.current.previous }, :class => "previous") if @pages.current.previous %>
- <%= link_to("Suivants", { :page => @pages.current.next }, :class => "next") if @pages.current.next %> 
-</div>
+<%= will_paginate @subscriptions %>

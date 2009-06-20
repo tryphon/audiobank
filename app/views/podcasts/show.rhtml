@@ -1,6 +1,6 @@
 <h2>Votre podcast</h2>
 <ul>
- <%= render :partial => "podcasts/podcasts", :object => @podcast.to_a, :locals => { :linked => false, :empty => "Aucun podcast correspondant n'a été trouvé ...", :actions => true, :tags => true } %>
+ <%= render :partial => "podcasts/podcasts", :object => Array(@podcast), :locals => { :linked => false, :empty => "Aucun podcast correspondant n'a été trouvé ...", :actions => true, :tags => true } %>
 </ul>
 
 <h2>Publier votre podcast</h2>

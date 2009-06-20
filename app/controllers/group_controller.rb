@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class GroupController < ApplicationController
 
 	layout 'documents'
@@ -23,8 +24,7 @@ class GroupController < ApplicationController
 
   def manage
     user = User.find(session[:user])
-		@pages = Paginator.new(self, user.manageable_groups.size, 4, params[:page])
-    @groups = user.manageable_groups.find(:all, :limit => @pages.items_per_page, :offset => @pages.current.offset)
+    @groups = user.manageable_groups.paginate(:page => params[:page], :per_page => 4)
   end
   
   def edit

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class PodcastsController < ApplicationController
   layout 'documents', :except => [:feed]
 	
@@ -38,8 +39,7 @@ class PodcastsController < ApplicationController
   end
 
 	def manage
-		@pages = Paginator.new(self, User.find(session[:user]).podcasts.size, 4, params[:page])
-		@podcast = User.find(session[:user]).podcasts.find(:all, :limit => @pages.items_per_page, :offset => @pages.current.offset, :include => :tags)
+		@podcasts = User.find(session[:user]).podcasts.paginate(:page => params[:page], :per_page => 4, :include => :tags)
 	end
     
   def destroy

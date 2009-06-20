@@ -1,8 +1,5 @@
 <h2>Gérer vos podcasts</h2>
 <ul>
- <%= render :partial => "podcasts/podcasts", :object => @podcast, :locals => { :linked => true, :empty => "Vous n'avez aucun podcast, vous devriez #{link_to("en ajouter un &#8250;", :action => "add")}", :actions => true, :tags => true } %>
+ <%= render :partial => "podcasts/podcasts", :object => @podcasts, :locals => { :linked => true, :empty => "Vous n'avez aucun podcast, vous devriez #{link_to("en ajouter un &#8250;", :action => "add")}", :actions => true, :tags => true } %>
 </ul>
-<div class="actions">
- <%= link_to("Précédents", { :page => @pages.current.previous }, :class => "previous") if @pages.current.previous %>
- <%= link_to("Suivants", { :page => @pages.current.next }, :class => "next") if @pages.current.next %> 
-</div>
+<%= will_paginate @podcasts %>
