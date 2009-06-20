@@ -32,8 +32,8 @@ class User < ActiveRecord::Base
 	validates_format_of :username, :with => /^[-a-z0-9]*$/, :message => "Le nom d'utilisateur ne peut contenir que des minuscules, des chiffres et '-' (a..z0..9-)"
 
 	validates_length_of :username, :in => 3..20,
-	  :too_long => "Le nom d'utilisateur est limité à %d caractères",
-	  :too_short => "Le nom d'utilisateur doit faire au moins %d caractères"
+	  :too_long => "Le nom d'utilisateur est limité à {{count}} caractères",
+	  :too_short => "Le nom d'utilisateur doit faire au moins {{count}} caractères"
 
 	validates_presence_of :name, :message => "Votre nom est requis"
   validates_presence_of :password, :message => "Un mot de passe est requis", :if => Proc.new { |u| u.openid_url.nil? }

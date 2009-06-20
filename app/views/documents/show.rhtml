@@ -1,6 +1,6 @@
 <h2>Votre document</h2>
 <ul>
- <%= render :partial => "documents/documents", :object => @document.to_a, :locals => { :linked => false, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => true, :tags => true } %>
+ <%= render :partial => "documents/documents", :object => Array(@document), :locals => { :linked => false, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => true, :tags => true } %>
 </ul>
 <h2>Les commentaires sur votre document</h2>
 <ul>

@@ -18,9 +18,11 @@ config.action_controller.perform_caching             = false
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
 
-# config.gem "rspec",            :lib => false
-# config.gem "rspec-rails",      :lib => false
-# config.gem "factory_girl", :lib => false
-# config.gem "remarkable_rails", :lib => false
-# config.gem "svenfuchs-i18n", :lib => false
+config.gem "rspec",            :lib => false
+config.gem "rspec-rails",      :lib => false
+config.gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => 'http://gems.github.com'
+
+
+#config.gem "remarkable_rails", :lib => false
+#config.gem "svenfuchs-i18n", :lib => false
 

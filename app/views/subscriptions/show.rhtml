@@ -1,6 +1,6 @@
 <h2>Consulter votre souscription</h2>
 <ul>
- <%= render :partial => "subscriptions", :object => @subscription.to_a, :locals => { :linked => false, :empty => "Aucune souscription correspondante n'a été trouvée ...", :actions => true } %>
+ <%= render :partial => "subscriptions", :object => Array(@subscription), :locals => { :linked => false, :empty => "Aucune souscription correspondante n'a été trouvée ...", :actions => true } %>
 </ul>
 <h2>Les commentaires sur cette souscription</h2>
 <ul>

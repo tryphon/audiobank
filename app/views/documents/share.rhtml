@@ -13,7 +13,7 @@
 <hr/>
 <h2>Partager votre document</h2>
 <ul>
- <%= render :partial => "documents/documents", :object => @document.to_a, :locals => { :linked => true, :empty => "Aucun document ne correspond ...", :actions => false, :tags => false } %>
+ <%= render :partial => "documents/documents", :object => Array(@document), :locals => { :linked => true, :empty => "Aucun document ne correspond ...", :actions => false, :tags => false } %>
 </ul>
 <hr/>
 <h4 class="left">N'ont pas accès à ce document :</h4>

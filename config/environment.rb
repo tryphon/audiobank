@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Be sure to restart your web server when you modify this file.
 
 # Uncomment below to force Rails into production mode when 
@@ -37,6 +38,8 @@ Rails::Initializer.run do |config|
   # config.active_record.default_timezone = :utc
   
   # See Rails::Configuration for more options
+  #config.gem "actionservice",            :lib => "action_service"
+  config.gem 'datanoise-actionwebservice', :lib => 'actionwebservice'
 end
 
 # Add new inflection rules using the following format 
@@ -48,5 +51,11 @@ end
 #   inflect.uncountable %w( fish sheep )
 # end
 
-# Include your application configuration below
-require 'custom.rb'
+ActionMailer::Base.default_charset = "utf-8"
+ActionMailer::Base.delivery_method = :sendmail
+
+require 'core_ext'
+
+WillPaginate::ViewHelpers.pagination_options[:previous_label] = 'Précédente'
+WillPaginate::ViewHelpers.pagination_options[:next_label] = 'Suivante'
+

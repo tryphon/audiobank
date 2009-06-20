@@ -1,5 +1,5 @@
 <h2>Votre groupe</h2>
 <ul>
- <%= render :partial => "group/groups", :object => @group.to_a, :locals => { :linked => false, :empty => "Aucun groupe correspondant n'a été trouvé ...", :actions => @manageable, :members => true } %>
+ <%= render :partial => "group/groups", :object => Array(@group), :locals => { :linked => false, :empty => "Aucun groupe correspondant n'a été trouvé ...", :actions => @manageable, :members => true } %>
 </ul>
 

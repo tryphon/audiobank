@@ -1,7 +1,7 @@
 <%= error_messages_for(:document) %>
 <h2>Déposer votre fichier</h2>
 <ul>
- <%= render :partial => "documents/documents", :object => @document.to_a, :locals => { :linked => true, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => false, :tags => false } %>
+ <%= render :partial => "documents/documents", :object => Array(@document), :locals => { :linked => true, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => false, :tags => false } %>
 </ul>
 <hr/>
 <h4>Avec votre navigateur :</h4>
