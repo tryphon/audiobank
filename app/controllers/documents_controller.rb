@@ -76,11 +76,8 @@ class DocumentsController < ApplicationController
 				upload_file = params[:document][:file]
 			end
 
-			upload_progress.message = "Vérification du document ..."
-      session.update
-
 			begin
-				logger.debug "Upload file: #{upload_file}"
+				logger.debug "Upload file: #{upload_file.inspect}"
 				uploaded = @document.upload_file(upload_file)
 			rescue Exception => e
  				logger.error("Can't upload #{upload_file.to_s}: #{e}")
