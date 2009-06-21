@@ -11,7 +11,8 @@
 # form the root of the application path.
 
 set :application, "audiobank"
-set :repository, "http://svn.tryphon.org/kolaka/audiobank/trunk"
+set :scm, "git"
+set :repository, "git://github.com/albanpeignier/audiobank.git"
 
 # =============================================================================
 # ROLES
@@ -46,7 +47,6 @@ set :deploy_to, "/var/www/tryphon.org/audiobank/"
 # SSH OPTIONS
 # =============================================================================
 # ssh_options[:keys] = %w(/path/to/my/key /path/to/another/key)
-ssh_options[:port] = 2722
 
 # =============================================================================
 # TASKS
@@ -86,7 +86,6 @@ ssh_options[:port] = 2722
 
 desc "Restart the web server"
 task :restart do
-  #sudo "/usr/sbin/svcadm refresh apache2"
   sudo "/etc/init.d/apache2 reload"
 end
 
@@ -120,11 +119,6 @@ task :after_deploy do
   cleanup
   enable_web
 end
-
-#desc "Remove symlink (useful for solaris)"
-#task :before_symlink do
-#  delete current_path
-#end
 
 desc "Add symlink"
 task :after_symlink do
