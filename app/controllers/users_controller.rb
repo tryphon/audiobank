@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class UsersController < ApplicationController
 	open_id_consumer :required => [:email, :nickname], :optional => [:fullname]
 	layout 'documents'
@@ -35,10 +36,14 @@ class UsersController < ApplicationController
 	end
 
 	def find
-	  user = User.find(session[:user])
+    @keywords = Document.keywords(params[:keywords])
 
-		@document = user.documents.find_by_keywords(params[:keywords])
-		@subscription = user.find_subscriptions(:keywords => params[:keywords])
+    unless @keywords.empty?
+      @documents = current_user.documents.find_by_keywords(@keywords)
+      @subscriptions = current_user.find_subscriptions(:keywords => @keywords)
+    else
+      @documents = @subscriptions = []
+    end
 	end
 
 	def signin

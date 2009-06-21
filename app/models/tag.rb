@@ -55,5 +55,9 @@ class Tag < ActiveRecord::Base
 			tag.destroy if tag.documents.empty?
 		end
 	end
+
+  def match(string)
+    self.name.match(string)
+  end
 	
 end

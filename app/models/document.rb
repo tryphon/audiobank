@@ -94,11 +94,29 @@ class Document < ActiveRecord::Base
   end
   
   def match?(keywords)
-    title.downcase.match(keywords.downcase)
+    keywords = keywords.downcase.split(" ") if String === keywords
+
+    keywords.all? do |keyword|
+      [self.title, self.description, *self.tags].any? do |text|
+        text = text.downcase if text.respond_to? :downcase
+        text.match(keyword)
+      end
+    end
   end
   
   def match_tags?(tags)
     (Array(tags) - self.tags).empty?
+  end
+
+  def self.keywords(string)
+    keywords = (string or "").downcase.split(" ")
+    keywords.delete_if { |k| k.size < 3 }
+
+    def keywords.to_s
+      self.join(' ')
+    end
+    
+    keywords
   end
 	
 end

@@ -287,15 +287,34 @@ describe Document do
     
   end
 
-  def match(keywords)
-    simple_matcher("match keywords #{keywords}") do |actual|
-      actual.match? keywords
-    end
-  end
+  describe "match?" do
 
-  it "should match a given string if title does (ignoring case)" do
-    @document.title = "matching string"
-    @document.should match("MATCH")
+    def match(keywords)
+      simple_matcher("match keywords #{keywords}") do |actual|
+        actual.match? keywords
+      end
+    end
+
+    it "should match a given string if title does (ignoring case)" do
+      @document.title = "matching string"
+      @document.should match("MATCH")
+    end
+
+    it "should match a given string if description does (ignoring case)" do
+      @document.description = "matching string"
+      @document.should match("MATCH")
+    end
+
+    it "should match a given string if one of the tags does (ignoring case)" do
+      @document.tags << Tag.parse("matching_tag")
+      @document.should match("MATCH")
+    end
+
+    it "should not match a given string if one of the keywords doesn't match" do
+      @document.title = "matching string"
+      @document.should_not match("UNMATCH")
+    end
+    
   end
 
   it "should return existing goups and users except subscribers as nonsubscribers" do
@@ -311,6 +330,33 @@ describe Document do
     @document.stub!(:subscribers).and_return(@subscriber_groups + @subscriber_users)
 
     @document.nonsubscribers.should == @nonsubscriber_groups + @nonsubscriber_users
+  end
+
+  describe "keywords" do
+
+    before(:each) do
+      @keywords = Array.new(3) { |n| "keyword#{n}" }
+      def @keywords.to_s
+        self.join(' ')
+      end
+    end
+    
+    it "should return an empty array if string is blank" do
+      Document.keywords(nil).should == []
+    end
+
+    it "should split given strings" do
+      Document.keywords(@keywords.to_s).should == @keywords
+    end
+
+    it "should ignore keywords smaller than 3 characters" do
+      Document.keywords("#{@keywords} ab").should == @keywords
+    end
+
+    it "should downcase words in string" do
+      Document.keywords("DUMMY").should == ["dummy"]
+    end
+    
   end
 
 end

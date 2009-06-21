@@ -18,7 +18,7 @@
 
 <h2>Recherchez</h2>
 <% form_tag({:controller => :users, :action => :find }, :id => "search") do %>
- <%= text_field_tag("keywords") %>
+ <%= text_field_tag("keywords", @keywords) %>
  <%= image_submit_tag("search.png", :class => "image") %>
 <% end %>
 <h2>Participez</h2>
