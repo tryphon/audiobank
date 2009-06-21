@@ -6,7 +6,7 @@ class GroupController < ApplicationController
   def add
     @group = Group.new(params[:group])
     if request.post?
-      @group.owner = User.find(session[:user])
+      @group.owner = current_user
       if @group.save
         flash[:success] = "Le groupe a bien été crée"
         redirect_to :action => 'manage'
@@ -17,18 +17,16 @@ class GroupController < ApplicationController
   end
   
   def show 
-    user = User.find(session[:user])
-  	@group = user.manageable_groups.find(params[:id])
+  	@group = current_user.manageable_groups.find(params[:id])
   	@manageable = true
   end  
 
   def manage
-    user = User.find(session[:user])
-    @groups = user.manageable_groups.paginate(:page => params[:page], :per_page => 4)
+    @groups = current_user.manageable_groups.paginate(:page => params[:page], :per_page => 4)
   end
   
   def edit
-    @group = User.find(session[:user]).manageable_groups.find(params[:id])
+    @group = current_user.manageable_groups.find(params[:id])
     if request.post?
       if @group.update_attributes(params[:group])
         flash[:success] = "Votre groupe a bien été édité"
@@ -40,19 +38,19 @@ class GroupController < ApplicationController
   end
   
   def destroy
-    User.find(session[:user]).manageable_groups.find(params[:id]).destroy
+    current_user.manageable_groups.find(params[:id]).destroy
     redirect_to :action => 'manage'
   end
   
 	def add_member
-		@group = User.find(session[:user]).manageable_groups.find(params[:group])
+		@group = current_user.manageable_groups.find(params[:group])
 		@group.users << User.find(params[:id].split("_")[1])
 		@group.save
 		render :action => "update"
 	end
   
   def remove_member
-		@group = User.find(session[:user]).manageable_groups.find(params[:group])
+		@group = current_user.manageable_groups.find(params[:group])
 		@group.users.delete(User.find(params[:id].split("_")[1]))
 		@group.save
 		render :action => "update"

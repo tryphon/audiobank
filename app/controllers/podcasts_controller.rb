@@ -9,7 +9,7 @@ class PodcastsController < ApplicationController
   def add
     @podcast = Podcast.new(params[:podcast])
     if request.post?
-      @podcast.author = User.find(session[:user])
+      @podcast.author = current_user
     	@podcast.tag_with(params[:labels])
     	@podcast.name = StringRandom.alphanumeric(8).downcase
       if @podcast.save
@@ -22,11 +22,11 @@ class PodcastsController < ApplicationController
   end
   
   def show 
-  	@podcast = User.find(session[:user]).podcasts.find(params[:id], :include => :tags)
+  	@podcast = current_user.podcasts.find(params[:id], :include => :tags)
   end
     
   def edit
-    @podcast = User.find(session[:user]).podcasts.find(params[:id])
+    @podcast = current_user.podcasts.find(params[:id])
     if request.post?
     	@podcast.tag_with(params[:labels])
       if @podcast.update_attributes(params[:document])
@@ -39,11 +39,11 @@ class PodcastsController < ApplicationController
   end
 
 	def manage
-		@podcasts = User.find(session[:user]).podcasts.paginate(:page => params[:page], :per_page => 4, :include => :tags)
+		@podcasts = current_user.podcasts.paginate(:page => params[:page], :per_page => 4, :include => :tags)
 	end
     
   def destroy
-    User.find(session[:user]).podcasts.find(params[:id]).destroy
+    current_user.podcasts.find(params[:id]).destroy
     redirect_to :action => 'manage'
   end
   

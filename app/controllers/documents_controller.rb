@@ -9,7 +9,7 @@ class DocumentsController < ApplicationController
   def add
     @document = AudioDocument.new(params[:document])
     if request.post?
-      @document.author = User.find(session[:user])
+      @document.author = current_user
     	@document.tag_with(params[:labels])
       if @document.save
         flash[:success] = "Votre document a bien été crée"
@@ -21,11 +21,11 @@ class DocumentsController < ApplicationController
   end
 
   def show
-  	@document = User.find(session[:user]).documents.find(params[:id], :include => :tags)
+  	@document = current_user.documents.find(params[:id], :include => :tags)
   	@review = Review.new(params[:review])
   	if request.post?
   		@review.document = @document
-  		@review.user = User.find(session[:user])
+  		@review.user = current_user
   		if @review.save
   			flash[:success] = "Votre commentaire a bien été ajouté"
   			redirect_to :action => 'show', :id => @document
@@ -38,7 +38,7 @@ class DocumentsController < ApplicationController
   end
 
   def edit
-    @document = User.find(session[:user]).documents.find(params[:id])
+    @document = current_user.documents.find(params[:id])
     if request.post?
     	@document.tag_with(params[:labels])
       if @document.update_attributes(params[:document])
@@ -51,11 +51,11 @@ class DocumentsController < ApplicationController
   end
 
 	def manage
-		@documents = User.find(session[:user]).documents.paginate :page => params[:page], :per_page => 4
+		@documents = current_user.documents.paginate :page => params[:page], :per_page => 4
 	end
 
   def upload
-  	@document = User.find(session[:user]).documents.find(params[:id])
+  	@document = current_user.documents.find(params[:id])
   	unless @document.upload
 	  	@document.upload = Upload.new
 	  	@document.save
@@ -94,22 +94,22 @@ class DocumentsController < ApplicationController
   end
 
   def download
-  	@document = User.find(session[:user]).documents.find(params[:id])
+  	@document = current_user.documents.find(params[:id])
   	send_file @document.path, :type => @document.format, :filename => @document.filename
   end
 
   def destroy
-    User.find(session[:user]).documents.find(params[:id]).destroy
+    current_user.documents.find(params[:id]).destroy
     redirect_to :action => 'manage'
   end
 
   def share
-  	@document = User.find(session[:user]).documents.find(params[:id])
+  	@document = current_user.documents.find(params[:id])
 	  flash[:warning] = "Votre document n'est lié à aucun fichier" unless @document.uploaded?
 	end
 
 	def tag
-		@documents = User.find(session[:user]).documents.find_by_tag(params[:name]).paginate(:page => params[:page], :per_page => 4)
+		@documents = current_user.documents.find_by_tag(params[:name]).paginate(:page => params[:page], :per_page => 4)
 	end
 
 	def auto_complete_for_tags
@@ -117,7 +117,7 @@ class DocumentsController < ApplicationController
 	end
 
   def listen
-  	@document = User.find(session[:user]).documents.find(params[:id])
+  	@document = current_user.documents.find(params[:id])
   	redirect_to :controller => 'casts', :action => 'play', :name => @document.casts.first.name
 	end
 

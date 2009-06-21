@@ -13,26 +13,18 @@ class UsersController < ApplicationController
 	end
 
  	def dashboard
- 	  user = User.find(session[:user])
-		@author = user
-		@subscriber = user
-
-		@tag = user.tags.uniq[0..15]
+ 	  @author = @subscriber = current_user
+		@tag = current_user.tags.first(15)
 	end
 
 	def tags
-	  user = User.find(session[:user])
-	  @author = user
-		@subscriber = user
-
-		@tag = user.tags.uniq[0..15]
+ 	  @author = @subscriber = current_user
+		@tag = current_user.tags.first(15)
 	end
 
 	def tag
-	  user = User.find(session[:user])
-
-		@document = user.documents.find_by_tag(params[:name], { :limit => 5 })
-		@subscription = user.find_subscriptions(:tag => params[:name], :limit => 5)
+		@document = current_user.documents.find_by_tag(params[:name], { :limit => 5 })
+		@subscription = current_user.find_subscriptions(:tag => params[:name], :limit => 5)
 	end
 
 	def find

@@ -3,7 +3,7 @@ class UserController < ApplicationController
   layout 'documents'
 
 	def edit
-		@user = User.find(session[:user])
+		@user = current_user
 		if request.post?
 			if @user.update_attributes(params[:user])
 				flash[:success] = "Vos informations ont bien été modifié"
@@ -14,7 +14,7 @@ class UserController < ApplicationController
 	end
 
   def show
-		@user = User.find(session[:user])
+		@user = current_user
   end
 
 end
