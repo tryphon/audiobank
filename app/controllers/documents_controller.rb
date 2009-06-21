@@ -2,8 +2,6 @@
 class DocumentsController < ApplicationController
 	layout 'documents', :except => [:auto_complete_for_tags]
 
-	upload_status_for :upload
-
   def index
     redirect_to :action => 'manage'
   end
