@@ -26,7 +26,7 @@ img { border: none; vertical-align: middle; }
 #header ul li a:hover { color: #333; background: #a3de5b url("../images/corner-over.png") no-repeat top right; }
 
 #frame { margin: 0; padding: 18px 0; clear: both; }
-#wrap { width: 750px; margin: 0 auto; background: #fff url("../images/frame-bg.png") repeat-y top left; }
+#wrap { width: 800px; margin: 0 auto; background: #fff url("../images/frame-bg.png") repeat-y top left; }
 #frame ul { margin: 4px 0; list-style-type: none; }
 #frame h1 { font: normal 145% "Georgia", serif; color: #66af16; margin: 6px 0; }
 #frame h2 { font: normal 120% "Georgia", serif; margin: 6px 0; color: #7dacd1; clear: both; border-bottom: 1px solid #7dacd1; }
@@ -59,7 +59,7 @@ img { border: none; vertical-align: middle; }
 #frame .pagination .prev_page { background: url("../images/previous.png") no-repeat; padding: 2px 2px 2px 20px; }
 #frame .pagination .disabled { display: none; }
 
-#content { float: right; width: 510px; margin: 0 0 0 40px; }
+#content { float: right; width: 570px; }
 #content h3, #content h3 a { text-decoration: none; color: #6b2; margin-bottom: 6px; width:330px; }
 #content h4 { margin: 12px 0 0; color: #5884a6; }
 #content p { margin: 0 0 0 6px; }
@@ -89,7 +89,7 @@ ul#welcome { margin: 16px 100px 16px 14px; }
 #subscribers, #users, #members { clear: both; border: 1px solid #5884a6; }
 #subscribers li, #users li, #members li { padding: 12px; margin: 2px 12px; cursor: pointer; }
 
-#sidebar { float: left; width: 200px; margin: 0 0 20px 0; }
+#sidebar { float: left; width: 210px; margin: 0 0 20px 0; }
 #sidebar ul { margin: 0 0 12px 22px; padding: 0; list-style-type: square; }
 #sidebar li { margin: 3px 0; padding: 6px 0 0 0; font-size: 100%; }
 #sidebar li a { color : #000; }
