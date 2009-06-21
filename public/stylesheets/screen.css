@@ -60,7 +60,7 @@ img { border: none; vertical-align: middle; }
 #frame .pagination .disabled { display: none; }
 
 #content { float: right; width: 510px; margin: 0 0 0 40px; }
-#content h3, #content h3 a { text-decoration: none; color: #6b2; margin-bottom: 6px; }
+#content h3, #content h3 a { text-decoration: none; color: #6b2; margin-bottom: 6px; width:330px; }
 #content h4 { margin: 12px 0 0; color: #5884a6; }
 #content p { margin: 0 0 0 6px; }
 #content li { position: relative; margin: 0 12px 8px; padding: 8px 0 0; }
