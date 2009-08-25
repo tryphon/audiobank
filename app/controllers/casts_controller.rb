@@ -38,6 +38,8 @@ class CastsController < ApplicationController
    
   def playcontent(name, format)
   	@cast = Cast.find_by_name(name)
+    raise ActiveRecord::RecordNotFound unless @cast
+
   	case format
   		when "ogg":
   			type = "application/ogg"
