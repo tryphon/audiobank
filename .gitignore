@@ -1,2 +1,3 @@
 coverage/*
 config/deploy_local.rb
+log/*
