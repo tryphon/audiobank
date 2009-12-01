@@ -113,7 +113,7 @@ class DocumentsController < ApplicationController
 	end
 
 	def auto_complete_for_tags
-		@tag = Tag.find(:all, :conditions => ["name ~* ?", params[:labels]])
+		@tag = Tag.find(:all, :conditions => ["name like ?", "%#{params[:labels].downcase}%"])
 	end
 
   def listen
