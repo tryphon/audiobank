@@ -19,7 +19,31 @@ lame=/usr/bin/lame
 [ -x $mpg321 ] || exit 1
 [ -x $lame ] || exit 1
 
-input_type=`file -bi "$input"`
+function file_mime_type() {
+    input_type=`file -bi "$1" | cut -d\; -f1`
+
+    if [ "$input_type" == "application/octet-stream" ]; then
+        # Try to read full text file output
+        text_file_type=`file -b "$input"`
+        matching_audio_type=`echo $text_file_type | sed -n -e 's/.*mpeg.*/mpeg/pi' -e 's/.*ogg.*/ogg/pi' -e 's/.*flac.*/flac/pi' | sed 'y/MPEGVORBISFLAC/mpegvorbisflac/'`
+        case $matching_audio_type in
+            mpeg)
+                input_type="audio/mpeg"
+                ;;
+            vorbis)
+                input_type="application/ogg"
+                ;;
+            flac)
+                input_type="audio/x-flac"
+                ;;
+        esac
+    fi
+
+    echo $input_type
+}
+
+input_type=`file_mime_type $input`
+
 case $input_type in 
 	audio/mpeg)
 		function play() {
