@@ -29,7 +29,7 @@ class Upload < ActiveRecord::Base
 	end
 	
 	def public_url 
-		"ftp://audiobank.tryphon.org/upload/media/#{key}/"
+		"ftp://audiobank.tryphon.org/#{key}/"
 	end
 	
 	def empty?
