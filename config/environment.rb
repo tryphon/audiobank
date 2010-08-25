@@ -5,6 +5,9 @@
 # you don't control web/app server and can't set it the proper way
 # ENV['RAILS_ENV'] ||= 'production'
 
+# Specifies gem version of Rails to use when vendor/rails is not present
+RAILS_GEM_VERSION = '2.3.8' unless defined? RAILS_GEM_VERSION
+
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
@@ -39,7 +42,7 @@ Rails::Initializer.run do |config|
   
   # See Rails::Configuration for more options
   #config.gem "actionservice",            :lib => "action_service"
-  config.gem 'fdv-actionwebservice'
+  config.gem 'fdv-actionwebservice', :lib => "action_service"
 end
 
 # Add new inflection rules using the following format 
