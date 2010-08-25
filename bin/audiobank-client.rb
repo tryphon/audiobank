@@ -126,16 +126,16 @@ case command
 end
 
 raise "file not found: #{file}" unless file.nil? or File.exist?(file)
-      
+
 begin
   wsdl = 'http://audiobank.tryphon.org/document/service.wsdl'
   if local then
-    wsdl = 'http://localhost:3000/document/service.wsdl'
+    wsdl = 'http://audiobank.local/document/service.wsdl'
   end
   
   factory = WSDLDriverFactory.new(wsdl)
   document_service = factory.create_rpc_driver
-  document_service.wiredump_dev= STDOUT if $DEBUG
+  document_service.wiredump_dev=STDOUT if $DEBUG
   
   if command_create then
     if name.nil? and not file.nil? then

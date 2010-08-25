@@ -1,6 +1,16 @@
+class DocumentAPI < ActionWebService::API::Base
+  api_method :create, :expects => [:string, :string], :returns => [:string]
+  api_method :url, :expects => [:string, :int], :returns => [:string]
+  api_method :confirm, :expects => [:string, :int], :returns => [:boolean]
+end
+
 class DocumentController < ApplicationController
-  wsdl_service_name 'Document'
-  web_service_scaffold :invoke
+
+  acts_as_web_service
+
+  # wsdl_service_name 'Document'
+  # web_service_scaffold :invoke
+  web_service_api DocumentAPI
 
   before_invocation :authenticate
   skip_before_filter :check_authentication
