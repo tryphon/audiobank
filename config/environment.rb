@@ -54,9 +54,6 @@ end
 #   inflect.uncountable %w( fish sheep )
 # end
 
-ActionMailer::Base.default_charset = "utf-8"
-ActionMailer::Base.delivery_method = :sendmail
-
 require 'core_ext'
 require 'taglib_ext'
 
