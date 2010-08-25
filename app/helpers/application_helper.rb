@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-  include UserVoiceHelper
 
 	def format_time(duration)
 		duration.strftime("%H:%M:%S")
