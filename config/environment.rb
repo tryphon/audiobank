@@ -39,7 +39,7 @@ Rails::Initializer.run do |config|
   
   # See Rails::Configuration for more options
   #config.gem "actionservice",            :lib => "action_service"
-  config.gem 'datanoise-actionwebservice', :lib => 'actionwebservice'
+  config.gem 'fdv-actionwebservice'
 end
 
 # Add new inflection rules using the following format 
