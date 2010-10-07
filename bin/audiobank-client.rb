@@ -41,6 +41,8 @@ require 'soap/wsdlDriver'
 require 'getoptlong'
 require 'rdoc/usage'
 
+require 'net/ftp'
+
 include SOAP
 
 module HTTP
