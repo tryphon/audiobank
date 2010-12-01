@@ -60,104 +60,52 @@ opts = GetoptLong.new(
       [ '--debug', '-d', GetoptLong::NO_ARGUMENT ],
       [ '--local', '-l', GetoptLong::NO_ARGUMENT ]
     )
-    
-$DEBUG=false
-local=false
 
-login = nil
-password = nil
+class AudioBankClient
 
-opts.each do |opt, arg|
-  case opt
-    when '--help'
-      RDoc::usage
-    when '--username'
-      login = arg
-    when '--password'
-      password = arg
-    when '--debug'
-      $DEBUG=true
-    when '--local'
-      local=true
+  attr_accessor :local, :debug, :login, :password
+
+  def initialize(options = {})
+    options.each { |k, v| send "#{k}=", v }
   end
-end    
 
-if login.nil?
-  puts "Missing username (try --help)"
-  exit 1
-end
-
-if password.nil?
-  puts "Missing password (try --help)"
-  exit 1
-end
-
-user_key = "#{login}/#{password}"
-
-if ARGV.length == 0
-  puts "Missing command argument (try --help)"
-  exit 1
-end
-
-command = ARGV.shift
-
-command_create=false
-command_upload=false
-command_confirm=false
-
-file = nil
-name = nil
-document_nil = nil
-
-case command
-  when 'create'
-    name = ARGV.shift
-    command_create=true
-  when 'upload'
-    document_id = ARGV.shift.to_i
-    file = ARGV.shift
-    command_upload=true
-  when 'confirm'
-    document_id = ARGV.shift.to_i
-    command_confirm=true
-  when 'import'
-    command_create=true
-    command_upload=true
-    command_confirm=true
-    file = ARGV.shift
-end
-
-raise "file not found: #{file}" unless file.nil? or File.exist?(file)
-
-begin
-  wsdl = 'http://audiobank.tryphon.org/document/service.wsdl'
-  if local then
-    wsdl = 'http://audiobank.local/document/service.wsdl'
+  def user_key
+    "#{login}/#{password}"
   end
-  
-  factory = WSDLDriverFactory.new(wsdl)
-  document_service = factory.create_rpc_driver
-  document_service.wiredump_dev=STDOUT if $DEBUG
-  
-  if command_create then
-    if name.nil? and not file.nil? then
-      File.basename(file) =~ /([^\.]+)\..*$/
-      name = $1
+
+  def wsdl
+    if local 
+      'http://audiobank.local/document/service.wsdl'
+    else
+      'http://audiobank.tryphon.org/document/service.wsdl'
     end
-    
+  end
+
+  def factory
+    factory = WSDLDriverFactory.new(wsdl)
+  end
+
+  def document_service
+    @document_service ||= factory.create_rpc_driver.tap do |service|
+      service.wiredump_dev = STDOUT if debug
+    end
+  end
+
+  def create(name)
     raise "not specified name" unless name
 
     puts "create document : '#{name}'"
     document_id = document_service.create(user_key, name)
     puts "new document : #{document_id}"
+    document_id
   end
-  
-  if command_upload then
-    raise "not document id" if document_id.nil?
-    raise "not specified file" if file.nil?
     
+  def upload(document_id, file)
+    raise "not document id" if document_id.nil?
+    check_file file
+
     upload_url = document_service.url(user_key, document_id)
-    puts "upload_url: #{upload_url}" if $DEBUG
+    puts "upload_url: #{upload_url}" if debug
     
     puts "document #{document_id}: uploading ..."
     if local then
@@ -181,14 +129,78 @@ begin
     puts "document #{document_id}: uploaded"
   end
 
-  if command_confirm then
+  def confirm(document_id)
     raise "not document id" if document_id.nil?
 
     puts "document #{document_id}: confirm upload"
     document_service.confirm(user_key, document_id)
   end
+
+  def check_file(file)
+    raise "not specified file" if file.nil?
+    raise "file not found: #{file}" unless file.nil? or File.exist?(file)
+  end
+
+  def import(files)
+    Array(files).each do |file|
+      check_file file
+      
+      name = File.basename(file, File.extname(file))
+      
+      document_id = create(name)
+      upload document_id, file
+      confirm document_id
+    end
+  end
+
+end
+
+client = AudioBankClient.new
+
+opts.each do |opt, arg|
+  case opt
+  when '--help'
+    RDoc::usage
+  when '--username'
+    client.login = arg
+  when '--password'
+    client.password = arg
+  when '--debug'
+    client.debug = true
+  when '--local'
+    client.local = true
+  end
+end    
+
+if client.login.nil?
+  puts "Missing username (try --help)"
+  exit 1
+end
+
+if client.password.nil?
+  puts "Missing password (try --help)"
+  exit 1
+end
+
+command = ARGV.shift
+unless command
+  puts "Missing command argument (try --help)"
+  exit 1
+end
+
+begin
+  case command
+  when 'create'
+    client.create ARGV.shift
+  when 'upload'
+    client.upload ARGV.shift.to_i, ARGV.shift
+  when 'confirm'
+    client.confirm ARGV.shift.to_i
+  when 'import'
+    client.import ARGV
+  end
 rescue Exception
   $stderr.print "An error occured: #{$!}\n"
-  raise if $DEBUG
+  raise if client.debug
   exit 1
 end
