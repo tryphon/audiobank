@@ -57,8 +57,9 @@ class Document < ActiveRecord::Base
     file.respond_to?(:size) ? self.size = file.size : self.size = File.size(file.path)
     
     self.uploaded = false
+
     File.open(path, "wb") do |f|
-      f.write(file.read)
+      FileUtils.copy_stream(file, f)
     end
     
     self.uploaded = true
