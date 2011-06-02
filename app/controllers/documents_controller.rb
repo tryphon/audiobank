@@ -71,7 +71,7 @@ class DocumentsController < ApplicationController
 	  			return
 	  		end
 			else
-				upload_file = params[:document][:file]
+				upload_file = (params[:document] and params[:document][:file])
 			end
 
 			begin
