@@ -51,6 +51,7 @@ class CastsController < ApplicationController
 
   def playlist(name)
   	@cast = Cast.find_by_name(name)
+    raise ActiveRecord::RecordNotFound unless @cast
 
   	content = "#EXTM3U\n"
   	content += "#EXTINF:#{@cast.document.length},#{@cast.document.title}\n" 
