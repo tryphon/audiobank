@@ -13,3 +13,7 @@ group :test do
   gem 'factory_girl'
   gem 'autotest'
 end
+
+group :production do
+  gem 'SyslogLogger'
+end
