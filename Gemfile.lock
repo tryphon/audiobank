@@ -22,6 +22,7 @@ GEM
     inherited_resources (1.0.6)
       has_scope (~> 0.5.0)
       responders (~> 0.4.6)
+    mysql (2.8.1)
     rack (1.1.0)
     rails (2.3.8)
       actionmailer (= 2.3.8)
@@ -62,6 +63,7 @@ DEPENDENCIES
   exception_notification
   factory_girl
   inherited_resources (= 1.0.6)
+  mysql
   rails (= 2.3.8)
   rcov
   remarkable_rails
