@@ -11,9 +11,11 @@ touch $lock_file
 
 [ "$#" -gt 0 ] && options="-e $1"
 
-bin_dir=`dirname $0`
+base_dir=`dirname $0`/..
+cd $base_dir
+
 # $bin_dir/../script/runner $options 'Cue.update'
-bundle exec $bin_dir/../script/runner $options 'Cast.update'
-bundle exec $bin_dir/../script/runner $options 'Subscription.notify'
+bundle exec ./script/runner $options 'Cast.update'
+bundle exec ./script/runner $options 'Subscription.notify'
 
 rm $lock_file
