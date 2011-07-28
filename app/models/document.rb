@@ -1,5 +1,5 @@
 require 'mahoro'
-require 'taglib'
+require 'tagfile'
 
 class Document < ActiveRecord::Base
 	belongs_to :author, :class_name => "User", :foreign_key => "author_id"
@@ -49,11 +49,12 @@ class Document < ActiveRecord::Base
 	end
 	
 	def upload_file(file)
-    document = TagLib::File.new(file.path)
+    self.format = Mahoro.new(Mahoro::MIME).file(file.path)
+
+    document = TagFile::File.with_mime_type(file.path, format)
     self.length = document.length
     document.close
     
-    self.format = Mahoro.new(Mahoro::MIME).file(file.path)
     file.respond_to?(:size) ? self.size = file.size : self.size = File.size(file.path)
     
     self.uploaded = false

@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
 # Be sure to restart your web server when you modify this file.
 
+begin
+  require "bundler"
+  Bundler.setup
+rescue Exception => e
+  puts "WARNING: Bundler isn't available (#{e.to_s})"
+end
+
 # Uncomment below to force Rails into production mode when 
 # you don't control web/app server and can't set it the proper way
 # ENV['RAILS_ENV'] ||= 'production'
@@ -42,8 +49,10 @@ Rails::Initializer.run do |config|
   
   # See Rails::Configuration for more options
   #config.gem "actionservice",            :lib => "action_service"
+
   config.gem 'rubyjedi-actionwebservice', :lib => 'actionwebservice'
   config.gem 'exception_notification'
+  config.gem 'rtaglib'
 end
 
 # Add new inflection rules using the following format 

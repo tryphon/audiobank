@@ -1,23 +1,23 @@
-require 'taglib'
-module TagLib
+require 'tagfile'
+
+module TagFile
 	class File
-    def taglibForMime(mime)
-      puts mime
-      if mime.include?('MP3') or mime.match(/MPEG.*layer III/)
-        return TagLib::MPEG
-      end
 
-      if mime.include?('Ogg') or mime.include?('ogg')
-        if mime.include?('Vorbis') or mime.include?('vorbis')
-          return TagLib::OggVorbis
-        end
-      end
+    @@types_from_mime = {
+      "application/ogg" => TagFile::OggVorbis,
+      "audio/mpeg" => TagFile::MPEG,
+      "audio/x-flac" => TagFile::FLAC
+    }
+    cattr_accessor :types_from_mime
 
-      if mime.include?('FLAC')
-        return TagLib::FLAC
-      end
-
-      return nil
+    def self.type_from_mime(mime_type)
+      types_from_mime[mime_type]
     end
+
+    def self.with_mime_type(path, mime_type)
+      file_type = type_from_mime(mime_type)
+      new path, file_type
+    end
+
   end
 end

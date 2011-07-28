@@ -78,7 +78,7 @@ class DocumentsController < ApplicationController
 				logger.debug "Upload file: #{upload_file.inspect}"
 				uploaded = @document.upload_file(upload_file)
 			rescue Exception => e
- 				logger.error("Can't upload #{upload_file.to_s}: #{e}")
+ 				logger.error("Can't upload #{upload_file.to_s}: #{e} #{e.backtrace}")
 			end
 
 			if uploaded

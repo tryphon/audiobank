@@ -8,8 +8,8 @@ set :keep_releases, 5
 after "deploy:update", "deploy:cleanup" 
 set :use_sudo, false
 
-server "radio.dbx.tryphon.priv", :app, :web, :db, :primary => true
-#server "sandbox", :app, :web, :db, :primary => true
+# server "radio.dbx.tryphon.priv", :app, :web, :db, :primary => true
+server "sandbox", :app, :web, :db, :primary => true
 
 after "deploy:update_code", "deploy:symlink_shared", "deploy:gems"
 
@@ -29,7 +29,8 @@ namespace :deploy do
 
   desc "Install gems"
   task :gems, :roles => :app do
-    sudo "rake --rakefile=#{release_path}/Rakefile gems:install RAILS_ENV=production"
+    run "mkdir -p #{shared_path}/bundle"
+    run "cd #{release_path} && bundle install --deployment --path=#{shared_path}/bundle --without=test development cucumber"
   end
 
   desc "Symlinks shared configs and folders on each release"
