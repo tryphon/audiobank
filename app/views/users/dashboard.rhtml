@@ -8,7 +8,7 @@
 <hr/>
 <h2>Vos souscriptions</h2>
 <ul>
- <%= render :partial => "subscriptions/subscriptions", :object => @subscriber.subscriptions[0..2], :locals => { :linked => true, :empty => "Vous n'avez aucune souscription ...", :actions => false, :tags => false } %>
+ <%= render :partial => "subscriptions/subscriptions", :object => @subscriber.find_subscriptions(:offset => 0, :limit => 2), :locals => { :linked => true, :empty => "Vous n'avez aucune souscription ...", :actions => false, :tags => false } %>
 </ul>
 <div class="actions">
  <%= link_to("Vos autres subscriptions &#8250;", :controller => "subscriptions", :action => "manage") %>
