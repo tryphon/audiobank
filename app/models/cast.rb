@@ -42,17 +42,22 @@ class Cast < ActiveRecord::Base
 			end
 		end
 
-		Document.find(:all).delete_if { |d| !d.uploaded? or !d.casts.empty? }.each do |document|
-			puts "INFO: create cast for document #{document.id}"
-			cast = Cast.create(:document => document, :name => StringRandom.alphanumeric(8).downcase)
-			FORMATS.each do |format|
-				if !cast.update_file(format) then
-					puts "ERROR: can't create cast for document #{document.id}"
-					cast.destroy
-				end
-			end
-			document.casts << cast
-	    Mailer::deliver_document_ready(document)
+		Document.to_be_prepared.each do |document|
+      puts "INFO: create cast for document #{document.id}"
+      cast = Cast.create(:document => document, :name => StringRandom.alphanumeric(8).downcase)
+
+      FORMATS.each do |format|
+        if !cast.update_file(format) then
+          puts "ERROR: can't create cast for document #{document.id}"
+        end
+      end
+
+      if FORMATS.all? { |f| cast.uptodate? f }
+        document.casts << cast
+        Mailer::deliver_document_ready(document)
+      else
+        cast.destroy
+      end
 		end
 	end
 end

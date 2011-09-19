@@ -359,4 +359,12 @@ describe Document do
     
   end
 
+  describe "#format" do
+    
+    it "should be 'application/octet-stream' when not uploaded [FIXME]" do
+      @document.format.should == "application/octet-stream"
+    end
+
+  end
+
 end

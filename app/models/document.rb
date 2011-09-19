@@ -16,6 +16,8 @@ class Document < ActiveRecord::Base
 	validates_length_of :description, :maximum => 255, :message => "Votre description est trop longue", :allow_blank => true, :allow_nil => true
 	
 	attr_protected :size, :length, :format, :file
+  
+  named_scope :to_be_prepared, :include => "casts", :conditions => [ "uploaded and casts.id IS NULL" ]
 
 	def subscribers
     # Subscription#subscriber is polymorphic
@@ -47,6 +49,12 @@ class Document < ActiveRecord::Base
     # TODO use a Duration object ?
 		Time.at(self.length) + Time.local(1970,1,1).to_i
 	end
+
+  # Workaround for a strange error in DocumentsController#download : 
+  # 'Attempt to call private method'
+  def format
+    read_attribute(:format)
+  end
 	
 	def upload_file(file)
     self.format = Mahoro.new(Mahoro::MIME).file(file.path)
