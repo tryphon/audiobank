@@ -4,7 +4,7 @@ class Cast < ActiveRecord::Base
 	FORMATS = %w(ogg mp3)
 
 	def update_file(format = "ogg")
-		puts "DEBUG: #{RAILS_ROOT}/bin/encode #{document.path} #{path(format)} #{format}"
+		# puts "DEBUG: #{RAILS_ROOT}/bin/encode #{document.path} #{path(format)} #{format}"
 		system "#{RAILS_ROOT}/bin/encode", document.path, path(format), format
 	end
 
