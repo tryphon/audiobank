@@ -1,8 +1,8 @@
 <h2>Vos identifiants</h2>
 <% form_tag(:action => :signin) do %>
- <p><label for="username">Nom d'utilisateur :</label><br/>
+ <p><label for="user_username">Nom d'utilisateur :</label><br/>
  <%= text_field("user", "username") %></p>
- <p><label for="password">Mot de passe :</label><br/>
+ <p><label for="user_password">Mot de passe :</label><br/>
  <%= password_field("user", "password") %></p>
  <%= submit_tag "Se connecter" %>
  ou

@@ -12,9 +12,22 @@ group :test do
   gem 'remarkable_rails'
   gem 'factory_girl'
   gem 'autotest'
+  
 end
 
 group :production do
   gem 'SyslogLogger'
   gem 'mysql'
+end
+
+group :cucumber do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'cucumber-rails', '0.3.2'
+  gem 'cucumber'
+  gem 'pickle'
+  gem 'factory_girl'
+  gem 'launchy'
+
+  gem 'celerity', :require => nil
 end
