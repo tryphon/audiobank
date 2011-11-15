@@ -15,9 +15,16 @@ class Upload < ActiveRecord::Base
 	def after_destroy
 		FileUtils.remove_dir(path) if File.exists?(path)
 	end
+
+  @@root = Rails.root + "media/upload"
+  cattr_accessor :root
+
+  def self.test_root
+    Rails.root + "tmp/upload"
+  end
 	
 	def path 
-		"#{RAILS_ROOT}/media/upload/#{key}"
+    root + key
 	end
 	
 	def candidates

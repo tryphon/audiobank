@@ -36,3 +36,11 @@ Feature: Manage Users
     When I press "Déposer votre fichier"
     Then I should see "Votre fichier a bien été déposé"
     And the document should be uploaded
+
+  Scenario: Upload a file via ftp
+    Given a document exists
+    And I am on the document's upload page
+    And I upload the file "spec/fixtures/one-second.ogg" to the specified ftp url
+    When I press "Confirmer le dépôt"
+    Then I should see "Votre fichier a bien été déposé"
+    And the document should be uploaded

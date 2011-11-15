@@ -1,9 +1,8 @@
 Spec::Runner.configure do |config|
   config.before(:each) do
-    Document.test_root.mkpath
-    Document.root = Document.test_root
+    TestRootSupport.all(:before, Document, Upload)
   end
   config.after(:each) do
-    Document.test_root.rmtree
+    TestRootSupport.all(:after)
   end
 end
