@@ -55,8 +55,13 @@ describe Document do
 
   end
 
-  it "should use Rails.root/media/id as storage path" do
-    @document.path.should == "#{RAILS_ROOT}/media/#{@document.id}"
+  describe "#path" do
+
+    it "should be Document.root/:id" do
+      @document.stub :root => "/root/"
+      @document.path.should == "/root/#{@document.id}"
+    end
+    
   end
 
   it "should have 01:00:00 as duration for a length of 3600 seconds" do

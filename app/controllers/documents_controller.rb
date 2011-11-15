@@ -100,6 +100,7 @@ class DocumentsController < ApplicationController
 
   def destroy
     current_user.documents.find(params[:id]).destroy
+    flash[:success] = "Votre document a bien été détruit"
     redirect_to :action => 'manage'
   end
 

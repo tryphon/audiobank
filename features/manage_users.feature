@@ -32,5 +32,3 @@ Feature: Manage Users
     And I fill in "Votre Email" with "test@tryphon.eu"
     When I press "Envoyer"
     Then I should see "Votre nouveau de passe a été envoyé à test@tryphon.eu"
-    
-    

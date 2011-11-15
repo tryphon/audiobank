@@ -40,10 +40,17 @@ class Document < ActiveRecord::Base
     else nil
   	end
   end
+
+  @@root = Rails.root + "media"
+  cattr_accessor :root
 	
 	def path
-		"#{RAILS_ROOT}/media/#{id}"
+    root + id.to_s if id
 	end
+
+  def self.test_root
+    Rails.root + "tmp/media"
+  end
   
 	def duration
     # TODO use a Duration object ?

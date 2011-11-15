@@ -4,6 +4,12 @@ Factory.define :audio_document do |d|
   d.association :author, :factory => :user
 end
 
+Factory.define :document, :class => "AudioDocument" do |d|
+  d.title "title"
+  d.description "description"
+  d.association :author, :factory => :user
+end
+
 Factory.define :user do |u|
   u.name "name"
   u.sequence(:username) { |n| "username-#{n}" }
