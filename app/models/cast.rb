@@ -1,6 +1,9 @@
 class Cast < ActiveRecord::Base
 	belongs_to :document
 
+  validates_presence_of :name
+  validates_uniqueness_of :name
+
 	FORMATS = %w(ogg mp3)
 
 	def update_file(format = "ogg")
@@ -14,8 +17,11 @@ class Cast < ActiveRecord::Base
 		end
 	end
 
+  @@root = Rails.root + "media/cast"
+  cattr_accessor :root
+
 	def path(format = "ogg")
-	  "#{RAILS_ROOT}/media/cast/#{filename(format)}"
+	  "#{root}/#{filename(format)}"
 	end
 
 	def filename(format = "ogg")
@@ -27,7 +33,7 @@ class Cast < ActiveRecord::Base
 	end
 
 	def uptodate?(format = "ogg")
-		FileUtils.uptodate?(path(format), document.path)
+		FileUtils.uptodate?(path(format), [document.path])
 	end
 
 	def self.update

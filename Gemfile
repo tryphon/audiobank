@@ -6,13 +6,21 @@ gem 'rubyjedi-actionwebservice'
 gem 'exception_notification'
 gem 'rtaglib'
 
+group :development do
+  gem 'capistrano'
+  gem 'guard'
+  gem 'guard-rspec'
+  group :linux do
+    gem 'rb-inotify'
+    gem 'libnotify'
+  end
+end
+
 group :test do
   gem 'rspec-rails', '< 2'
   gem 'rcov'
   gem 'remarkable_rails'
   gem 'factory_girl'
-  gem 'autotest'
-  
 end
 
 group :production do

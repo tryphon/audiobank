@@ -30,3 +30,8 @@ end
 Factory.define :tag do |t|
   t.sequence(:name) { |n| "tag_#{n}" }
 end
+
+Factory.define :cast do |d|
+  d.association :document
+  d.name StringRandom.alphanumeric(8).downcase
+end
