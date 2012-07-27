@@ -1,4 +1,4 @@
-class AddDownloadCountOnDocument < ActiveRecord::Migration
+class AddDownloadCountOnCasts < ActiveRecord::Migration
   def self.up
     add_column :casts, :download_count, :integer, :default => 0
   end
