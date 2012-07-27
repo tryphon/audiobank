@@ -57,6 +57,10 @@ class Document < ActiveRecord::Base
 		Time.at(self.length) + Time.local(1970,1,1).to_i
 	end
 
+  def download_count
+    casts.sum :download_count
+  end
+
   # Workaround for a strange error in DocumentsController#download : 
   # 'Attempt to call private method'
   def format

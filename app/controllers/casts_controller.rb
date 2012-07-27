@@ -40,12 +40,9 @@ class CastsController < ApplicationController
   	@cast = Cast.find_by_name(name)
     raise ActiveRecord::RecordNotFound unless @cast
 
-  	case format
-  		when "ogg":
-  			type = "application/ogg"
-  		when "mp3" 
-  			type = "application/mp3"
-  	end
+    @cast.increment(:download_count).save
+    logger.info "Play Cast #{@cast.name} #{format} #{@cast.size(format)} #{@cast.download_count} #{@cast.document.id} #{@cast.document.author.username} \"#{@cast.document.title}\""
+
   	redirect_to "/static/cast/#{@cast.filename(format)}"
   end
 

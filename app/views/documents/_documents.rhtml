@@ -11,12 +11,18 @@
      <span class="length"><%= format_time(document.duration) %></span>
     </div>
    <% end %>
-   <% unless document.tags.empty? or !tags %>
-    <div class="tags">
+   <% unless document.tags.empty? and document.download_count.zero? %>
+   <div class="tags">
      <% for tag in document.tags %>
-      <%= link_to(tag.name, { :action => "tag", :name => tag.name }, :title => "Etiquette : #{tag.name}", :rel => "tag") %>
+       <%= link_to(tag.name, { :action => "tag", :name => tag.name }, :title => "Etiquette : #{tag.name}", :rel => "tag") %>
      <% end %>
-    </div>
+
+     <% unless document.download_count.zero? %>
+     <span class="download_count">
+       <%= pluralize(document.download_count, 'écoute') %>
+     </span>
+     <% end %>
+   </div>
    <% end %>
    <% if actions %>
     <div class="actions">

@@ -18,7 +18,13 @@ class User < ActiveRecord::Base
 		def find_by_keywords(keywords)
 			find(:all).delete_if { |d| !d.match?(keywords) }
 		end
+
+    def download_count
+      # FIXME very very old school
+      Cast.sum(:download_count, :conditions => { :document_id => proxy_owner.document_ids })
+    end
 	end
+
 
 	has_many :subscriptions, :dependent => :destroy, :order => "created_at DESC", :as => "subscriber"
 

@@ -2,10 +2,30 @@
 <ul>
  <%= render :partial => "documents/documents", :object => @author.documents[0..2], :locals => { :linked => true, :empty => "Vous n'avez aucun document ...", :actions => false, :tags => false } %>
 </ul>
+
 <div class="actions">
  <%= link_to("Vos autres documents &#8250;", :controller => "documents", :action => "manage") %>
 </div>
 <hr/>
+
+<% unless @author.documents.empty? %>
+<h2>Statistiques</h2>
+<div class="statistics">
+<p>
+Vous disposez de <strong><%= @author.documents.count %></strong> documents.
+</p>
+<p>
+Ils répresentent <strong><%= @author.documents.sum(:length) / 60 %></strong> heures.
+</p>
+<% unless @author.documents.download_count.zero? %>
+<p>
+Ils ont été écoutés au total <strong><%= @author.documents.download_count %></strong> fois. 
+</p>
+<% end %>
+</div>
+<hr/>
+<% end %>
+
 <h2>Vos souscriptions</h2>
 <ul>
  <%= render :partial => "subscriptions/subscriptions", :object => @subscriber.find_subscriptions(:offset => 0, :limit => 2), :locals => { :linked => true, :empty => "Vous n'avez aucune souscription ...", :actions => false, :tags => false } %>
@@ -13,14 +33,6 @@
 <div class="actions">
  <%= link_to("Vos autres subscriptions &#8250;", :controller => "subscriptions", :action => "manage") %>
 </div>
-<h2>Vos podcasts</h2>
-<ul>
- <%= render :partial => "podcasts/podcasts", :object => @author.podcasts[0..2], :locals => { :linked => true, :empty => "Vous n'avez aucun podcast ...", :actions => false, :tags => false } %>
-</ul>
-<div class="actions">
- <%= link_to("Vos autres podcasts &#8250;", :controller => "podcasts", :action => "manage") %>
-</div>
-<hr/>
 <h2>Vos étiquettes</h2>
 <% if @tag.empty? %>
  <p>Vous n'avez aucune étiquette ..</p>
