@@ -40,8 +40,10 @@ class CastsController < ApplicationController
   	@cast = Cast.find_by_name(name)
     raise ActiveRecord::RecordNotFound unless @cast
 
-    @cast.increment(:download_count).save
-    logger.info "Play Cast #{@cast.name} #{format} #{@cast.size(format)} #{@cast.download_count} #{@cast.document.id} #{@cast.document.author.username} \"#{@cast.document.title}\""
+    unless request.head?
+      @cast.increment(:download_count).save
+      logger.info "Play Cast #{@cast.name} #{format} #{@cast.size(format)} #{@cast.download_count} #{@cast.document.id} #{@cast.document.author.username} \"#{@cast.document.title}\""
+    end
 
   	redirect_to "/static/cast/#{@cast.filename(format)}"
   end
