@@ -39,7 +39,6 @@ require 'fileutils'
 require 'soap/wsdlDriver'
 
 require 'getoptlong'
-require 'rdoc/usage'
 
 require 'net/ftp'
 
@@ -159,8 +158,6 @@ client = AudioBankClient.new
 
 opts.each do |opt, arg|
   case opt
-  when '--help'
-    RDoc::usage
   when '--username'
     client.login = arg
   when '--password'
