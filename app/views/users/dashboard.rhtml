@@ -15,7 +15,7 @@
 Vous disposez de <strong><%= @author.documents.count %></strong> documents.
 </p>
 <p>
-Ils répresentent <strong><%= @author.documents.sum(:length) / 60 %></strong> heures.
+Ils répresentent <strong><%= @author.documents.sum(:length) / 60 %></strong> minutes.
 </p>
 <% unless @author.documents.download_count.zero? %>
 <p>
