@@ -16,6 +16,10 @@ class HttpHook
       request.body = "{\"document\": #{document.to_json}}"
       Net::HTTP.new(uri.host, uri.port).start { |http| http.request(request) }
     end
+    true
+  rescue => e
+    Rails.logger.error "HttpHook #{url} fails for #{document.id}: #{e}"
+    false
   end
 
 end
