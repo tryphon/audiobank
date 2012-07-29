@@ -11,6 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'documents/tag/:name', :controller => 'documents', :action => 'tag'
   map.connect 'documents/tag/:name/:page', :controller => 'documents', :action => 'tag'
   map.connect 'documents/page/:page', :controller => 'documents', :action => 'manage'
+  map.connect 'documents/:id.:format', :controller => 'documents', :action => 'show'
   map.connect 'documents/:action/:id', :controller => 'documents'
   map.connect 'document/:action', :controller => 'document'
   map.connect 'podcasts/feed/:name', :controller => 'podcasts', :action => 'feed'

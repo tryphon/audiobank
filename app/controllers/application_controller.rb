@@ -10,13 +10,23 @@ class ApplicationController < ActionController::Base
   protected
   
   def current_user
-    @current_user ||= User.find(session[:user]) if session[:user]
+    @current_user ||= (User.find(session[:user]) if session[:user])
   end
 
 	private
+
 	def	check_authentication
-		unless current_user
-			redirect_to :controller => "users", :action => "signin"
-		end
+    case request.format
+    when Mime::XML, Mime::ATOM, Mime::JSON
+      if user = authenticate_with_http_basic { |username, password| User.authenticate(username, password) }
+        @current_user = user
+      else
+        request_http_basic_authentication
+      end
+    else
+      unless current_user
+        redirect_to :controller => "users", :action => "signin"
+      end
+    end
 	end
 end

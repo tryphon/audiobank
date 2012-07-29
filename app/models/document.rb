@@ -139,5 +139,16 @@ class Document < ActiveRecord::Base
     
     keywords
   end
-	
+
+  def to_json(options = {})
+    { :id => id, 
+      :title => title, 
+      :length => length, 
+      :description => description, 
+      :upload => upload.public_url, 
+      :download_count => download_count }.tap do |attributes|
+      attributes[:cast] = casts.first.name unless casts.empty?
+    end.to_json
+  end
+
 end

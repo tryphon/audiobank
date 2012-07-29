@@ -34,6 +34,10 @@ class DocumentsController < ApplicationController
   		end
     else
     	@review.rating = 3
+      if request.format === Mime::JSON
+        render :json => @document
+      end
+        # render :action => :show, :format => params[:format], :layout => (params[:format] == "json" ? false : 'documents')
   	end
   end
 
@@ -131,4 +135,5 @@ class DocumentsController < ApplicationController
     end
     render :partial => "users/people", :object => @people, :locals => { :empty => "Aucun utilisateur ne correspond", :draggable => true }
   end
+
 end
