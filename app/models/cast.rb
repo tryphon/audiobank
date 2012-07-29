@@ -60,7 +60,7 @@ class Cast < ActiveRecord::Base
 
       if FORMATS.all? { |f| cast.uptodate? f }
         document.casts << cast
-        Mailer::deliver_document_ready(document)
+        document.ready!
       else
         cast.destroy
       end

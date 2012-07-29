@@ -21,6 +21,7 @@ group :test do
   gem 'rcov'
   gem 'remarkable_rails'
   gem 'factory_girl'
+  gem 'fakeweb'
 end
 
 group :production do

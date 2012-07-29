@@ -151,4 +151,18 @@ class Document < ActiveRecord::Base
     end.to_json
   end
 
+  @@hooks = []
+  cattr_reader :hooks
+
+  def ready!
+    # Create a Hook for mails
+    Mailer::deliver_document_ready self
+
+    hooks.each do |hook|
+      hook.document_ready self
+    end
+
+    true
+  end
+
 end

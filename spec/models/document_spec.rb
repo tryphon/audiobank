@@ -372,4 +372,20 @@ describe Document do
 
   end
 
+  describe "#ready!" do
+
+    before(:each) do
+      Factory :cast, :document => @document
+    end
+
+    let(:hook) { mock }
+    
+    it "should invoke hooks with document_ready" do
+      @document.stub :hooks => [hook]
+      hook.should_receive(:document_ready).with(@document)
+      @document.ready!
+    end
+
+  end
+
 end
