@@ -10,12 +10,21 @@ class DocumentsController < ApplicationController
     @document = AudioDocument.new(params[:document])
     if request.post?
       @document.author = current_user
-    	@document.tag_with(params[:labels])
+    	@document.tag_with(params[:labels]) if params[:labels].present?
       if @document.save
-        flash[:success] = "Votre document a bien été crée"
-        redirect_to :action => 'upload', :id => @document
+        # FIXME Sorry for kitten :(
+        unless request.format == Mime::JSON
+          flash[:success] = "Votre document a bien été crée"
+          redirect_to :action => 'upload', :id => @document
+        else
+          render :json => @document
+        end
       else
-        flash[:failure] = "Votre document n'a pas été crée"
+        unless request.format == Mime::JSON
+          flash[:failure] = "Votre document n'a pas été crée"
+        else
+          render :json => @document, :status => [406, "Invalid entity"]
+        end
       end
     end
   end

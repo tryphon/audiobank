@@ -145,9 +145,10 @@ class Document < ActiveRecord::Base
       :title => title, 
       :length => length, 
       :description => description, 
-      :upload => upload.public_url, 
       :download_count => download_count }.tap do |attributes|
       attributes[:cast] = casts.first.name unless casts.empty?
+      attributes[:upload] = upload.public_url if upload
+      attributes[:errors] = errors.to_json unless valid?
     end.to_json
   end
 

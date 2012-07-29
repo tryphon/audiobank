@@ -11,8 +11,11 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'documents/tag/:name', :controller => 'documents', :action => 'tag'
   map.connect 'documents/tag/:name/:page', :controller => 'documents', :action => 'tag'
   map.connect 'documents/page/:page', :controller => 'documents', :action => 'manage'
-  map.connect 'documents/:id.:format', :controller => 'documents', :action => 'show'
+  map.connect 'documents/add', :controller => 'documents', :action => 'add', :conditions => { :method => :get }
+  map.connect 'documents.:format', :controller => 'documents', :action => 'add', :conditions => { :method => :post }
   map.connect 'documents/:action/:id', :controller => 'documents'
+  map.connect 'documents/:id.:format', :controller => 'documents', :action => 'show'
+
   map.connect 'document/:action', :controller => 'document'
   map.connect 'podcasts/feed/:name', :controller => 'podcasts', :action => 'feed'
   map.connect 'podcasts/page/:page', :controller => 'podcasts', :action => 'manage'
