@@ -6,11 +6,6 @@ class CastsController < ApplicationController
   		when "mp3":
   			playcontent(File.basename(params[:name], "."+ params[:format]), params[:format])
   		when "ogg":
-  			if mp3_only_player?
-			  	real_name = File.basename(params[:name], "."+ params[:format])
-	  			redirect_to :action => :play, :name => real_name +".mp3"  
-	  			return
-	  		end
   			playcontent(File.basename(params[:name], "."+ params[:format]), params[:format])
   		when "m3u" 
   			playlist(File.basename(params[:name], "."+ params[:format]))
@@ -54,7 +49,7 @@ class CastsController < ApplicationController
 
   	content = "#EXTM3U\n"
   	content += "#EXTINF:#{@cast.document.length},#{@cast.document.title}\n" 
-  	content += url_for(:action => 'play', :name => @cast.name) + ".ogg\n"
+  	content += url_for(:action => 'play', :name => @cast.name) + ".mp3\n"
 
 		m3u_url = "cache/#{name}.m3u"
 		m3u_path = "#{RAILS_ROOT}/public/#{m3u_url}"
