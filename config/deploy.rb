@@ -1,6 +1,6 @@
 set :application, "audiobank"
 set :scm, "git"
-set :repository, "git://www.tryphon.priv/audiobank"
+set :repository, "git://projects.tryphon.priv/audiobank"
 
 set :deploy_to, "/var/www/audiobank"
 
