@@ -372,6 +372,15 @@ describe Document do
 
   end
 
+  describe "#format=" do
+
+    it "should ignore additionnal information (; and after)" do
+      @document.format = "application/ogg; charset=binary"
+      @document.format.should == "application/ogg"
+    end
+
+  end
+
   describe "#ready!" do
 
     before(:each) do

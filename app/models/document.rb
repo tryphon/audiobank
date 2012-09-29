@@ -66,6 +66,10 @@ class Document < ActiveRecord::Base
   def format
     read_attribute(:format)
   end
+
+  def format=(format)
+    write_attribute :format, format.gsub(/;.*$/, "")
+  end
 	
 	def upload_file(file)
     self.format = Mahoro.new(Mahoro::MIME).file(file.path)
