@@ -66,6 +66,7 @@ GEM
       rake (>= 0.8.1)
     libnotify (0.7.2)
       ffi (~> 1.0.0)
+    mahoro (0.3)
     mime-types (1.16)
     mysql (2.8.1)
     net-scp (1.0.4)
@@ -143,6 +144,7 @@ DEPENDENCIES
   inherited_resources (= 1.0.6)
   launchy
   libnotify
+  mahoro
   mysql
   pickle
   rails (= 2.3.8)

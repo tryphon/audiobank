@@ -5,6 +5,7 @@ gem 'inherited_resources', '= 1.0.6'
 gem 'rubyjedi-actionwebservice'
 gem 'exception_notification'
 gem 'rtaglib'
+gem 'mahoro'
 
 group :development do
   gem 'capistrano'
