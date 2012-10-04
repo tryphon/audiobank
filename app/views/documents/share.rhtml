@@ -1,4 +1,11 @@
 <h2>Publier votre document</h2>
+
+<p>
+Sur une application tierce (comme <%= link_to "Bonnes-Ondes", "http://bonnes-ondes.fr" %>), indiquez l'identifiant AudioBank suivant : <strong><%= @document.id %></strong>.
+</p>
+
+<br/>
+
 <% if @document.uploaded? %>
  <% if @document.casts.empty? %>
   <p>Le contenu publiable sera disponible dans quelques minutes.</p>
@@ -10,7 +17,9 @@
 <% else %>
  <p>Le contenu publiable sera disponible dès que vous aurez <%= link_to("déposé votre fichier &#8250;", {:action => "upload", :id => @document }) %></p>
 <% end %>
+
 <hr/>
+
 <h2>Partager votre document</h2>
 <ul>
  <%= render :partial => "documents/documents", :object => Array(@document), :locals => { :linked => true, :empty => "Aucun document ne correspond ...", :actions => false, :tags => false } %>
