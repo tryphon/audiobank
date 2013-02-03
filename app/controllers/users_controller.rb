@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 class UsersController < ApplicationController
-	open_id_consumer :required => [:email, :nickname], :optional => [:fullname]
 	layout 'documents'
 
 	def index

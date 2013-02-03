@@ -1,5 +1,13 @@
-class AddOpenIdStoreToDb < ActiveRecord::Migration
+class RemoveOpenIdTables < ActiveRecord::Migration
   def self.up
+    drop_table "open_id_associations"
+    drop_table "open_id_nonces"
+    drop_table "open_id_settings"
+    
+    remove_column :users, :openid_url
+  end
+
+  def self.down
     create_table "open_id_associations", :force => true do |t|
       t.column "server_url", :binary
       t.column "handle", :string
@@ -18,11 +26,7 @@ class AddOpenIdStoreToDb < ActiveRecord::Migration
       t.column "setting", :string
       t.column "value", :binary
     end
-  end
-
-  def self.down
-    drop_table "open_id_associations"
-    drop_table "open_id_nonces"
-    drop_table "open_id_settings"
+    
+    add_column(:users, :openid_url, :string)
   end
 end
