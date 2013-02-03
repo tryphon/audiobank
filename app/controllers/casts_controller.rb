@@ -52,7 +52,7 @@ class CastsController < ApplicationController
   	content += url_for(:action => 'play', :name => @cast.name) + ".mp3\n"
 
 		m3u_url = "cache/#{name}.m3u"
-		m3u_path = "#{RAILS_ROOT}/public/#{m3u_url}"
+		m3u_path = "#{Rails.root}/public/#{m3u_url}"
 		unless File.exists?(m3u_path)
 			File.open(m3u_path, "w") do |f|
 					f.write(content)
