@@ -5,13 +5,13 @@ class Cast < ActiveRecord::Base
   validates_uniqueness_of :name
 
   # FIXME
-  attr_accessible :name
+  attr_accessible :name, :document
 
 	FORMATS = %w(ogg mp3)
 
 	def update_file(format = "ogg")
-		# puts "DEBUG: #{RAILS_ROOT}/bin/encode #{document.path} #{path(format)} #{format}"
-		system "#{RAILS_ROOT}/bin/encode", document.path, path(format), format
+		# puts "DEBUG: #{Rails.root}/bin/encode #{document.path} #{path(format)} #{format}"
+		system "#{Rails.root}/bin/encode", document.path, path(format), format
 	end
 
 	def before_destroy

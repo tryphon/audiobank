@@ -2,7 +2,7 @@ class Cue < ActiveRecord::Base
 	belongs_to :document
 	
 	def update_file
-		system "#{RAILS_ROOT}/bin/encode", document.path, path, "ogg"
+		system "#{Rails.root}/bin/encode", document.path, path, "ogg"
 	end
 	
 	def before_destroy
@@ -10,7 +10,7 @@ class Cue < ActiveRecord::Base
 	end
 
 	def path
-		"#{RAILS_ROOT}/media/cue/#{id}"
+		"#{Rails.root}/media/cue/#{id}"
 	end
 	
 	def self.update

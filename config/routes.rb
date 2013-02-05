@@ -60,7 +60,6 @@ AudioBank::Application.routes.draw do
   match '/casts/:name.:format', :controller => 'casts', :action => 'play'
 
   match '/users/:id/:confirm', :controller => 'users', :action => 'confirm'
-	# match ':action/:id', :controller => 'users'
 
   match '/recover_password' => 'users#recover_password'
   match '/signup' => 'users#signup'

@@ -18,8 +18,10 @@ class Document < ActiveRecord::Base
 	
 	attr_protected :size, :length, :format, :file
   
-  scope :to_be_prepared, :include => "casts", :conditions => [ "uploaded and casts.id IS NULL" ]
-  
+  def self.to_be_prepared
+    includes(:casts).where( :uploaded => true, :casts => { :document_id=> nil } )
+  end
+
   attr_accessible :description, :title
   # FIXME
   attr_accessible :subscriber
