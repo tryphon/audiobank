@@ -16,47 +16,47 @@ img { border: none; vertical-align: middle; }
 #access { display: none; }
 
 #header { border-bottom: 4px solid #ccc; background: #333; }
-#header div { position: relative; height: 100px; width: 750px; margin: 0 auto; background: url("../images/audiobank.png") no-repeat 0px 10px; }
+#header div { position: relative; height: 100px; width: 750px; margin: 0 auto; background: image-url("audiobank.png") no-repeat 0px 10px; }
 #header h1 { display: none; }
 #header a { font-size: 90%; color: #fff; }
 #header div ul { position: absolute; bottom: 0; right: 0; padding: 0; font-size: 90%; list-style: none; }
-#header ul li { float: left; margin: 0 0 0 8px; padding: 0; background: #66af16 url("../images/corner.png") no-repeat top right; }
+#header ul li { float: left; margin: 0 0 0 8px; padding: 0; background: #66af16 image-url("corner.png") no-repeat top right; }
 #header ul li a { float: left; display: block; padding: 6px 10px; text-decoration: none; color: #fff; font: normal 115% "Trebuchet MS", sans-serif; }
-#header ul li a:hover { color: #333; background: #a3de5b url("../images/corner-over.png") no-repeat top right; }
+#header ul li a:hover { color: #333; background: #a3de5b image-url("corner-over.png") no-repeat top right; }
 
 #frame { margin: 0; padding: 18px 0; clear: both; }
-#wrap { width: 800px; margin: 0 auto; background: #fff url("../images/frame-bg.png") repeat-y top left; }
+#wrap { width: 800px; margin: 0 auto; background: #fff image-url("frame-bg.png") repeat-y top left; }
 #frame ul { margin: 4px 0; list-style-type: none; }
 #frame h1 { font: normal 145% "Georgia", serif; color: #66af16; margin: 6px 0; }
 #frame h2 { font: normal 120% "Georgia", serif; margin: 6px 0; color: #7dacd1; clear: both; border-bottom: 1px solid #7dacd1; }
 #frame .actions, #frame .tags, #frame .pagination { clear: both; margin: 0 0 6px; padding: 4px 0; font-size: 90%; text-align: right; border-top: 1px solid #ccc; }
 #frame .details { position: absolute; top: 10px; right: 0; font-size: 90%; }
-#frame .tags { margin: 6px 0 0; padding: 6px 20px; text-align: left; background: url("../images/tags.png") no-repeat 0px 6px; position: relative; min-height: 18px; }
+#frame .tags { margin: 6px 0 0; padding: 6px 20px; text-align: left; background: image-url("tags.png") no-repeat 0px 6px; position: relative; min-height: 18px; }
 #frame .download_count { position: absolute; top: 6px; right: 0; }
 #frame .details span, #frame .actions span, #frame .icon { margin: 0; padding: 0 4px 0 20px; }
 #frame .actions a, #frame .details a { color: #000; padding: 2px 2px 2px 20px; margin-left: 6px; }
-#frame .edit { background: url("../images/edit.png") no-repeat; }
-#frame .share { background: url("../images/share.png") no-repeat; }
-#frame .destroy { background: url("../images/destroy.png") no-repeat; }
-#frame .upload { background: url("../images/upload.png") no-repeat; }
-#frame .next { background: url("../images/next.png") no-repeat; }
-#frame .previous { background: url("../images/previous.png") no-repeat; }
-#frame .download { background: url("../images/download.png") no-repeat; }
-#frame .listen { background: url("../images/listen.png") no-repeat; }
-#frame .basket_put { background: url("../images/basket_put.png") no-repeat; }
-#frame .warning { background: url("../images/warning.png") no-repeat; }
-#frame .unavailable { background: url("../images/unavailable.png") no-repeat; }
-#frame .signup { background: url("../images/author.png") no-repeat; }
-#frame .length { background: url("../images/length.png") no-repeat; }
-#frame .size { background: url("../images/size.png") no-repeat; }
-#frame .note { background: url("../images/note.png") no-repeat; }
-#frame .author { float: left; background: url("../images/author.png") no-repeat; }
+#frame .edit { background: image-url("edit.png") no-repeat; }
+#frame .share { background: image-url("share.png") no-repeat; }
+#frame .destroy { background: image-url("destroy.png") no-repeat; }
+#frame .upload { background: image-url("upload.png") no-repeat; }
+#frame .next { background: image-url("next.png") no-repeat; }
+#frame .previous { background: image-url("previous.png") no-repeat; }
+#frame .download { background: image-url("download.png") no-repeat; }
+#frame .listen { background: image-url("listen.png") no-repeat; }
+#frame .basket_put { background: image-url("basket_put.png") no-repeat; }
+#frame .warning { background: image-url("warning.png") no-repeat; }
+#frame .unavailable { background: image-url("unavailable.png") no-repeat; }
+#frame .signup { background: image-url("author.png") no-repeat; }
+#frame .length { background: image-url("length.png") no-repeat; }
+#frame .size { background: image-url("size.png") no-repeat; }
+#frame .note { background: image-url("note.png") no-repeat; }
+#frame .author { float: left; background: image-url("author.png") no-repeat; }
 
 #frame .pagination { padding-right: 15px; }
 #frame .pagination .current { color: #999; }
 #frame .pagination a { color: #000; padding: 2px; }
-#frame .pagination .next_page { background: url("../images/next.png") no-repeat; padding: 2px 2px 2px 20px; }
-#frame .pagination .prev_page { background: url("../images/previous.png") no-repeat; padding: 2px 2px 2px 20px; }
+#frame .pagination .next_page { background: image-url("next.png") no-repeat; padding: 2px 2px 2px 20px; }
+#frame .pagination .prev_page { background: image-url("previous.png") no-repeat; padding: 2px 2px 2px 20px; }
 #frame .pagination .disabled { display: none; }
 
 #content { float: right; width: 570px; }
@@ -84,7 +84,7 @@ ul#welcome { margin: 16px 100px 16px 14px; }
 #content dl dd { padding: 0; margin: 0; }
 #content dl dt { margin-top: 12px; }
 
-#welcome li { margin: 6px; color: #000; padding: 4px 4px 4px 28px; background: #fff url("../images/tick.png") no-repeat 4px 4px; }
+#welcome li { margin: 6px; color: #000; padding: 4px 4px 4px 28px; background: #fff image-url("tick.png") no-repeat 4px 4px; }
 
 #subscribers, #users, #members { clear: both; border: 1px solid #5884a6; }
 #subscribers li, #users li, #members li { padding: 12px; margin: 2px 12px; cursor: pointer; }
@@ -104,10 +104,10 @@ ul#welcome { margin: 16px 100px 16px 14px; }
 #status .progressBar .background { background-color: #333; height: 18px; width: 0%; }
 
 #messages { padding: 0 0 12px; background: #fff; }
-#flash { margin: 6px 0; padding: 12px 0; font-size: 115%; font-weight: bold; text-indent: 54px; border-top: 1px solid #979797; border-bottom: 1px solid #979797; background: #e7e7e7 url("../images/notice.png") no-repeat 28px; }
-#messages .success { color: #1e7a1b; border-color: #4bb426; background: #b7e1af url("../images/success.png") no-repeat 28px; }
-#messages .failure { color: #c01100; border-color: #ca4f35; background: #ffbdbd url("../images/failure.png") no-repeat 28px; }
-#messages .warning { color: #c67109; border-color: #c67109; background: #f8e694 url("../images/warning.png") no-repeat 28px; }
+#flash { margin: 6px 0; padding: 12px 0; font-size: 115%; font-weight: bold; text-indent: 54px; border-top: 1px solid #979797; border-bottom: 1px solid #979797; background: #e7e7e7 image-url("notice.png") no-repeat 28px; }
+#messages .success { color: #1e7a1b; border-color: #4bb426; background: #b7e1af image-url("success.png") no-repeat 28px; }
+#messages .failure { color: #c01100; border-color: #ca4f35; background: #ffbdbd image-url("failure.png") no-repeat 28px; }
+#messages .warning { color: #c67109; border-color: #c67109; background: #f8e694 image-url("warning.png") no-repeat 28px; }
 
 #errors ul { margin: 0 12px 14px 14px; list-style-type: square; }
 #errors li { margin: 6px; }
