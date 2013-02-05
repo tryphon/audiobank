@@ -10,7 +10,7 @@ Feature: Manage Users
     Given I am on the "documents/add" page
     And I fill in "Titre" with "Document de test"
     And I fill in "Description" with "Une description courte"
-    And I fill in "Etiquettes" with "tag1, tag2"
+    And I fill in "Etiquettes" with "tag1,tag2"
     When I press "Creer votre document"
     Then I should see "Votre document a bien été crée"
 

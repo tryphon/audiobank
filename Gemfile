@@ -13,6 +13,7 @@ gem 'inherited_resources', '~> 1.3'
 gem 'rtaglib'
 gem 'mahoro'
 gem 'will_paginate'
+gem 'rails_tokeninput'
 
 gem 'exception_notification'
 

@@ -1,12 +1,7 @@
 <%= error_messages_for(:document) %>
 <h2>Modifier votre document</h2>
+
 <%= form_tag(:action => :edit) do %>
- <p><label for="document_title">Titre :</label><br/>
- <%= text_field("document", "title", :size => 30) %></p>
- <p><label for="document_description">Description :</label><br/>
- <%= text_area("document", "description", :rows => 10, :cols => 28) %></p>
- <p><label for="labels">Etiquettes :</label><br/>
- <%= text_field_tag("labels", @document.tags.collect{ |t| t.name }.join(" " ), :size => 30) %><span id="labels_auto_complete"></span>
- <%= auto_complete_field("labels", :url => {:controller => "documents", :action => "auto_complete_for_tags"}, :tokens => " ") %></p>
+ <%= render :partial => 'form' %>
  <%= submit_tag "Modifier ce document" %> ou <%= link_to("annuler", { :action => "show", :id => @document}, :title => "Annuler", :class => "blue") %>
 <% end %>

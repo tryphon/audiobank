@@ -114,9 +114,12 @@ class Document < ActiveRecord::Base
 
 	before_create :build_upload
   
-  def tag_with(list)
+  attr_accessible :tag_tokens
+  attr_reader :tag_tokens
+
+  def tag_tokens=(tokens)
   	Tag.transaction do
-  		self.tags = Tag.parse(list)
+  		self.tags = Tag.parse(tokens)
   	end
   end
   

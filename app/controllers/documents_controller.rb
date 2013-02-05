@@ -53,7 +53,6 @@ class DocumentsController < ApplicationController
   def edit
     @document = current_user.documents.find(params[:id])
     if request.post?
-    	@document.tag_with(params[:labels])
       if @document.update_attributes(params[:document])
         flash[:success] = "Votre document a bien été édité"
         redirect_to :action => 'show', :id => @document
@@ -127,7 +126,12 @@ class DocumentsController < ApplicationController
 	end
 
 	def auto_complete_for_tags
-		@tag = Tag.find(:all, :conditions => ["name like ?", "%#{params[:labels].downcase}%"])
+    query = params[:q].downcase
+
+    tags = Tag.where(["name like ?", "%#{query}%"]).order(:name)
+    tags.unshift Tag.new(:name => query) unless tags.any? { |t| t.name == query }
+
+    render :json => tags
 	end
 
   def listen
