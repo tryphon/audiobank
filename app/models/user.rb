@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
 
     def download_count
       # FIXME very very old school
-      Cast.sum(:download_count, :conditions => { :document_id => proxy_owner.document_ids })
+      Cast.sum(:download_count, :conditions => { :document_id => proxy_association.owner.document_ids })
     end
 	end
 

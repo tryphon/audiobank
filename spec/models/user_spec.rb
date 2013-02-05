@@ -55,3 +55,19 @@ describe User, "validation" do
   end
 
 end
+
+describe User do
+
+  describe "#documents" do
+    
+    describe "#download_count" do
+
+      it "should be zero by default" do
+        subject.documents.download_count.should be_zero
+      end
+
+    end
+
+  end
+
+end
