@@ -6,7 +6,7 @@ Feature: Manage Users
   Scenario: Sign up
     Given I am on the "signup" page
     And I fill in "user_username" with "test"
-    And I fill in "Email" with "test@tryphon.eu"
+    And I fill in "user_email" with "test@tryphon.eu"
     And I fill in "user_name" with "Test User"
     And I fill in "Mot de passe" with "secret"
     When I press "Creer un compte"

@@ -15,7 +15,7 @@ Feature: Manage Users
     Then I should see "Votre document a bien été crée"
 
   Scenario: Edit a document
-    Given a document exists
+    Given a document exists for current user
     And I am on the document's edit page
     And I fill in "Description" with "Une autre description"
     When I press "Modifier ce document"
@@ -23,14 +23,14 @@ Feature: Manage Users
     And I should see "Une autre description"
 
   Scenario: Destroy a document
-    Given a document exists
+    Given a document exists for current user
     And I am on the document's page
     When I follow "Détruire"
     Then I should see "Votre document a bien été détruit" 
     And the document should not exist
 
   Scenario: Upload a file via http
-    Given a document exists
+    Given a document exists for current user
     And I am on the document's upload page
     And I attach the file "spec/fixtures/one-second.ogg" to "Fichier"
     When I press "Déposer votre fichier"
@@ -38,7 +38,7 @@ Feature: Manage Users
     And the document should be uploaded
 
   Scenario: Upload a file via ftp
-    Given a document exists
+    Given a document exists for current user
     And I am on the document's upload page
     And I upload the file "spec/fixtures/one-second.ogg" to the specified ftp url
     When I press "Confirmer le dépôt"

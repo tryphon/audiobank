@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 class UserController < ApplicationController
 
-  layout 'documents'
-
 	def edit
 		@user = current_user
 		if request.post?

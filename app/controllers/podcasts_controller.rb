@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 class PodcastsController < ApplicationController
-  layout 'documents', :except => [:feed]
+  layout nil, :only => [:feed]
 	
   def index
     redirect_to :action => 'manage'

@@ -1,9 +1,7 @@
-# Filters added to this controller will be run for all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
 class ApplicationController < ActionController::Base
-  include ExceptionNotification::Notifiable
+  protect_from_forgery
 
-	before_filter :check_authentication, :except => [:signup, :signin, :welcome, :index, :confirm, :play, :playlist, :feed, :begin, :complete, :recover_password]
+  before_filter :check_authentication
 
   helper_method :current_user
 
@@ -29,4 +27,5 @@ class ApplicationController < ActionController::Base
       end
     end
 	end
+
 end

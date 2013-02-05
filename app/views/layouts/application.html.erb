@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>AudioBank</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+
+  <%= csrf_meta_tags %>
+ </head>
+ <body>
+  <ul id="access">
+   <li><a href="#content">Aller au contenu</a></li>
+   <li><a href="#sidebar">Aller au menu</a></li>
+  </ul>
+  <hr/>
+  <div id="header">
+   <div>
+   <h1>AudioBank</h1>
+   <ul>
+    <% if session[:user] %>
+     <li><%= link_to("Tableau de bord", :controller => "users", :action => "dashboard") %></li>
+     <li><%= link_to("Mon compte", :controller => "user", :action => "show") %></li>
+     <li><%= link_to("Quitter", :controller => "users", :action => "signout") %></li>
+    <% else %>
+     <li><%= link_to("Créer un compte", :controller => "users", :action => "signup") %></li>
+     <li><%= link_to("S'identifier", :controller => "users", :action => "signin") %></li>
+    <% end %>
+   </ul>
+   </div>
+  </div>
+  <hr/>
+  <div id="frame">
+   <div id="wrap">
+    <%= render :partial => "users/display_flash" %>
+    <div id="content">
+     <%= yield %>
+    </div>
+    <hr/>
+    <div id="sidebar">
+     <% if session[:user] %>
+      <%= render :partial => "users/sidebar" %>
+     <% else %>
+      <%= render :partial => "users/guest" %>
+     <% end %>
+    </div>
+   </div>
+  </div>
+  <hr/>
+  <div id="footer">
+   <div>
+   </div>
+  </div>
+ <%= user_voice_feedback %>
+ </body>
+</html>

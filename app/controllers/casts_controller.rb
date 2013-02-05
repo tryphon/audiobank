@@ -1,6 +1,8 @@
 class CastsController < ApplicationController
 	layout nil
 
+  skip_before_filter :check_authentication
+
   def play
   	case params[:format]
   		when "mp3":

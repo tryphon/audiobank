@@ -1,0 +1,12 @@
+<%= error_messages_for(:user) %>
+<h2>Vous</h2>
+<%= form_tag(:action => :edit) do %>
+ <p><label for="user_name">Nom complet :</label><br/>
+ <%= text_field("user", "name") %></p>
+ <p><label for="user_email">Email :</label><br/>
+ <%= text_field("user", "email") %></p>
+ <p><label for="user_organization">Organisme :</label><br/>
+ <%= text_field("user", "organization") %></p>
+ <%= submit_tag "Modifier" %> ou
+ <%= link_to "revenir &#8250;", :action => :show, :class => "blue" %>
+<% end %>

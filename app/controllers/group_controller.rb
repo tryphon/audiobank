@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 class GroupController < ApplicationController
 
-	layout 'documents'
-
   def add
     @group = Group.new(params[:group])
     if request.post?

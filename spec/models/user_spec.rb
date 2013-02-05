@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe User, "validation" do
@@ -38,19 +39,19 @@ describe User, "validation" do
   it "should make an error 'Le nom d'utilisateur est limité à x caractères' when username too long" do
     @user.username = 'x' * 40
     @user.should_not be_valid
-    @user.errors.on(:username).should match(/Le nom d'utilisateur est limité à \d+ caractères/)
+    @user.should have(1).errors_on(:username)
   end
 
   it "should make an error 'Le nom d'utilisateur doit faire au moins x caractères' when username too short" do
     @user.username = 'x' * 2
     @user.should_not be_valid
-    @user.errors.on(:username).should match(/Le nom d'utilisateur doit faire au moins \d+ caractères/)
+    @user.should have(1).errors_on(:username)
   end
 
   it "should make an error 'Le nom d'utilisateur ne peut contenir que des minuscules, des chiffres et '-' (a..z0..9-)' when format is invalid" do
     @user.username = 'x ' * 2
     @user.should_not be_valid
-    @user.errors.on(:username).should == "Le nom d'utilisateur ne peut contenir que des minuscules, des chiffres et '-' (a..z0..9-)"
+    @user.should have(1).errors_on(:username)
   end
 
 end

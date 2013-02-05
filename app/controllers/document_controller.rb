@@ -1,18 +1,15 @@
-class DocumentAPI < ActionWebService::API::Base
-  api_method :create, :expects => [:string, :string], :returns => [:string]
-  api_method :url, :expects => [:string, :int], :returns => [:string]
-  api_method :confirm, :expects => [:string, :int], :returns => [:boolean]
-end
+# class DocumentAPI < ActionWebService::API::Base
+#   api_method :create, :expects => [:string, :string], :returns => [:string]
+#   api_method :url, :expects => [:string, :int], :returns => [:string]
+#   api_method :confirm, :expects => [:string, :int], :returns => [:boolean]
+# end
 
 class DocumentController < ApplicationController
 
-  acts_as_web_service
+  # acts_as_web_service
+  # web_service_api DocumentAPI
+  # before_invocation :authenticate
 
-  # wsdl_service_name 'Document'
-  # web_service_scaffold :invoke
-  web_service_api DocumentAPI
-
-  before_invocation :authenticate
   skip_before_filter :check_authentication
 
   def create(user_key, name)

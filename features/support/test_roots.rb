@@ -1,3 +1,5 @@
+require 'test_root_support'
+
 Before do
   TestRootSupport.all(:before, Document, Upload)
 end

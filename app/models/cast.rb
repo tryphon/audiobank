@@ -4,6 +4,9 @@ class Cast < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name
 
+  # FIXME
+  attr_accessible :name
+
 	FORMATS = %w(ogg mp3)
 
 	def update_file(format = "ogg")

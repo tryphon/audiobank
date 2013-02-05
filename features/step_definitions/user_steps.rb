@@ -9,7 +9,8 @@ end
 Given /^I am a new, authenticated user$/ do
   @current_user = create_model('an user "current user"', :password => "secret", :confirmed => true)
   visit('/signin')
-  And %{I fill in "user_username" with "#{@current_user.username}"}
-  And %{I fill in "user_password" with "secret"}
-  And %{I press "Se connecter"}
+
+  step %{I fill in "user_username" with "#{@current_user.username}"}
+  step %{I fill in "user_password" with "secret"}
+  step %{I press "Se connecter"}
 end

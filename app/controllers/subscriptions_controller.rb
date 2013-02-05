@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 class SubscriptionsController < ApplicationController
-  layout 'documents'
 
   def index
     redirect_to :action => 'manage'

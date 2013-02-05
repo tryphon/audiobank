@@ -1,5 +1,6 @@
 require 'mahoro'
 require 'tagfile'
+require 'taglib_ext'
 
 class Document < ActiveRecord::Base
 	belongs_to :author, :class_name => "User", :foreign_key => "author_id"
@@ -17,7 +18,11 @@ class Document < ActiveRecord::Base
 	
 	attr_protected :size, :length, :format, :file
   
-  named_scope :to_be_prepared, :include => "casts", :conditions => [ "uploaded and casts.id IS NULL" ]
+  scope :to_be_prepared, :include => "casts", :conditions => [ "uploaded and casts.id IS NULL" ]
+  
+  attr_accessible :description, :title
+  # FIXME
+  attr_accessible :subscriber
 
 	def subscribers
     # Subscription#subscriber is polymorphic
@@ -93,18 +98,19 @@ class Document < ActiveRecord::Base
     true
 	end
 	
-	def after_destroy
+  def delete_file
 		File.delete(path) if File.exist?(path)
-		Tag.destroy_orphelan_tags
   end
-  
-	def after_save
-		Tag.destroy_orphelan_tags
-	end
-	
-	def before_create
-	  self.upload = Upload.new
-	end
+
+	after_destroy :delete_file
+
+  delegate :destroy_orphelan_tags, :to => Tag
+
+  after_destroy :destroy_orphelan_tags
+  after_save :destroy_orphelan_tags
+
+
+	before_create :build_upload
   
   def tag_with(list)
   	Tag.transaction do
@@ -161,7 +167,7 @@ class Document < ActiveRecord::Base
 
   def ready!
     # Create a Hook for mails
-    Mailer::deliver_document_ready self
+    UserMailer.document_ready(self).deliver
 
     hooks.each do |hook|
       hook.document_ready self

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 class DocumentsController < ApplicationController
-	layout 'documents', :except => [:auto_complete_for_tags]
+	layout nil, :only => [:auto_complete_for_tags]
 
   def index
     redirect_to :action => 'manage'

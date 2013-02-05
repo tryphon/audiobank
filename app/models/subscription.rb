@@ -5,7 +5,10 @@ class Subscription < ActiveRecord::Base
 
 	validates_uniqueness_of :subscriber_id, :scope => [:document_id, :subscriber_type]
 
-  before_validation_on_create :define_default_author
+  before_validation :define_default_author, :on => :create
+
+  # FIXME
+  attr_accessible :subscriber
 
 	def self.notify
 	  unnotified_subscriptions = Subscription.find_all_by_notified(false)

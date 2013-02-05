@@ -4,4 +4,7 @@ class Review < ActiveRecord::Base
 	
 	validates_presence_of :description, :message => "Une description est requise"
 	validates_inclusion_of :rating, :in => 0..5, :message => "Une note est requise"
+
+  # FIXME
+  attr_accessible :user, :description, :rating
 end

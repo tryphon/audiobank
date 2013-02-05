@@ -1,0 +1,21 @@
+<h2>Votre document</h2>
+<ul>
+ <%= render :partial => "documents/documents", :object => Array(@document), :locals => { :linked => false, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => true, :tags => true } %>
+</ul>
+<h2>Les commentaires sur votre document</h2>
+<ul>
+ <%= render :partial => "reviews/reviews", :object => @document.reviews, :locals => { :empty => "Aucun commentaire ..." } %> 
+</ul>
+<%= error_messages_for("review") %>
+<h2>Ajouter un commentaire</h2>
+<%= form_tag(:action => :show) do %>
+ <p><label for="review_description">Commentaire :</label><br/>
+ <%= text_area("review", "description", :rows => 4, :cols => 44) %></p>
+ <p>
+  <label for="review_rating">Note :</label>
+  <%= radio_button("review", "rating", "0") %>0 <%= radio_button("review", "rating", "1") %>1
+  <%= radio_button("review", "rating", "2") %>2 <%= radio_button("review", "rating", "3") %>3
+  <%= radio_button("review", "rating", "4") %>4	<%= radio_button("review", "rating", "5") %>5
+ </p>
+ <%= submit_tag "Ajouter votre commentaire" %>
+<% end %>

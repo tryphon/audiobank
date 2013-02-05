@@ -1,3 +1,5 @@
+require 'string_random'
+
 Factory.define :audio_document do |d|
   d.title "title"
   d.description "description"

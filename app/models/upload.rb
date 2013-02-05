@@ -5,16 +5,24 @@ class Upload < ActiveRecord::Base
     "Upload: #{@key} (#{path}, #{candidates})"
   end
   
-  def before_create
+  def create_key
 		self.key = StringRandom.alphanumeric(16).downcase
+  end
 
+  before_create :create_key
+
+  def create_path
 		FileUtils.mkdir_p path
 		File.chmod(02775, path)
   end
+
+  before_create :create_path
   
-	def after_destroy
+	def destroy_path
 		FileUtils.remove_dir(path) if File.exists?(path)
 	end
+
+  after_destroy :destroy_path
 
   @@root = Rails.root + "media/upload"
   cattr_accessor :root

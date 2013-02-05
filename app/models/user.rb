@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 require "digest/sha2"
 class User < ActiveRecord::Base
+
+  attr_accessible :name, :password, :email, :username, :organization
+
 	has_many :reviews, :dependent => :destroy
 
 	has_many :documents, :dependent => :destroy, :order => "updated_at DESC", :foreign_key => "author_id" do
@@ -151,7 +154,7 @@ class User < ActiveRecord::Base
 	def change_password
 	  generated_password = new_password
 	  update_attribute(:password, generated_password)
-	  Mailer.deliver_new_password(self, generated_password)
+	  UserMailer.new_password(self, generated_password).deliver
 	end
 
 	def new_password

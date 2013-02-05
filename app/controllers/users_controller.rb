@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 class UsersController < ApplicationController
-	layout 'documents'
+
+  skip_before_filter :check_authentication, :only => [ :signup, :signin, :recover_password, :confirm ]
 
 	def index
 		welcome
@@ -56,7 +57,7 @@ class UsersController < ApplicationController
     if request.post?
     	@user.confirmed = false
       if @user.save
-	      Mailer::deliver_confirm(@user, self)
+	      UserMailer.confirm(@user, self).deliver
       	flash[:success] = "Votre compte a bien été crée"
         flash[:notice] = "Un email de confirmation vous a été envoyé"
         redirect_to :action => "signin"

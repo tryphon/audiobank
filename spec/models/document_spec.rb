@@ -145,8 +145,10 @@ describe Document do
       @document.size.should == File.size(@file)
     end
 
-    def exist
-      simple_matcher("exist") do |actual|
+    extend RSpec::Matchers::DSL
+    
+    matcher :exist do
+      match do |actual|
         File.exists?(actual)
       end
     end
@@ -155,9 +157,9 @@ describe Document do
       @document.path.should exist
     end
 
-    def contain_file_data(file)
-      simple_matcher("contain file data") do |actual|
-        IO.read(actual) == IO.read(file)
+    RSpec::Matchers.define :contain_file_data do |expected|
+      match do |actual|
+        IO.read(actual) == IO.read(expected)
       end
     end
 
@@ -181,8 +183,10 @@ describe Document do
       @document = Factory(:audio_document)
     end
 
-    def exist
-      simple_matcher("exist") do |actual|
+    extend RSpec::Matchers::DSL
+
+    matcher :exist do
+      match do |actual|
         actual.class.exists?(actual.id)
       end
     end
@@ -254,7 +258,7 @@ describe Document do
 
   it "should destroy orphelan tags when document is saved" do
     Tag.should_receive(:destroy_orphelan_tags)
-    @document.save
+    @document.save!
   end
 
   describe "match_tags?" do
@@ -264,8 +268,8 @@ describe Document do
       @other_tag = Factory(:tag)
     end
 
-    def match_tags(tags)
-      simple_matcher("match tags #{Tag.format(Array(tags))}") do |actual|
+    RSpec::Matchers.define :match_tags do |tags|
+      match do |actual|
         actual.match_tags? tags
       end
     end
@@ -294,8 +298,8 @@ describe Document do
 
   describe "match?" do
 
-    def match(keywords)
-      simple_matcher("match keywords #{keywords}") do |actual|
+    RSpec::Matchers.define :match do |keywords|
+      match do |actual|
         actual.match? keywords
       end
     end
