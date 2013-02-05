@@ -5,7 +5,7 @@
  <%= text_field("group", "name") %></p>
  <p><label for="group_description">Description :</label><br/>
  <%= text_area("group", "description", :rows => 10, :cols => 28) %></p>
- <%= submit_tag "Modifier votre groupe" %> ou <%= link_to("annuler &#8250;", { :action => "manage" }, :title => "Annuler", :class => "blue") %>
+ <%= submit_tag "Modifier votre groupe" %> ou <%= link_to("annuler", { :action => "manage" }, :title => "Annuler", :class => "blue") %>
  
  
  

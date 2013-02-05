@@ -1,5 +1,5 @@
 <h2>Gérer vos groupes</h2>
 <ul>
- <%= render :partial => "group/groups", :object => @groups, :locals => { :linked => true, :empty => "Vous n'avez aucun groupe, vous devriez #{link_to("en ajouter un &#8250;", :action => "add")}", :actions => true, :members => false } %>
+ <%= render :partial => "group/groups", :object => @groups, :locals => { :linked => true, :empty => "Vous n'avez aucun groupe, vous devriez #{link_to('en ajouter un', :action => 'add')}.".html_safe, :actions => true, :members => false } %>
 </ul>
 <%= will_paginate @groups %>

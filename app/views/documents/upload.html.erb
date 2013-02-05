@@ -11,7 +11,7 @@
  <p><label for="document_file">Fichier :</label><br/>
  <%= file_field "document", "file" %></p>
 
- <%= submit_tag "Déposer votre fichier" %> ou <%= link_to("le faire plus tard &#8250;", { :action => "share", :id => @document}, :title => "Déposer votre fichier plus tard", :class => "blue") %>
+ <%= submit_tag "Déposer votre fichier" %> ou <%= link_to("le faire plus tard", { :action => "share", :id => @document}, :title => "Déposer votre fichier plus tard", :class => "blue") %>
 <% end %>
 <hr/>
 
@@ -21,7 +21,7 @@
 <%= hidden_field_tag "mode", "ftp" %>
 <p>Déposer votre fichier dans ce répertoire :<br/>
 <a target="_new" href="<%= @document.upload.public_url %>"><%= @document.upload.public_url %></a></p>
-<%= submit_tag "Confirmer le dépôt" %> ou <%= link_to("le faire plus tard &#8250;", { :action => "share", :id => @document}, :title => "Déposer votre fichier plus tard", :class => "blue") %>
+<%= submit_tag "Confirmer le dépôt" %> ou <%= link_to("le faire plus tard", { :action => "share", :id => @document}, :title => "Déposer votre fichier plus tard", :class => "blue") %>
 <% end %>
 
 <p class="note icon">Vous pouvez utiliser <a href="http://fireftp.mozdev.org/">FireFTP</a> avec FireFox, 
