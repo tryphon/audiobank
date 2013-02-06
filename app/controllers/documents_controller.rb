@@ -139,14 +139,34 @@ class DocumentsController < ApplicationController
   	redirect_to :controller => 'casts', :action => 'play', :name => @document.casts.first.name
 	end
 
-  def search_nonsubscribers
-    input = params[:input].nil? ? "" : params[:input].downcase
-    id = params[:id]
+  def auto_complete_for_subscribers
+  	document = current_user.documents.find(params[:id])
+    query = params[:q].downcase
 
-    @people = Document.find(id).nonsubscribers.delete_if do |people|
-      ! people.match_name?(input)
+    candidates = document.nonsubscribers.select do |people|
+      people.match_name?(query)
     end
-    render :partial => "users/people", :object => @people, :locals => { :empty => "Aucun utilisateur ne correspond", :draggable => true }
+
+    render :json => tokenize_subscribers(candidates)
   end
+
+  protected 
+
+  def tokenize_subscribers(candidates)
+    candidates.map do |candidate|
+      name = candidate.name
+
+      case candidate
+      when User
+        name += " (#{candidate.organization})" if candidate.organization.present?
+      when Group
+        name += " (Groupe)"
+      end
+      
+      { :id => "#{candidate.class.name.downcase}:#{candidate.id}",
+        :name => name }
+    end
+  end
+  helper_method :tokenize_subscribers
 
 end

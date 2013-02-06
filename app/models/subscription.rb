@@ -8,7 +8,7 @@ class Subscription < ActiveRecord::Base
   before_validation :define_default_author, :on => :create
 
   # FIXME
-  attr_accessible :subscriber
+  attr_accessible :subscriber, :author
 
 	def self.notify
 	  unnotified_subscriptions = Subscription.find_all_by_notified(false)

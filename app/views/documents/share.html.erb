@@ -25,21 +25,11 @@ Sur une application tierce (comme <%= link_to "Bonnes-Ondes", "http://bonnes-ond
  <%= render :partial => "documents/documents", :object => Array(@document), :locals => { :linked => true, :empty => "Aucun document ne correspond ...", :actions => false, :tags => false } %>
 </ul>
 <hr/>
-<h4 class="left">N'ont pas accès à ce document :</h4>
-<%= form_tag({}, { :id => :filter }) do %>
- <p>
-  <%= text_field_tag("input", "rechercher", :onclick => "this.focus(); this.select();") %>
-  <%= hidden_field_tag("id", @document.id ) %>
- </p>
-<% end %>
-<%#= observe_form(:filter, { :url => { :controller => "documents", :action => "search_nonsubscribers" }, :update => :users, :frequency => 2 }) %>
-<ul id="users">
- <%= render :partial => "users/people", :object => @document.nonsubscribers, :locals => { :empty => "Reposer ici les utilisateurs qui ne doivent pas avoir accès à ce document" } %>
-</ul>
-<%#= drop_receiving_element("users", :url => { :controller => "subscriptions", :action => "remove", :document => @document }) %>
-<hr/>
+
 <h4>Ont accès à ce document :</h4>
-<ul id="subscribers">
- <%= render :partial => "users/people", :object => @document.subscribers, :locals => { :empty => "Déposer ici les utilisateurs qui ont accès à ce document", :limit => :none } %>
-</ul>
-<%#= drop_receiving_element("subscribers", :url => { :controller => "subscriptions", :action => "add", :document => @document }) %>
+
+<%= form_tag(:action => :edit, :id => @document) do %>
+  <%= text_field("document", "subscriber_tokens", :size => 30, :class => "token_input", :data => { :populate => tokenize_subscribers(@document.subscribers).to_json, :theme => "users", :url => url_for(:controller => "documents", :action => "auto_complete_for_subscribers", :id => @document) }) %>
+
+ <%= submit_tag "Modifier le partage" %> ou <%= link_to("annuler", { :action => "show", :id => @document}, :title => "Annuler", :class => "blue") %>
+<% end %>

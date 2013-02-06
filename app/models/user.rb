@@ -4,6 +4,13 @@ class User < ActiveRecord::Base
 
   attr_accessible :name, :password, :email, :username, :organization
 
+  def full_name
+    [].tap do |parts|
+      parts << name
+      parts << "(#{organization})" if organization.present?
+    end.join(' ')
+  end
+
 	has_many :reviews, :dependent => :destroy
 
 	has_many :documents, :dependent => :destroy, :order => "updated_at DESC", :foreign_key => "author_id" do

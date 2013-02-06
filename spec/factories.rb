@@ -19,6 +19,12 @@ Factory.define :user do |u|
   u.password "password"
 end
 
+Factory.define :group do |f|
+  f.sequence(:name) { |n| "Group #{n}"}
+  f.sequence(:description) { |n| "Test Group #{n}"}
+  f.association :owner, :factory => :user
+end
+
 Factory.define :subscription do |s|
   s.association :subscriber, :factory => :user
 end

@@ -1,12 +1,18 @@
 <%= error_messages_for(:group) %>
 <h2>Modifier un groupe</h2>
+
 <%= form_tag(:action => :edit) do %>
  <p><label for="group_name">Nom :</label><br/>
  <%= text_field("group", "name") %></p>
+
  <p><label for="group_description">Description :</label><br/>
  <%= text_area("group", "description", :rows => 10, :cols => 28) %></p>
+
+ <p>
+   <label for="group_description">Membres :</label><br/>
+   <%= text_field("group", "user_tokens", :size => 30, :class => "token_input", :data => { :property_to_search => "full_name", :populate => @group.users.to_json(:only => [:id], :methods => [:full_name]), :theme => "users", :url => url_for(:controller => "group", :action => "search_nonmembers", :id => @group) }) %>
+ </p>
+ 
+
  <%= submit_tag "Modifier votre groupe" %> ou <%= link_to("annuler", { :action => "manage" }, :title => "Annuler", :class => "blue") %>
- 
- 
- 
 <% end %>

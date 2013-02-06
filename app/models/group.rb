@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class Group < ActiveRecord::Base
 
-  attr_accessible :name, :description
+  attr_accessible :name, :description, :user_tokens
 
    has_and_belongs_to_many :users
    belongs_to :owner, :class_name => "User", :foreign_key => "owner_id"
@@ -19,5 +19,11 @@ class Group < ActiveRecord::Base
   def match_name?(input)
  	  self.name.downcase.include?(input)
 	end
+
+  attr_reader :user_tokens
+  def user_tokens=(tokens)
+    user_ids = tokens.split(',')
+    self.users = User.find user_ids
+  end
 
 end

@@ -254,6 +254,37 @@ describe Document do
 
   end
 
+  describe "subscriber_tokens=" do
+
+    let(:subscriber) { Factory :user }
+
+    it "should create a new Subscription with new Subscriber" do
+      subject.subscriber_tokens = "user:#{subscriber.id}"
+      subject.subscribers.should == [ subscriber ]
+    end
+
+    it "should support User" do
+      user = Factory(:user)
+      subject.subscriber_tokens = "user:#{user.id}"
+      subject.subscribers.should == [ user ]
+    end
+
+    it "should support Group" do
+      group = Factory(:group)
+      subject.subscriber_tokens = "group:#{group.id}"
+      subject.subscribers.should == [ group ]
+    end
+
+    it "should keep existing Subscriptions" do
+      previous_subscriber = Factory(:user)
+      subject.subscriptions.create :subscriber => previous_subscriber
+
+      subject.subscriber_tokens = "user:#{subscriber.id},user:#{previous_subscriber.id}"
+      subject.subscribers.should =~ [previous_subscriber, subscriber]
+    end
+    
+  end
+
   it "should destroy orphelan tags when document is saved" do
     subject.tap do |document|
       Tag.should_receive(:destroy_orphelan_tags)

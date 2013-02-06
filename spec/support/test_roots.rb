@@ -1,6 +1,6 @@
 require 'test_root_support'
 
-Spec::Runner.configure do |config|
+RSpec.configure do |config|
   config.before(:each) do
     TestRootSupport.all(:before, Document, Upload, Cast)
   end

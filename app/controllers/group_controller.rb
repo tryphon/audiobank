@@ -55,14 +55,14 @@ class GroupController < ApplicationController
   end  
 
   def search_nonmembers
-    input = params[:input].nil? ? "" : params[:input].downcase
-    id = params[:id]
-    
-    @people = Group.find(id).nonmembers.delete_if do |user|
-      not (user.name.downcase.include?(input) or (!user.username.nil? and user.username.downcase.include?(input)))
+    group = current_user.manageable_groups.find(params[:id])
+    query = params[:q].downcase
+
+    candidates = group.nonmembers.select do |user|
+      user.match_name? query
     end
-    render :partial => "users/people", :object => @people, 
-      :locals => { :empty => "Aucun utilisateur ne correspond", :draggable => true }
+
+    render :json => candidates.to_json(:only => :id, :methods => :full_name)
   end	
 
 end

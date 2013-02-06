@@ -1,0 +1,107 @@
+/* Example tokeninput style #1: Token vertical list*/
+ul.token-input-list-users {
+    overflow: hidden; 
+    height: auto !important; 
+    height: 1%;
+    width: 400px;
+    border: 1px solid #999;
+    cursor: text;
+    z-index: 999;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    list-style-type: none;
+    clear: left;
+}
+
+ul.token-input-list-users li {
+    list-style-type: none;
+}
+
+ul.token-input-list-users li input {
+    border: 0;
+    width: 350px;
+    padding: 3px 0px;
+    background-color: white;
+    -webkit-appearance: caret;
+}
+
+li.token-input-input-token-users {
+   margin: 3px !important;
+   padding: 8px 10px !important;
+}
+
+li.token-input-token-users {
+    margin: 3px !important;
+    padding: 8px 10px !important;
+    overflow: hidden;
+    height: auto !important; 
+    height: 1%;
+    background-color: #efefef;
+    color: #000;
+    cursor: default;
+    display: block;
+}
+
+li.token-input-token-users p {
+    float: left;
+    padding: 0;
+    margin: 0;
+}
+
+li.token-input-token-users span {
+    float: right;
+    color: #777;
+    cursor: pointer;
+}
+
+li.token-input-selected-token-users {
+    background-color: #08844e;
+    color: #fff;
+}
+
+li.token-input-selected-token-users span {
+    color: #bbb;
+}
+
+div.token-input-dropdown-users {
+    position: absolute;
+    width: 400px;
+    background-color: #fff;
+    overflow: hidden;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    cursor: default;
+    z-index: 1;
+}
+
+div.token-input-dropdown-users p {
+    margin: 0;
+    padding: 5px;
+    color: #777;
+}
+
+div.token-input-dropdown-users ul {
+    margin: 0;
+    padding: 0;
+}
+
+div.token-input-dropdown-users ul li {
+    background-color: #fff;
+    padding: 3px 12px !important;
+    list-style-type: none;
+}
+
+div.token-input-dropdown-users ul li.token-input-dropdown-users-item {
+    background-color: #fafafa;
+}
+
+div.token-input-dropdown-users ul li.token-input-dropdown-users-item2 {
+    background-color: #fff;
+}
+
+div.token-input-dropdown-users ul li.token-input-selected-dropdown-users-item {
+    background-color: #d0efa0;
+}
+

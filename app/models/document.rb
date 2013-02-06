@@ -22,7 +22,7 @@ class Document < ActiveRecord::Base
     includes(:casts).where( :uploaded => true, :casts => { :document_id=> nil } )
   end
 
-  attr_accessible :description, :title
+  attr_accessible :description, :title, :subscriber_tokens
   # FIXME
   attr_accessible :subscriber
 
@@ -121,6 +121,14 @@ class Document < ActiveRecord::Base
   	Tag.transaction do
   		self.tags = Tag.parse(tokens)
   	end
+  end
+
+  attr_reader :subscriber_tokens
+  def subscriber_tokens=(tokens)
+    self.subscriptions = tokens.split(",").map do |token|
+      subscriber_type, subscriber_id = token.split(':')
+      subscriptions.where(:subscriber_id => subscriber_id, :subscriber_type => subscriber_type.classify).first_or_create(:author => author)
+    end
   end
   
   def nonsubscribers
