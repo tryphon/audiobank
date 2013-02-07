@@ -23,8 +23,10 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  gem 'therubyracer', :platforms => :ruby
+  # to fix "undefined method `include_path'" 
+  # ... and permission denied on .location.yml
+  gem 'therubyracer', '= 0.10.2'
+  gem 'libv8', "= 3.3.10.4" 
 
   gem 'uglifier', '>= 1.0.3'
 end
