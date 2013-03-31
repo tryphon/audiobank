@@ -48,6 +48,8 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug'
 
+gem 'uservoice-widget'
+
 group :development do
   gem 'capistrano'
   gem 'guard'
