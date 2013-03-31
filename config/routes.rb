@@ -56,6 +56,19 @@ AudioBank::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # 
 
+  match '/documents/index', :controller => 'legacy_documents', :action => 'index'
+  match '/documents/add', :controller => 'legacy_documents', :action => 'add'
+  match '/documents/show/:id', :controller => 'legacy_documents', :action => 'show'
+  match '/documents/edit/:id', :controller => 'legacy_documents', :action => 'edit'
+  match '/documents/manage', :controller => 'legacy_documents', :action => 'manage'
+  match '/documents/upload/:id', :controller => 'legacy_documents', :action => 'upload'
+  match '/documents/download/:id', :controller => 'legacy_documents', :action => 'download'
+  match '/documents/share/:id', :controller => 'legacy_documents', :action => 'share'
+  match '/documents/tag/:name', :controller => 'legacy_documents', :action => 'tag'
+  match '/documents/auto_complete_for_tags/:q', :controller => 'legacy_documents', :action => 'auto_complete_for_tags'
+  match '/documents/listen/:id', :controller => 'legacy_documents', :action => 'listen'
+  match '/documents/auto_complete_for_subscribers/:id', :controller => 'legacy_documents', :action => 'auto_complete_for_subscribers'
+
   match '/casts/:name', :controller => 'casts', :action => 'play'
   match '/casts/:name.:format', :controller => 'casts', :action => 'play'
 

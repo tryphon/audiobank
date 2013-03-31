@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-class DocumentsController < ApplicationController
+class LegacyDocumentsController < ApplicationController
 	layout nil, :only => [:auto_complete_for_tags]
 
   def index

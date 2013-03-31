@@ -10,7 +10,7 @@
     <% unless podcast.tags.empty? %> 
      <div class="tags">
       <% for tag in podcast.tags %>
-       <%= link_to(tag.name, { :controller => "documents", :action => "tag", :name => tag.name }, :title => "Etiquette : #{tag.name}", :rel => "tag") %> 
+       <%= link_to(tag.name, { :controller => "legacy_documents", :action => "tag", :name => tag.name }, :title => "Etiquette : #{tag.name}", :rel => "tag") %> 
       <% end %>
      </div>
     <% end %>

@@ -1,10 +1,10 @@
 <h2>Vos documents</h2>
 <ul>
- <%= render :partial => "documents/documents", :object => @author.documents[0..2], :locals => { :linked => true, :empty => "Vous n'avez aucun document ...", :actions => false, :tags => false } %>
+ <%= render :partial => "legacy_documents/documents", :object => @author.documents[0..2], :locals => { :linked => true, :empty => "Vous n'avez aucun document ...", :actions => false, :tags => false } %>
 </ul>
 
 <div class="actions">
- <%= link_to("Vos autres documents", :controller => "documents", :action => "manage") %>
+ <%= link_to("Vos autres documents", :controller => "legacy_documents", :action => "manage") %>
 </div>
 <hr/>
 

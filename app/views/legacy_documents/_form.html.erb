@@ -5,4 +5,4 @@
   <%= text_area("document", "description", :rows => 10, :cols => 28) %></p>
 
 <p><label for="document_tag_tokens">Etiquettes :</label><br/>
-  <%= text_field("document", "tag_tokens", :size => 30, :class => "token_input", :data => { :populate => @document.tags.to_json, :theme => "tags", :value => "name", :url => url_for(:controller => "documents", :action => "auto_complete_for_tags") }) %></p>
+  <%= text_field("document", "tag_tokens", :size => 30, :class => "token_input", :data => { :populate => @document.tags.to_json, :theme => "tags", :value => "name", :url => url_for(:controller => "legacy_documents", :action => "auto_complete_for_tags") }) %></p>

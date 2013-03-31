@@ -11,6 +11,6 @@ Votre podcast est accessible à l'adresse suivante :
 
 <h2>Les documents inclus dans votre podcast</h2>
 <ul>
- <%= render :partial => "documents/documents", :object => @podcast.documents, :locals => { :linked => true, :empty => "Vous n'avez aucun document dans ce podcast", :actions => false, :tags => false } %>
+ <%= render :partial => "legacy_documents/documents", :object => @podcast.documents, :locals => { :linked => true, :empty => "Vous n'avez aucun document dans ce podcast", :actions => false, :tags => false } %>
 </ul>
 

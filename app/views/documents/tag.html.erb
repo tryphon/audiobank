@@ -1,5 +1,0 @@
-<h2>Vos documents portant l'étiquette : <%= params[:name] %></h2>
-<ul>
- <%= render :partial => "documents/documents", :object => @documents, :locals => { :linked => true, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => true, :tags => true } %>
-</ul>
-<%= will_paginate @documents %>

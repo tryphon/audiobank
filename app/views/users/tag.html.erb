@@ -1,9 +1,9 @@
 <h2>Vos documents portant l'étiquette : <%= params[:name] %></h2>
 <ul>
- <%= render :partial => "documents/documents", :object => @document, :locals => { :linked => true, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => false, :tags => true } %>
+ <%= render :partial => "legacy_documents/documents", :object => @document, :locals => { :linked => true, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => false, :tags => true } %>
 </ul>
 <div class="actions">
- <%= link_to("Vos autres documents portant cette étiquette", :controller => "documents", :action => "tag", :name => params[:name]) %>
+ <%= link_to("Vos autres documents portant cette étiquette", :controller => "legacy_documents", :action => "tag", :name => params[:name]) %>
 </div>
 <h2>Vos souscriptions portant l'étiquette : <%= params[:name] %></h2>
 <ul>

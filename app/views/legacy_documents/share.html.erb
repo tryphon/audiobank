@@ -22,14 +22,14 @@ Sur une application tierce (comme <%= link_to "Bonnes-Ondes", "http://bonnes-ond
 
 <h2>Partager votre document</h2>
 <ul>
- <%= render :partial => "documents/documents", :object => Array(@document), :locals => { :linked => true, :empty => "Aucun document ne correspond ...", :actions => false, :tags => false } %>
+ <%= render :partial => "legacy_documents/documents", :object => Array(@document), :locals => { :linked => true, :empty => "Aucun document ne correspond ...", :actions => false, :tags => false } %>
 </ul>
 <hr/>
 
 <h4>Ont accès à ce document :</h4>
 
 <%= form_tag(:action => :edit, :id => @document) do %>
-  <%= text_field("document", "subscriber_tokens", :size => 30, :class => "token_input", :data => { :populate => tokenize_subscribers(@document.subscribers).to_json, :theme => "users", :url => url_for(:controller => "documents", :action => "auto_complete_for_subscribers", :id => @document) }) %>
+  <%= text_field("document", "subscriber_tokens", :size => 30, :class => "token_input", :data => { :populate => tokenize_subscribers(@document.subscribers).to_json, :theme => "users", :url => url_for(:controller => "legacy_documents", :action => "auto_complete_for_subscribers", :id => @document) }) %>
 
  <%= submit_tag "Modifier le partage" %> ou <%= link_to("annuler", { :action => "show", :id => @document}, :title => "Annuler", :class => "blue") %>
 <% end %>

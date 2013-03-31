@@ -1,6 +1,6 @@
 <h2>Vos documents correspondant à : <%= @keywords %></h2>
 <ul>
- <%= render :partial => "documents/documents", :object => @documents, :locals => { :linked => true, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => false, :tags => true } %>
+ <%= render :partial => "legacy_documents/documents", :object => @documents, :locals => { :linked => true, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => false, :tags => true } %>
 </ul>
 <h2>Vos souscriptions correspondant à : <%= @keywords %></h2>
 <ul>
