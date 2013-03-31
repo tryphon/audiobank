@@ -13,7 +13,8 @@ class Upload < ActiveRecord::Base
 
   def create_path
 		FileUtils.mkdir_p path
-		File.chmod(02775, path)
+    # File.chmod tests if path is a String
+    File.chmod 02775, path.to_s
   end
 
   before_create :create_path
