@@ -1,6 +1,7 @@
 class DocumentsController < InheritedResources::Base
+
   actions :all
-  respond_to :html, :xml, :json
+  respond_to :xml, :json
 
   protected
 
@@ -9,6 +10,7 @@ class DocumentsController < InheritedResources::Base
   end
 
   def collection
-		current_user.documents.paginate :page => params[:page], :per_page => 4
+		current_user.documents.paginate :page => params[:page], :per_page => (params[:per_page] or 10)
 	end
+
 end

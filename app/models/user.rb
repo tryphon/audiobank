@@ -55,6 +55,8 @@ class User < ActiveRecord::Base
   validates_presence_of :password, :message => "Un mot de passe est requis"
 	validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/, :message => "Un email valide pour vous contacter est requis"
 
+  validates_presence_of :authentication_token
+
 	def tags
 	  subscriptions_tags = find_subscriptions.collect{ |s| s.document.tags }.flatten
 	  documents_tags = documents.collect{ |d| d.tags }.flatten
@@ -157,6 +159,21 @@ class User < ActiveRecord::Base
     logger.info("user logged : #{username}")
 		user
 	end
+
+  def self.authenticate_by_token(token)
+    User.where(:authentication_token => token, :confirmed => true).first.tap do |user|
+      if user
+        logger.info "user logged by token : #{user.username}"
+      else
+        logger.debug "unknown token : #{token}"
+      end
+    end
+  end
+
+  before_validation :generate_authentication_token, :on => :create
+  def generate_authentication_token
+    self.authentication_token = SecureRandom.hex
+  end
 
 	def change_password
 	  generated_password = new_password

@@ -1,5 +1,6 @@
 first:
   id: 1
+  authentication_token: dummy
   username: first
   password: secret
   name: First

@@ -17,9 +17,9 @@ module NavigationHelpers
       url_for :controller => "users", :action => "confirm", :id => user.id, :confirm => user.hashcode
 
     when /the document's ([a-z]+) page/
-      url_for :controller => "documents", :action => $1, :id => model!("a document")
+      url_for :controller => "legacy_documents", :action => $1, :id => model!("a document")
     when /the document's page/
-      url_for :controller => "documents", :action => "show", :id => model!("a document")
+      url_for :controller => "legacy_documents", :action => "show", :id => model!("a document")
 
     when /the \"\/?(.*)\" page$/
       "/#{$1}"

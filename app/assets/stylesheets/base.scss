@@ -127,3 +127,9 @@ p#cloud { margin-bottom: 8px; }
 
 #content .statistics { margin: 10px 0 27px 12px; }
 #content .statistics p { margin: 6px 0; }
+
+#content span.auth_token {
+    border: 1px solid #ccc; 
+    background: #eee;
+    padding: 2px;
+}

@@ -7,7 +7,6 @@ describe User, "validation" do
 
   before do
     @user = users(:first)
-    puts @user.errors.inspect unless @user.valid?
     @user.should be_valid
   end
 
@@ -68,6 +67,14 @@ describe User do
 
     end
 
+  end
+
+  describe "#authentication_token" do
+
+    it "should be defined when user is created" do
+      Factory(:user).authentication_token.should be_present
+    end
+    
   end
 
 end
