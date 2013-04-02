@@ -92,7 +92,7 @@ class Document < ActiveRecord::Base
     File.open(path, "wb") do |f|
       FileUtils.copy_stream(file, f)
     end
-    
+
     self.uploaded = true
     self.cues.clear
     self.casts.clear

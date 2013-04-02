@@ -69,7 +69,13 @@ AudioBank::Application.routes.draw do
   match '/documents/listen/:id', :controller => 'legacy_documents', :action => 'listen'
   match '/documents/auto_complete_for_subscribers/:id', :controller => 'legacy_documents', :action => 'auto_complete_for_subscribers'
 
-  resources :documents
+  resources :documents do
+    resource :upload do
+      member do 
+        post :confirm
+      end
+    end
+  end
 
   match '/casts/:name', :controller => 'casts', :action => 'play'
   match '/casts/:name.:format', :controller => 'casts', :action => 'play'

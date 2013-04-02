@@ -71,6 +71,7 @@ end
 group :test do
   gem "factory_girl_rails"
   gem 'fakeweb'
+  gem 'json_spec'
   gem 'rcov'
 end
 

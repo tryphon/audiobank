@@ -6,6 +6,6 @@ Given(/^a document exists for current user$/) do
 end
 
 Given /^I upload the file "([^"]*)\" to the specified ftp url$/ do |file|
-  upload_key = page.body.scan(%r{ftp://audiobank.tryphon.org/([a-z0-9]+)/}).uniq.to_s
+  upload_key = page.body.scan(%r{#{Upload.ftp_server}/([a-z0-9]+)/}).uniq.to_s
   FileUtils.cp file, Upload.find_by_key(upload_key).path
 end

@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
 
 	private
 
+  def audio_document_url(*args)
+    document_url *args
+  end
+
   def check_authentication
     Rails.logger.debug "Format: #{request.format}, auth_token: #{params[:auth_token]}"
     case request.format

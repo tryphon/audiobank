@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
 	has_many :reviews, :dependent => :destroy
 
-	has_many :documents, :dependent => :destroy, :order => "updated_at DESC", :foreign_key => "author_id" do
+	has_many :documents, :dependent => :destroy, :order => "updated_at DESC", :foreign_key => "author_id", :class_name => "AudioDocument" do
 		def find_by_tag(name, options = Hash.new)
 	    tag = Tag.find_by_name(name)
 		  documents = find(:all).delete_if { |d| !d.tags.include?(tag) }
@@ -34,7 +34,6 @@ class User < ActiveRecord::Base
       Cast.sum(:download_count, :conditions => { :document_id => proxy_association.owner.document_ids })
     end
 	end
-
 
 	has_many :subscriptions, :dependent => :destroy, :order => "created_at DESC", :as => "subscriber"
 
