@@ -18,7 +18,7 @@ base_dir=`dirname $0`/..
 cd $base_dir
 
 # $bin_dir/../script/runner $options 'Cue.update'
-bundle exec ./script/runner $options 'Cast.update'
-bundle exec ./script/runner $options 'Subscription.notify'
+bundle exec rails runner $options 'Cast.update'
+bundle exec rails runner $options 'Subscription.notify'
 
 rm $lock_file
