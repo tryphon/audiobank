@@ -19,14 +19,14 @@ class ApplicationController < ActionController::Base
 
   def check_authentication
     Rails.logger.debug "Format: #{request.format}, auth_token: #{params[:auth_token]}"
-    case request.format
-    when Mime::XML, Mime::ATOM, Mime::JSON
-      @current_user ||= User.authenticate_by_token params[:auth_token] if params[:auth_token]
-      unless @current_user
-        render :text => "HTTP API: Access denied.\n", :status => :unauthorized
-      end
-    else
-      unless current_user
+
+    unless current_user
+      if request.format.in? [Mime::XML, Mime::ATOM, Mime::JSON]
+        @current_user ||= User.authenticate_by_token params[:auth_token] if params[:auth_token]
+        unless @current_user
+          render :text => "HTTP API: Access denied.\n", :status => :unauthorized
+        end
+      else
         redirect_to :controller => "users", :action => "signin"
       end
     end
