@@ -5,7 +5,7 @@ set :repository, "git://projects.tryphon.priv/audiobank"
 set :deploy_to, "/var/www/audiobank"
 
 set :keep_releases, 5
-after "deploy:update", "deploy:cleanup" 
+after "deploy:update", "deploy:cleanup"
 set :use_sudo, false
 default_run_options[:pty] = true
 
@@ -14,6 +14,9 @@ set :rake, "bundle exec rake"
 server "radio.dbx1.tryphon.priv", :app, :web, :db, :primary => true
 
 after "deploy:update_code", "deploy:symlink_shared", "deploy:gems"
+
+require "bundler/capistrano"
+load "deploy/assets"
 
 namespace :deploy do
   # Prevent errors when chmod isn't allowed by server
