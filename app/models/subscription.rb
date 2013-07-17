@@ -35,7 +35,7 @@ class Subscription < ActiveRecord::Base
 
 	  mapped_subscriptions.each do |user, subscriptions|
 	    puts "notify #{user.username} for #{subscriptions.size} subscription(s)"
-	    Mailer.deliver_document_shared(user, subscriptions)
+	    UserMailer.document_shared(user, subscriptions).deliver unless subscriptions.empty?
 	    subscriptions.each { |subscription| subscription.update_attribute("notified", true) }
 	  end
 	end

@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 class UserMailer < ActionMailer::Base
-  default :from => "AudioBank <audiobank@tryphon.org>"
-
-  default_url_options[:host] = 'audiobank.tryphon.org'
+  default :from => "AudioBank <audiobank@tryphon.eu>"
+  default_url_options[:host] = 'audiobank.tryphon.eu'
 
   def confirm(user, controller)
     @user = user
