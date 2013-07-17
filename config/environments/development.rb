@@ -38,4 +38,8 @@ AudioBank::Application.configure do
   config.to_prepare do
     Upload.ftp_server = "localhost"
   end
+
+  config.action_mailer.smtp_settings = { :address => "mail.tryphon.priv", :openssl_verify_mode => 'none' }
+  config.action_mailer.default_url_options = { :host => 'audiobank.local' }
+
 end

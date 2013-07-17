@@ -5,9 +5,9 @@
     Le document "<%= @document.title %>" est maintenant prêt pour un partage sur internet.
   </p>
   <ul>
-    <li>Identifiant du cast : <%= @document.casts.first.name %></li>
+    <li>Identifiant du document : <%= @document.id %></li>
     <li>Durée : <%= (@document.length / 60.0).ceil %> minutes</li>
     <li><%= link_to("Détails du document", :controller => "legacy_documents", :action => "show", :id => @document , :only_path => false) %></li>
-  </ul> 
+  </ul>
  </body>
 </html>

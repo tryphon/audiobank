@@ -2,6 +2,6 @@ Document <%= @document.title %>
 
 Le document "<%= @document.title %>" est maintenant prêt pour un partage sur internet.
 
-* Identifiant du cast : <%= @document.casts.first.name %>
+* Identifiant du cast : <%= @document.id %>
 * Durée : <%= (@document.length / 60.0).ceil %> minutes
 * Détails du document : <%= url_for(:controller => "legacy_documents", :action => "show", :id => @document, :only_path => false) %>
