@@ -170,7 +170,6 @@ GEM
     rake (10.0.3)
     rb-inotify (0.8.8)
       ffi (>= 0.5.0)
-    rcov (1.0.0)
     rdoc (3.12)
       json (~> 1.4)
     remarkable (3.1.13)
@@ -262,7 +261,6 @@ DEPENDENCIES
   rails (= 3.2.11)
   rails_tokeninput
   rb-inotify
-  rcov
   remarkable_activerecord
   rspec
   rspec-rails

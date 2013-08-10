@@ -23,10 +23,10 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
 
-  # to fix "undefined method `include_path'" 
+  # to fix "undefined method `include_path'"
   # ... and permission denied on .location.yml
   gem 'therubyracer', '= 0.10.2'
-  gem 'libv8', "= 3.3.10.4" 
+  gem 'libv8', "= 3.3.10.4"
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -72,7 +72,6 @@ group :test do
   gem "factory_girl_rails"
   gem 'fakeweb'
   gem 'json_spec'
-  gem 'rcov'
 end
 
 group :test do
