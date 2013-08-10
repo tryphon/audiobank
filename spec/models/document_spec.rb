@@ -9,7 +9,7 @@ describe Document do
   end
 
   describe "creation" do
-    
+
     it "should have an upload" do
       subject.save!
       subject.upload.should_not be_nil
@@ -31,7 +31,7 @@ describe Document do
 
   describe "extname" do
 
-    def self.it_should_be_for_format(expected, format) 
+    def self.it_should_be_for_format(expected, format)
       it "should be #{expected} for #{format} format" do
         subject.format = format
         subject.extname.should == expected
@@ -59,16 +59,11 @@ describe Document do
       subject.stub :root => "/root/"
       subject.path.should == "/root/#{subject.id}"
     end
-    
-  end
 
-  it "should have 01:00:00 as duration for a length of 3600 seconds" do
-    subject.length = 3600
-    subject.duration.strftime("%H:%M:%S").should == "01:00:00"
   end
 
   describe "validation" do
-    
+
     it "should validate presence of description" do
       subject.description = ""
       subject.should have(1).error_on(:description)
@@ -89,7 +84,7 @@ describe Document do
   describe "subscribers" do
 
     let(:subscriber) { Factory :user }
-    
+
     before(:each) do
       subject.subscriptions.create! :subscriber => subscriber
     end
@@ -101,7 +96,7 @@ describe Document do
   end
 
   describe "upload" do
-    
+
     before(:each) do
       @file = File.new(File.join(fixture_path, "one-second.ogg"))
     end
@@ -121,7 +116,7 @@ describe Document do
   end
 
   describe "after upload" do
-    
+
     before(:each) do
       @file = File.join(fixture_path, "one-second.ogg")
       subject.upload_file(File.new(@file))
@@ -144,7 +139,7 @@ describe Document do
     end
 
     extend RSpec::Matchers::DSL
-    
+
     matcher :exist do
       match do |actual|
         File.exists?(actual)
@@ -174,9 +169,9 @@ describe Document do
     end
 
   end
-  
+
   describe "destroy" do
-    
+
     before(:each) do
       subject = Factory(:audio_document)
     end
@@ -213,7 +208,7 @@ describe Document do
       subject.destroy
       cue.should_not exist
     end
-    
+
     it "should delete the storage file if exists" do
       File.stub!(:exist?).with(subject.path).and_return(true)
       File.should_receive(:delete).with(subject.path)
@@ -282,7 +277,7 @@ describe Document do
       subject.subscriber_tokens = "user:#{subscriber.id},user:#{previous_subscriber.id}"
       subject.subscribers.should =~ [previous_subscriber, subscriber]
     end
-    
+
   end
 
   it "should destroy orphelan tags when document is saved" do
@@ -324,7 +319,7 @@ describe Document do
     it "should be false if one of the given tags is a document tag" do
       subject.should_not match_tags(subject.tags + [ @other_tag ])
     end
-    
+
   end
 
   describe "match?" do
@@ -354,7 +349,7 @@ describe Document do
       subject.title = "matching string"
       subject.should_not match("UNMATCH")
     end
-    
+
   end
 
   it "should return existing goups and users except subscribers as nonsubscribers" do
@@ -380,7 +375,7 @@ describe Document do
         self.join(' ')
       end
     end
-    
+
     it "should return an empty array if string is blank" do
       Document.keywords(nil).should == []
     end
@@ -396,11 +391,11 @@ describe Document do
     it "should downcase words in string" do
       Document.keywords("DUMMY").should == ["dummy"]
     end
-    
+
   end
 
   describe "#format" do
-    
+
     it "should be 'application/octet-stream' when not uploaded [FIXME]" do
       subject.format.should == "application/octet-stream"
     end
@@ -423,7 +418,7 @@ describe Document do
     end
 
     let(:hook) { mock }
-    
+
     it "should invoke hooks with document_ready" do
       subject.stub :hooks => [hook]
       hook.should_receive(:document_ready).with(subject)

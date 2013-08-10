@@ -9,7 +9,7 @@
    <% if subscription.document.uploaded? %>
     <div class="details">
      <span class="size"><%= number_to_human_size(subscription.document.size) %></span>
-     <span class="length"><%= format_time(subscription.document.duration) %></span>
+     <span class="length"><%= format_duration(subscription.document.duration) %></span>
     </div>
    <% end %>
    <% unless subscription.document.tags.empty? or !tags %>

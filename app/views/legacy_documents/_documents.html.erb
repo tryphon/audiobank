@@ -8,7 +8,7 @@
    <% if document.uploaded? %>
     <div class="details">
      <span class="size"><%= number_to_human_size(document.size) %></span>
-     <span class="length"><%= format_time(document.duration) %></span>
+     <span class="length"><%= format_duration(document.duration) %></span>
     </div>
    <% end %>
    <% unless document.tags.empty? and document.download_count.zero? %>
