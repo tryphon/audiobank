@@ -17,6 +17,7 @@ Factory.define :user do |u|
   u.sequence(:username) { |n| "username-#{n}" }
   u.email "dummy@tryphon.org"
   u.password "password"
+  u.confirmed true
 end
 
 Factory.define :group do |f|

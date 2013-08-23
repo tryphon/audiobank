@@ -57,8 +57,19 @@ end
 
 describe User do
 
+  let(:user) { Factory :user }
+
+  describe ".authenticate" do
+
+    it "should strip given password" do
+      user.update_attribute :password, "dummy"
+      User.authenticate(user.username, " dummy ").should == user
+    end
+
+  end
+
   describe "#documents" do
-    
+
     describe "#download_count" do
 
       it "should be zero by default" do
@@ -74,7 +85,7 @@ describe User do
     it "should be defined when user is created" do
       Factory(:user).authentication_token.should be_present
     end
-    
+
   end
 
 end

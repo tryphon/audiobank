@@ -135,11 +135,12 @@ class User < ActiveRecord::Base
 	end
 
 	def self.digest_password(clear_password)
-  	Digest::SHA256.hexdigest(clear_password)
+    clear_password = clear_password.strip if clear_password
+  	Digest::SHA256.hexdigest(clear_password) if clear_password.present?
 	end
 
 	def password=(password)
-		write_attribute(:password, User.digest_password(password)) unless password.empty?
+    write_attribute(:password, User.digest_password(password))
 	end
 
 	def self.authenticate(username, clear_password)
