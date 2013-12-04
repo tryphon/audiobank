@@ -13,7 +13,7 @@ set :rake, "bundle exec rake"
 
 server "radio.dbx1.tryphon.priv", :app, :web, :db, :primary => true
 
-after "deploy:update_code", "deploy:symlink_shared", "deploy:gems"
+after "deploy:update_code", "deploy:symlink_shared"
 
 require "bundler/capistrano"
 load "deploy/assets"
@@ -30,12 +30,6 @@ namespace :deploy do
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-  end
-
-  desc "Install gems"
-  task :gems, :roles => :app do
-    run "mkdir -p #{shared_path}/bundle"
-    run "cd #{release_path} && bundle install --deployment --path=#{shared_path}/bundle --without=test development cucumber"
   end
 
   desc "Symlinks shared configs and folders on each release"

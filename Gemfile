@@ -51,7 +51,7 @@ gem 'jquery-rails'
 gem 'uservoice-widget'
 
 group :development do
-  gem 'capistrano'
+  gem 'capistrano', '~> 2.15.5'
   gem 'guard'
   gem 'guard-rspec'
   gem 'guard-bundler'
