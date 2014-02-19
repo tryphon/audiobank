@@ -11,7 +11,7 @@ class Cast < ActiveRecord::Base
 
 	def update_file(format = "ogg")
 		# puts "DEBUG: #{Rails.root}/bin/encode #{document.path} #{path(format)} #{format}"
-		system "#{Rails.root}/bin/encode", document.path, path(format), format
+		system "#{Rails.root}/bin/encode", document.path.to_s, path(format), format
 	end
 
 	def before_destroy
