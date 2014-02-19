@@ -4,7 +4,7 @@ class Upload < ActiveRecord::Base
 	def to_s
     "Upload: #{@key} (#{path}, #{candidates})"
   end
-  
+
   def create_key
 		self.key = StringRandom.alphanumeric(16).downcase
   end
@@ -18,7 +18,7 @@ class Upload < ActiveRecord::Base
   end
 
   before_create :create_path
-  
+
 	def destroy_path
 		FileUtils.remove_dir(path) if File.exists?(path)
 	end
@@ -31,26 +31,26 @@ class Upload < ActiveRecord::Base
   def self.test_root
     Rails.root + "tmp/upload"
   end
-	
-	def path 
+
+	def path
     root + key
 	end
-	
+
 	def candidates
 		Dir.glob("#{path}/*")
 	end
-	
+
 	def file
 		File.new(candidates.first)
 	end
 
   @@ftp_server = "audiobank.tryphon.eu"
   cattr_accessor :ftp_server
-	
-	def public_url 
+
+	def public_url
 		"ftp://#{ftp_server}/#{key}/"
 	end
-	
+
 	def empty?
 		candidates.empty?
 	end
@@ -62,7 +62,7 @@ class Upload < ActiveRecord::Base
       logger.debug "Upload file: #{uploaded_file.inspect}"
       document.upload_file(uploaded_file) and document.save and destroy
     rescue Exception => e
-      logger.error "Can't upload #{upload_file.inspect}: #{e} #{e.backtrace}"
+      logger.error "Can't upload #{uploaded_file.inspect}: #{e} #{e.backtrace}"
       false
     end
   end
