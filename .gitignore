@@ -18,3 +18,4 @@ coverage/*
 *.rails2
 config/newrelic.yml
 .rbenv-version
+.ruby-version
