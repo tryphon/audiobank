@@ -10,8 +10,9 @@ gem 'sqlite3'
 gem 'json'
 
 gem 'inherited_resources', '~> 1.3'
-gem 'rtaglib'
 gem 'mahoro'
+gem "taglib-ruby", "~> 0.4.0", :require => "taglib"
+
 gem 'will_paginate'
 gem 'rails_tokeninput'
 

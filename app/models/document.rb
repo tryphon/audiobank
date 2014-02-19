@@ -1,7 +1,3 @@
-require 'mahoro'
-require 'tagfile'
-require 'taglib_ext'
-
 class Document < ActiveRecord::Base
 	belongs_to :author, :class_name => "User", :foreign_key => "author_id"
 	has_one :upload, :dependent => :destroy
@@ -80,18 +76,19 @@ class Document < ActiveRecord::Base
 	def upload_file(file)
     self.format = Mahoro.new(Mahoro::MIME).file(file.path)
 
-    document = TagFile::File.with_mime_type(file.path, format)
-    self.length = document.length
-    document.close
-
-    file.respond_to?(:size) ? self.size = file.size : self.size = File.size(file.path)
+    TagLib::FileRef.open(file.path) do |fileref|
+      unless fileref.null?
+        properties = fileref.audio_properties
+        self.length = properties.length
+      end
+    end
 
     self.uploaded = false
-
     File.open(path, "wb") do |f|
       FileUtils.copy_stream(file, f)
     end
 
+    self.size = file.respond_to?(:size) ?  file.size : File.size(file.path)
     self.uploaded = true
     self.cues.clear
     self.casts.clear
