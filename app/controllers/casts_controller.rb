@@ -5,17 +5,17 @@ class CastsController < ApplicationController
 
   def play
   	case params[:format]
-  		when "mp3":
-  			playcontent(File.basename(params[:name], "."+ params[:format]), params[:format])
-  		when "ogg":
-  			playcontent(File.basename(params[:name], "."+ params[:format]), params[:format])
-  		when "m3u" 
-  			playlist(File.basename(params[:name], "."+ params[:format]))
-  		else
-  			redirect_to :action => :play, :name => params[:name]+".m3u"
+  	when "mp3"
+  		playcontent(File.basename(params[:name], "."+ params[:format]), params[:format])
+  	when "ogg"
+  		playcontent(File.basename(params[:name], "."+ params[:format]), params[:format])
+  	when "m3u"
+  		playlist(File.basename(params[:name], "."+ params[:format]))
+  	else
+  		redirect_to :action => :play, :name => params[:name]+".m3u"
   	end
   end
-  
+
   private
   def player?
   	if request.env['HTTP_USER_AGENT'] =~ /^Winamp|Windows/
@@ -32,7 +32,7 @@ class CastsController < ApplicationController
   		false
   	end
   end
-   
+
   def playcontent(name, format)
   	@cast = Cast.find_by_name(name)
     raise ActiveRecord::RecordNotFound unless @cast
@@ -50,7 +50,7 @@ class CastsController < ApplicationController
     raise ActiveRecord::RecordNotFound unless @cast
 
   	content = "#EXTM3U\n"
-  	content += "#EXTINF:#{@cast.document.length},#{@cast.document.title}\n" 
+  	content += "#EXTINF:#{@cast.document.length},#{@cast.document.title}\n"
   	content += url_for(:action => 'play', :name => @cast.name) + ".mp3\n"
 
 		m3u_url = "cache/#{name}.m3u"
