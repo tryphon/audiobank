@@ -9,11 +9,13 @@ after "deploy:update", "deploy:cleanup"
 set :use_sudo, false
 default_run_options[:pty] = true
 
-set :rake, "bundle exec rake"
+set :bundle_cmd, "/var/lib/gems/2.0.0/bin/bundle"
+set :rake, "#{bundle_cmd} exec rake"
 
-server "radio.dbx1.tryphon.priv", :app, :web, :db, :primary => true
+#server "radio.dbx1.tryphon.priv", :app, :web, :db, :primary => true
+server "sandbox", :app, :web, :db, :primary => true
 
-after "deploy:update_code", "deploy:symlink_shared"
+after "deploy:update_code", "deploy:symlink_shared", "deploy:bundle_link"
 
 require "bundler/capistrano"
 load "deploy/assets"
@@ -30,6 +32,10 @@ namespace :deploy do
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+  end
+
+  task :bundle_link do
+    run "ln -fs #{bundle_cmd} #{release_path}/script/bundle"
   end
 
   desc "Symlinks shared configs and folders on each release"

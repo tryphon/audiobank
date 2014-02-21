@@ -9,13 +9,13 @@ fi
 
 touch $lock_file
 
-# To find bundle
-export PATH=/usr/local/bin:$PATH
-
 [ "$#" -gt 0 ] && options="-e $1"
 
 base_dir=`dirname $0`/..
 cd $base_dir
+
+# To find bundle
+export PATH=script:$PATH
 
 # $bin_dir/../script/runner $options 'Cue.update'
 bundle exec rails runner $options 'Cast.update'
