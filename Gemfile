@@ -68,6 +68,8 @@ group :development, :test do
   gem "rspec-rails"
   gem 'remarkable_activerecord'
   gem "brakeman", :require => false
+  gem 'simplecov'
+  gem 'simplecov-rcov'
 end
 
 group :test do
