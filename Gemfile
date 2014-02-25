@@ -67,6 +67,7 @@ group :development, :test do
   gem "rspec"
   gem "rspec-rails"
   gem 'remarkable_activerecord'
+  gem "brakeman", :require => false
 end
 
 group :test do
