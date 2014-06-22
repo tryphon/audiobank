@@ -5,8 +5,6 @@ gem 'rails', '3.2.17'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
-
 gem 'json'
 
 gem 'inherited_resources', '~> 1.3'
@@ -64,6 +62,7 @@ group :development do
 end
 
 group :development, :test do
+  gem 'sqlite3'
   gem "rspec"
   gem "rspec-rails"
   gem 'remarkable_activerecord'
