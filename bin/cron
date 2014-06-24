@@ -18,7 +18,7 @@ cd $base_dir
 export PATH=script:$PATH
 
 # $bin_dir/../script/runner $options 'Cue.update'
-bundle exec rails runner $options 'Cast.update'
-bundle exec rails runner $options 'Subscription.notify'
+script/bundle exec rails runner $options 'Cast.update'
+script/bundle exec rails runner $options 'Subscription.notify'
 
 rm $lock_file
