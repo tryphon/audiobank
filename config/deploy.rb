@@ -9,7 +9,7 @@ after "deploy:update", "deploy:cleanup"
 set :use_sudo, false
 default_run_options[:pty] = true
 
-set :bundle_cmd, "/var/lib/gems/2.0.0/bin/bundle"
+set :bundle_cmd, "/var/lib/gems/1.9.1/bin/bundle"
 set :rake, "#{bundle_cmd} exec rake"
 
 #server "radio.dbx1.tryphon.priv", :app, :web, :db, :primary => true
