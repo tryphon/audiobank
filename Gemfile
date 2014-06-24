@@ -86,5 +86,5 @@ end
 
 group :production do
   gem 'SyslogLogger'
-  gem 'mysql'
+  gem 'mysql2'
 end
