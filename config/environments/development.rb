@@ -40,7 +40,7 @@ AudioBank::Application.configure do
   end
 
   config.action_mailer.smtp_settings = { :address => "mail.tryphon.priv", :openssl_verify_mode => 'none' }
-  config.action_mailer.default_url_options = { :host => 'audiobank.local' }
+  config.action_mailer.default_url_options = { :host => 'audiobank.tryphon.dev' }
 
   config.to_prepare do
     # Document.hooks << HttpHook.new("http://bonnes-ondes.local/audiobank_updates.json")
