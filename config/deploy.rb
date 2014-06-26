@@ -12,8 +12,8 @@ default_run_options[:pty] = true
 set :bundle_cmd, "/var/lib/gems/1.9.1/bin/bundle"
 set :rake, "#{bundle_cmd} exec rake"
 
-#server "radio.dbx1.tryphon.priv", :app, :web, :db, :primary => true
-server "sandbox", :app, :web, :db, :primary => true
+server "radio.dbx1.tryphon.priv", :app, :web, :db, :primary => true
+# server "sandbox", :app, :web, :db, :primary => true
 
 after "deploy:update_code", "deploy:symlink_shared", "deploy:bundle_link"
 
