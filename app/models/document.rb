@@ -96,6 +96,18 @@ class Document < ActiveRecord::Base
     true
 	end
 
+  def prepare
+    begin
+      transaction do
+        Rails.logger.info "Create Cast for Document #{id}"
+        casts.create(:name => StringRandom.alphanumeric(8).downcase).prepare!
+        ready!
+      end
+    rescue => e
+      Rails.logger.error "Can't create Cast for Document #{id} : #{e}"
+    end
+  end
+
   def delete_file
 		File.delete(path) if File.exist?(path)
   end

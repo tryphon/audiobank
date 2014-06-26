@@ -14,6 +14,42 @@ class Cast < ActiveRecord::Base
 		system "#{Rails.root}/bin/encode", document.path.to_s, path(format), format
 	end
 
+  def sox(*arguments)
+    command = Array(arguments).flatten.join(' ')
+    system "sox #{command} 2> /dev/null" or raise "Sox command failed : 'sox #{command}'"
+  end
+
+  def sox_task(description, *arguments)
+    sox_duration = Benchmark.ms do
+      sox *arguments
+    end
+    Rails.logger.info "Created document #{document.id} #{description} in #{sox_duration.to_i}s"
+  end
+
+  def prepare!
+    return if uptodate?
+
+    Tempfile.open([name, '.wav']) do |wav_file|
+      sox_task "wav", "-t", document.extname, document.path, wav_file.path
+      FORMATS.each do |format|
+        unless uptodate? format
+          quality = (format == "mp3" ? "-3.2" : 5)
+          sox_task format, wav_file.path, "-C", quality, path(format)
+        end
+      end
+    end
+
+    touch
+  end
+
+  def prepare
+    begin
+      prepare!
+    rescue => e
+      Rails.logger.error "Can't prepare Cast for Document #{id} : #{e}"
+    end
+  end
+
 	def before_destroy
 		FORMATS.each do |format|
 			File.delete(path(format)) if File.exists?(path(format))
@@ -35,9 +71,18 @@ class Cast < ActiveRecord::Base
 	  File.exists?(path(format)) ? File.size(path(format)) : 0
 	end
 
-	def uptodate?(format = "ogg")
-		FileUtils.uptodate?(path(format), [document.path])
+	def uptodate?(format = nil)
+    if format
+		  FileUtils.uptodate?(path(format), [document.path])
+    else
+      FORMATS.all? { |format| uptodate?(format) }
+    end
 	end
+
+  def self.prepare
+		Cast.find_each(&:prepare)
+    Document.to_be_prepared.find_each(&:prepare)
+  end
 
 	def self.update
 		Cast.find(:all).each do |cast|
