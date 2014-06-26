@@ -80,7 +80,7 @@ class Cast < ActiveRecord::Base
 	end
 
   def self.prepare
-		Cast.find_each(&:prepare)
+		Cast.includes(:document).find_each(&:prepare)
     Document.to_be_prepared.find_each(&:prepare)
   end
 
