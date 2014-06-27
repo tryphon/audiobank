@@ -3,7 +3,7 @@
 <ul>
  <%= render :partial => "legacy_documents/documents", :object => Array(@document), :locals => { :linked => true, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => false, :tags => false } %>
 </ul>
-<p class="note icon">Les formats supportés sont : ogg vorbis, flac, mp3 et mpc.</p>
+<p class="note icon">Les formats supportés sont : ogg/vorbis, flac, mp3.</p>
 <hr/>
 <h4>Avec votre navigateur :</h4>
 <%# Need to this this plugin %>
@@ -24,5 +24,5 @@
 <%= submit_tag "Confirmer le dépôt" %> ou <%= link_to("le faire plus tard", { :action => "share", :id => @document}, :title => "Déposer votre fichier plus tard", :class => "blue") %>
 <% end %>
 
-<p class="note icon">Vous pouvez utiliser <a href="http://fireftp.mozdev.org/">FireFTP</a> avec FireFox, 
+<p class="note icon">Vous pouvez utiliser <a href="http://fireftp.mozdev.org/">FireFTP</a> avec FireFox,
 <a href="http://filezilla.sourceforge.net/">FileZilla</a> sous Windows ou <a href="http://www.cyberduck.ch/">Cyberduck</a> sous Mac</p>

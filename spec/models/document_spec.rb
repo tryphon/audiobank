@@ -79,6 +79,28 @@ describe Document do
       subject.should have(1).error_on(:title)
     end
 
+    context "when uploaded" do
+
+      before { subject.uploaded = true }
+
+      it "should validate inclusion of format in supported ones" do
+        subject.format = "audio/x-wav"
+        subject.should have(1).error_on(:format)
+      end
+
+    end
+
+    context "when not uploaded" do
+
+      before { subject.uploaded = false }
+
+      it "should not validate inclusion of format in supported ones" do
+        subject.format = "dummy"
+        subject.should_not have(1).error_on(:format)
+      end
+
+    end
+
   end
 
   describe "subscribers" do
@@ -95,22 +117,24 @@ describe Document do
 
   end
 
-  describe "upload" do
+  describe "#upload_file" do
 
-    before(:each) do
-      @file = File.new(File.join(fixture_path, "one-second.ogg"))
-    end
+    let(:file) { File.new(File.join(fixture_path, "one-second.ogg")) }
 
     it "should clear existing cues" do
       subject.stub!(:cues).and_return(cues = mock("cues"))
       cues.should_receive(:clear)
-      subject.upload_file(@file)
+      subject.upload_file(file)
     end
 
     it "should clear existing casts" do
       subject.stub!(:casts).and_return(casts = mock("casts"))
       casts.should_receive(:clear)
-      subject.upload_file(@file)
+      subject.upload_file(file)
+    end
+
+    it "should return false if the given file hasn't a supported format" do
+      subject.upload_file(File.new(__FILE__)).should be_false
     end
 
   end
