@@ -1,5 +1,5 @@
 <h2>Gérer vos documents</h2>
 <ul>
- <%= render :partial => "legacy_documents/documents", :object => @documents, :locals => { :linked => true, :empty => "Vous n'avez aucun document, vous devriez #{link_to("en ajouter un", :action => "add")}", :actions => true, :tags => true } %>
+ <%= render :partial => "legacy_documents/documents", :object => @documents, :locals => { :linked => true, :empty => "Vous n'avez aucun document, vous devriez #{link_to("en ajouter un", :action => "add")}.".html_safe, :actions => true, :tags => true } %>
 </ul>
-<%= will_paginate @documents %>     
+<%= will_paginate @documents %>
