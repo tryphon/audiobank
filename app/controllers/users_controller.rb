@@ -88,11 +88,11 @@ class UsersController < ApplicationController
   	if @user.hashcode == params[:confirm] && !@user.confirmed?
   		@user.update_attribute(:confirmed, true)
 
-  		begin
-  	  	User.find(@user.id).subscriptions.build(:author => User.find(1), :document => Document.find(1)).save
-  	  rescue ActiveRecord::RecordNotFound
-  	    logger.error("no welcome document found")
-  	  end
+  		# begin
+  	  # 	User.find(@user.id).subscriptions.build(:author => User.find(1), :document => Document.find(1)).save
+  	  # rescue ActiveRecord::RecordNotFound
+  	  #   logger.error("no welcome document found")
+  	  # end
 
 	  	flash[:success] = "Bienvenue !"
 	    session[:user] = @user.id
