@@ -47,8 +47,6 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug'
 
-gem 'uservoice-widget'
-
 group :development do
   gem 'capistrano', '~> 2.15.5'
   gem 'guard'
