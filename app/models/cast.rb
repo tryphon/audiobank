@@ -46,7 +46,7 @@ class Cast < ActiveRecord::Base
     begin
       prepare!
     rescue => e
-      Rails.logger.error "Can't prepare Cast for Document #{id} : #{e}"
+      Rails.logger.error "Can't prepare Cast #{id} : #{e}"
     end
   end
 
