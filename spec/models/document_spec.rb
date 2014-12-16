@@ -70,7 +70,7 @@ describe Document do
     end
 
     it "should validate length of description is less than 255 characters" do
-      subject.description = "a" * 256
+      subject.description = "a" * (50000+1)
       subject.should have(1).error_on(:description)
     end
 
