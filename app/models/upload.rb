@@ -9,7 +9,7 @@ class Upload < ActiveRecord::Base
 		self.key = StringRandom.alphanumeric(16).downcase
   end
 
-  before_create :create_key
+  before_validation :create_key, on: :create
 
   def create_path
 		FileUtils.mkdir_p path
@@ -17,7 +17,7 @@ class Upload < ActiveRecord::Base
     File.chmod 02775, path.to_s
   end
 
-  before_create :create_path
+  before_validation :create_path, on: :create
 
 	def destroy_path
 		FileUtils.remove_dir(path) if File.exists?(path)

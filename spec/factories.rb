@@ -44,3 +44,10 @@ Factory.define :cast do |d|
   d.association :document
   d.name StringRandom.alphanumeric(8).downcase
 end
+
+Factory.define :dropbox do |d|
+  d.association :user
+  d.sequence(:login) { |n| "login-#{n}" }
+  d.password StringRandom.alphanumeric(8)
+  d.sequence(:directory) { |n| "dropbox-#{n}" }
+end

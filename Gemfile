@@ -14,6 +14,8 @@ gem "taglib-ruby", "~> 0.4.0", :require => "taglib"
 gem 'will_paginate'
 gem 'rails_tokeninput'
 
+gem 'listen', '~> 2.7.9'
+
 gem 'exception_notification'
 
 # Gems used only for assets and not required
