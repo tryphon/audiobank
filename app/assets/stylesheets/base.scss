@@ -129,7 +129,22 @@ p#cloud { margin-bottom: 8px; }
 #content .statistics p { margin: 6px 0; }
 
 #content span.auth_token {
-    border: 1px solid #ccc; 
+    border: 1px solid #ccc;
     background: #eee;
     padding: 2px;
+}
+
+#content .document {
+    .description {
+        p {
+            margin-bottom: 1em;
+        }
+    }
+}
+
+#content form {
+    #document_description {
+        width: 100%;
+        height: 30em;
+    }
 }

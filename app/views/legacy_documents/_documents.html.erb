@@ -2,9 +2,15 @@
  <li><%= empty %></li>
 <% else %>
  <% for document in documents %>
-  <li>
+  <li class="document">
    <h3 class="item fn"><%= link_to_if(linked, document.title, :controller => "legacy_documents", :action => "show", :id => document) %></h3>
-   <p><%= document.description %></p>
+   <div class="description">
+     <% if documents.many? %>
+       <%= truncate(document.description, length: 200) %>
+     <% else %>
+       <%= simple_format(document.description) %>
+     <% end %>
+   </div>
    <% if document.uploaded? %>
     <div class="details">
      <span class="size"><%= number_to_human_size(document.size) %></span>

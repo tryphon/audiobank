@@ -11,7 +11,7 @@ class Document < ActiveRecord::Base
 
 	validates_presence_of :title, :message => "Un titre est requis"
 	validates_presence_of :description, :message => "Une description est requise"
-	validates_length_of :description, :maximum => 255, :message => "Votre description est trop longue", :allow_blank => true, :allow_nil => true
+	validates_length_of :description, :maximum => 50000, :message => "Votre description est trop longue", :allow_blank => true, :allow_nil => true
 
   @@supported_formats = %{application/ogg audio/mpeg audio/x-flac}
   cattr_reader :supported_formats
@@ -126,8 +126,7 @@ class Document < ActiveRecord::Base
   after_destroy :destroy_orphelan_tags
   after_save :destroy_orphelan_tags
 
-
-	before_create :build_upload
+	before_save :build_upload, on: :create
 
   attr_accessible :tag_tokens
   attr_reader :tag_tokens
