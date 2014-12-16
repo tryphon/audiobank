@@ -13,7 +13,7 @@ class Document < ActiveRecord::Base
 	validates_presence_of :description, :message => "Une description est requise"
 	validates_length_of :description, :maximum => 50000, :message => "Votre description est trop longue", :allow_blank => true, :allow_nil => true
 
-  @@supported_formats = %{application/ogg audio/mpeg audio/x-flac}
+  @@supported_formats = %{application/ogg audio/ogg audio/mpeg audio/x-flac}
   cattr_reader :supported_formats
 
   validates_inclusion_of :format, :in => supported_formats, :message => "Ce format audio (%{value}) n'est pas supporté", :if => :uploaded?
@@ -42,7 +42,7 @@ class Document < ActiveRecord::Base
   	case self.format
     when "audio/mpeg" then "mp3"
     when "audio/x-flac" then "flac"
-    when "application/ogg", "audio/x-vorbis+ogg" then "ogg"
+    when "application/ogg", "audio/x-vorbis+ogg", "audio/ogg" then "ogg"
   		# not supported format :
     when "audio/x-wav" then "wav"
     when "audio/mp4" then "ma4"
@@ -81,7 +81,10 @@ class Document < ActiveRecord::Base
 
 	def upload_file(file)
     self.format = Mahoro.new(Mahoro::MIME).file(file.path)
-    return false unless format.in? supported_formats
+    unless format.in? supported_formats
+      logger.debug "Refuse format (#{format}) for Document #{id}"
+      return false
+    end
 
     TagLib::FileRef.open(file.path) do |fileref|
       unless fileref.null?

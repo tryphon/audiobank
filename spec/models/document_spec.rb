@@ -155,7 +155,7 @@ describe Document do
     end
 
     it "should have file format" do
-      subject.format.should == "application/ogg"
+      subject.format.should be_in("application/ogg", "audio/ogg")
     end
 
     it "should have file size" do
