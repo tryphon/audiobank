@@ -54,7 +54,7 @@ AudioBank::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # 
+  #
 
   match '/documents/index', :controller => 'legacy_documents', :action => 'index'
   match '/documents/add', :controller => 'legacy_documents', :action => 'add'
@@ -71,7 +71,7 @@ AudioBank::Application.routes.draw do
 
   resources :documents do
     resource :upload do
-      member do 
+      member do
         post :confirm
       end
     end
@@ -79,6 +79,8 @@ AudioBank::Application.routes.draw do
 
   match '/casts/:name', :controller => 'casts', :action => 'play'
   match '/casts/:name.:format', :controller => 'casts', :action => 'play'
+
+  match '/podcasts/:name.rss', controller: 'podcasts', action: 'feed', format: 'xml'
 
   match '/users/:id/:confirm', :controller => 'users', :action => 'confirm'
 

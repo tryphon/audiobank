@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 class PodcastsController < ApplicationController
   layout nil, :only => [:feed]
-	
+
   def index
     redirect_to :action => 'manage'
   end
-  
+
   def add
     @podcast = Podcast.new(params[:podcast])
     if request.post?
@@ -20,11 +20,11 @@ class PodcastsController < ApplicationController
       end
     end
   end
-  
-  def show 
+
+  def show
   	@podcast = current_user.podcasts.find(params[:id], :include => :tags)
   end
-    
+
   def edit
     @podcast = current_user.podcasts.find(params[:id])
     if request.post?
@@ -41,14 +41,16 @@ class PodcastsController < ApplicationController
 	def manage
 		@podcasts = current_user.podcasts.paginate(:page => params[:page], :per_page => 4, :include => :tags)
 	end
-    
+
   def destroy
     current_user.podcasts.find(params[:id]).destroy
     redirect_to :action => 'manage'
   end
-  
+
   def feed
   	@podcast = Podcast.find_by_name(params[:name])
   	render :content_type => "application/rss+xml"
   end
+  skip_filter :check_authentication, only: :feed
+
 end
