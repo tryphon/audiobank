@@ -5,7 +5,7 @@
   <li class="document">
    <h3 class="item fn"><%= link_to_if(linked, document.title, :controller => "legacy_documents", :action => "show", :id => document) %></h3>
    <div class="description">
-     <% if documents.many? %>
+     <% if documents.many? or linked %>
        <%= truncate(document.description, length: 200) %>
      <% else %>
        <%= simple_format(document.description) %>
