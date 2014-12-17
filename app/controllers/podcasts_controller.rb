@@ -22,7 +22,7 @@ class PodcastsController < ApplicationController
   end
 
   def show
-  	@podcast = current_user.podcasts.find(params[:id], :include => :tags)
+  	@podcast = current_user.podcasts.includes(documents: [:tags, :casts, :author]).find(params[:id], :include => :tags)
   end
 
   def edit
@@ -48,7 +48,7 @@ class PodcastsController < ApplicationController
   end
 
   def feed
-  	@podcast = Podcast.find_by_name(params[:name])
+    @podcast = Podcast.includes(documents: [:tags, :casts, :author]).find_by_name(params[:name])
   	render :content_type => "application/rss+xml"
   end
   skip_filter :check_authentication, only: :feed

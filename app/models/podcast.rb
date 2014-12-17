@@ -2,6 +2,8 @@
 
 class Podcast < ActiveRecord::Base
 	has_and_belongs_to_many :tags
+  has_many :documents, through: :tags
+
 	belongs_to :author, :class_name => "User", :foreign_key => "author_id"
   attr_accessible :title, :description
 
@@ -17,9 +19,4 @@ class Podcast < ActiveRecord::Base
   	return Time.now if documents.empty?
   	documents.first.updated_at
   end
-
-  def documents
-    self.author.find_documents(:tags => self.tags, :order_by => :id).reverse
-  end
-
 end
