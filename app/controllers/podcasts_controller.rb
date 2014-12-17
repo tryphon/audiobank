@@ -29,7 +29,7 @@ class PodcastsController < ApplicationController
     @podcast = current_user.podcasts.find(params[:id])
     if request.post?
     	@podcast.tag_with(params[:labels])
-      if @podcast.update_attributes(params[:document])
+      if @podcast.update_attributes(params[:podcast])
         flash[:success] = "Votre podcast a bien été édité"
         redirect_to :action => 'show', :id => @podcast
       else
