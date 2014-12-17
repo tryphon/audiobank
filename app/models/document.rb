@@ -79,6 +79,17 @@ class Document < ActiveRecord::Base
     write_attribute :format, format.gsub(/;.*$/, "")
   end
 
+  def self.tag_lib_file(format)
+  	case format
+    when "audio/mpeg" then TagLib::MPEG::File
+    when "audio/x-flac" then TagLib::FLAC::File
+    when "application/ogg", "audio/x-vorbis+ogg", "audio/ogg" then TagLib::Ogg::Vorbis::File
+    when "audio/x-wav" then TagLib::RIFF::WAV::File
+    when "audio/mp4" then TagLib::MP4::File
+    else nil
+  	end
+  end
+
 	def upload_file(file)
     self.format = Mahoro.new(Mahoro::MIME).file(file.path)
     unless format.in? supported_formats
@@ -86,11 +97,8 @@ class Document < ActiveRecord::Base
       return false
     end
 
-    TagLib::FileRef.open(file.path) do |fileref|
-      unless fileref.null?
-        properties = fileref.audio_properties
-        self.length = properties.length
-      end
+    self.class.tag_lib_file(format).open(file.path) do |taglib_file|
+      self.length = taglib_file.audio_properties.length
     end
 
     self.uploaded = false
