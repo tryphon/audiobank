@@ -63,7 +63,7 @@ class LegacyDocumentsController < ApplicationController
   end
 
 	def manage
-		@documents = current_user.documents.paginate :page => params[:page], :per_page => 4
+		@documents = current_user.documents.paginate :page => params[:page], :per_page => 10
 	end
 
   def upload
@@ -150,7 +150,7 @@ class LegacyDocumentsController < ApplicationController
     render :json => tokenize_subscribers(candidates)
   end
 
-  protected 
+  protected
 
   def tokenize_subscribers(candidates)
     candidates.map do |candidate|
@@ -162,7 +162,7 @@ class LegacyDocumentsController < ApplicationController
       when Group
         name += " (Groupe)"
       end
-      
+
       { :id => "#{candidate.class.name.downcase}:#{candidate.id}",
         :name => name }
     end
