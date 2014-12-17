@@ -17,6 +17,8 @@ cd $base_dir
 # To find bundle
 export PATH=script:$PATH
 
+export NEWRELIC_AGENT_ENABLED=false
+
 # $bin_dir/../script/runner $options 'Cue.update'
 script/bundle exec rails runner $options 'Cast.prepare'
 script/bundle exec rails runner $options 'Subscription.notify'
