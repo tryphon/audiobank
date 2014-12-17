@@ -41,6 +41,7 @@ class Dropbox < ActiveRecord::Base
 
   def create_directory
     FileUtils.mkdir_p directory
+    File.chmod 02775, directory.to_s
   end
   before_validation :create_directory, on: :create
 
@@ -105,7 +106,7 @@ class Dropbox < ActiveRecord::Base
     processing_files = []
 
     inotify = INotify::Notifier.new
-    inotify.watch(root, :recursive, :close_write) do |event|
+    inotify.watch(root.to_s, :recursive, :close_write) do |event|
       Rails.logger.debug "Inotify event: #{event.inspect}"
 
       filename = event.absolute_name
