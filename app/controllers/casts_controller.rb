@@ -15,7 +15,7 @@ class CastsController < ApplicationController
   	when "m3u"
   		render text: playlist(@cast), type: "audio/x-mpegurl"
     when "json"
-      render json: { title: @cast.document.title, duration: @cast.document.duration, tags: @cast.document.tags.map(&:name) }
+      render json: { title: @cast.document.title, author: @cast.document.author.name, duration: @cast.document.duration, tags: @cast.document.tags.map(&:name) }
   	else
   		redirect_to :action => :play, :name => "#{name}.m3u"
   	end
