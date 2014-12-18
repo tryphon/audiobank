@@ -37,6 +37,8 @@ gem 'newrelic_rpm'
 
 gem 'rack-piwik', :require => 'rack/piwik'
 
+gem 'rack-cors', :require => 'rack/cors'
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
