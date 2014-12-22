@@ -38,7 +38,7 @@ describe Cast do
     let(:document) { cast.document }
 
     before do
-      document.upload_file File.new(File.join(fixture_path, "one-second.ogg"))
+      document.upload_fixture
     end
 
     it "should create ogg file" do

@@ -34,8 +34,12 @@ class Document < ActiveRecord::Base
     self.subscriptions.collect { |s| s.subscriber }
   end
 
-	def filename
-		"#{id}-#{title}.#{extname}"
+	def filename(options = {})
+    [].tap do |parts|
+      parts << "#{id}-" unless options[:without_id]
+      parts << title
+      parts << ".#{extname}"
+    end.join
 	end
 
   def extname

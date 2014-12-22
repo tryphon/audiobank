@@ -94,7 +94,7 @@ describe Dropbox::Import do
 
     let(:file) do
       temp_file = Tempfile.new("audiobank-dropbox")
-      FileUtils.cp File.join(fixture_path, "one-second.ogg"), temp_file.path
+      FileUtils.cp test_sound_file, temp_file.path
       temp_file.path
     end
     let(:import_file) { import(file) }

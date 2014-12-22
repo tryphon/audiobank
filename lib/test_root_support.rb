@@ -7,7 +7,7 @@ class TestRootSupport
   end
 
   def test_root
-    Rails.root + "tmp" + model.name.parameterize
+    Rails.root + "tmp" + model.name.pluralize.parameterize
   end
 
   def prepare
@@ -27,7 +27,7 @@ class TestRootSupport
     if models.present?
       @@supports = models.collect do |model|
         TestRootSupport.new(model)
-      end 
+      end
     end
 
     @@supports

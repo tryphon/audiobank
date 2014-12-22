@@ -9,6 +9,10 @@ class Cast < ActiveRecord::Base
 
 	FORMATS = %w(ogg mp3)
 
+  def self.each_format(&block)
+    FORMATS.each &block
+  end
+
 	def update_file(format = "ogg")
 		# puts "DEBUG: #{Rails.root}/bin/encode #{document.path} #{path(format)} #{format}"
 		system "#{Rails.root}/bin/encode", document.path.to_s, path(format), format
@@ -56,7 +60,7 @@ class Cast < ActiveRecord::Base
 		end
 	end
 
-  @@root = Rails.root + "media/cast"
+  @@root = Rails.root + "media/casts"
   cattr_accessor :root
 
 	def path(format = "ogg")
@@ -67,9 +71,21 @@ class Cast < ActiveRecord::Base
 	  "#{id}.#{format}"
 	end
 
+	def public_filename(format = "ogg")
+	  "#{document.title}.#{format}"
+	end
+
 	def size(format = "ogg")
 	  File.exists?(path(format)) ? File.size(path(format)) : 0
 	end
+
+  def mime_type(format = "ogg")
+  	case format
+    when "mp3" then "audio/mpeg"
+    when "ogg" then "audio/ogg"
+    else nil
+  	end
+  end
 
 	def uptodate?(format = nil)
     if format

@@ -119,18 +119,18 @@ describe Document do
 
   describe "#upload_file" do
 
-    let(:file) { File.new(File.join(fixture_path, "one-second.ogg")) }
+    let(:file) { test_sound_file }
 
     it "should clear existing cues" do
       subject.stub!(:cues).and_return(cues = mock("cues"))
       cues.should_receive(:clear)
-      subject.upload_file(file)
+      subject.upload_file(File.new(file))
     end
 
     it "should clear existing casts" do
       subject.stub!(:casts).and_return(casts = mock("casts"))
       casts.should_receive(:clear)
-      subject.upload_file(file)
+      subject.upload_file(File.new(file))
     end
 
     it "should return false if the given file hasn't a supported format" do
@@ -141,9 +141,9 @@ describe Document do
 
   describe "after upload" do
 
+    let(:file) { test_sound_file }
     before(:each) do
-      @file = File.join(fixture_path, "one-second.ogg")
-      subject.upload_file(File.new(@file))
+      subject.upload_fixture
     end
 
     it "should be uploaded" do
@@ -159,7 +159,7 @@ describe Document do
     end
 
     it "should have file size" do
-      subject.size.should == File.size(@file)
+      subject.size.should == File.size(file)
     end
 
     extend RSpec::Matchers::DSL
@@ -181,7 +181,7 @@ describe Document do
     end
 
     it "should store the file content" do
-      subject.path.should contain_file_data(@file)
+      subject.path.should contain_file_data(file)
     end
 
     it "should not have existing document cues" do

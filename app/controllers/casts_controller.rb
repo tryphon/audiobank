@@ -7,7 +7,7 @@ class CastsController < ApplicationController
     format = params[:format]
     name = params[:name]
 
-  	@cast = Cast.find_by_name!(name)
+  	@cast = Cast.includes(:document).find_by_name!(name)
 
   	case format
   	when "mp3", "ogg"
@@ -25,11 +25,11 @@ class CastsController < ApplicationController
 
   def playcontent(cast, format)
     unless request.head?
-      cast.increment(:download_count).save
+      Cast.increment_counter(:download_count, cast.id)
       logger.info "Play Cast #{cast.name} #{format} #{cast.size(format)} #{cast.download_count} #{cast.document.id} #{cast.document.author.username} \"#{cast.document.title}\""
     end
 
-  	redirect_to "/static/cast/#{cast.filename(format)}"
+    send_file @cast.path(format), :type => @cast.mime_type(format), :filename => @cast.public_filename(format)
   end
 
   def playlist(cast)
