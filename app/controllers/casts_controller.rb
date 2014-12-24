@@ -29,6 +29,10 @@ class CastsController < ApplicationController
       logger.info "Play Cast #{cast.name} #{format} #{cast.size(format)} #{cast.download_count} #{cast.document.id} #{cast.document.author.username} \"#{cast.document.title}\""
     end
 
+    expiration = 1.year
+    expires_in expiration, public: true
+    response.headers["Expires"] = expiration.from_now.httpdate
+
     send_file @cast.path(format), :type => @cast.mime_type(format), :filename => @cast.public_filename(format)
   end
 
