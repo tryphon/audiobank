@@ -7,9 +7,8 @@ class LegacyDocumentsController < ApplicationController
   end
 
   def add
-    @document = AudioDocument.new(params[:document])
+    @document = current_user.documents.build(params[:document])
     if request.post?
-      @document.author = current_user
     	@document.tag_with(params[:labels]) if params[:labels].present?
       if @document.save
         # FIXME Sorry for kitten :(
@@ -136,7 +135,8 @@ class LegacyDocumentsController < ApplicationController
 
   def listen
   	@document = current_user.documents.find(params[:id])
-  	redirect_to :controller => 'casts', :action => 'play', :name => @document.casts.first.name
+    cast = @document.casts.first
+  	redirect_to :controller => 'casts', :action => 'play', :name => cast.name, :token => cast.expected_token(request.ip), format: "m3u"
 	end
 
   def auto_complete_for_subscribers

@@ -6,3 +6,7 @@
 
 <p><label for="document_tag_tokens">Etiquettes :</label><br/>
   <%= text_field("document", "tag_tokens", :size => 30, :class => "token_input", :data => { :populate => @document.tags.to_json, :theme => "tags", :value => "name", :url => url_for(:controller => "legacy_documents", :action => "auto_complete_for_tags") }) %></p>
+
+<% if @document.can_protect_casts? %>
+<p><%= check_box("document", "protected_casts") %> <label for="document_protected_casts">Document protégé</label></p>
+<% end %>

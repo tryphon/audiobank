@@ -24,7 +24,7 @@ class Document < ActiveRecord::Base
     includes(:casts).where( :uploaded => true, :casts => { :document_id=> nil } )
   end
 
-  attr_accessible :description, :title, :subscriber_tokens
+  attr_accessible :description, :title, :subscriber_tokens, :protected_casts
   # FIXME
   attr_accessible :subscriber
 
@@ -190,6 +190,10 @@ class Document < ActiveRecord::Base
     end
 
     keywords
+  end
+
+  def can_protect_casts?
+    author and author.casts_token_secret.present?
   end
 
   def to_json(options = {})

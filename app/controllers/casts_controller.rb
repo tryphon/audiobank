@@ -24,6 +24,14 @@ class CastsController < ApplicationController
   private
 
   def playcontent(cast, format)
+    if expected_token = cast.expected_token(request.ip)
+      unless expected_token.validate(params[:token])
+        logger.info "Refuse Cast #{cast.name} access (expected: '#{expected_token}')"
+        render status: 403, text: "Invalid token"
+        return
+      end
+    end
+
     unless request.head?
       Cast.increment_counter(:download_count, cast.id)
       logger.info "Play Cast #{cast.name} #{format} #{cast.size(format)} #{cast.download_count} #{cast.document.id} #{cast.document.author.username} \"#{cast.document.title}\""
@@ -39,6 +47,7 @@ class CastsController < ApplicationController
   def playlist(cast)
   	content = "#EXTM3U\n"
   	content += "#EXTINF:#{cast.document.length},#{cast.document.title}\n"
-  	content += url_for(:action => 'play', :name => cast.name) + ".mp3\n"
+    query = "?token=#{params[:token]}" if params[:token]
+  	content += url_for(:action => 'play', :name => cast.name) + ".mp3#{query}\n"
   end
 end

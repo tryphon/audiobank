@@ -130,4 +130,17 @@ class Cast < ActiveRecord::Base
       end
 		end
 	end
+
+  def protected?
+    document.protected_casts?
+  end
+
+  def expected_token(target)
+    AccessToken.new(secret: document.author.casts_token_secret, target: target) if protected?
+  end
+
+  def validate_token(token, target)
+    expected_token.validate(token)
+  end
+
 end
