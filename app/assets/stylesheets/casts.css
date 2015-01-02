@@ -1,0 +1,11 @@
+/*
+ *= require_self
+ */
+
+html, body {
+    margin: 0;
+}
+
+.tryphon-player {
+    margin: 0 auto;
+}

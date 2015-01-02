@@ -1,5 +1,5 @@
 class CastsController < ApplicationController
-	layout nil
+	layout :nil
 
   skip_before_filter :check_authentication
 
@@ -8,6 +8,7 @@ class CastsController < ApplicationController
     name = params[:name]
 
   	@cast = Cast.includes(:document).find_by_name!(name)
+    @document = @cast.document
 
   	case format
   	when "mp3", "ogg"
@@ -15,9 +16,9 @@ class CastsController < ApplicationController
   	when "m3u"
   		render text: playlist(@cast), type: "audio/x-mpegurl"
     when "json"
-      render json: { title: @cast.document.title, author: @cast.document.author.name, duration: @cast.document.duration, tags: @cast.document.tags.map(&:name) }
+      render json: { title: @document.title, author: @document.author.name, duration: @document.duration, tags: @document.tags.map(&:name) }
   	else
-  		redirect_to :action => :play, :name => "#{name}.m3u"
+      render
   	end
   end
 
