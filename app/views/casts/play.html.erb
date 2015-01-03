@@ -8,6 +8,8 @@
     <script src="http://player.tryphon.eu/v2/player.js"></script>
     <%= javascript_include_tag "casts" %>
     <%= stylesheet_link_tag    "casts", :media => "all" %>
+
+    <%= stylesheet_link_tag @cast.player_css_url if @cast.player_css_url.present? %>
   </head>
   <body>
     <div class="audiobank tryphon-player <%= @document.tags.map { |t| "audiobank-#{t.name}" }.join(' ') %> frame">

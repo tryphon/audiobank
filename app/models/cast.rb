@@ -143,4 +143,8 @@ class Cast < ActiveRecord::Base
     expected_token.validate(token)
   end
 
+  def player_css_url
+    document.author.player_css_url
+  end
+
 end
