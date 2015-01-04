@@ -14,12 +14,17 @@ class CastsController < ApplicationController
   	when "mp3", "ogg"
   		playcontent @cast, format
   	when "m3u"
-  		render text: playlist(@cast), type: "audio/x-mpegurl"
+  		render text: playlist_content(@cast), type: "audio/x-mpegurl"
     when "json"
       render json: { title: @document.title, author: @document.author.name, duration: @document.duration, tags: @document.tags.map(&:name), player_css_url: @cast.player_css_url }
   	else
       render
   	end
+  end
+
+  def playlist
+  	@cast = Cast.includes(:document).find_by_name!(params[:name])
+  	render text: playlist_content(@cast, params[:prefered_format]), type: "audio/x-mpegurl"
   end
 
   private
@@ -45,10 +50,10 @@ class CastsController < ApplicationController
     send_file @cast.path(format), :type => @cast.mime_type(format), :filename => @cast.public_filename(format)
   end
 
-  def playlist(cast)
+  def playlist_content(cast, prefered_format = "mp3")
   	content = "#EXTM3U\n"
   	content += "#EXTINF:#{cast.document.length},#{cast.document.title}\n"
     query = "?token=#{params[:token]}" if params[:token]
-  	content += url_for(:action => 'play', :name => cast.name) + ".mp3#{query}\n"
+  	content += url_for(:action => 'play', :name => cast.name) + ".#{prefered_format}#{query}\n"
   end
 end

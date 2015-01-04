@@ -79,6 +79,7 @@ AudioBank::Application.routes.draw do
 
   match '/casts/:name', :controller => 'casts', :action => 'play'
   match '/casts/:name.:format', :controller => 'casts', :action => 'play'
+  match '/casts/:name.:prefered_format.:format', :controller => 'casts', :action => 'playlist'
 
   match '/podcasts/:name.rss', controller: 'podcasts', action: 'feed', format: 'xml'
 
