@@ -14,11 +14,12 @@
   <body>
     <div class="audiobank tryphon-player <%= @document.tags.map { |t| "audiobank-#{t.name}" }.join(' ') %> frame">
       <div class="content">
-        <a href="<%= url_for action: 'play', name: @cast.name, only_path: false, token: params[:token] %>">
+        <a class="main" href="<%= url_for action: 'play', name: @cast.name, only_path: false, token: params[:token] %>">
           <span class="author"><%= @document.author.name %></span>
           <span class="title"><%= @document.title %></span>
         </a>
-        <span class='popup'></span>
+        <span class="links"></span>
+        <a class="popup" href="<%= url_for action: 'play', name: @cast.name, only_path: false, token: params[:token] %>" target="_blank"></a>
         <span class="duration"><%= format_duration @document.duration %></span>
         <span class="peak left"><span class="level"></span></span>
         <span class="peak right"><span class="level"></span></span>
