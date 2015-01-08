@@ -12,7 +12,7 @@
     <%= stylesheet_link_tag @cast.player_css_url if @cast.player_css_url.present? %>
   </head>
   <body>
-    <div class="audiobank tryphon-player <%= @document.tags.map { |t| "audiobank-#{t.name}" }.join(' ') %> frame">
+    <div class="audiobank tryphon-player <%= 'autoplay' if params[:autoplay].in?('true','1') %> <%= @document.tags.map { |t| "audiobank-#{t.name}" }.join(' ') %> frame">
       <div class="content">
         <a class="main" href="<%= url_for action: 'play', name: @cast.name, only_path: false, token: params[:token] %>">
           <span class="author"><%= @document.author.name %></span>
