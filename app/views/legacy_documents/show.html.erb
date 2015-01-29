@@ -3,3 +3,9 @@
  <%= render :partial => "legacy_documents/documents", :object => Array(@document), :locals => { :linked => false, :empty => "Aucun document correspondant n'a été trouvé ...", :actions => true, :tags => true } %>
 </ul>
 
+<% unless @document.casts.empty? %>
+  <%= link_to "Ecouter", url_for(controller: 'casts', action: 'play', name: @document.casts.first.name, only_path: false), class: "tryphon-player", data: { id: @document.id } %>
+  <% content_for :javascript_includes do %>
+    <%= javascript_include_tag "http://player.tryphon.dev/v2/player.js" %>
+  <% end %>
+<% end %>

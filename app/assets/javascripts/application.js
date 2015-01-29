@@ -15,3 +15,4 @@
 //= require jquery.tokeninput
 
 //= require token_input
+//= require player

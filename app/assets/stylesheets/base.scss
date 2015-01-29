@@ -37,6 +37,7 @@ img { border: none; vertical-align: middle; }
 #frame .actions a, #frame .details a { color: #000; padding: 2px 2px 2px 20px; margin-left: 6px; }
 #frame .edit { background: image-url("edit.png") no-repeat; }
 #frame .share { background: image-url("share.png") no-repeat; }
+#frame .publish { background: image-url("publish.png") no-repeat; }
 #frame .destroy { background: image-url("destroy.png") no-repeat; }
 #frame .upload { background: image-url("upload.png") no-repeat; }
 #frame .next { background: image-url("next.png") no-repeat; }
@@ -128,10 +129,26 @@ p#cloud { margin-bottom: 8px; }
 #content .statistics { margin: 10px 0 27px 12px; }
 #content .statistics p { margin: 6px 0; }
 
-#content span.auth_token {
+#content span.pastable, #content .pastables dd {
     border: 1px solid #ccc;
     background: #eee;
-    padding: 2px;
+    padding: 2px 5px;
+}
+
+#content .pastables {
+    dt {
+        display: block;
+        margin-top: 12px;
+    }
+    dd {
+        display: block;
+        float: left;
+        margin-top: -1.3em;
+        margin-left: 10em;
+    }
+    &:after {
+        content: ".";  display: block; height: 0; clear: both; visibility: hidden;
+    }
 }
 
 #content .document {

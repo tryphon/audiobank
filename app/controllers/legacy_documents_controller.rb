@@ -115,6 +115,11 @@ class LegacyDocumentsController < ApplicationController
     redirect_to :action => 'manage'
   end
 
+  def publish
+  	@document = current_user.documents.find(params[:id])
+	  flash[:warning] = "Votre document n'est lié à aucun fichier" unless @document.uploaded?
+	end
+
   def share
   	@document = current_user.documents.find(params[:id])
 	  flash[:warning] = "Votre document n'est lié à aucun fichier" unless @document.uploaded?
@@ -136,7 +141,10 @@ class LegacyDocumentsController < ApplicationController
   def listen
   	@document = current_user.documents.find(params[:id])
     cast = @document.casts.first
-  	redirect_to :controller => 'casts', :action => 'play', :name => cast.name, :token => cast.expected_token(request.ip), format: "m3u"
+
+    expectedo_token = cast.expected_token(request.ip)
+
+  	redirect_to controller: 'casts', action: 'play', name: cast.name, token: cast.expected_token(request.ip), format: params[:format]
 	end
 
   def auto_complete_for_subscribers

@@ -30,9 +30,11 @@
  <%= render :partial => "group/groups", :object => @user.groups, :locals => { :linked => false, :empty => "Vous n'appartenez à aucun groupe", :actions => false, :members => false } %>
 </ul>
 
+<br/>
+
 <h2>Clé d'API</h2>
 
 <p>
   Pour utiliser <%= link_to "l'API d'AudioBank", "http://wiki.tryphon.eu/audiobank/api" %>, utilisez cette clé :
-  <span class="auth_token"><%= @user.authentication_token %></span>
+  <span class="pastable"><%= @user.authentication_token %></span>
 </p>

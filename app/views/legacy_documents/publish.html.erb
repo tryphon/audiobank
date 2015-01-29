@@ -1,0 +1,35 @@
+<h2>Publier votre document</h2>
+
+<p>
+  Sur une application tierce (comme <%= link_to "Bonnes-Ondes", "http://bonnes-ondes.fr" %>), indiquez l'identifiant AudioBank suivant&nbsp;:
+</p>
+
+<dl class="pastables">
+  <dt>Identifiant AudioBank</dt>
+  <dd><%= @document.id %></dd>
+</dl>
+
+<% if @document.uploaded? %>
+ <% if @document.casts.empty? %>
+  <p>Le contenu publiable sera disponible dans quelques minutes.</p>
+ <% else %>
+  <p>
+    Pour publier votre document dans un site internet, utilisez l'adresse suivante:
+  </p>
+  <dl class="pastables">
+    <dt>Adresse complète</dt>
+    <dd><%= public_cast_url(@document) %></dd>
+    <dt>Identifiant du Cast</dt>
+    <dd><%= @document.casts.first.name %></dd>
+  </dl>
+
+  <% if @document.protected_casts? %>
+  <br/>
+  <p>
+    <strong>Attention</strong>: ce document dispose d'un accès protégé, cette adresse ne fonctionnera que si elle est accompagnée d'une clé d'accès.
+  </p>
+  <% end %>
+ <% end %>
+<% else %>
+ <p>Le contenu publiable sera disponible dès que vous aurez <%= link_to("déposé votre fichier", {:action => "upload", :id => @document }) %></p>
+<% end %>

@@ -1,0 +1,57 @@
+.tryphon-player {
+    height: 50px;
+    margin: 12px;
+
+    .tp-content {
+        height: 100%;
+        position: relative;
+    }
+
+    .tp-links, .tp-popup, .tp-peak, .tp-author, .tp-title { display: none; }
+
+    a.tp-main {
+        text-indent: -9999px;
+        display: block;
+        height: 100%;
+        width: 50px;
+        background: image-url('player/play.png') no-repeat center left;
+        &:focus {
+            border-color: transparent;
+            color: transparent;
+        }
+
+        &.tp-play {
+            background-image: url('player/play.png');
+        }
+        &.tp-pause {
+            background-image: url('player/pause.png');
+        }
+    }
+
+    .tp-bar {
+        position: absolute;
+        left: 50px;
+        right: 70px;
+
+        top: 20px;
+        bottom: 20px;
+        background: #ddd;
+
+        .tp-progress {
+            background-color: #6B2;
+            display: block;
+            width: 0;
+            height: 100%;
+        }
+    }
+
+    .tp-duration {
+        position: absolute;
+        width: 65px;
+        right: 0;
+
+        top: 15px;
+        height: 15px;
+        text-align: right;
+    }
+}
