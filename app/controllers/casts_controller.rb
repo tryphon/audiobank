@@ -29,6 +29,9 @@ class CastsController < ApplicationController
 
   private
 
+  @@uuid_generator = UUID.new
+  cattr_reader :uuid_generator
+
   def playcontent(cast, format)
     if expected_token = cast.expected_token(request.ip)
       unless expected_token.validate(params[:token])
@@ -39,8 +42,20 @@ class CastsController < ApplicationController
     end
 
     unless request.head?
-      Cast.increment_counter(:download_count, cast.id)
-      logger.info "Play Cast #{cast.name} #{format} #{cast.size(format)} #{cast.download_count} #{cast.document.id} #{cast.document.author.username} \"#{cast.document.title}\""
+      cookie_name = "d/#{cast.name}"
+      unless request.cookie_jar.signed[cookie_name]
+        download_uuid = uuid_generator.generate
+        cookie_deadline = Time.now + cast.document.duration
+
+        logger.debug "Define cookie #{cookie_name} which expires on #{cookie_deadline}"
+        cookies.signed[cookie_name] = {
+          :value => download_uuid,
+          :expires => cookie_deadline
+        }
+
+        Cast.increment_counter(:download_count, cast.id)
+        logger.info "Play Cast #{download_uuid} #{cast.name} #{format} #{cast.size(format)} #{cast.download_count} #{cast.document.id} #{cast.document.author.username} \"#{cast.document.title}\""
+      end
     end
 
     expiration = 1.year

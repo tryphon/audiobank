@@ -34,6 +34,7 @@ end
 
 gem 'jquery-rails'
 gem 'newrelic_rpm'
+gem 'uuid'
 
 gem 'rack-piwik', :require => 'rack/piwik'
 
