@@ -43,12 +43,12 @@ class CastsController < ApplicationController
 
     unless request.head?
       cookie_name = "d/#{cast.name}"
-      unless request.cookie_jar.signed[cookie_name]
+      unless cookies[cookie_name]
         download_uuid = uuid_generator.generate
         cookie_deadline = Time.now + cast.document.duration
 
         logger.debug "Define cookie #{cookie_name} which expires on #{cookie_deadline}"
-        cookies.signed[cookie_name] = {
+        cookies[cookie_name] = {
           :value => download_uuid,
           :expires => cookie_deadline
         }
