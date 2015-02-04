@@ -16,7 +16,7 @@ class CastsController < ApplicationController
   	when "m3u"
   		render text: playlist_content(@cast), type: "audio/x-mpegurl"
     when "json"
-      render json: { title: @document.title, author: @document.author.name, duration: @document.duration, tags: @document.tags.map(&:name), player_css_url: @cast.player_css_url }
+      render json: { title: @document.title, author: @document.author.name, duration: @document.duration, protected: @document.protected_casts, tags: @document.tags.map(&:name), player_css_url: @cast.player_css_url }
   	else
       render
   	end
