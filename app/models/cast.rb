@@ -12,6 +12,9 @@ class Cast < ActiveRecord::Base
   def self.each_format(&block)
     FORMATS.each &block
   end
+  def each_format(&block)
+    FORMATS.each &block
+  end
 
 	def update_file(format = "ogg")
 		# puts "DEBUG: #{Rails.root}/bin/encode #{document.path} #{path(format)} #{format}"
@@ -145,6 +148,24 @@ class Cast < ActiveRecord::Base
 
   def player_css_url
     document.author.player_css_url
+  end
+
+  def as_json(options = nil)
+    {
+      title: document.title,
+      author: document.author.name,
+      duration: document.duration,
+      protected: document.protected_casts?,
+      tags: document.tags.map(&:name),
+      player_css_url: player_css_url,
+      formats: {}
+    }.tap do |attributes|
+      each_format do |format|
+        attributes[:formats][format] = {
+          size: size(format)
+        }
+      end
+    end
   end
 
 end
