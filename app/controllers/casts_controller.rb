@@ -59,7 +59,7 @@ class CastsController < ApplicationController
     end
 
     expiration = 1.year
-    expires_in expiration, public: true
+    expires_in expiration, public: false
     response.headers["Expires"] = expiration.from_now.httpdate
 
     send_file @cast.path(format), :type => @cast.mime_type(format), :filename => @cast.public_filename(format)
