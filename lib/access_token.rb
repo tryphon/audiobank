@@ -13,7 +13,7 @@ class AccessToken
   cattr_accessor :time_period
 
   def seconds
-    time.to_i / 300
+    time.to_i / time_period.to_i
   end
 
   def data
