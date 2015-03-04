@@ -33,10 +33,13 @@ class Cast < ActiveRecord::Base
     Rails.logger.info "Created document #{document.id} #{description} in #{sox_duration.to_i}s"
   end
 
+  @@temp_directory = Dir.tmpdir
+  cattr_accessor :temp_directory
+
   def prepare!
     return if uptodate?
 
-    Tempfile.open([name, '.wav']) do |wav_file|
+    Tempfile.open([name, '.wav'], temp_directory) do |wav_file|
       sox_task "wav", "-t", document.extname, document.path, wav_file.path
       FORMATS.each do |format|
         unless uptodate? format
