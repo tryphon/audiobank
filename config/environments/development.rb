@@ -43,6 +43,7 @@ AudioBank::Application.configure do
   config.action_mailer.default_url_options = { :host => 'audiobank.tryphon.dev' }
 
   config.to_prepare do
+    Cast.temp_directory = "/var/tmp"
     # Document.hooks << HttpHook.new("http://bonnes-ondes.local/audiobank_updates.json")
   end
 end
