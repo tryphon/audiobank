@@ -70,10 +70,10 @@ describe User do
 
   describe "#documents" do
 
-    describe "#download_count" do
+    describe "#downloads_count" do
 
       it "should be zero by default" do
-        subject.documents.download_count.should be_zero
+        subject.documents.downloads_count.should be_zero
       end
 
     end

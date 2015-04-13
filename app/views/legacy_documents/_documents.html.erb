@@ -17,17 +17,17 @@
      <span class="length"><%= format_duration(document.duration) %></span>
     </div>
    <% end %>
-   <% unless document.tags.empty? and document.download_count.zero? and not document.protected_casts? %>
+   <% unless document.tags.empty? and document.downloads_count.zero? and not document.protected_casts? %>
    <div class="tags">
      <% for tag in document.tags %>
        <%= link_to(tag.name, { :action => "tag", :name => tag.name }, :title => "Etiquette : #{tag.name}", :rel => "tag") %>
      <% end %>
 
-     <% unless document.download_count.zero? and not document.protected_casts? %>
-     <span class="download_count">
+     <% unless document.downloads_count.zero? and not document.protected_casts? %>
+     <span class="downloads_count">
        <%= image_tag("locked.png", alt: "Document protégé") if document.protected_casts? %>
-       <% unless document.download_count.zero? %>
-         <%= pluralize(document.download_count, 'écoute') %>
+       <% unless document.downloads_count.zero? %>
+         <%= pluralize(document.downloads_count, 'écoute') %>
        <% end %>
      </span>
      <% end %>

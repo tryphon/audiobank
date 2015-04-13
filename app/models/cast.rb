@@ -1,5 +1,6 @@
 class Cast < ActiveRecord::Base
 	belongs_to :document
+  has_many :downloads
 
   validates_presence_of :name
   validates_uniqueness_of :name

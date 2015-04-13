@@ -17,7 +17,7 @@ describe CastsController do
     it "should increase the download count" do
       get :play, :name => cast.name, :format => "mp3"
       cast.reload
-      cast.download_count.should == 1
+      cast.downloads_count.should == 1
     end
 
   end

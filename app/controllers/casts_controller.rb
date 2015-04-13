@@ -41,22 +41,7 @@ class CastsController < ApplicationController
       end
     end
 
-    unless request.head?
-      cookie_name = "d/#{cast.name}"
-      unless cookies[cookie_name]
-        download_uuid = uuid_generator.generate
-        cookie_deadline = Time.now + cast.document.duration
-
-        logger.debug "Define cookie #{cookie_name} which expires on #{cookie_deadline}"
-        cookies[cookie_name] = {
-          :value => download_uuid,
-          :expires => cookie_deadline
-        }
-
-        Cast.increment_counter(:download_count, cast.id)
-        logger.info "Play Cast #{download_uuid} #{cast.name} #{format} #{cast.size(format)} #{cast.download_count} #{cast.document.id} #{cast.document.author.username} \"#{cast.document.title}\""
-      end
-    end
+    Download.from_request(request, cast, format) unless request.head?
 
     expiration = 1.year
     expires_in expiration, public: false

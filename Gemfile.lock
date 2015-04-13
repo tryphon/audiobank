@@ -95,6 +95,7 @@ GEM
     fastercsv (1.5.5)
     ffi (1.9.3)
     formatador (0.2.5)
+    geoip (1.4.0)
     gherkin (2.12.2)
       multi_json (~> 1.3)
     guard (2.6.1)
@@ -295,6 +296,7 @@ DEPENDENCIES
   exception_notification
   factory_girl_rails
   fakeweb
+  geoip
   guard
   guard-bundler
   guard-cucumber

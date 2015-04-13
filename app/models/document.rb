@@ -69,8 +69,8 @@ class Document < ActiveRecord::Base
     length
   end
 
-  def download_count
-    casts.sum :download_count
+  def downloads_count
+    casts.sum :downloads_count
   end
 
   # Workaround for a strange error in DocumentsController#download :
@@ -201,7 +201,7 @@ class Document < ActiveRecord::Base
       :title => title,
       :length => length,
       :description => description,
-      :download_count => download_count }.tap do |attributes|
+      :downloads_count => downloads_count }.tap do |attributes|
       attributes[:cast] = casts.first.name unless casts.empty?
       attributes[:upload] = upload.public_url if upload
       attributes[:errors] = errors.to_json unless valid?

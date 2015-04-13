@@ -32,7 +32,7 @@ img { border: none; vertical-align: middle; }
 #frame .actions, #frame .tags, #frame .pagination { clear: both; margin: 0 0 6px; padding: 4px 0; font-size: 90%; text-align: right; border-top: 1px solid #ccc; }
 #frame .details { position: absolute; top: 10px; right: 0; font-size: 90%; }
 #frame .tags { margin: 6px 0 0; padding: 6px 20px; text-align: left; background: image-url("tags.png") no-repeat 0px 6px; position: relative; min-height: 18px; }
-#frame .download_count { position: absolute; top: 6px; right: 0; }
+#frame .downloads_count { position: absolute; top: 6px; right: 0; }
 #frame .details span, #frame .actions span, #frame .icon { margin: 0; padding: 0 4px 0 20px; }
 #frame .actions a, #frame .details a { color: #000; padding: 2px 2px 2px 20px; margin-left: 6px; }
 #frame .edit { background: image-url("edit.png") no-repeat; }

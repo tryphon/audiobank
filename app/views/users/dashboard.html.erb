@@ -17,9 +17,9 @@ Vous disposez de <strong><%= @author.documents.count %></strong> documents.
 <p>
 Ils répresentent <strong><%= @author.documents.sum(:length) / 60 %></strong> minutes.
 </p>
-<% unless @author.documents.download_count.zero? %>
+<% unless @author.documents.downloads_count.zero? %>
 <p>
-Ils ont été écoutés au total <strong><%= @author.documents.download_count %></strong> fois. 
+Ils ont été écoutés au total <strong><%= @author.documents.downloads_count %></strong> fois.
 </p>
 <% end %>
 </div>
