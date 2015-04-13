@@ -2,6 +2,7 @@ class Download < ActiveRecord::Base
   belongs_to :listener
   belongs_to :document
   belongs_to :cast, counter_cache: true
+  belongs_to :user
 
   attr_accessor :request
 
@@ -19,6 +20,7 @@ class Download < ActiveRecord::Base
       self.cast_name = cast.name
       self.document = cast.document
       self.duration = document.duration
+      self.user_id = document.author_id
 
       if format
         self.file_size = cast.size(format)
