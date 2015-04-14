@@ -46,8 +46,12 @@ class Download < ActiveRecord::Base
     Cookie.new self
   end
 
-  def self.cookie_name(cast_name)
-    "d/#{cast_name}"
+  def self.cookie_name(cast_name, format)
+    "d/#{cast_name}.#{format}"
+  end
+
+  def self.newer_than(duration)
+    where ["created_at > ?", duration.ago]
   end
 
   class Cookie
@@ -58,10 +62,10 @@ class Download < ActiveRecord::Base
       @download = download
     end
 
-    delegate :request, :uid, :cast_name, :duration, to: :download
+    delegate :request, :uid, :cast_name, :duration, :format, to: :download
 
     def name
-      Download.cookie_name cast_name
+      Download.cookie_name cast_name, format
     end
 
     def deadline
@@ -102,13 +106,13 @@ class Download < ActiveRecord::Base
     end
   end
 
-  def self.find_by_cookie(request, cast_name)
-    if download_uid = request.cookie_jar[cookie_name(cast_name)]
+  def self.find_by_cookie(request, cast_name, format)
+    if download_uid = request.cookie_jar[cookie_name(cast_name, format)]
       find_by_uid(download_uid)
     end
   end
 
   def self.from_request(request, cast, format)
-    find_by_cookie(request, cast.name) or create(request: request, cast: cast, format: format)
+    find_by_cookie(request, cast.name, format) or create(request: request, cast: cast, format: format)
   end
 end

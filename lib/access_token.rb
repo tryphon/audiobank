@@ -1,5 +1,5 @@
 class AccessToken
-  attr_accessor :secret, :target, :time
+  attr_accessor :secret, :resource, :target, :time
 
   def initialize(attributes = {})
     attributes.each { |k,v| send "#{k}=", v }
@@ -17,7 +17,7 @@ class AccessToken
   end
 
   def data
-    "#{secret}-#{target}-#{seconds}"
+    [secret, resource, target, seconds].compact.join('-')
   end
 
   def token

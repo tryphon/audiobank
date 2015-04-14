@@ -43,11 +43,15 @@ class CastsController < ApplicationController
 
     Download.from_request(request, cast, format) unless request.head?
 
-    expiration = 1.year
-    expires_in expiration, public: false
-    response.headers["Expires"] = expiration.from_now.httpdate
+    if request.get? and !request.params[:redirect] and CastServer.hotspot?(cast, format) and redirect_url = CastServer.redirect_url(request, cast, format)
+      redirect_to redirect_url
+    else
+      expiration = 1.year
+      expires_in expiration, public: false
+      response.headers["Expires"] = expiration.from_now.httpdate
 
-    send_file @cast.path(format), :type => @cast.mime_type(format), :filename => @cast.public_filename(format)
+      send_file @cast.path(format), :type => @cast.mime_type(format), :filename => @cast.public_filename(format)
+    end
   end
 
   def playlist_content(cast, prefered_format = "mp3")
