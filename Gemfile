@@ -94,4 +94,5 @@ end
 group :production do
   gem 'SyslogLogger'
   gem 'mysql2'
+  gem 'memcache-client'
 end

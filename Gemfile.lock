@@ -149,6 +149,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memcache-client (1.8.5)
     method_source (0.8.2)
     mime-types (1.25.1)
     multi_json (1.10.1)
@@ -310,6 +311,7 @@ DEPENDENCIES
   libv8 (= 3.3.10.4)
   listen (~> 2.7.9)
   mahoro
+  memcache-client
   mysql2
   newrelic_rpm
   pickle
