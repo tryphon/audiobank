@@ -29,23 +29,32 @@ class CastsController < ApplicationController
 
   private
 
-  @@uuid_generator = UUID.new
-  cattr_reader :uuid_generator
-
   def playcontent(cast, format)
-    if expected_token = cast.expected_token(request.ip)
-      unless expected_token.validate(params[:token])
-        logger.info "Refuse Cast #{cast.name} access (expected: '#{expected_token}')"
-        render status: 403, text: "Invalid token"
-        return
-      end
+    gocast_signature = request.headers["X-GoCast-Signature"]
+    if gocast_signature and not CastServer.validate_signature(gocast_signature, cast, format)
+      render status: 403, text: "Invalid GoCast signature"
+      return
     end
 
-    Download.from_request(request, cast, format) unless request.head?
+    unless gocast_signature
+      if expected_token = cast.expected_token(request.ip)
+        unless expected_token.validate(params[:token])
+          logger.info "Refuse Cast #{cast.name} access (expected: '#{expected_token}')"
+          render status: 403, text: "Invalid token"
+          return
+        end
+      end
 
-    if request.get? and !request.params[:redirect] and CastServer.hotspot?(cast, format) and redirect_url = CastServer.redirect_url(request, cast, format)
+      Download.from_request(request, cast, format) unless request.head?
+    end
+
+    if request.get? and !gocast_signature and CastServer.hotspot?(cast, format) and redirect_url = CastServer.redirect_url(request, cast, format)
       redirect_to redirect_url
     else
+      if gocast_signature
+        Rails.logger.info "Send #{cast.name}.#{format} to GoCast server #{request.ip}"
+      end
+
       expiration = 1.year
       expires_in expiration, public: false
       response.headers["Expires"] = expiration.from_now.httpdate

@@ -44,7 +44,7 @@ AudioBank::Application.configure do
 
   config.to_prepare do
     Cast.temp_directory = "/var/tmp"
-    CastServer.access_token_secret = "secret"
+    CastServer.secret = "secret"
     # Document.hooks << HttpHook.new("http://bonnes-ondes.local/audiobank_updates.json")
   end
 end

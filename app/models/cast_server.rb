@@ -31,12 +31,12 @@ class CastServer < ActiveRecord::Base
     hotspot_with_cache?(cast, format)
   end
 
-  @@access_token_secret = nil
-  cattr_accessor :access_token_secret
+  @@secret = nil
+  cattr_accessor :secret
 
   def self.expected_token(request, cast, format)
-    if access_token_secret
-      AccessToken.new(secret: access_token_secret, resource: "#{cast.name}.#{format}", target: request.ip).token
+    if secret
+      AccessToken.new(secret: secret, resource: "#{cast.name}.#{format}", target: request.ip).token
     end
   end
 
@@ -64,6 +64,10 @@ class CastServer < ActiveRecord::Base
       end
       "http://#{public_host}/casts/#{cast.name}.#{format}#{query}"
     end
+  end
+
+  def self.validate_signature(gocast_signature, cast, format)
+    Digest::SHA256.hexdigest("#{secret}-#{cast.name}.#{format}") == gocast_signature
   end
 
 end
