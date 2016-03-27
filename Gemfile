@@ -93,6 +93,6 @@ end
 
 group :production do
   gem 'SyslogLogger'
-  gem 'mysql2'
+  gem 'mysql2', '~> 0.3.10'
   gem 'memcache-client'
 end

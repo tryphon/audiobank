@@ -154,7 +154,7 @@ GEM
     mime-types (1.25.1)
     multi_json (1.10.1)
     multi_test (0.1.1)
-    mysql2 (0.3.16)
+    mysql2 (0.3.20)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -312,7 +312,7 @@ DEPENDENCIES
   listen (~> 2.7.9)
   mahoro
   memcache-client
-  mysql2
+  mysql2 (~> 0.3.10)
   newrelic_rpm
   pickle
   rack-cors
@@ -332,3 +332,6 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   uuid
   will_paginate
+
+BUNDLED WITH
+   1.11.2
