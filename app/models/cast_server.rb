@@ -6,6 +6,7 @@ class CastServer < ActiveRecord::Base
   end
 
   after_save :clear_public_hosts_sampler
+  after_save :clear_origins
 
   @@hotspot_hourly_downloads_threshold = 10
   cattr_accessor :hotspot_hourly_downloads_threshold
@@ -38,6 +39,22 @@ class CastServer < ActiveRecord::Base
     if secret
       AccessToken.new(secret: secret, resource: "#{cast.name}.#{format}", target: request.ip).token
     end
+  end
+
+  ORIGINS_KEY = "CastServer.origins".freeze
+
+  def self.origins
+    Rails.cache.fetch(ORIGINS_KEY) do
+      CastServer.enabled.where("public_host is not null").pluck(:public_host).map { |h| "http://#{h}" }.join(' ')
+    end
+  end
+
+  def clear_origins
+    self.class.clear_origins
+  end
+
+  def self.clear_origins
+    Rails.cache.delete ORIGINS_KEY
   end
 
   PUBLIC_HOSTS_SAMPLER_CACHE_KEY = "CastServer.public_hosts_sampler".freeze

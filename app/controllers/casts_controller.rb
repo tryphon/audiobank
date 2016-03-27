@@ -49,6 +49,7 @@ class CastsController < ApplicationController
     end
 
     if request.get? and !gocast_signature and CastServer.hotspot?(cast, format) and redirect_url = CastServer.redirect_url(request, cast, format)
+      response.headers["Access-Control-Allow-Origin"] = CastServer.origins
       redirect_to redirect_url
     else
       if gocast_signature
